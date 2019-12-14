@@ -1,0 +1,21 @@
+
+//
+// bootstrap-taginput.scss
+//
+
+/* Bootstrap tagsinput */
+.bootstrap-tagsinput {
+    width: 100%;
+    padding: 4px 7px 4px;
+    box-shadow: none;
+  
+    .label-info {
+      display: inline-block;
+      padding: 0 5px;
+      margin: 3px 1px;
+      font-size: 13px;
+      font-weight: $font-weight-medium;
+      background-color: $primary;
+      border-radius: 3px;
+    }
+}

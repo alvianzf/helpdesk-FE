@@ -1,0 +1,88 @@
+// 
+// pricing.scss
+//
+
+.pricing-column{
+    position: relative;
+    margin-bottom: 40px;
+  
+    .inner-box {
+      position: relative;
+      padding: 0 0 40px;
+    }
+
+    .plan-title {
+      font-size: 16px;
+      font-weight: 400;
+      color: $primary;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .plan-price {
+      margin-bottom: 10px;
+      font-size: 40px;
+      color: $dark;
+    }
+    .plan-duration {
+      font-size: 13px;
+      color: $gray-600;
+    }
+  
+    .plan-stats {
+  
+      li {
+        margin-bottom: 15px;
+        line-height: 24px;
+      }
+    }
+  }
+  
+  .ribbon {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    z-index: 1;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    text-align: right;
+  
+    span {
+      position: absolute;
+      top: 19px;
+      left: -21px;
+      display: block;
+      width: 100px;
+      font-size: 10px;
+      line-height: 20px;
+      color: $white;
+      text-align: center;
+      text-transform: uppercase;
+      background: $primary;
+      box-shadow: 0 0 8px 0 rgba($dark, 0.06), 0 1px 0 0 rgba($dark, 0.02);
+      transform: rotate(-45deg);
+  
+      &::before {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: -1;
+        content: "";
+        border-top: 3px solid $primary;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid transparent;
+        border-left: 3px solid $primary;
+      }
+      &::after {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: -1;
+        content: "";
+        border-top: 3px solid $primary;
+        border-right: 3px solid $primary;
+        border-bottom: 3px solid transparent;
+        border-left: 3px solid transparent;
+      }
+    }
+  }

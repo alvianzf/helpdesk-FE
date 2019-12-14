@@ -1,0 +1,88 @@
+// 
+// tablesaw.scss
+//
+
+.tablesaw {
+    thead {
+        background: $gray-100;
+        background-image: none;
+        border: none;
+        th {
+            text-shadow: none;
+        }
+        tr:first-child th {
+            font-family: $font-family-secondary;
+            font-weight: 500;
+            border: none;
+        }
+    }
+    td {
+        border-top: 1px solid $gray-100 !important;
+    }
+}
+
+.tablesaw td,
+.tablesaw tbody th {
+    padding: 10px !important;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.tablesaw-stack tbody tr,
+.tablesaw tbody tr {
+    border-bottom: none;
+}
+
+.tablesaw-bar .btn-select.btn-small::after,
+.tablesaw-bar .btn-select.btn-micro::after {
+    padding-right: 10px;
+    font-size: 8px;
+}
+
+.tablesaw-swipe .tablesaw-cell-persist {
+    border-color: $gray-100;
+    box-shadow: none;
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn {
+    padding: 3px 10px;
+    color: $dark;
+    text-shadow: none;
+    text-transform: none;
+    background-image: none;
+    border: 1px solid $gray-300;
+
+    &::after {
+        display: none;
+    }
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn.btn-select {
+    &:hover {
+        background: $white;
+    }
+}
+
+.tablesaw-enhanced .tablesaw-bar .btn:hover,
+.tablesaw-enhanced .tablesaw-bar .btn:focus,
+.tablesaw-enhanced .tablesaw-bar .btn:active {
+    color: $primary !important;
+    background-color: $gray-100;
+    background-image: none;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.tablesaw-columntoggle-popup {
+    .btn-group {
+        display: block;
+    }
+}
+
+.tablesaw-swipe .tablesaw-swipe-cellpersist {
+    border-right: 2px solid $gray-100;
+}
+
+.tablesaw-sortable-btn {
+    cursor: pointer;
+}

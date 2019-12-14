@@ -1,0 +1,126 @@
+// 
+// plugins-rtl.scss
+//
+
+// Select 2
+
+.select2-container {
+    .select2-selection--single {
+        .select2-selection__rendered {
+            padding-right: 12px;
+        }
+
+        .select2-selection__arrow {
+            right: auto;
+            left: 3px;
+        }
+    }
+
+    .select2-selection--multiple {
+        .select2-selection__choice {
+            float: right;
+            margin-right: 0;
+            margin-left: 5px;
+        }
+    }
+
+    .select2-search--inline {
+        float: right;
+    }
+}
+
+
+// Multiple select
+
+.ms-container {
+    .ms-optgroup-label {
+        padding: 5px 5px 0 0;
+    }
+}
+
+
+// Parsley
+
+.parsley-errors-list {
+    >li {
+        padding-right: 20px;
+        padding-left: 0;
+
+        &::before {
+            right: 2px;
+            left: auto;
+        }
+    }
+}
+
+// Quilljs
+
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    right: auto;
+    left: 0;
+}
+
+.ql-editor {
+    direction: rtl;
+    text-align: right;
+}
+
+// X-ediatable 
+
+.editable-buttons {
+    margin-right: 7px;
+    margin-left: 0;
+
+    .editable-cancel {
+        margin-right: 7px;
+        margin-left: 0;
+    }
+}
+
+// datatable
+
+.dataTables_wrapper {
+    .dataTables_filter{
+        text-align: left !important;
+        input{
+            margin-right: 0.5em;
+            margin-left: 0 !important;
+        }
+    }
+}
+
+// Responsive Table
+
+.responsive-table-plugin {
+    .btn-group.pull-right {
+        float: left;
+    }
+    .checkbox-row {
+        label{
+            &::after{
+                top: -2px;
+                margin-left: -22px;
+            }
+        }
+    }
+}
+
+// tablesaw
+
+.tablesaw-columntoggle-popup {
+    .tablesaw-btn-group {
+        > label {
+            input{
+                margin-right: 0;
+                margin-left: .8em;
+            }
+        }
+    }
+}
+
+// flot chart
+
+.legendLabel {
+    padding-right: 5px;
+    padding-left: 20px !important;
+}

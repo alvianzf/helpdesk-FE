@@ -1,0 +1,17 @@
+//
+// dropify.scss
+//
+
+@font-face {
+    font-family: 'dropify';
+    font-style: normal;
+    font-weight: normal;
+    src: url("~~~@assets/fonts/dropify.eot");
+    src: url("~~~@assets/fonts/dropify.eot#iefix") format("embedded-opentype"), url("~~~@assets/fonts/dropify.woff") format("woff"), url("~~~@assets/fonts/dropify.ttf") format("truetype"), url("~~~@assets/fonts/dropify.svg#dropify") format("svg");
+}
+
+.dropify-wrapper {
+    background:$white;
+    border: 2px dashed rgba($dark, 0.3);
+    border-radius: 6px;
+}

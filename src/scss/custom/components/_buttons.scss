@@ -1,0 +1,116 @@
+// 
+// buttons.scss
+//
+
+.btn {
+    color: $white;
+
+    .mdi {
+        &::before {
+            margin-top: -1px;
+        }
+    }
+}
+
+.btn-rounded {
+    border-radius: 2em;
+}
+
+//
+// light button
+// 
+.btn-light,.btn-white {
+    color: $gray-900;
+}
+
+//
+// Link buttons
+//
+// Make a button look and behave like a link
+.btn-link {
+    font-weight: $font-weight-normal;
+    color: $link-color;
+    background-color: transparent;
+
+    @include hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+        background-color: transparent;
+        border-color: transparent;
+    }
+    &:focus,
+    &.focus {
+        text-decoration: $link-hover-decoration;
+        border-color: transparent;
+        box-shadow: none;
+    }
+    &:disabled,
+    &.disabled {
+        color: $btn-link-disabled-color;
+        pointer-events: none;
+    } // No need for an active state here
+} 
+//
+// Alternate buttons
+//
+@each $color,
+$value in $theme-colors {
+    .btn-outline-#{$color} {
+        @include button-outline-variant($value);
+    }
+}
+
+// 
+// Button labels
+//
+
+.btn-label {
+    padding: .6rem .9rem;
+    margin: -.55rem .9rem -.55rem -.9rem;
+    background-color: rgba($gray-900,0.1);
+}
+
+.btn-label-right {
+    padding: .6rem .9rem;
+    margin: -.55rem -.9rem -.55rem .9rem;
+    background-color: rgba($gray-900,0.1);
+}
+
+// 
+// Button Extra Small Size
+// 
+
+.btn-xs {
+    padding: .2rem .6rem;
+    font-size: .75rem;
+    border-radius: .15rem;
+}
+
+
+// btn bordered
+
+@mixin button-bordred-variant($bg) {
+    color: $white !important;
+    background-color: $bg;
+    border-bottom: 2px solid darken($bg, 7%);
+}
+
+@each $color, $value in $theme-colors {
+    .btn-bordred-#{$color} {
+      @include button-bordred-variant($value);
+    }
+}
+
+// btn transparent
+
+@mixin button-lighten-variant($bg) {
+    color: $bg !important;
+    background-color: rgba($bg, 0.25) !important;
+    border: 1px solid rgba($bg, 0.2) !important;
+}
+
+@each $color, $value in $theme-colors {
+    .btn-lighten-#{$color} {
+      @include button-lighten-variant($value);
+    }
+}

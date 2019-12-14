@@ -1,0 +1,35 @@
+// 
+// profile.scss
+//
+
+.profile-pills {
+    li{
+      a{
+        display: block;
+        padding: 0 10px;
+        line-height: 30px !important;
+        color: rgba($dark,0.5) !important;
+  
+        i {
+          font-size: 14px;
+        }
+      }
+    }
+}
+
+.comment-footer {
+    display: block;
+    font-size: 12px;;
+
+    i {
+      margin-right: 7px;
+      font-size: 13px;
+    }
+  }
+  .comment-footer, .comment-footer a {
+    color: rgba($dark, 0.5);
+
+    &:hover {
+      color: $primary;
+    }
+}

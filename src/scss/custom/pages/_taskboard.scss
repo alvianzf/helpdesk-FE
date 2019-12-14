@@ -1,0 +1,42 @@
+// 
+// taskboard.scss
+//
+
+.taskList {
+    min-height: 40px;
+    margin-bottom: 0;
+    > li {
+      padding: 20px;
+      margin-bottom: 15px;
+      background-color: $white;
+      border: 1px solid $gray-300;
+      border-radius: 3px;
+  }
+  .kanban-detail{
+    margin-left: 35px;
+    ul {
+      li {
+        a {
+          display: inline-block;
+          i {
+            padding: 0 5px;
+            font-size: 16px;
+            line-height: 32px;
+            color: $gray-600;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.task-placeholder {
+  padding: 20px;
+  background-color: $gray-200 !important;
+  border: 1px dashed $gray-300 !important;
+}
+
+.gu-mirror {
+  list-style: none;
+}

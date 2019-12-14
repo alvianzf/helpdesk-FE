@@ -1,0 +1,32 @@
+//
+// parsley.scss
+//
+ 
+.parsley-errors-list {
+  padding: 0;
+  margin: 0;
+
+  > li {
+    position: relative;
+    padding-left: 20px;
+    margin-top: 5px;
+    color: $danger;
+    list-style: none;
+  
+    &::before {
+      position: absolute;
+      top: -1px;
+      left: 2px;
+      font-family: "Material Design Icons";
+      content: "\F159";
+    }
+  }
+}
+
+.parsley-error {
+  border-color: $danger;
+}
+
+.parsley-success {
+  border-color: $success;
+}
