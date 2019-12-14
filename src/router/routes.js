@@ -28,6 +28,15 @@ export default [
     }
   },
   {
+    path: '/user-management/admin',
+    name: 'user.admin',
+    component: () => lazyLoadView(import('@views/admin/list')),
+    meta: {
+      // authRequired: true,
+      title: 'List Administrator',
+    }
+  },
+  {
     path: '/auth/login',
     name: 'auth.login',
     component: () => lazyLoadView(import('@views/auth/login')),

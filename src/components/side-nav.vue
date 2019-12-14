@@ -46,6 +46,26 @@ export default {
             <span> Chat List </span>
           </router-link>
         </li>
+        <li>
+          <a
+            href="javascript: void(0);"
+            class="waves-effect"
+          >
+            <i class="mdi mdi-account-multiple-outline"></i>
+            <span> User Management </span>
+            <span class="menu-arrow"></span>
+          </a>
+          <ul
+            class="nav-second-level nav"
+            aria-expanded="false"
+          >
+            <li>
+              <router-link tag="a" :to="{ name : 'user.admin' }">
+                Administrator
+              </router-link>
+            </li>
+          </ul>
+        </li>
       </ul>
       <div class="clearfix"></div>
     </div>

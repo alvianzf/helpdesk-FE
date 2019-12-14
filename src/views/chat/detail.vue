@@ -52,7 +52,6 @@ export default {
                         <b-input-group>
                             <b-form-textarea
                             id="textarea"
-                            v-model="text"
                             placeholder="Enter something..."
                             rows="3"
                             max-rows="6"
@@ -72,7 +71,6 @@ export default {
 
 <style lang="scss" scoped>
     .header {
-        padding: 12px 25px;
         border-bottom: 1px solid rgba(152,166,173,.3);
         overflow: hidden;
     }
