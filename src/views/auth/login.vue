@@ -40,7 +40,6 @@ export default {
               >
                 <b-form-input
                   id="input-1"
-                  v-model="username"
                   type="text"
                   required
                   placeholder="Enter username"
@@ -54,7 +53,6 @@ export default {
               >
                 <b-form-input
                   id="input-2"
-                  v-model="password"
                   type="password"
                   required
                   placeholder="Enter password"
