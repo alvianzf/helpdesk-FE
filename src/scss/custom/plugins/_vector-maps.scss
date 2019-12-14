@@ -3,10 +3,10 @@
 //
 
 .jvectormap-label {
-    padding: 5px 8px;
+    border: none;
+    background: $dark;
+    color: $white;
     font-family: $font-family-secondary;
     font-size: $font-size-base;
-    color: $white;
-    background: $dark;
-    border: none;
+    padding: 5px 8px;
 }

@@ -17,9 +17,9 @@ button{
 }
 
 pre{
-  padding: 7px;
   background-color: $gray-100;
   border: 1px solid darken($gray-100, 4%);
+  padding: 7px;
 }
 
 // blockquote
@@ -27,12 +27,12 @@ pre{
 .blockquote{
   padding: 10px 20px;
   margin-bottom: 20px;
-  font-size: 16px;
   border-left: 4px solid $gray-200;
+  font-size: 16px;
   &.blockquote-reverse{
-    text-align: right;
-    border-right: 4px solid $gray-200;
     border-left: 0;
+    border-right: 4px solid $gray-200;
+    text-align: right;
   }
 }
 

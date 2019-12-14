@@ -19,8 +19,8 @@
 }
 
 @mixin toast-variant($bg) {
-    background-color: rgba($bg, 0.8) !important;
     border: 2px solid $bg !important;
+    background-color: rgba($bg, 0.8) !important;
 }
 
 @each $color, $value in $theme-colors {

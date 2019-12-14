@@ -61,8 +61,8 @@
     }
     .mr#{$infix}-auto,
     .mx#{$infix}-auto {
-      margin-right: inherit !important;
       margin-left: auto !important;
+      margin-right: inherit !important;
     }
     .mb#{$infix}-auto,
     .my#{$infix}-auto {

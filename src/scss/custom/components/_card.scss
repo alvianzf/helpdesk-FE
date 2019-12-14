@@ -17,14 +17,14 @@
     float: right;
     height: 16px;
     > a {
-        display: inline-block;
-        font-size: 18px;
-        line-height: 1;
         color: inherit;
+        font-size: 18px;
+        display: inline-block;
+        line-height: 1;
 
         &.collapsed {
             i {
-                &::before {
+                &:before {
                     content: "\F415";
                 }
             }
@@ -37,36 +37,30 @@
 .card-title,
 .card-header {
     margin-top: 0;
-    background-color: #fff;
-    padding : 10px 15px;
-}
-
-.card-body {
-    padding: 5px 15px;
 }
 
 
 //Card disable loading (Custom Cards)
 .card-disabled {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    cursor: progress;
-    background: rgba($white, 0.8);
+    right: 0;
+    top: 0;
+    bottom: 0;
     border-radius: $card-border-radius;
+    background: rgba($white, 0.8);
+    cursor: progress;
 
     .card-portlets-loader {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 30px;
-        height: 30px;
-        margin-top: - ($grid-gutter-width / 2);
-        margin-left: - ($grid-gutter-width / 2);
         background-color: $dark;
         animation: rotatebox 1.2s infinite ease-in-out;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: - ($grid-gutter-width / 2);
+        margin-top: - ($grid-gutter-width / 2);
     }
 }
 
@@ -84,30 +78,29 @@
 
 // Custom card box
 .card-box {
-    padding: $card-spacer-x;
-    margin-bottom: $grid-gutter-width;
     background-color: $white;
+    padding: $card-spacer-x;
     box-shadow: $shadow-sm;
-
+    margin-bottom: $grid-gutter-width;
     @include border-radius($card-border-radius);
 
     
     .card-drop {
-        display: inline-block;
-        font-size: 20px;
-        line-height: 1px;
         color: $gray-600;
+        font-size: 20px;
+        display: inline-block;
+        line-height: 1px;
     }
 }
 
 .header-title {
-    margin: 0 0 7px 0;
     font-size: 1rem;
+    margin: 0 0 7px 0;
 }
 
 .sub-header {
-    margin-bottom: $grid-gutter-width;
     font-size: 0.875rem;
+    margin-bottom: $grid-gutter-width;
     color: $gray-600;
 }
 
@@ -126,7 +119,7 @@
 
 // Draggable cards
 .card-draggable-placeholder {
+    border: 2px dashed rgba($dark, 0.4);
     margin-bottom: 16px;
     background-color: rgba($dark, 0.06);
-    border: 2px dashed rgba($dark, 0.4);
 }

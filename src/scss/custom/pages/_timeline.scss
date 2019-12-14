@@ -3,55 +3,55 @@
 //
 
 .timeline {
-    position: relative;
-    display: table;
-    width: 100%;
-    margin-bottom: 50px;
-    table-layout: fixed;
-    border-spacing: 0;
     border-collapse: collapse;
+    border-spacing: 0;
+    display: table;
+    margin-bottom: 50px;
+    position: relative;
+    table-layout: fixed;
+    width: 100%;
   
     .time-show {
-      position: relative;
-      margin-top: 30px;
-      margin-right: -75px;
       margin-bottom: 30px;
+      margin-right: -75px;
+      margin-top: 30px;
+      position: relative;
       text-align: right;
       a {
         color: $white;
       }
     }
-    &::before {
+    &:before {
+      background-color: rgba($gray-500, 0.3);
+      bottom: 0px;
+      content: "";
+      left: 50%;
       position: absolute;
       top: 30px;
-      bottom: 0;
-      left: 50%;
-      z-index: 0;
       width: 2px;
-      content: "";
-      background-color: rgba($gray-500, 0.3);
+      z-index: 0;
     }
     .timeline-icon {
-      position: absolute;
-      top: 50%;
-      left: -54px;
-      display: block;
-      width: 21px;
-      height: 21px;
-      margin-top: -11px;
-      color: $white;
-      text-align: center;
-      background: $gray-600;
       -webkit-border-radius: 50%;
+      background: $gray-600;
       border-radius: 50%;
+      color: $white;
+      display: block;
+      height: 21px;
+      left: -54px;
+      margin-top: -11px;
+      position: absolute;
+      text-align: center;
+      top: 50%;
+      width: 21px;
       i {
         color: $gray-200;
       }
     }
     .time-icon {
-      &::before {
-        margin-top: 5px;
+      &:before {
         font-size: 16px;
+        margin-top: 5px;
       }
     }
   
@@ -59,56 +59,56 @@
   
   h3{
     &.timeline-title {
-      margin: 0 0 5px;
+      color: $gray-600;
       font-size: 20px;
       font-weight: 400;
-      color: $gray-600;
+      margin: 0 0 5px;
       text-transform: uppercase;
     }
   }
   
   .timeline-item {
     display: table-row;
-    &::before {
+    &:before {
+      content: "";
       display: block;
       width: 50%;
-      content: "";
     }
     .timeline-desk {
       .arrow {
+        border-bottom: 8px solid transparent;
+        border-right: 8px solid $white !important;
+        border-top: 8px solid transparent;
+        display: block;
+        height: 0;
+        left: -7px;
+        margin-top: -10px;
         position: absolute;
         top: 50%;
-        left: -7px;
-        display: block;
         width: 0;
-        height: 0;
-        margin-top: -10px;
-        border-top: 8px solid transparent;
-        border-right: 8px solid $white !important;
-        border-bottom: 8px solid transparent;
       }
     }
   }
   
   .timeline-item.alt {
-    &::after {
+    &:after {
+      content: "";
       display: block;
       width: 50%;
-      content: "";
     }
     .timeline-desk {
       .arrow-alt {
-        position: absolute;
-        top: 50%;
-        right: -7px;
-        left: auto;
-        display: block;
-        width: 0;
-        height: 0;
-        margin-top: -10px;
-        border-top: 8px solid transparent;
         border-bottom: 8px solid transparent;
         border-left: 8px solid $white !important;
+        border-top: 8px solid transparent;
+        display: block;
+        height: 0;
+        left: auto;
+        margin-top: -10px;
+        position: absolute;
+        right: -7px;
+        top: 50%;
+        width: 0;
       }
       .album {
         float: right;
@@ -120,15 +120,15 @@
       }
     }
     .timeline-icon {
-      right: -58px;
       left: auto;
+      right: -58px;
     }
-    &::before {
+    &:before {
       display: none;
     }
     .panel {
-      margin-right: 45px;
       margin-left: 0;
+      margin-right: 45px;
       .panel-body p + p {
         margin-top: 10px !important;
       }
@@ -146,35 +146,35 @@
   
   .timeline-desk {
     display: table-cell;
-    width: 50%;
     vertical-align: top;
+    width: 50%;
     h4 {
-      margin: 0;
       font-size: 16px;
       font-weight: 300;
+      margin: 0;
     }
     .panel {
-      position: relative;
+      background: $white;
       display: block;
-      padding: 20px;
       margin-bottom: 5px;
       margin-left: 45px;
+      position: relative;
       text-align: left;
-      background: $white;
+      padding: 20px;
       border-radius: 7px;
     }
     h5 {
       span {
-        display: block;
-        margin-bottom: 4px;
-        font-size: 12px;
         color: $gray-200;
+        display: block;
+        font-size: 12px;
+        margin-bottom: 4px;
       }
     }
     p {
-      margin-bottom: 0;
-      font-size: 14px;
       color: $gray-600;
+      font-size: 14px;
+      margin-bottom: 0;
     }
     .album {
       margin-top: 12px;
@@ -184,14 +184,14 @@
       }
   
       img {
-        width: auto;
         height: 36px;
+        width: auto;
         border-radius: 3px;
       }
     }
     .notification {
-      padding: 8px;
-      margin-top: 20px;
       background: none repeat scroll 0 0 $white;
+      margin-top: 20px;
+      padding: 8px;
     }
   }

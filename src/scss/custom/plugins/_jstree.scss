@@ -8,8 +8,8 @@
         background-image: url("~~~@assets/images/jstree.png");
     }
     .jstree-node {
-        background-repeat: repeat-y;
         background-position: -292px -4px;
+        background-repeat: repeat-y;
     }
     
     .jstree-themeicon-custom {
@@ -19,8 +19,8 @@
     }
     
     .jstree-anchor {
-        height: 28px;
         line-height: 28px;
+        height: 28px;
     }
     
     &>.jstree-container-ul .jstree-loading>.jstree-ocl {
@@ -30,8 +30,8 @@
     .jstree-icon:empty {
         width: 24px;
         height: 28px;
-        font-size: 15px;
         line-height: 28px;
+        font-size: 15px;
     }
     
     .jstree-clicked,

@@ -17,18 +17,18 @@
     margin: 10px 0;
   }
   .swal2-file, .swal2-input, .swal2-textarea {
-    font-size: 16px;
     border: 2px solid $gray-300;
+    font-size: 16px;
     box-shadow: none;
   }
   .swal2-confirm.btn-confirm {
-    font-size: $font-size-base;
     background-color: $primary !important;
+    font-size: $font-size-base;
   }
 
   .swal2-cancel.btn-cancel {
-    font-size: $font-size-base;
     background-color: $danger !important;
+    font-size: $font-size-base;
   }
 
   .swal2-styled:focus {
@@ -67,8 +67,8 @@
   }
 }
 .swal2-modal .swal2-file:focus, .swal2-modal .swal2-input:focus, .swal2-modal .swal2-textarea:focus {
-  border: 2px solid $primary;
   outline: 0;
+  border: 2px solid $primary;
 }
 
 .swal2-container.swal2-shown {

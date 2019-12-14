@@ -11,16 +11,16 @@
         }
 
         .select2-selection__arrow {
-            right: auto;
             left: 3px;
+            right: auto;
         }
     }
 
     .select2-selection--multiple {
         .select2-selection__choice {
             float: right;
-            margin-right: 0;
             margin-left: 5px;
+            margin-right: 0;
         }
     }
 
@@ -34,7 +34,7 @@
 
 .ms-container {
     .ms-optgroup-label {
-        padding: 5px 5px 0 0;
+        padding: 5px 5px 0px 0;
     }
 }
 
@@ -43,12 +43,12 @@
 
 .parsley-errors-list {
     >li {
-        padding-right: 20px;
         padding-left: 0;
+        padding-right: 20px;
 
-        &::before {
-            right: 2px;
+        &:before {
             left: auto;
+            right: 2px;
         }
     }
 }
@@ -56,8 +56,8 @@
 // Quilljs
 
 .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
-    right: auto;
     left: 0;
+    right: auto;
 }
 
 .ql-editor {
@@ -68,12 +68,12 @@
 // X-ediatable 
 
 .editable-buttons {
-    margin-right: 7px;
     margin-left: 0;
+    margin-right: 7px;
 
     .editable-cancel {
-        margin-right: 7px;
         margin-left: 0;
+        margin-right: 7px;
     }
 }
 
@@ -83,8 +83,8 @@
     .dataTables_filter{
         text-align: left !important;
         input{
+            margin-left: 0px !important;
             margin-right: 0.5em;
-            margin-left: 0 !important;
         }
     }
 }
@@ -97,9 +97,9 @@
     }
     .checkbox-row {
         label{
-            &::after{
-                top: -2px;
+            &:after{
                 margin-left: -22px;
+                top: -2px;
             }
         }
     }
@@ -121,6 +121,6 @@
 // flot chart
 
 .legendLabel {
-    padding-right: 5px;
     padding-left: 20px !important;
+    padding-right: 5px;
 }

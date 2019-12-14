@@ -33,9 +33,9 @@
 }
 
 .progress-animated {
-  transition: 5s all;
-  animation-name: animationProgress;
   animation-duration: 5s;
+  animation-name: animationProgress;
+  transition: 5s all;
 }
 
 
@@ -54,7 +54,6 @@ $value in $theme-colors {
     width:0;
   }
 }
-
 @keyframes animationProgress {
   from {
     width:0;

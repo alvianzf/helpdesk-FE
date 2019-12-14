@@ -13,47 +13,47 @@
         display: none;
     }
     .logo-lg-text-dark {
-        font-size: 22px;
-        font-weight: $font-weight-bold;
         color: $dark;
+        font-weight: $font-weight-bold;
+        font-size: 22px;
         text-transform: uppercase;
     }
     .logo-lg-text-light {
-        font-size: 22px;
-        font-weight: $font-weight-bold;
         color: $white;
+        font-weight: $font-weight-bold;
+        font-size: 22px;
         text-transform: uppercase;
     }
 }
 
 .logo-box {
-    float: left;
-    width: $leftbar-width;
     height: $topbar-height;
+    width: $leftbar-width;
+    float: left;
     background-color: $logo-box-background;
 }
 
 .navbar-custom {
-    position: fixed;
-    right: 0;
-    left: 0;
-    z-index: 100;
-    height: $topbar-height;
-    padding: 0 10px 0 0;
     background-color: $bg-topbar-light;
+    padding: 0 10px 0 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: $topbar-height;
+    z-index: 100;
 
     .topnav-menu {
         > li {
             float: left;
         }
         .nav-link {
-            display: block;
-            min-width: 32px;
-            max-height: $topbar-height;
             padding: 0 15px;
-            line-height: $topbar-height;
             color: $gray-700;
+            min-width: 32px;
+            display: block;
+            line-height: $topbar-height;
             text-align: center;
+            max-height: $topbar-height;
         }
     }
     .dropdown.show {
@@ -64,11 +64,11 @@
 
     /* Search */
     .app-search {
+        overflow: hidden;
+        height: $topbar-height;
         display: table;
         max-width: 180px;
-        height: $topbar-height;
         margin-right: 20px;
-        overflow: hidden;
         
         .app-search-box {
             display: table-cell;
@@ -80,39 +80,39 @@
             }
         }
         .form-control {
+            border: none;
             height: 38px;
-            padding-right: 0;
             padding-left: 20px;
+            padding-right: 0;
             color: $dark;
             background-color: rgba($gray-700,0.07);
-            border: none;
-            border-radius: 30px 0 0 30px;
             box-shadow: none;
+            border-radius: 30px 0 0 30px;
         }
         .input-group-append {
-            z-index: 4;
             margin-left: 0;
+            z-index: 4;
         }
 
         .btn {
-            color: $gray-600;
             background-color: rgba($gray-700,0.07);
             border-color: transparent;
+            color: $gray-600;
             border-radius: 0 30px 30px 0;
             box-shadow: none !important;
         }
     }
 
     .button-menu-mobile {
-        display: inline-block;
-        width: 60px;
-        height: $topbar-height;
-        font-size: 24px;
-        line-height: $topbar-height;
-        color: $dark;
-        cursor: pointer;
-        background-color: transparent;
         border: none;
+        color: $dark;
+        display: inline-block;
+        height: $topbar-height;
+        line-height: $topbar-height;
+        width: 60px;
+        background-color: transparent;
+        font-size: 24px;
+        cursor: pointer;
     }
     
     .button-menu-mobile.disable-btn {
@@ -130,8 +130,8 @@
     margin-left: 0;
 
     .noti-title {
-        padding: 15px 20px;
         background-color: $white;
+        padding: 15px 20px;
     }
 
     .noti-icon {
@@ -140,10 +140,10 @@
     }
 
     .noti-icon-badge {
+        display: inline-block;
         position: absolute;
         top: 16px;
         right: 10px;
-        display: inline-block;
     }
 
     .notify-item {
@@ -151,23 +151,23 @@
 
         .notify-icon {
             float: left;
-            width: 36px;
             height: 36px;
-            margin-right: 10px;
+            width: 36px;
             font-size: 18px;
             line-height: 36px;
-            color: $white;
             text-align: center;
+            margin-right: 10px;
             border-radius: 50%;
+            color: $white;
         }
 
         .notify-details {
             margin-bottom: 5px;
-            margin-left: 45px;
             overflow: hidden;
-            color: $gray-800;
+            margin-left: 45px;
             text-overflow: ellipsis;
             white-space: nowrap;
+            color: $gray-800;
 
             b {
                 font-weight: 500;
@@ -178,16 +178,16 @@
             span {
                 display: block;
                 overflow: hidden;
-                font-size: 13px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                font-size: 13px;
             }
         }
         
         .user-msg {
             margin-left: 45px;
-            line-height: 16px;
             white-space: normal;
+            line-height: 16px;
         }
     }
     .profile-dropdown {
@@ -200,16 +200,16 @@
 .profile-dropdown {
     width: 170px;
     i {
-        margin-right: 5px;
         vertical-align: middle;
+        margin-right: 5px;
     }
 }
 
 .nav-user {
     padding: 0 12px !important;
     img {
-        width: 32px;
         height: 32px;
+        width: 32px;
     }
 }
 
@@ -251,8 +251,8 @@
             border-color: rgba($white,0.07);
         }
         .btn {
-            color: rgba($white,0.7);
             background-color: rgba($white,0.07);
+            color: rgba($white,0.7);
         }
     }
 }
@@ -266,9 +266,9 @@
 
 
 .page-title-main {
-    padding: 0 20px;
     margin: 0;
     line-height: $topbar-height;
+    padding: 0 20px;
 }
 
 

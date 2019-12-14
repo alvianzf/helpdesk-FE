@@ -46,8 +46,8 @@
 .notification-list {
 
     .noti-icon-badge {
-        right: auto;
         left: 10px;
+        right: auto;
     }
 
     .notify-item {
@@ -55,14 +55,14 @@
 
         .notify-icon {
             float: right;
-            margin-right: 0;
             margin-left: 10px;
+            margin-right: 0;
         }
 
         .notify-details,
         .user-msg {
-            margin-right: 45px;
             margin-left: 0;
+            margin-right: 45px;
         }
     }
 
@@ -75,9 +75,9 @@
 
 .profile-dropdown {
     i {
-        float: right;
-        margin: 5px 0 0 10px;
         vertical-align: middle;
+        margin: 5px 0 0 10px;
+        float: right;
     }
 }
 
@@ -129,10 +129,10 @@
     }
 
     .menu-arrow {
-        right: auto;
         left: 20px;
+        right: auto;
 
-        &::before {
+        &:before {
             content: "\F141";
         }
     }
@@ -160,8 +160,8 @@
 
                     >a {
                         i {
-                            margin-right: 5px;
                             margin-left: 20px;
+                            margin-right: 5px;
                         }
 
                         span {
@@ -191,8 +191,8 @@
 
                         >a {
                             span.pull-right {
-                                right: 0;
                                 left: 20px;
+                                right: 0;
                             }
                         }
                     }
@@ -209,8 +209,8 @@
 
     //Footer
     .footer {
-        right: $leftbar-width-collapsed !important;
         left: 0 !important;
+        right: $leftbar-width-collapsed !important;
     }
 }
 
@@ -243,8 +243,8 @@
         }
 
         +.content-page .footer {
-            right: $leftbar-width-sm;
             left: 0;
+            right: $leftbar-width-sm;
         }
     }
 }
@@ -270,16 +270,16 @@
 
 // Leftbar with user
 .user-pro-dropdown {
-    margin-right: 5%;
     margin-left: 0;
+    margin-right: 5%;
 }
 
 
 // footer.scss
 
 .footer {
-    right: $leftbar-width;
     left: 0;
+    right: $leftbar-width;
 
     .footer-links {
         a {
@@ -303,9 +303,9 @@
 //
 
 .right-bar {
-    right: auto;
-    left: -($rightbar-width + 10px);
     float: left !important;
+    left: -($rightbar-width + 10px);
+    right: auto;
 
     .user-box {
         .user-img {
@@ -319,7 +319,7 @@
 
 .right-bar-enabled {
     .right-bar {
-        right: auto;
         left: 0;
+        right: auto;
     }
 }

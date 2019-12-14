@@ -14,22 +14,22 @@
 
 .dropdown-menu {
     &.show {
+        text-align: right;
+        left: auto;
         right: 0;
         bottom: auto;
-        left: auto;
-        text-align: right;
     }
 
     &.dropdown-megamenu {
-        right: 20px !important;
-        left: 20px !important;
         background-image: none;
+        left: 20px !important;
+        right: 20px !important;
     }
 }
 
 .dropdown-menu-right {
-    right: auto !important;
     left: 0 !important;
+    right: auto !important;
     
 }
 
@@ -42,7 +42,7 @@ ul {
 
 .list-inline-item{
     &:not(:last-child) {
-        margin-right: 0;
+        margin-right: 0px;
         margin-left: 6px;
     }
 }
@@ -90,8 +90,8 @@ dd {
     }
 
     > :not(:last-child) {
-        margin-right: 0;
         margin-left: .25rem;
+        margin-right: 0;
     }
 }
 
@@ -107,12 +107,12 @@ dd {
 }
 
 .alert-dismissible {
-    padding-right: $alert-padding-x;
     padding-left: $close-font-size + $alert-padding-x * 2;
+    padding-right: $alert-padding-x;
 
     .close {
-        right: auto;
         left: 0;
+        right: auto;
     }
 }
 
@@ -137,14 +137,14 @@ dd {
 
 .custom-control-label {
     &::before {
-        right: -($custom-control-gutter + $custom-control-indicator-size);
         left: auto;
+        right: -($custom-control-gutter + $custom-control-indicator-size);
     }
 
     // Foreground (icon)
     &::after {
-        right: -($custom-control-gutter + $custom-control-indicator-size);
         left: auto;
+        right: -($custom-control-gutter + $custom-control-indicator-size);
     }
 }
 
@@ -184,8 +184,8 @@ dd {
 // Input Group
 
 .input-group-prepend {
-    margin-right: 0;
     margin-left: -1px;
+    margin-right: 0;
 }
 
 .input-group-append {
@@ -201,9 +201,9 @@ dd {
 .input-group>.input-group-append:last-child>.input-group-text:not(:last-child),
 .input-group>.custom-select:not(:last-child),
 .input-group>.form-control:not(:last-child) {
-    border-top-left-radius: 0;
     border-top-right-radius: $input-border-radius;
     border-bottom-right-radius: $input-border-radius;
+    border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 
@@ -216,7 +216,7 @@ dd {
 .input-group>.custom-select:not(:first-child),
 .input-group>.form-control:not(:first-child) {
     border-top-left-radius: $input-border-radius;
+    border-bottom-left-radius: $input-border-radius;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom-left-radius: $input-border-radius;
 }

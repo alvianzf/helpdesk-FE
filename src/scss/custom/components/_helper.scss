@@ -38,49 +38,49 @@
 
 // avatar height
 .avatar-xs {
-  width: 1.5rem;
   height: 1.5rem;
+  width: 1.5rem;
 }
 
 .avatar-sm {
-  width: 2.25rem;
   height: 2.25rem;
+  width: 2.25rem;
 }
 
 .avatar-md {
-  width: 3.5rem;
   height: 3.5rem;
+  width: 3.5rem;
 }
 
 .avatar-lg {
-  width: 4.5rem;
   height: 4.5rem;
+  width: 4.5rem;
 }
 
 .avatar-xl {
-  width: 6rem;
   height: 6rem;
+  width: 6rem;
 }
 
 .avatar-xxl {
-  width: 7.5rem;
   height: 7.5rem;
+  width: 7.5rem;
 }
 
 .avatar-title {
-  display: flex;
   align-items: center;
+  color: $white;
+  display: flex;
+  height: 100%;
   justify-content: center;
   width: 100%;
-  height: 100%;
-  color: $white;
 }
 
 .avatar-group {
   padding-left: 12px;
   .avatar-group-item {
-    display: inline-block;
     margin: 0 0 10px -12px;
+    display: inline-block;
     border: 2px solid $white;
     border-radius: 50%;
   }
@@ -92,9 +92,9 @@
 .sp-line-2,
 .sp-line-3,
 .sp-line-4 {
-  display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
   -webkit-box-orient: vertical;
 }
 

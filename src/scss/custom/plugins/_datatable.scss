@@ -7,8 +7,8 @@
 }
 
 table.dataTable {
-    margin-bottom: 15px !important;
     border-collapse: collapse !important;
+    margin-bottom: 15px !important;
 
     tbody {
         // Multi select table
@@ -27,10 +27,10 @@ table.dataTable {
         }
         // Key Tables
         th.focus,td.focus{
-            color: $primary;
-            background-color: rgba($primary, 0.15);
             outline: 2px solid $primary !important;
             outline-offset: -1px;
+            color: $primary;
+            background-color: rgba($primary, 0.15);
         }
     }
 }
@@ -46,10 +46,10 @@ table.dataTable.dtr-inline.collapsed {
         >tr[role=row] {
             > td, > th {
                 &:first-child{
-                    &::before{
-                        top: $table-cell-padding;
-                        background-color: $success;
+                    &:before{
                         box-shadow: $shadow-lg;
+                        background-color: $success;
+                        top: $table-cell-padding;
                     }
                 }
             }
@@ -57,9 +57,9 @@ table.dataTable.dtr-inline.collapsed {
         >tr.parent {
             > td, > th {
                 &:first-child{
-                    &::before{
-                        top: $table-cell-padding;
+                    &:before{
                         background-color: $danger;
+                        top: $table-cell-padding;
                     }
                 }
             }
@@ -69,18 +69,18 @@ table.dataTable.dtr-inline.collapsed {
 
 // Data Table copy button
 div.dt-button-info {
-    z-index: 21;
-    color: $white;
-    text-align: center;
     background-color: $primary;
     border: none;
-    border-radius: 3px;
+    color: $white;
     box-shadow: none;
+    border-radius: 3px;
+    text-align: center;
+    z-index: 21;
 
     h2 {
-        color: $white;
-        background-color: rgba($white, 0.2);
         border-bottom: none;
+        background-color: rgba($white, 0.2);
+        color: $white;
     }
 }
 
@@ -95,9 +95,9 @@ div.dt-button-info {
     }
     .dataTables_paginate {
         ul {
+            text-align: center;
             display: block;
             margin: $spacer 0 0 !important;
-            text-align: center;
         }
     }
     div.dt-buttons {

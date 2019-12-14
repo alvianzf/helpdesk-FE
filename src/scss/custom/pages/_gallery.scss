@@ -4,12 +4,12 @@
 
 .portfolioFilter {
     a {
-        display: inline-block;
-        padding: 5px 10px;
-        font-weight: $font-weight-medium;
+        transition: all 0.3s ease-out;
         color: $dark;
         border-radius: 3px;
-        transition: all 0.3s ease-out;
+        padding: 5px 10px;
+        display: inline-block;
+        font-weight: $font-weight-medium;
         &:hover {
             color: $primary;
         }
@@ -21,16 +21,16 @@
 
 
 .thumb {
-    padding: 10px;
-    margin-top: 24px;
     background-color: $white;
     border-radius: 3px;
     box-shadow: $shadow-sm;
+    margin-top: 24px;
+    padding: 10px;
 }
   
 .thumb-img {
-    overflow: hidden;
     border-radius: 2px;
+    overflow: hidden;
 }
   
 .gal-detail {

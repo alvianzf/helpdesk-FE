@@ -12,9 +12,9 @@
 
 .note-editor{
   &.note-frame {
-    margin: 0;
     border: 1px solid $input-border-color;
     box-shadow: none;
+    margin: 0;
 
     .note-statusbar {
       background-color: lighten($gray-200,2%);
@@ -32,9 +32,9 @@
 }
 
 .note-editable {
-  padding: $input-padding-y $input-padding-x;
   border: $input-border-width solid $input-border-color;
   border-radius: $input-border-radius;
+  padding: $input-padding-y $input-padding-x;
 
   p {
     &:last-of-type {

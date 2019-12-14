@@ -56,9 +56,9 @@
                 &.today.disabled,
                 &.today.disabled:hover,
                 &.today:hover {
-                    color: $white;
                     background-color: $primary !important;
                     background-image: none !important;
+                    color: $white;
                 }
 
                 &.day.focused,
@@ -94,17 +94,17 @@
 
 .datepicker-dropdown {
 
-    &::after {
+    &:after {
         border-bottom: 6px solid $dropdown-bg;
     }
-    &::before {
+    &:before {
         border-bottom-color: $dropdown-border-color;
     }
     &.datepicker-orient-top {
-        &::before {
+        &:before {
             border-top: 7px solid $dropdown-border-color;
         }
-        &::after {
+        &:after {
             border-top: 6px solid $dropdown-bg;
         }
     }

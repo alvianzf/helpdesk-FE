@@ -7,24 +7,24 @@
 
   .ribbon{
     position: relative;
+    clear: both;
     padding: 5px 12px;
     margin-bottom: 15px;
-    clear: both;
+    box-shadow: 2px 5px 10px rgba($dark, 0.15);
+    color: $white;
     font-size: 13px;
     font-weight: $font-weight-semibold;
-    color: $white;
-    box-shadow: 2px 5px 10px rgba($dark, 0.15);
 
-    &::before{
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      z-index: -1;
-      display: block;
-      margin-bottom: -10px;
+    &:before{
       content: " ";
       border-style: solid;
       border-width: 10px;
+      display: block;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      margin-bottom: -10px;
+      z-index: -1;
     }
     &.float-left {
       margin-left: -30px;
@@ -34,7 +34,7 @@
       margin-right: -30px;
       border-radius: 3px 0 0 3px;
 
-      &::before{
+      &:before{
         right: 0;
       }
     }
@@ -54,7 +54,7 @@
     .ribbon-#{$color} {
         background: ($value);
 
-        &::before {
+        &:before {
           border-color: darken(($value),10%) transparent transparent;
         }
     }
@@ -64,47 +64,47 @@
   /* Ribbon two */
   .ribbon-two {
     position: absolute;
-    top: -5px;
     left: -5px;
+    top: -5px;
     z-index: 1;
+    overflow: hidden;
     width: 75px;
     height: 75px;
-    overflow: hidden;
     text-align: right;
 
     span {
+      font-size: 13px;
+      color: $white;
+      text-align: center;
+      line-height: 20px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      width: 100px;
+      display: block;
+      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
       position: absolute;
       top: 19px;
       left: -21px;
-      display: block;
-      width: 100px;
-      font-size: 13px;
       font-weight: $font-weight-semibold;
-      line-height: 20px;
-      color: $white;
-      text-align: center;
-      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
 
-      &::before {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: -1;
+      &:before {
         content: "";
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: -1;
         border-right: 3px solid transparent;
         border-bottom: 3px solid transparent;
       }
 
-      &::after {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        z-index: -1;
+      &:after {
         content: "";
-        border-bottom: 3px solid transparent;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: -1;
         border-left: 3px solid transparent;
+        border-bottom: 3px solid transparent;
       }
     }
   }
@@ -115,14 +115,14 @@
       span {
         background: ($value);
   
-        &::before {
-          border-top: 3px solid darken(($value),15%);
+        &:before {
           border-left: 3px solid darken(($value),15%);
+          border-top: 3px solid darken(($value),15%);
         }
   
-        &::after {
-          border-top: 3px solid darken(($value),15%);
+        &:after {
           border-right: 3px solid darken(($value),15%);
+          border-top: 3px solid darken(($value),15%);
         }
       }
     }

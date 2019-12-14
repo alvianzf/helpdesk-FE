@@ -10,6 +10,15 @@ export default [
     }
   },
   {
+    path: '/auth/login',
+    name: 'auth.login',
+    component: () => lazyLoadView(import('@views/auth/login')),
+    meta: {
+      // authRequired: true,
+      title: 'Login Page',
+    }
+  },
+  {
     path: '/404',
     name: '404',
     component: require('@views/_404').default,

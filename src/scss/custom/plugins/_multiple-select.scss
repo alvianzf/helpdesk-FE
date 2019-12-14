@@ -3,24 +3,24 @@
 //
 
 .ms-container {
+    background: transparent url('~~~@assets/images/multiple-arrow.png') no-repeat 50% 50%;
     width: auto;
     max-width: 370px;
-    background: transparent url('~~~@assets/images/multiple-arrow.png') no-repeat 50% 50%;
     
     .ms-list {
-        border: $input-border-width solid $input-border-color;
         box-shadow: none;
+        border: $input-border-width solid $input-border-color;
 
         &.ms-focus {
-            border: $input-border-width solid $input-focus-border-color;
             box-shadow: none;
+            border: $input-border-width solid $input-focus-border-color;
         }
     }
     .ms-selectable {
         li {
             &.ms-elem-selectable {
-                padding: 5px 10px;
                 border: none;
+                padding: 5px 10px;
             }
             &.ms-hover {
                 background-color: $primary;
@@ -29,8 +29,8 @@
     }
     .ms-selection {
         li.ms-elem-selection {
-            padding: 5px 10px;
             border: none;
+            padding: 5px 10px;
         }
         li.ms-hover {
             background-color: $primary;
@@ -39,8 +39,8 @@
 }
 
 .ms-selectable {
-    outline: none !important;
     box-shadow: none;
+    outline: none !important;
 }
 
 .search-input {
@@ -48,8 +48,8 @@
 }
 
 .ms-optgroup-label {
-    font-family: $font-family-secondary;
-    font-size: 13px;
     font-weight: $font-weight-medium;
+    font-family: $font-family-secondary;
     color: $dark !important;
+    font-size: 13px;
 }

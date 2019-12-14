@@ -3,18 +3,18 @@
 //
 
 .footer {
+    bottom: 0;
+    padding: 19px 15px 20px;
     position: absolute;
     right: 0;
-    bottom: 0;
-    left: $leftbar-width;
-    padding: 19px 15px 20px;
     color: $gray-600;
+    left: $leftbar-width;
     background-color: darken($body-bg,2.5%);
 
     .footer-links {
         a {
-            margin-left: 1.5rem;
             color: $gray-600;
+            margin-left: 1.5rem;
             transition: all .4s;
             &:hover {
                 color: $gray-900;

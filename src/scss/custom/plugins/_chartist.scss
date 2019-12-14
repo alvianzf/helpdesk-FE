@@ -2,25 +2,25 @@
 // chartist.scss
 //
 
-.ct-golden-section::before {
+.ct-golden-section:before {
     float: none;
 }
 
 .ct-chart {
     max-height: 300px;
     .ct-label {
+        fill: $gray-500;
+        color: $gray-500;
         font-size: 12px;
         line-height: 1;
-        color: $gray-500;
-        fill: $gray-500;
     }
 }
 
 .ct-chart.simple-pie-chart-chartist {
     .ct-label {
-        font-size: 16px;
         color: $white;
         fill: $white;
+        font-size: 16px;
     }
 }
 
@@ -124,16 +124,16 @@
 
 .chartist-tooltip {
     position: absolute;
-    z-index: 1;
     display: inline-block;
+    opacity: 0;
     min-width: 10px;
     padding: 2px 10px;
+    border-radius: 3px;
+    background: $dark;
     color: $white;
     text-align: center;
     pointer-events: none;
-    background: $dark;
-    border-radius: 3px;
-    opacity: 0;
+    z-index: 1;
     transition: opacity .2s linear;
     &.tooltip-show {
         opacity: 1;

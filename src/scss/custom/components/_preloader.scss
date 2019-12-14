@@ -5,26 +5,26 @@
 .preloader {
     position: absolute;
     top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
-    z-index: 9999;
     background-color: rgba($white, 0.75);
+    z-index: 9999;
 }
 
 .status {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     width: 40px;
     height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
     margin: -20px 0 0 -20px;
 }
 
 .spinner {
-    position: relative;
     margin: 0 auto;
     font-size: 10px;
+    position: relative;
     text-indent: -9999em;
     border-top: 5px solid $gray-300;
     border-right: 5px solid $gray-300;
@@ -35,10 +35,10 @@
 }
 
 .spinner,
-.spinner::after {
+.spinner:after {
+    border-radius: 50%;
     width: 40px;
     height: 40px;
-    border-radius: 50%;
 }
 
 @-webkit-keyframes SpinnerAnimation {

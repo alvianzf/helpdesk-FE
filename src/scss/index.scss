@@ -8,9 +8,6 @@ File: Main Css File
 */
 
 
-//Custom
-@import "custom/custom";
-
 //Fonts
 @import "custom/fonts/fonts";
 
@@ -89,6 +86,7 @@ File: Main Css File
 @import "custom/plugins/jstree";
 @import "custom/plugins/google-maps";
 @import "custom/plugins/vector-maps";
+
 @import "icons";
 
 :export {

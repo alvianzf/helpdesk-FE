@@ -26,14 +26,14 @@
 
 .nano{
     >.nano-content{
-        right: 0 !important;
         left: -17px;
+        right: 0px !important;
     }
 }
 
 #main {
+    left: 0px;
     right: 490px;
-    left: 0;
 
     .page-title{
         .sidebar-toggle-btn{
@@ -42,14 +42,14 @@
     }
 
     .search-box{
+        margin-left: 0px !important;
         margin-right: 30px;
-        margin-left: 0 !important;
         .icon{
-            right: auto !important;
             left: 0;
+            right: auto !important;
         }
         input{
-            padding: 0 0 0 36px !important;
+            padding: 0px 0px 0px 36px !important;
         }
     }
     .message-list{
@@ -60,7 +60,7 @@
                     float: right;
                 }
                 .checkbox-wrapper-mail{
-                    margin-right: 0;
+                    margin-right: 0px;
                     margin-left: 10px;
                 }
                 .title{
@@ -76,10 +76,10 @@
                     left: 200px;
                 }
                 .date {
-                    right: auto;
                     left: 0;
+                    right: auto;
                     padding-right: 80px;
-                    padding-left: 0;
+                    padding-left: 0px;
                 }
             }
         }
@@ -92,21 +92,21 @@
 
 .show-message {
     #main {
-        margin-right: 0;
         margin-left: 40%;
+        margin-right: 0px;
     }
 }
 
 #message{
     right: 60%;
-    left: 0;
+    left: 0px;
     transform: translateX(-200%);
     .header{
         .page-title{
             .icon{
-                float: right;
-                margin-right: 0;
                 margin-left: 10px;
+                margin-right: 0px;
+                float: right;
             }
         }
         
@@ -155,8 +155,8 @@
         .header {
             .page-title {
                 .sidebar-toggle-btn {
-                    margin-right: 10px;
                     margin-left: 20px;
+                    margin-right: 10px;
                 }
             }
         }
@@ -186,8 +186,8 @@
                     left: 120px;
                 }
                 .mail-col-2 {
-                    right: auto;
                     left: 0;
+                    right: auto;
                     .date {
                         padding-right: 0;
                     }
@@ -202,8 +202,8 @@
 
 .home-btn {
     position: absolute;
-    right: auto;
     left: 25px;
+    right: auto;
 }
 
 // Taskboard
@@ -211,7 +211,7 @@
 .taskList {
     .kanban-detail {
         margin-right: 35px;
-        margin-left: 0;
+        margin-left: 0px;
     }
 }
 
@@ -221,6 +221,6 @@
 
 @media print {
     .content-page{
-        margin: 0;
+        margin: 0px;
     }
 }
