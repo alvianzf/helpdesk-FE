@@ -40,6 +40,12 @@ export default {
             <span> Dashboard </span>
           </router-link>
         </li>
+        <li class="active">
+          <router-link tag="a" :to="{ name : 'chat.list' }">
+            <i class="mdi mdi-chat"></i>
+            <span> Chat List </span>
+          </router-link>
+        </li>
       </ul>
       <div class="clearfix"></div>
     </div>
