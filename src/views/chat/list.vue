@@ -21,9 +21,9 @@ export default {
                         <li class="unread">
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
                                         <i class="mdi mdi-eye"></i>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <div class="subject col-md-9">
                                     <span> Chat Subject here </span>
@@ -34,9 +34,35 @@ export default {
                         <li class="unread">
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
                                         <i class="mdi mdi-eye"></i>
-                                    </a>
+                                    </router-link>
+                                </div>
+                                <div class="subject col-md-9">
+                                    <span> Chat Subject here </span>
+                                </div>
+                                <div class="date col-md-2">11:49 am</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="text-center col-md-1">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
+                                        <i class="mdi mdi-eye"></i>
+                                    </router-link>
+                                </div>
+                                <div class="subject col-md-9">
+                                    <span> Chat Subject here </span>
+                                </div>
+                                <div class="date col-md-2">11:49 am</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="text-center col-md-1">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
+                                        <i class="mdi mdi-eye"></i>
+                                    </router-link>
                                 </div>
                                 <div class="subject col-md-9">
                                     <span> Chat Subject here </span>
@@ -60,9 +86,9 @@ export default {
                         <li>
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
                                         <i class="mdi mdi-eye"></i>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <div class="subject col-md-9">
                                     <span> Chat Subject here </span>
@@ -73,9 +99,9 @@ export default {
                         <li>
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
                                         <i class="mdi mdi-eye"></i>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <div class="subject col-md-9">
                                     <span> Chat Subject here </span>
@@ -86,35 +112,9 @@ export default {
                         <li>
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <a href="#">
+                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
                                         <i class="mdi mdi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="subject col-md-9">
-                                    <span> Chat Subject here </span>
-                                </div>
-                                <div class="date col-md-2">11:49 am</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <div class="text-center col-md-1">
-                                    <a href="#">
-                                        <i class="mdi mdi-eye"></i>
-                                    </a>
-                                </div>
-                                <div class="subject col-md-9">
-                                    <span> Chat Subject here </span>
-                                </div>
-                                <div class="date col-md-2">11:49 am</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <div class="text-center col-md-1">
-                                    <a href="#">
-                                        <i class="mdi mdi-eye"></i>
-                                    </a>
+                                    </router-link>
                                 </div>
                                 <div class="subject col-md-9">
                                     <span> Chat Subject here </span>

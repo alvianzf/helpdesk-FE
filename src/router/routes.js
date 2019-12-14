@@ -19,6 +19,15 @@ export default [
     }
   },
   {
+    path: '/chat/detail',
+    name: 'chat.detail',
+    component: () => lazyLoadView(import('@views/chat/detail')),
+    meta: {
+      // authRequired: true,
+      title: 'Chat Detail',
+    }
+  },
+  {
     path: '/auth/login',
     name: 'auth.login',
     component: () => lazyLoadView(import('@views/auth/login')),
