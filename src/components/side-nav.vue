@@ -64,7 +64,18 @@ export default {
                 Administrator
               </router-link>
             </li>
+            <li>
+              <router-link tag="a" :to="{ name : 'user.customer_service' }">
+                Customer Service
+              </router-link>
+            </li>
           </ul>
+        </li>
+        <li class="active">
+          <router-link tag="a" :to="{ name : 'auth.login' }">
+            <i class="mdi mdi-logout"></i>
+            <span> Logout </span>
+          </router-link>
         </li>
       </ul>
       <div class="clearfix"></div>

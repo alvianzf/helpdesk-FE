@@ -37,6 +37,15 @@ export default [
     }
   },
   {
+    path: '/user-management/customer-service',
+    name: 'user.customer_service',
+    component: () => lazyLoadView(import('@views/customer_service/list')),
+    meta: {
+      // authRequired: true,
+      title: 'List Customer Service',
+    }
+  },
+  {
     path: '/auth/login',
     name: 'auth.login',
     component: () => lazyLoadView(import('@views/auth/login')),
