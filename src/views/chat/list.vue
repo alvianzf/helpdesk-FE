@@ -12,6 +12,7 @@ export default {
             <div class="col-md-12">
                 <b-card>
                     <header class="header">
+                        <h3 class="float-left"> Total 16 chats </h3>
                         <div class="search-box float-right">
                             <input placeholder="Search..." class="form-control">
                         </div>
