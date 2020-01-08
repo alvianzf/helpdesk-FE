@@ -15,19 +15,25 @@ export default {
                 <div class="col-12">
                     <div class="form-group">
                         <label>Name <span class="tx-danger">*</span></label>
-                        <input class="form-control" placeholder="Enter name" required/>
+                        <input type="text" class="form-control" placeholder="Enter name" required/>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group">
                         <label>Email <span class="tx-danger">*</span></label>
-                        <input class="form-control" placeholder="Enter email" required/>
+                        <input type="email" class="form-control" placeholder="Enter email" required/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Password <span class="tx-danger">*</span></label>
+                        <input class="form-control" placeholder="Enter password" required type="password"/>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group">
                         <label>Phone </label>
-                        <input class="form-control" placeholder="Enter phone" required/>
+                        <input type="text" class="form-control" placeholder="Enter phone" required/>
                     </div>
                 </div>
             </div>

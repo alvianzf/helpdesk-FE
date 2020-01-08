@@ -14,6 +14,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.1.0",
+    "dotenv": "^8.2.0",
     "lodash": "^4.17.15",
     "metismenujs": "^1.1.0",
     "vue": "^2.6.10",
@@ -44,7 +45,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

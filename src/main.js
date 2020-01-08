@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from '@src/app'
 import router from '@router'
-import store from '@state'
 import '@components/_globals'
 import VueTables from 'vue-tables-2'
 import BootstrapVue from 'bootstrap-vue'
@@ -11,7 +10,6 @@ Vue.use(VueTables.ClientTable);
 
 const app = new Vue({
   router,
-  store,
   render: (h) => h(App),
 }).$mount('#app')
 
