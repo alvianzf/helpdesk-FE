@@ -1,39 +1,56 @@
 <script>
 import Layout from '@layouts/main'
 import Add from './add'
-import { get,post,destroy } from '@api'
+// import { destroy } from '@api'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name : 'list',
     components : { Layout, Add },
-    methods: {
-        FETCH_ADMINS() {
-            get('api/auth/list/admin')
-            .then((res) => {
-                res.data.data.forEach(v => {
-                    this.rows.push({
-                        id : v._id,
-                        name : v.name,
-                        email : v.email,
-                        phone : v.phone
-                    })
+    computed : mapGetters({
+        users : 'getUsers',
+        user : 'getUser',
+        response : 'getResponse'
+    }),
+    watch: {
+        users(set) {
+            this.rows = []
+            set.forEach(v => {
+                this.rows.push({
+                    id : v._id,
+                    name : v.name,
+                    email : v.email,
+                    phone : v.phone
                 })
             })
-            .catch((err) => {
-                console.log(err)
-            })
         },
+        response (set) {
+            if(set.success)
+            {
+                this.$bvToast.toast(set.message, {
+                    title: 'Success',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'success'
+                })
+            } else {
+                this.$bvToast.toast(set.message, {
+                    title: 'Error',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'error'
+                })
+            }
+        }
+    },
+    methods: {
+        ...mapActions(['GET_ADMINS','GET_USER','DELETE_USER']),
         edit(id) {
-            console.log(id)
-            post('api/auth/find', { id : id})
-            .then((res) => {
-                this.user = res.data.data
-                this.$bvModal.show('modal')
-                this.method = 'update'
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+            this.GET_USER({id : id})
+            this.$bvModal.show('modal')
+            this.method = 'update'
         },
         destroy(id) {
             this.$swal({
@@ -46,31 +63,15 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
-                        destroy('api/auth/delete', { id : id})
-                        .then((res) => {
-                            this.$bvToast.toast(res.data.message, {
-                                title: 'Success',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'success'
-                            })
-                        })
-                        .catch((error) => {
-                            this.$bvToast.toast(error.response.data.message, {
-                                title: 'Error',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'error'
-                            })
-                        })
+                        this.DELETE_USER({ id : id})
                     }
                 })
         }
     },
     mounted() {
-        this.FETCH_ADMINS()
+        // this.FETCH_ADMINS()
+        this.GET_ADMINS()
+        console.log(this.users)
     },
     data() {
         return {
@@ -85,7 +86,6 @@ export default {
                 sortable: ['name', 'email','phone'],
                 filterable: ['name', 'email','phone']
             },
-            user : null,
             method : 'post'
         }
     }

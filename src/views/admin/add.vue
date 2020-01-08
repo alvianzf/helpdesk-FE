@@ -1,5 +1,5 @@
 <script>
-import { post,put } from '@api'
+import { mapActions } from 'vuex'
 
 export default {
     name : 'add',
@@ -15,12 +15,13 @@ export default {
         }
     },
     methods : {
+        ...mapActions(['POST_USER','PUT_USER']),
         save(e) {
             e.preventDefault()
             this.$validator.validate().then(valid => {
                 if (valid) {
                     if(this.method == 'post') {
-                        post('api/auth/register', {
+                        this.POST_USER({
                             name : this.form.name,
                             email : this.form.email,
                             password : this.form.password,
@@ -28,57 +29,17 @@ export default {
                             phone : this.form.phone,
                             website : null
                         })
-                        .then((res) => {
-                            this.$bvToast.toast(res.data.message, {
-                                title: 'Success',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'success'
-                            })
-                            this.$bvModal.hide('modal')
-                            this.form = {}
-                        })
-                        .catch((error) => {
-                            this.$bvToast.toast(error.response.data.message, {
-                                title: 'Error',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'error'
-                            })
-                            this.$bvModal.hide('modal')
-                            this.form = {}
-                        })
+                        this.$bvModal.hide('modal')
+                        this.form = {}
                     } else {
-                        put('api/auth/update', {
+                        this.PUT_USER({
                             id : this.form._id,
                             name : this.form.name,
                             email : this.form.email,
                             phone : this.form.phone
                         })
-                        .then((res) => {
-                            this.$bvToast.toast(res.data.message, {
-                                title: 'Success',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'success'
-                            })
-                            this.$bvModal.hide('modal')
-                            this.form = {}
-                        })
-                        .catch((error) => {
-                            this.$bvToast.toast(error.response.data.message, {
-                                title: 'Error',
-                                autoHideDelay: 5000,
-                                toaster : 'b-toaster-top-right',
-                                appendToast: false,
-                                variant : 'error'
-                            })
-                            this.$bvModal.hide('modal')
-                            this.form = {}
-                        })
+                        this.$bvModal.hide('modal')
+                        this.form = {}
                     }
                     
                 }

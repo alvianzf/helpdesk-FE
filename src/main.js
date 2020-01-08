@@ -7,6 +7,7 @@ import BootstrapVue from 'bootstrap-vue'
 import VeeValidate from 'vee-validate'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css';
+import store from '@state'
 
 const options = {
   confirmButtonColor: '#41b882',
@@ -21,6 +22,7 @@ Vue.use(VueSweetalert2, options)
 const app = new Vue({
   router,
   render: (h) => h(App),
+  store : store
 }).$mount('#app')
 
 // If running e2e tests...

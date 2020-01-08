@@ -12,6 +12,7 @@ const aliases = {
   '@assets': 'src/assets',
   '@utils': 'src/utils',
   '@api': 'src/api',
+  '@state' : 'src/state',
   '@scss': 'src/scss/index.scss',
 }
 
