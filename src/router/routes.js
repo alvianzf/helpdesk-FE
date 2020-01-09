@@ -46,6 +46,15 @@ export default [
     }
   },
   {
+    path: '/website-management',
+    name: 'website_management',
+    component: () => lazyLoadView(import('@views/website/list')),
+    meta: {
+      // authRequired: true,
+      title: 'List Website',
+    }
+  },
+  {
     path: '/auth/login',
     name: 'auth.login',
     component: () => lazyLoadView(import('@views/auth/login')),

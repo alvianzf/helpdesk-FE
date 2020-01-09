@@ -72,6 +72,12 @@ export default {
           </ul>
         </li>
         <li class="active">
+          <router-link tag="a" :to="{ name : 'website_management' }">
+            <i class="mdi mdi-earth"></i>
+            <span> Website List </span>
+          </router-link>
+        </li>
+        <li class="active">
           <router-link tag="a" :to="{ name : 'auth.login' }">
             <i class="mdi mdi-logout"></i>
             <span> Logout </span>
