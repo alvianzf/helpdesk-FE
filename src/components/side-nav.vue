@@ -87,6 +87,14 @@ export default {
       <div class="clearfix"></div>
     </div>
     <!-- End Sidebar -->
+
+    <div class="notification">
+      <div class="notification-box">
+        <div class="notification-text">
+          <p> Have 1 message </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

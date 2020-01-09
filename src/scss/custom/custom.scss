@@ -1,0 +1,38 @@
+.file-pick{
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.notification {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+
+    .notification-box {
+        background: #0078ec;
+        color: #fff;
+        padding: 15px 0px;
+        text-align: center;
+        border-radius: 15px;
+
+        .notification-text {
+            p {
+                margin-bottom: 0px;
+            }
+        }
+    }
+}
+
+.btn-icon {
+    background: #0078ec !important;
+}
+
+.btn-icon:hover {
+    color: #fff !important;
+}

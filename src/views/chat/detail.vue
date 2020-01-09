@@ -15,30 +15,32 @@ export default {
                         <span> username </span>
                     </header>
                     <div class="chat-body-list">
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
-                        <div class="box sb1">I'm speech bubble</div>
-                        <div class="box sb2">I'm speech bubble</div>
+                        <div class='quote float-left'>
+                            <div class='speech-bubble left'>
+                                <blockquote>
+                                    <span>testing left</span>
+                                </blockquote>
+                                <p>
+                                    <span class='time-ago'>
+                                        17:30
+                                    </span>
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class='quote float-right'>
+                            <div class='speech-bubble right grey'>
+                                <blockquote>
+                                    <span>testing right </span>
+                                </blockquote>
+                                <p>
+                                    <span class='time-ago'>
+                                        17:30
+                                    </span>
+                                </p>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="chat-form">
                         <b-input-group>
@@ -72,6 +74,78 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
+    .quote {
+        display: inline-block;
+        margin: 2ex 0em;
+        clear: both;
+    }
+    .quote p {
+        font-weight: 500;
+    }
+    .quote p .time-ago {
+        font-size: 90%;
+        color: tint(#2D4154, 40%);
+    }
+    .quote blockquote {
+        color: tint(#2D4154, 20%);
+        margin: 0;
+    }
+    .quote .round-avatar {
+        border-radius: 50%;
+        border: 1px solid #E0E8ED;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        float: left;
+        margin-right: 0.5em;
+        width: 60px;
+        height: 60px;
+    }
+    .quote .speech-bubble {
+        float: left;
+    }
+    .quote .speech-bubble.right {
+        border: 1px solid #0078ec;
+        border-radius: 6px;
+        position: relative;
+        margin-left: 9px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        margin-right: 4px;
+        margin-bottom: 4px;
+        padding: 1ex 1em;
+        background: #0078ec;
+        color: #fff;
+    }
+    .quote .speech-bubble.left {
+        border: 1px solid #E0E8ED;
+        border-radius: 6px;
+        position: relative;
+        margin-left: 9px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        margin-right: 4px;
+        margin-bottom: 4px;
+        padding: 1ex 1em;
+        background: #FDFDFE;
+    }
+    
+    .quote .speech-bubble.left:after, .quote .speech-bubble.left:before {
+        content: "";
+        display: block;
+        position: absolute;
+    }
+    .quote .speech-bubble.left:after {
+        top: 16px;
+    }
+    .quote .speech-bubble.left:before {
+        top: 14px;
+    }
+
+    .quote .speech-bubble p {
+        line-height: 1.3em;
+        margin: 0;
+        margin-top: 20px;
+        color: #a5a5a5;
+        font-weight: 400;
+    }
     .header {
         border-bottom: 1px solid rgba(152,166,173,.3);
         overflow: hidden;
@@ -79,49 +153,7 @@ export default {
 
     .chat-body-list {
         height: 60vh;
-        padding: 25px;
+        padding: 0;
         overflow-y: scroll;
-    }
-
-    .box {
-        width: 300px;
-        background: #71b6f9;
-        padding: 10px;
-        text-align: center;
-        font-weight: 700;
-        color: #fff;
-        font-family: arial;
-        position:relative;
-        margin-bottom : 15px;
-    }
-
-    .sb1:before {
-        content: "";
-        width: 0px;
-        height: 0px;
-        position: absolute;
-        border-left: 5px solid #71b6f9;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #71b6f9;
-        border-bottom: 5px solid transparent;
-        right: -10px;
-        top: 6px;
-    }
-
-    .sb2:before {
-        content: "";
-        width: 0px;
-        height: 0px;
-        position: absolute;
-        border-left: 5px solid transparent;
-        border-right: 5px solid #71b6f9;
-        border-top: 5px solid #71b6f9;
-        border-bottom: 5px solid transparent;
-        left: -10px;
-        top: 6px;
-    }
-
-    .btn-icon {
-        background: #71b6f9;
     }
 </style>

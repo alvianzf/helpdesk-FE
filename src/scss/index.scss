@@ -86,17 +86,8 @@ File: Main Css File
 @import "custom/plugins/jstree";
 @import "custom/plugins/google-maps";
 @import "custom/plugins/vector-maps";
-
+@import "custom/custom.scss";
 @import "icons";
-
-.file-pick{
-  opacity: 0;
-  position: absolute;
-  left: 0px;
-  top: 0;
-  height: 60px;
-  width: 100%;
-}
 
 :export {
   // Any values that need to be accessible from JavaScript
