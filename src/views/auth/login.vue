@@ -1,10 +1,28 @@
 <script>
 import Layout from '@layouts/auth'
+import { mapActions } from 'vuex'
+
 export default {
     name : 'login',
-    components : { Layout }
+    components : { Layout },
+    data() {
+      return {
+        form : {}
+      }
+    },
+    methods: {
+      ...mapActions(['POST_LOGIN']),
+      login(e) {
+        e.preventDefault();
+        this.POST_LOGIN({
+          email : this.form.email,
+          password : this.form.password
+        })
+      }
+    },
 }
 </script>
+
 <template>
     <Layout>
     <div class="row justify-content-center">
@@ -32,17 +50,18 @@ export default {
               
             </b-alert>
 
-            <b-form>
+            <b-form @submit="login">
               <b-form-group
                 id="input-group-1"
-                label="Username"
+                label="Email Address"
                 label-for="input-1"
               >
                 <b-form-input
                   id="input-1"
-                  type="text"
+                  type="email"
                   required
-                  placeholder="Enter username"
+                  v-model="form.email"
+                  placeholder="Enter email"
                 ></b-form-input>
               </b-form-group>
 
@@ -54,6 +73,7 @@ export default {
                 <b-form-input
                   id="input-2"
                   type="password"
+                  v-model="form.password"
                   required
                   placeholder="Enter password"
                 ></b-form-input>

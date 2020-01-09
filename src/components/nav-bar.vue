@@ -34,10 +34,10 @@ export default {
     <div class="logo-box">
       <a href="index.html" class="logo text-center">
         <span class="logo-lg mg-t-20">
-          Logo Here
+          Chat Helpdesk
         </span>
         <span class="logo-sm">
-          Logo Here
+          Chat Helpdesk
         </span>
       </a>
     </div>

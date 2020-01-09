@@ -1,5 +1,6 @@
 import Vue from  'vue'
 import Vuex from 'vuex'
+import auth from './modules/auth'
 import user from './modules/user'
 import website from './modules/website'
 
@@ -16,6 +17,6 @@ export default new Vuex.Store({
         SET_RESPONSE : (state,payload) => state.response = payload
     },
     modules : {
-        user,website
+        user,website, auth
     }
 })
