@@ -91,7 +91,9 @@ export default {
     <div class="notification">
       <div class="notification-box">
         <div class="notification-text">
-          <p> Have 1 message </p>
+          <router-link tag="a" :to="{ name : 'chat.detail' }">
+            <p> Have 1 message </p>
+          </router-link>
         </div>
       </div>
     </div>
