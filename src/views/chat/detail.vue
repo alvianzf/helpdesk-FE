@@ -8,15 +8,7 @@ export default {
 <template>
     <Layout>
         <b-row>
-            <b-col cols="3">
-                <b-card title="Option">
-                    <b-button variant="outline-primary" block>Back to List</b-button>
-                    <b-button variant="outline-primary" block>Send Image</b-button>
-                    <b-button variant="outline-primary" block>Transfer Chat</b-button>
-                    <b-button variant="primary" block>End Chat</b-button>
-                </b-card>
-            </b-col>
-            <b-col cols="9">
+            <b-col cols="12">
                 <b-card>
                     <header class="header">
                         <h4> Subject </h4>
@@ -57,11 +49,21 @@ export default {
                             max-rows="6"
                             ></b-form-textarea>
                             <b-input-group-append>
+                                <button type="button" class="btn btn-icon">
+                                    <input type="file" class="file-pick" accept="image/jpeg,image/png"/>
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
                                 <button class="btn btn-icon">
                                     <i class="mdi mdi-send"></i>
                                 </button>
                             </b-input-group-append>
                         </b-input-group>
+                    </div>
+                    <div class="col-md-12">
+                        <b-dropdown id="dropdown-left" text="Options" variant="primary" class="m-2 float-right">
+                            <b-dropdown-item href="#">Transfer Chat</b-dropdown-item>
+                            <b-dropdown-item href="#">End Chat</b-dropdown-item>
+                        </b-dropdown>
                     </div>
                 </b-card>
             </b-col>
