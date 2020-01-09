@@ -1,6 +1,7 @@
 import Vue from  'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
+import website from './modules/website'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,6 @@ export default new Vuex.Store({
         SET_RESPONSE : (state,payload) => state.response = payload
     },
     modules : {
-        user
+        user,website
     }
 })

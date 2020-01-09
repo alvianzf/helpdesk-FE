@@ -1,72 +1,73 @@
 <script>
 import Layout from '@layouts/main'
 import Add from './add'
-// import { destroy } from '@api'
-// import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name : 'list',
     components : { Layout, Add },
-    // watch: {
-    //     users(set) {
-    //         this.rows = []
-    //         set.forEach(v => {
-    //             this.rows.push({
-    //                 id : v._id,
-    //                 name : v.name,
-    //                 email : v.email,
-    //                 phone : v.phone
-    //             })
-    //         })
-    //     },
-    //     response (set) {
-    //         if(set.success)
-    //         {
-    //             this.$bvToast.toast(set.message, {
-    //                 title: 'Success',
-    //                 autoHideDelay: 5000,
-    //                 toaster : 'b-toaster-top-right',
-    //                 appendToast: false,
-    //                 variant : 'success'
-    //             })
-    //         } else {
-    //             this.$bvToast.toast(set.message, {
-    //                 title: 'Error',
-    //                 autoHideDelay: 5000,
-    //                 toaster : 'b-toaster-top-right',
-    //                 appendToast: false,
-    //                 variant : 'error'
-    //             })
-    //         }
-    //     }
-    // },
+    computed : mapGetters({
+        websites : 'getWebsites',
+        website : 'getWebsite',
+        response : 'getResponse'
+    }),
+    watch: {
+        websites(set) {
+            this.rows = []
+            set.forEach(v => {
+                this.rows.push({
+                    id : v._id,
+                    name : v.name,
+                    ip : v.ip
+                })
+            })
+        },
+        response (set) {
+            if(set.success)
+            {
+                this.$bvToast.toast(set.message, {
+                    title: 'Success',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'success'
+                })
+            } else {
+                this.$bvToast.toast(set.message, {
+                    title: 'Error',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'error'
+                })
+            }
+        }
+    },
     methods: {
-        // ...mapActions(['GET_ADMINS','GET_USER','DELETE_USER']),
-        // edit(id) {
-        //     this.GET_USER({id : id})
-        //     this.$bvModal.show('modal')
-        //     this.method = 'update'
-        // },
-        // destroy(id) {
-        //     this.$swal({
-        //         title : 'Are You Sure?',
-        //         text : "You won't able to revert this!",
-        //         type : "warning",
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, delete it!'
-        //         }).then((result) => {
-        //             if (result.value) {
-        //                 this.DELETE_USER({ id : id})
-        //             }
-        //         })
-        // }
+        ...mapActions(['GET_WEBSITES','GET_WEBSITE','DELETE_WEBSITE']),
+        edit(id) {
+            this.GET_WEBSITE({id : id})
+            this.$bvModal.show('modal')
+            this.method = 'update'
+        },
+        destroy(id) {
+            this.$swal({
+                title : 'Are You Sure?',
+                text : "You won't able to revert this!",
+                type : "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.DELETE_WEBSITE({ id : id})
+                    }
+                })
+        }
     },
     mounted() {
-        // this.FETCH_ADMINS()
-        // this.GET_ADMINS()
-        // console.log(this.users)
+        this.GET_WEBSITES()
     },
     data() {
         return {
@@ -112,6 +113,6 @@ export default {
                 </v-client-table>
             </div>
         </div>
-        <Add v-bind:method="method" />
+        <Add v-bind:method="method" v-bind:data="website"/>
     </Layout>
 </template>

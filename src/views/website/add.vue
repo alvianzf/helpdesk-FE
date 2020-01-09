@@ -1,5 +1,5 @@
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
     name : 'add',
@@ -15,33 +15,27 @@ export default {
         }
     },
     methods : {
-        // ...mapActions(['POST_USER','PUT_USER']),
+        ...mapActions(['POST_WEBSITE','PUT_WEBSITE']),
         save(e) {
             e.preventDefault()
             this.$validator.validate().then(valid => {
                 if (valid) {
-                    // if(this.method == 'post') {
-                    //     this.POST_USER({
-                    //         name : this.form.name,
-                    //         email : this.form.email,
-                    //         password : this.form.password,
-                    //         role : "administrator",
-                    //         phone : this.form.phone,
-                    //         website : null
-                    //     })
-                    //     this.$bvModal.hide('modal')
-                    //     this.form = {}
-                    // } else {
-                    //     this.PUT_USER({
-                    //         id : this.form._id,
-                    //         name : this.form.name,
-                    //         email : this.form.email,
-                    //         phone : this.form.phone
-                    //     })
-                    //     this.$bvModal.hide('modal')
-                    //     this.form = {}
-                    // }
-                    
+                    if(this.method == 'post') {
+                        this.POST_WEBSITE({
+                            name : this.form.name,
+                            ip : this.form.ip
+                        })
+                        this.$bvModal.hide('modal')
+                        this.form = {}
+                    } else {
+                        this.PUT_WEBSITE({
+                            id : this.form._id,
+                            name : this.form.name,
+                            ip : this.form.ip
+                        })
+                        this.$bvModal.hide('modal')
+                        this.form = {}
+                    }
                 }
             });
         }
@@ -66,7 +60,7 @@ export default {
                         <label>IP Address <span class="tx-danger">*</span></label>
                         <input type="text" name="ip" class="form-control" placeholder="Enter IP Address" 
                             v-bind:class="errors.has('ip') ? 'form-control is-invalid' : 'form-control'" 
-                            v-model="form.email" v-validate="'required'" />
+                            v-model="form.ip" v-validate="'required'" />
                         <span v-show="errors.has('ip')" class="help is-danger text-red">{{ errors.first('ip') }}</span>
                     </div>
                 </div>
