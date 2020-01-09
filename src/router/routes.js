@@ -5,7 +5,7 @@ export default [
     name: 'home',
     component: () => lazyLoadView(import('@views/dashboard/dashboard')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'Dashboard',
     }
   },
@@ -14,7 +14,7 @@ export default [
     name: 'chat.list',
     component: () => lazyLoadView(import('@views/chat/list')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'Chat List',
     }
   },
@@ -23,7 +23,7 @@ export default [
     name: 'chat.detail',
     component: () => lazyLoadView(import('@views/chat/detail')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'Chat Detail',
     }
   },
@@ -32,7 +32,7 @@ export default [
     name: 'user.admin',
     component: () => lazyLoadView(import('@views/admin/list')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'List Administrator',
     }
   },
@@ -41,7 +41,7 @@ export default [
     name: 'user.customer_service',
     component: () => lazyLoadView(import('@views/customer_service/list')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'List Customer Service',
     }
   },
@@ -50,7 +50,7 @@ export default [
     name: 'website_management',
     component: () => lazyLoadView(import('@views/website/list')),
     meta: {
-      // authRequired: true,
+      authRequired: true,
       title: 'List Website',
     }
   },
