@@ -45,7 +45,7 @@ export default {
                             <b-form-textarea
                             id="textarea"
                             placeholder="Enter something..."
-                            rows="3"
+                            rows="2"
                             max-rows="6"
                             ></b-form-textarea>
                             <b-input-group-append>
