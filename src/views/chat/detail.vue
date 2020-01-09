@@ -51,11 +51,11 @@ export default {
                             max-rows="6"
                             ></b-form-textarea>
                             <b-input-group-append>
-                                <button type="button" class="btn btn-icon">
+                                <button type="button" class="btn btn-primary btn-icon">
                                     <input type="file" class="file-pick" accept="image/jpeg,image/png"/>
                                     <i class="fas fa-paperclip"></i>
                                 </button>
-                                <button class="btn btn-icon">
+                                <button class="btn btn-primary btn-icon">
                                     <i class="mdi mdi-send"></i>
                                 </button>
                             </b-input-group-append>
