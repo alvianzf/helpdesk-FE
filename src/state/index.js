@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './modules/auth'
 import user from './modules/user'
 import website from './modules/website'
+import chat from './modules/chat'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,6 @@ export default new Vuex.Store({
         SET_RESPONSE : (state,payload) => state.response = payload
     },
     modules : {
-        user,website, auth
+        user,website, auth, chat
     }
 })

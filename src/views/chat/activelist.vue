@@ -1,9 +1,25 @@
 <script>
 import Layout from '@layouts/main'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name : 'activelist',
-    components : { Layout }
+    components : { Layout },
+    computed : mapGetters({
+        chats : 'getChats'
+    }),
+    methods: {
+        ...mapActions(['GET_ACTIVE_LIST','GET_ACTIVE_LIST_BY_OPERATOR'])
+    },
+    mounted() {
+        if(localStorage.getItem('user_role') == "customer service") {
+            this.GET_ACTIVE_LIST_BY_OPERATOR({
+                active_operator : localStorage.getItem('user_id') 
+            })
+        } else {
+            this.GET_ACTIVE_LIST()
+        }
+    },
 }
 </script>
 <template>
@@ -18,7 +34,7 @@ export default {
                         </div>
                     </header>
                     <ul class="message-list">
-                        <li class="unread">
+                        <li v-for="chat in chats" :key="chat._id" class="unread">
                             <div class="row">
                                 <div class="text-center col-md-1">
                                     <router-link tag="a" :to="{ name : 'chat.detail' }">
@@ -26,13 +42,13 @@ export default {
                                     </router-link>
                                 </div>
                                 <div class="subject col-md-3">
-                                    <span> Ari Putra </span>
+                                    <span> {{ chat.name }} </span>
                                 </div>
                                 <div class="subject col-md-3">
-                                    <span> ariteknologi@gmail.com </span>
+                                    <span> {{ chat.email }} </span>
                                 </div>
                                 <div class="subject col-md-3">
-                                    <span> 08117044456 </span>
+                                    <span> {{ chat.phone }} </span>
                                 </div>
                                 <div class="date col-md-2">11:49 am</div>
                             </div>
@@ -57,8 +73,8 @@ export default {
     }
 
     .message-list li.unread {
-        font-weight: 500;
-        color: #98a6ad;
+        font-weight: 200;
+        color: #000000;
     }
 
     .message-list li {
