@@ -14,7 +14,7 @@ export default {
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
             this.GET_ACTIVE_LIST_BY_OPERATOR({
-                active_operator : localStorage.getItem('user_id') 
+                operator : localStorage.getItem('user_id') 
             })
         } else {
             this.GET_ACTIVE_LIST()
