@@ -19,6 +19,7 @@ const actions = {
             localStorage.setItem('user_role', res.data.data.role)
             localStorage.setItem('user_name', res.data.data.name)
             localStorage.setItem('user_phone', res.data.data.phone)
+            localStorage.setItem('user_id', res.data.data.id)
             router.push({ name : "home"})
         }).catch(error => {
             console.log(error)
