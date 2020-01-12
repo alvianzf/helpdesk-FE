@@ -32,6 +32,17 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    GET_CHAT_DETAIL : ({commit}, payload) => {
+        post('api/chat/list/message/bychannel', payload)
+        .then(res => {
+            commit('setChat', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

@@ -28,7 +28,7 @@ export default [
     }
   },
   {
-    path: '/chat/detail',
+    path: '/chat/detail/:id',
     name: 'chat.detail',
     component: () => lazyLoadView(import('@views/chat/detail')),
     meta: {

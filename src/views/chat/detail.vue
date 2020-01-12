@@ -1,8 +1,21 @@
 <script>
 import Layout from '@layouts/main'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     name : 'detail',
-    components : { Layout }
+    components : { Layout },
+    computed : mapGetters({
+        chat : 'getChat'
+    }),
+    methods: {
+        ...mapActions(['GET_CHAT_DETAIL'])
+    },
+    mounted() {
+        this.GET_CHAT_DETAIL({
+            channel_id : this.$route.params.id
+        })
+    },
 }
 </script>
 <template>
@@ -11,36 +24,42 @@ export default {
             <b-col cols="12">
                 <b-card>
                     <header class="header">
-                        <h4> Subject </h4>
-                        <span> username </span>
+                        <h4> {{ chat ? chat.name : null }} </h4>
+                        <span> {{ chat ? chat.phone : null }} </span>
                     </header>
                     <div class="chat-body-list">
-                        <div class='quote float-left'>
-                            <div class='speech-bubble left'>
-                                <blockquote>
-                                    <span>testing left</span>
-                                </blockquote>
-                                <p>
-                                    <span class='time-ago'>
-                                        17:30
-                                    </span>
-                                </p>
+                        <div v-if="chat && chat.message.length > 0">
+                            <div v-for="message in chat.message">
+                                <div class='quote float-left' v-if="message.is_guest">
+                                    <div class='speech-bubble left'>
+                                        <blockquote>
+                                            <span>{{ message.message }}</span>
+                                        </blockquote>
+                                        <p>
+                                            <span class='time-ago'>
+                                                17:30
+                                            </span>
+                                        </p>
 
+                                    </div>
+                                </div>
+                                <div class='quote float-right' v-else>
+                                    <div class='speech-bubble right grey'>
+                                        <blockquote>
+                                            <span>{{ message.message }}</span>
+                                        </blockquote>
+                                        <p>
+                                            <span class='time-ago'>
+                                                17:30
+                                            </span>
+                                        </p>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class='quote float-right'>
-                            <div class='speech-bubble right grey'>
-                                <blockquote>
-                                    <span>testing right </span>
-                                </blockquote>
-                                <p>
-                                    <span class='time-ago'>
-                                        17:30
-                                    </span>
-                                </p>
-
-                            </div>
-                        </div>
+                        
+                        
                     </div>
                     <div class="chat-form">
                         <b-input-group>

@@ -37,7 +37,7 @@ export default {
                         <li v-for="chat in chats" :key="chat._id" class="unread">
                             <div class="row">
                                 <div class="text-center col-md-1">
-                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
+                                    <router-link tag="a" :to="({ name : 'chat.detail', params : { id : chat._id } })">
                                         <i class="mdi mdi-eye"></i>
                                     </router-link>
                                 </div>
