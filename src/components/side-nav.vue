@@ -40,11 +40,30 @@ export default {
             <span> Dashboard </span>
           </router-link>
         </li>
-        <li class="active">
-          <router-link tag="a" :to="{ name : 'chat.list' }">
+        <li>
+          <a
+            href="javascript: void(0);"
+            class="waves-effect"
+          >
             <i class="mdi mdi-chat"></i>
-            <span> Chat List </span>
-          </router-link>
+            <span> Chat </span>
+            <span class="menu-arrow"></span>
+          </a>
+          <ul
+            class="nav-second-level nav"
+            aria-expanded="false"
+          >
+            <li>
+              <router-link tag="a" :to="{ name : 'chat.active.list' }">
+                Active
+              </router-link>
+            </li>
+            <li>
+              <router-link tag="a" :to="{ name : 'chat.recent.list' }">
+                Recent
+              </router-link>
+            </li>
+          </ul>
         </li>
         <li>
           <a
