@@ -43,6 +43,18 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    SEND_MESSAGE : ({dispatch}, payload) => {
+        post('api/chat/new/message/operator',payload)
+        .then(() => {
+            dispatch('GET_CHAT_DETAIL', { channel_id : payload.channel_id })
+        })
+        .catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

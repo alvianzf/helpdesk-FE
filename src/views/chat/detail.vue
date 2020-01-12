@@ -8,8 +8,25 @@ export default {
     computed : mapGetters({
         chat : 'getChat'
     }),
+    data() {
+        return {
+            form : {}
+        }
+    },
     methods: {
-        ...mapActions(['GET_CHAT_DETAIL'])
+        ...mapActions(['GET_CHAT_DETAIL','SEND_MESSAGE']),
+        sendChat(e) {
+            if(e.keyCode == 13 && !e.shiftKey) {
+                if(this.form.message) {
+                    this.SEND_MESSAGE({
+                        operator : localStorage.getItem('user_id'),
+                        message : this.form.message,
+                        channel_id : this.$route.params.id
+                    })
+                    this.form.message = null
+                }
+            }
+        }
     },
     mounted() {
         this.GET_CHAT_DETAIL({
@@ -68,6 +85,8 @@ export default {
                             placeholder="Enter something..."
                             rows="2"
                             max-rows="6"
+                            @keydown="sendChat"
+                            v-model="form.message"
                             ></b-form-textarea>
                             <b-input-group-append>
                                 <button type="button" class="btn btn-primary btn-icon">
