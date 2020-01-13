@@ -32,6 +32,17 @@ const actions = {
         socket.on('unoperator_list_chat', res => {
             commit('setCount', res.data.length)
         })
+    },
+    FIND_CHAT_BY_ID : ({commit}, payload) => {
+        post('api/chat/findbyid', payload)
+        .then(res => {
+            commit('setChat', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

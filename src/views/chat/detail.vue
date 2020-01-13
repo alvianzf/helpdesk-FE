@@ -14,23 +14,11 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_CHAT_DETAIL','SEND_MESSAGE']),
-        sendChat(e) {
-            if(e.keyCode == 13 && !e.shiftKey) {
-                if(this.form.message) {
-                    this.SEND_MESSAGE({
-                        operator : localStorage.getItem('user_id'),
-                        message : this.form.message,
-                        channel_id : this.$route.params.id
-                    })
-                    this.form.message = null
-                }
-            }
-        }
+        ...mapActions(['FIND_CHAT_BY_ID']),
     },
     mounted() {
-        this.GET_CHAT_DETAIL({
-            channel_id : this.$route.params.id
+        this.FIND_CHAT_BY_ID({
+            id : this.$route.params.id
         })
     },
 }
@@ -54,7 +42,7 @@ export default {
                                         </blockquote>
                                         <p>
                                             <span class='time-ago'>
-                                                17:30
+                                                {{ message.createdAt.parseDate("Y-m-d")}}
                                             </span>
                                         </p>
 
@@ -67,7 +55,7 @@ export default {
                                         </blockquote>
                                         <p>
                                             <span class='time-ago'>
-                                                17:30
+                                                {{ message.createdAt.parseDate("Y-m-d")}}
                                             </span>
                                         </p>
 
@@ -75,8 +63,6 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        
-                        
                     </div>
                     <div class="chat-form">
                         <b-input-group>
@@ -85,7 +71,6 @@ export default {
                             placeholder="Enter something..."
                             rows="2"
                             max-rows="6"
-                            @keydown="sendChat"
                             v-model="form.message"
                             ></b-form-textarea>
                             <b-input-group-append>
