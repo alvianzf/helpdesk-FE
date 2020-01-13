@@ -14,11 +14,23 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID']),
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR']),
+        sendMessage(e) {
+            e.preventDefault();
+            this.SEND_MESSAGE({
+                message : this.form.message,
+                id : this.$route.params.id
+            })
+            this.form.message = null
+        }
     },
     mounted() {
         this.FIND_CHAT_BY_ID({
             id : this.$route.params.id
+        })
+        this.ASSIGN_OPERATOR({
+            id : this.$route.params.id,
+            operator : localStorage.getItem('user_id')
         })
     },
 }
@@ -33,33 +45,31 @@ export default {
                         <span> {{ chat ? chat.phone : null }} </span>
                     </header>
                     <div class="chat-body-list">
-                        <div v-if="chat && chat.message.length > 0">
-                            <div v-for="message in chat.message">
-                                <div class='quote float-left' v-if="message.is_guest">
-                                    <div class='speech-bubble left'>
-                                        <blockquote>
-                                            <span>{{ message.message }}</span>
-                                        </blockquote>
-                                        <p>
-                                            <span class='time-ago'>
-                                                {{ message.createdAt.parseDate("Y-m-d")}}
-                                            </span>
-                                        </p>
+                        <div v-for="message in chat.message">
+                            <div class='quote float-left' v-if="message.is_guest">
+                                <div class='speech-bubble left'>
+                                    <blockquote>
+                                        <span>{{ message.message }}</span>
+                                    </blockquote>
+                                    <p>
+                                        <span class='time-ago'>
+                                            {{ message.createdAt}}
+                                        </span>
+                                    </p>
 
-                                    </div>
                                 </div>
-                                <div class='quote float-right' v-else>
-                                    <div class='speech-bubble right grey'>
-                                        <blockquote>
-                                            <span>{{ message.message }}</span>
-                                        </blockquote>
-                                        <p>
-                                            <span class='time-ago'>
-                                                {{ message.createdAt.parseDate("Y-m-d")}}
-                                            </span>
-                                        </p>
+                            </div>
+                            <div class='quote float-right' v-else>
+                                <div class='speech-bubble right grey'>
+                                    <blockquote>
+                                        <span>{{ message.message }}</span>
+                                    </blockquote>
+                                    <p>
+                                        <span class='time-ago'>
+                                            {{ message.createdAt }}
+                                        </span>
+                                    </p>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +88,7 @@ export default {
                                     <input type="file" class="file-pick" accept="image/jpeg,image/png"/>
                                     <i class="fas fa-paperclip"></i>
                                 </button>
-                                <button class="btn btn-primary btn-icon">
+                                <button class="btn btn-primary btn-icon" @click="sendMessage">
                                     <i class="mdi mdi-send"></i>
                                 </button>
                             </b-input-group-append>

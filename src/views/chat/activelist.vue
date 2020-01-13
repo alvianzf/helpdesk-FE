@@ -52,7 +52,7 @@ export default {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(chat , index) in chats" :key="chat._id" v-if="!chat.active_operator" class="unoperator">
+                            <tr v-for="(chat , index) in chats" :key="chat._id">
                                 <td>
                                     {{ index + 1 }}
                                 </td>
@@ -66,7 +66,7 @@ export default {
                                     <span> {{ chat.phone }} </span>
                                 </td>
                                 <td>
-                                    <span> {{ chat.active_operator ? chat.active_operator : 'No Operator Yet' }} </span>
+                                    <span> {{ chat.active_operator ? chat.active_operator.name : 'No Operator Yet' }} </span>
                                 </td>
                                 <td>
                                     <router-link tag="a" :to="({ name : 'chat.detail', params : { id : chat._id } })">
