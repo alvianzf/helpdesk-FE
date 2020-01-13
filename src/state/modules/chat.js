@@ -27,6 +27,17 @@ const actions = {
             })
         })
     },
+    GET_RECENT_LIST_BY_WESBITE : ({commit}, payload) => {
+        post('api/chat/list/recent/bywebsite', payload)
+        .then(res => {
+            commit('setChats', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
     LIST_UNOPERATOR_BY_WEBSITE : ({ dispatch, commit }, payload) => {
         socket.emit('get_list_chat_unoperator', payload)
         socket.on('unoperator_list_chat', res => {

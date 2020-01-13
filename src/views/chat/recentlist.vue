@@ -1,9 +1,25 @@
 <script>
 import Layout from '@layouts/main'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name : 'activelist',
-    components : { Layout }
+    components : { Layout },
+    computed : mapGetters({
+        chats : 'getChats'
+    }),
+    methods: {
+        ...mapActions(['GET_RECENT_LIST_BY_WESBITE'])
+    },
+    mounted() {
+        if(localStorage.getItem('user_role') == "customer service") {
+            this.GET_RECENT_LIST_BY_WESBITE({
+                website : localStorage.getItem('user_website') 
+            })
+        } else {
+            this.GET_ACTIVE_LIST()
+        }
+    },
 }
 </script>
 <template>
@@ -12,32 +28,54 @@ export default {
             <div class="col-md-12">
                 <b-card>
                     <header class="header">
-                        <h3 class="float-left"> Total 16 chats </h3>
-                        <div class="search-box float-right">
-                            <input placeholder="Search..." class="form-control">
-                        </div>
+                        <h3 class="float-left"> Total {{ chats.length }} chats </h3>
                     </header>
-                    <ul class="message-list">
-                        <li class="unread">
-                            <div class="row">
-                                <div class="text-center col-md-1">
-                                    <router-link tag="a" :to="{ name : 'chat.detail' }">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                   No 
+                                </td>
+                                <td>
+                                    Name
+                                </td>
+                                <td>
+                                    Email
+                                </td>
+                                <td>
+                                    Phone
+                                </td>
+                                <td>
+                                    CSO
+                                </td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(chat , index) in chats" :key="chat._id">
+                                <td>
+                                    {{ index + 1 }}
+                                </td>
+                                <td>
+                                    <span> {{ chat.name }} </span>
+                                </td>
+                                <td>
+                                    <span> {{ chat.email }} </span>
+                                </td>
+                                <td>
+                                    <span> {{ chat.phone }} </span>
+                                </td>
+                                <td>
+                                    <span> {{ chat.active_operator ? chat.active_operator.name : 'No Operator Yet' }} </span>
+                                </td>
+                                <td>
+                                    <router-link tag="a" :to="({ name : 'chat.detail', params : { id : chat._id } })">
                                         <i class="mdi mdi-eye"></i>
                                     </router-link>
-                                </div>
-                                <div class="subject col-md-3">
-                                    <span> Ari Putra </span>
-                                </div>
-                                <div class="subject col-md-3">
-                                    <span> ariteknologi@gmail.com </span>
-                                </div>
-                                <div class="subject col-md-3">
-                                    <span> 08117044456 </span>
-                                </div>
-                                <div class="date col-md-2">11:49 am</div>
-                            </div>
-                        </li>
-                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </b-card>
             </div>
         </div>
@@ -51,25 +89,16 @@ export default {
         overflow: hidden;
     }
 
-    .message-list {
-        display: block;
-        padding-left: 0;
+    thead {
+        background: #0078ec;
+        color: #fff;
     }
 
-    .message-list li.unread {
-        font-weight: 500;
-        color: #98a6ad;
+    thead tr td {
+        border: 0;
     }
 
-    .message-list li {
-        position: relative;
-        display: block;
-        height: 50px;
-        line-height: 50px;
-        cursor: default;
-        -webkit-transition-duration: .3s;
-        transition-duration: .3s;
-        color: #323a46;
-        border-bottom: 1px solid #f3f3f3;
+    tr.unoperator {
+        background : #d7e4f1;
     }
 </style>
