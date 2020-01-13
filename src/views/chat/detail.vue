@@ -6,8 +6,31 @@ export default {
     name : 'detail',
     components : { Layout },
     computed : mapGetters({
-        chat : 'getChat'
+        chat : 'getChat',
+        response : 'getResponse'
     }),
+    watch: {
+        response (set) {
+            if(set.success)
+            {
+                this.$bvToast.toast(set.message, {
+                    title: 'Success',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'success'
+                })
+            } else {
+                this.$bvToast.toast(set.message, {
+                    title: 'Error',
+                    autoHideDelay: 5000,
+                    toaster : 'b-toaster-top-right',
+                    appendToast: false,
+                    variant : 'error'
+                })
+            }
+        }
+    },
     data() {
         return {
             form : {},
@@ -15,7 +38,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','SEND_MESSAGE_IMAGE']),
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','SEND_MESSAGE_IMAGE','CLOSE_CHAT']),
         sendMessage(e) {
             e.preventDefault();
             this.SEND_MESSAGE({
@@ -31,6 +54,24 @@ export default {
                 id : this.$route.params.id
             }
             this.SEND_MESSAGE_IMAGE(form)
+        },
+        endChat(e) {
+            this.$swal({
+            title : 'Are You Sure To Close This Chat?',
+            text : "You won't able to revert this!",
+            type : "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, close it!'
+            }).then((result) => {
+                if (result.value) {
+                    this.CLOSE_CHAT({
+                        id : this.$route.params.id
+                    })
+                }
+            })
+            
         }
     },
     mounted() {
@@ -85,31 +126,36 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div class="chat-form">
-                        <b-input-group>
-                            <b-form-textarea
-                            id="textarea"
-                            placeholder="Enter something..."
-                            rows="2"
-                            max-rows="6"
-                            v-model="form.message"
-                            ></b-form-textarea>
-                            <b-input-group-append>
-                                <button type="button" class="btn btn-primary btn-icon">
-                                    <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
-                                    <i class="fas fa-paperclip"></i>
-                                </button>
-                                <button class="btn btn-primary btn-icon" @click="sendMessage">
-                                    <i class="mdi mdi-send"></i>
-                                </button>
-                            </b-input-group-append>
-                        </b-input-group>
+                    <div v-if="chat && chat.is_open">
+                        <div class="chat-form">
+                            <b-input-group>
+                                <b-form-textarea
+                                id="textarea"
+                                placeholder="Enter something..."
+                                rows="2"
+                                max-rows="6"
+                                v-model="form.message"
+                                ></b-form-textarea>
+                                <b-input-group-append>
+                                    <button type="button" class="btn btn-primary btn-icon">
+                                        <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
+                                        <i class="fas fa-paperclip"></i>
+                                    </button>
+                                    <button class="btn btn-primary btn-icon" @click="sendMessage">
+                                        <i class="mdi mdi-send"></i>
+                                    </button>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </div>
+                        <div class="col-md-12">
+                            <b-dropdown id="dropdown-left" text="Options" variant="primary" class="m-2 float-right">
+                                <b-dropdown-item href="#">Transfer Chat</b-dropdown-item>
+                                <b-dropdown-item href="#" @click="endChat">End Chat</b-dropdown-item>
+                            </b-dropdown>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <b-dropdown id="dropdown-left" text="Options" variant="primary" class="m-2 float-right">
-                            <b-dropdown-item href="#">Transfer Chat</b-dropdown-item>
-                            <b-dropdown-item href="#">End Chat</b-dropdown-item>
-                        </b-dropdown>
+                    <div v-else>
+                        <p class="text-center">This chat has closed </p>
                     </div>
                 </b-card>
             </b-col>

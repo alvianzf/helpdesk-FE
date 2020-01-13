@@ -58,10 +58,7 @@ const actions = {
     ASSIGN_OPERATOR : ({commit}, payload) => {
         post('api/chat/assign/operator', payload)
         .then(res => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
+            
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -83,6 +80,21 @@ const actions = {
             })
         })
     },
+    CLOSE_CHAT : ({commit, dispatch}, payload) => {
+        post('api/chat/close', payload)
+        .then(res => {
+            dispatch('FIND_CHAT_BY_ID', payload)
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    }
 }
 
 const mutations = {
