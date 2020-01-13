@@ -10,11 +10,12 @@ export default {
     }),
     data() {
         return {
-            form : {}
+            form : {},
+            url : process.env.VUE_APP_API
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR']),
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','SEND_MESSAGE_IMAGE']),
         sendMessage(e) {
             e.preventDefault();
             this.SEND_MESSAGE({
@@ -22,6 +23,14 @@ export default {
                 id : this.$route.params.id
             })
             this.form.message = null
+        },
+        sendImage(e) {
+            e.preventDefault();
+            var form = {
+                attach : e.target.files[0],
+                id : this.$route.params.id
+            }
+            this.SEND_MESSAGE_IMAGE(form)
         }
     },
     mounted() {
@@ -49,11 +58,12 @@ export default {
                             <div class='quote float-left' v-if="message.is_guest">
                                 <div class='speech-bubble left'>
                                     <blockquote>
-                                        <span>{{ message.message }}</span>
+                                        <span v-if="!message.media">{{ message.message }}</span>
+                                        <img v-bind:src="`${url}/${message.media}`" class="chat-image" v-else/>
                                     </blockquote>
                                     <p>
                                         <span class='time-ago'>
-                                            {{ message.createdAt}}
+                                            {{ message.createdAt }}
                                         </span>
                                     </p>
 
@@ -62,7 +72,8 @@ export default {
                             <div class='quote float-right' v-else>
                                 <div class='speech-bubble right grey'>
                                     <blockquote>
-                                        <span>{{ message.message }}</span>
+                                        <span v-if="!message.media">{{ message.message }}</span>
+                                        <img v-bind:src="`${url}/${message.media}`" class="chat-image" v-else/>
                                     </blockquote>
                                     <p>
                                         <span class='time-ago'>
@@ -85,7 +96,7 @@ export default {
                             ></b-form-textarea>
                             <b-input-group-append>
                                 <button type="button" class="btn btn-primary btn-icon">
-                                    <input type="file" class="file-pick" accept="image/jpeg,image/png"/>
+                                    <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
                                     <i class="fas fa-paperclip"></i>
                                 </button>
                                 <button class="btn btn-primary btn-icon" @click="sendMessage">
@@ -188,5 +199,9 @@ export default {
         height: 60vh;
         padding: 0;
         overflow-y: scroll;
+    }
+
+    .chat-image {
+        width: 500px;
     }
 </style>

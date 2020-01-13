@@ -1,4 +1,4 @@
-import { get, post, put, destroy } from '@api'
+import { get, post, postImg } from '@api'
 import io from 'socket.io-client';
 
 const socket = io(`${process.env.VUE_APP_SOCKET_URL}`)
@@ -68,7 +68,21 @@ const actions = {
                 message : error.response.data.message
             })
         })
-    }
+    },
+    SEND_MESSAGE_IMAGE : ({commit, dispatch}, payload) => {
+        var form = new FormData()
+        form.set('attach', payload.attach)
+        form.set('id', payload.id)
+        postImg('api/chat/attach/operator', form)
+        .then(res => {
+            dispatch('FIND_CHAT_BY_ID', payload)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
 }
 
 const mutations = {
