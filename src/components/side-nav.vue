@@ -1,5 +1,6 @@
 <script>
 import MetisMenu from 'metismenujs/dist/metismenujs'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {},
@@ -10,11 +11,19 @@ export default {
       default: () => ({}),
     },
   },
+  computed: mapGetters({
+    count : 'getCount'
+  }),
+  methods: {
+    ...mapActions(['LIST_UNOPERATOR_BY_WEBSITE'])
+  },
   mounted: function() {
     // eslint-disable-next-line no-unused-vars
     var menuRef = new MetisMenu('#side-menu')
-  },
-  methods: {}
+    this.LIST_UNOPERATOR_BY_WEBSITE({
+      website : localStorage.getItem('user_website')
+    })
+  }
 }
 </script>
 
@@ -107,11 +116,11 @@ export default {
     </div>
     <!-- End Sidebar -->
 
-    <div class="notification">
+    <div class="notification" v-if="count > 0">
       <div class="notification-box">
         <div class="notification-text">
-          <router-link tag="a" :to="{ name : 'chat.detail' }">
-            <p> Have 1 message </p>
+          <router-link tag="a" :to="{ name : 'chat.active.list' }">
+            <p> Have {{ count }} chat </p>
           </router-link>
         </div>
       </div>
