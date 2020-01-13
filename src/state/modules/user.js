@@ -140,6 +140,18 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    USERS_BY_WEBSITE : ({commit}, payload) => {
+        post('api/auth/list/cso/bywebsite', payload)
+        .then((res) => {
+            commit('setUsers', res.data.data)
+        })
+        .catch((error) => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

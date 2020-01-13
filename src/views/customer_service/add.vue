@@ -102,7 +102,7 @@ export default {
                         <label>Website </label>
                         <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form.website" name="manufacturing" v-validate="'required'">
                             <option selected="selected" value="">Choose Website</option>
-                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website.name">{{ website.name }}</option>
+                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
                         </select>
                         <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
                     </div>

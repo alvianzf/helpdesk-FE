@@ -1,5 +1,6 @@
 import { get, post, postImg } from '@api'
 import io from 'socket.io-client';
+import router from '@router'
 
 const socket = io(`${process.env.VUE_APP_SOCKET_URL}`)
 
@@ -95,6 +96,21 @@ const actions = {
         post('api/chat/close', payload)
         .then(res => {
             dispatch('FIND_CHAT_BY_ID', payload)
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    TRANSFER_CHAT : ({ commit, dispatch}, payload) => {
+        post('api/chat/transfer', payload)
+        .then(res => {
+            router.push({ name : "chat.active.list"})
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message

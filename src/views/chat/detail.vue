@@ -7,7 +7,8 @@ export default {
     components : { Layout },
     computed : mapGetters({
         chat : 'getChat',
-        response : 'getResponse'
+        response : 'getResponse',
+        users : 'getUsers'
     }),
     watch: {
         response (set) {
@@ -34,11 +35,16 @@ export default {
     data() {
         return {
             form : {},
-            url : process.env.VUE_APP_API
+            url : process.env.VUE_APP_API,
+            transfer : {
+                operator : ""
+            },
+            active_user : localStorage.getItem('user_id')
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','SEND_MESSAGE_IMAGE','CLOSE_CHAT']),
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','USERS_BY_WEBSITE','TRANSFER_CHAT']),
         sendMessage(e) {
             e.preventDefault();
             this.SEND_MESSAGE({
@@ -72,6 +78,13 @@ export default {
                 }
             })
             
+        },
+        transferChat(e) {
+            e.preventDefault()
+            this.TRANSFER_CHAT({
+                id : this.$route.params.id,
+                operator : this.transfer.operator
+            })
         }
     },
     mounted() {
@@ -81,6 +94,9 @@ export default {
         this.ASSIGN_OPERATOR({
             id : this.$route.params.id,
             operator : localStorage.getItem('user_id')
+        })
+        this.USERS_BY_WEBSITE({
+            website : localStorage.getItem('user_website')
         })
     },
 }
@@ -147,12 +163,8 @@ export default {
                                 </b-input-group-append>
                             </b-input-group>
                         </div>
-                        <div class="col-md-12">
-                            <b-dropdown id="dropdown-left" text="Options" variant="primary" class="m-2 float-right">
-                                <b-dropdown-item href="#">Transfer Chat</b-dropdown-item>
-                                <b-dropdown-item href="#" @click="endChat">End Chat</b-dropdown-item>
-                            </b-dropdown>
-                        </div>
+                        <button type="button" v-b-modal.modal class="mg-t-10 mg-r-15 btn btn-primary"> Transfer Chat </button>
+                        <button type="button" class="mg-t-10 btn btn-danger" @click="endChat"> End Chat </button>
                     </div>
                     <div v-else>
                         <p class="text-center">This chat has closed </p>
@@ -160,6 +172,29 @@ export default {
                 </b-card>
             </b-col>
         </b-row>
+
+        <b-modal id="modal" size="md" title="Choose CSO" hide-footer>
+            <form @submit="transferChat"> 
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>CSO </label>
+                            <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
+                                <option selected="selected" value="">Choose CSO</option>
+                                <option v-for="user in users.filter( (v) => v._id != active_user )" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
+                            </select>
+                            <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="float-right">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </b-modal>
+
     </Layout>
 </template>
 
@@ -249,5 +284,13 @@ export default {
 
     .chat-image {
         width: 500px;
+    }
+
+    .mg-t-10 {
+        margin-top: 10px;
+    }
+
+    .mg-r-15 {
+        margin-right: 15px;
     }
 </style>

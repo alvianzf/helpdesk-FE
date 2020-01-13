@@ -74,7 +74,7 @@ export default {
     },
     data() {
         return {
-            columns: ['name', 'email', 'phone','website','action'],
+            columns: ['name', 'email', 'phone','website.name','action'],
             rows: [],
             options: {
                 headings: {
