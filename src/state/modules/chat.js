@@ -16,45 +16,11 @@ const getters = {
 }
 
 const actions = {
-    GET_ACTIVE_LIST : ({commit}) => {
-        get('api/chat/list/active')
+    GET_ACTIVE_LIST_BY_WESBITE : ({commit}, payload) => {
+        post('api/chat/list/active/bywebsite', payload)
         .then(res => {
             commit('setChats', res.data.data)
         }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
-    GET_ACTIVE_LIST_BY_OPERATOR : ({commit}, payload) => {
-        post('api/chat/list/active/byoperator', payload)
-        .then(res => {
-            commit('setChats', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
-    GET_CHAT_DETAIL : ({commit}, payload) => {
-        post('api/chat/list/message/bychannel', payload)
-        .then(res => {
-            commit('setChat', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
-    SEND_MESSAGE : ({dispatch}, payload) => {
-        post('api/chat/new/message/operator',payload)
-        .then(() => {
-            dispatch('GET_CHAT_DETAIL', { channel_id : payload.channel_id })
-        })
-        .catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
