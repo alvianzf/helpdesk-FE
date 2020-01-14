@@ -23,6 +23,12 @@ export default {
     this.LIST_UNOPERATOR_BY_WEBSITE({
       website : localStorage.getItem('user_website')
     })
+  },
+  data() {
+    return {
+      name : localStorage.getItem('user_name'),
+      email : localStorage.getItem('user_email')
+    }
   }
 }
 </script>
@@ -36,8 +42,8 @@ export default {
         </a>
       </div>
 
-      <p class="tx-primary tx-bold tx-15 mg-t-30 mg-b-3">Admin Name</p>
-      <p class="text-muted tx-bold tx-14 mg-b-40">Admin Email</p>
+      <p class="tx-primary tx-bold tx-15 mg-t-30 mg-b-3">{{ name }}</p>
+      <p class="text-muted tx-bold tx-14 mg-b-40">{{ email }}</p>
     </div>
 
     <!--- Sidemenu -->
