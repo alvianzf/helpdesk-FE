@@ -9,12 +9,13 @@ export default {
         chats : 'getChats'
     }),
     methods: {
-        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE'])
+        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE','GET_ACTIVE_LIST'])
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
             this.GET_ACTIVE_LIST_BY_WESBITE({
-                website : localStorage.getItem('user_website') 
+                website : localStorage.getItem('user_website') ,
+                operator : localStorage.getItem('user_id')
             })
         } else {
             this.GET_ACTIVE_LIST()

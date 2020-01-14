@@ -28,6 +28,28 @@ const actions = {
             })
         })
     },
+    GET_ACTIVE_LIST : ({commit}) => {
+        get('api/chat/list/active')
+        .then(res => {
+            commit('setChats', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    GET_RECENT_LIST : ({commit}) => {
+        get('api/chat/list/recent')
+        .then(res => {
+            commit('setChats', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
     GET_RECENT_LIST_BY_WESBITE : ({commit}, payload) => {
         post('api/chat/list/recent/bywebsite', payload)
         .then(res => {
