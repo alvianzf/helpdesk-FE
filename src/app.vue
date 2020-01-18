@@ -1,25 +1,28 @@
 <template>
-  <div id="app">
-    <RouterView />
+  <div class="h-100">
+    <router-view/>
+    <color-switcher/>
   </div>
 </template>
-
 <script>
-import appConfig from '@/app.config'
+import ColorSwitcher from '@/components/Common/ColorSwitcher'
+import { getDirection } from '@/utils'
 
 export default {
-  name : 'app',
-  page: {
-    // All subcomponent titles will be injected into this template.
-    titleTemplate(title) {
-      title = typeof title === 'function' ? title(this.$store) : title
-      return title ? `${title} | ${appConfig.title}` : appConfig.title
-    },
+  components: {
+    ColorSwitcher
   },
+  beforeMount () {
+    const direction = getDirection()
+    if (direction.isRtl) {
+      document.body.classList.add('rtl')
+      document.dir = 'rtl'
+      document.body.classList.remove('ltr')
+    } else {
+      document.body.classList.add('ltr')
+      document.dir = 'ltr'
+      document.body.classList.remove('rtl')
+    }
+  }
 }
 </script>
-
-<!-- This should generally be the only global CSS in the app. -->
-<style lang="scss">
-@import '@scss';
-</style>
