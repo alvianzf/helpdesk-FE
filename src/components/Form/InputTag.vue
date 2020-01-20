@@ -174,25 +174,14 @@ export default {
 </template>
 <style>
 .vue-tagsinput {
-  background-color: #fff;
-  border: 1px solid #ccc;
   overflow: hidden;
   padding-left: 5px;
   padding-top: 5px;
 }
 
-.vue-tagsinput--focused {
-  border-color: #a5d24a;
-}
-
 .vue-tagsinput-tag {
-  background-color: #cde69c;
   border-radius: 2px;
-  border: 1px solid #a5d24a;
-  color: #638421;
   display: inline-block;
-  font-family: sans-serif;
-  font-size: 13px;
   font-weight: 400;
   margin-bottom: 5px;
   margin-right: 5px;
@@ -211,8 +200,6 @@ export default {
 .vue-tagsinput-input {
   background: transparent;
   border: 0;
-  color: #777;
-  font-family: sans-serif;
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 6px;

@@ -1,11 +1,12 @@
 <template>
   <div :class="{'app-menu':true, 'shown' : isOpen}"  @mouseenter="isMenuOver=true" @mouseleave="isMenuOver=false">
     <slot></slot>
-    <a class="app-menu-button d-inline-block d-xl-none" @click.prevent="toggle"><i class="simple-icon-refresh"/></a>
+    <a class="app-menu-button d-inline-block d-xl-none" @click.prevent="toggle"><i class="simple-icon-options"/></a>
   </div>
 </template>
 
 <script>
+import { setTimeout } from 'timers'
 export default {
   data () {
     return {
@@ -34,6 +35,10 @@ export default {
   watch: {
     isOpen (val) {
       if (val) {
+        setTimeout(() => {
+          this.$emit('show')
+        }, 300)
+
         this.addEvents()
       } else {
         this.removeEvents()
