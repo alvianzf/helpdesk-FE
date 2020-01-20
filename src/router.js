@@ -35,6 +35,14 @@ const routes = [
     ]
   },
   {
+    path: '/app/website',
+    component: () => import(/* webpackChunkName: "applications" */ './views/app'),
+    redirect: '/app/website/list',
+    children: [
+      { path: 'list', component: () => import(/* webpackChunkName: "applications" */ './views/app/website/list') },
+    ]
+  },
+  {
     path: '/app/agent',
     component: () => import(/* webpackChunkName: "applications" */ './views/app'),
     redirect: '/app/agent/admin',

@@ -16,6 +16,9 @@
                           <i class="iconsminds-conference"></i>Agent
                         </a>
                     </li>
+                    <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li">
+                      <a><i class="iconsminds-big-data"></i>  Website List</a>
+                    </router-link>
 
                    <!-- Single Menu
                     <router-link :class="{ active : selectedParentMenu==='dashboards' }" @click.native="changeSelectedParentHasNoSubmenu('dashboards')" to="/app/dashboards/default" tag="li">
