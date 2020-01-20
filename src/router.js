@@ -28,6 +28,7 @@ const routes = [
     path: '/app/chat',
     component: () => import(/* webpackChunkName: "applications" */ './views/app'),
     redirect: '/app/chat/open',
+    beforeEnter: AuthRequired,
     children: [
       { path: 'open', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/open') },
       { path: 'active', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/active') },
@@ -38,6 +39,7 @@ const routes = [
     path: '/app/website',
     component: () => import(/* webpackChunkName: "applications" */ './views/app'),
     redirect: '/app/website/list',
+    beforeEnter: AuthRequired,
     children: [
       { path: 'list', component: () => import(/* webpackChunkName: "applications" */ './views/app/website/list') },
     ]
@@ -46,6 +48,7 @@ const routes = [
     path: '/app/agent',
     component: () => import(/* webpackChunkName: "applications" */ './views/app'),
     redirect: '/app/agent/admin',
+    beforeEnter: AuthRequired,
     children: [
       { path: 'admin', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/admin/list') },
       { path: 'operator', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/operator/list') },
