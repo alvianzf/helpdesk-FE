@@ -1,9 +1,9 @@
 export default (to, from, next) => {
-  if (localStorage.getItem('user') != null && localStorage.getItem('user').length > 0) {
+  if (localStorage.getItem('token') != null) {
     // verify with firebase or jwt
     next()
   } else {
-    localStorage.removeItem('user')
+    localStorage.removeItem('token')
     next('/user/login')
   }
 }

@@ -8,18 +8,19 @@
           </div>
           <div class="form-side">
             <h6 class="mb-4">{{ $t('user.login-title')}}</h6>
-            <b-form @submit.prevent="formSubmit">
+            <p class=" text-white h2">Welcome Back</p>
+            <p class="white mb-0">Please use your credentials to login.</p>
+            <b-form @submit.prevent="login">
               <label class="form-group has-float-label mb-4">
-                <input type="email" class="form-control" v-model="email">
-                <span>{{ $t('user.email') }}</span>
+                <input type="email" class="form-control" v-model="form.email">
+                <span>Email</span>
               </label>
               <label class="form-group has-float-label mb-4">
-                <input type="password" class="form-control" v-model="password">
-                <span>{{ $t('user.password') }}</span>
+                <input type="password" class="form-control" v-model="form.password">
+                <span>Password</span>
               </label>
               <div class="d-flex justify-content-between align-items-center">
-                  <router-link tag="a" to="/user/forgot-password">{{ $t('user.forgot-password-question')}}</router-link>
-                  <b-button type="submit" variant="primary" size="lg" class="btn-shadow" :disabled="processing">{{ $t('user.login-button')}}</b-button>
+                  <b-button type="submit" variant="primary" size="lg" class="btn-shadow" :disabled="processing">Submit</b-button>
               </div>
           </b-form>
         </div>
@@ -28,39 +29,46 @@
   </b-row>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+
+import { mapActions,mapGetters } from 'vuex'
 
 export default {
-  data () {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  computed: {
-    ...mapGetters(['currentUser', 'processing', 'loginError'])
-  },
-  methods: {
-    ...mapActions(['login']),
-    formSubmit () {
-      this.email = 'demo@gogo.com'
-      this.password = 'gogo123'
-      this.login({ email: this.email, password: this.password })
-    }
-  },
-  watch: {
-    currentUser (val) {
-      if (val && val.uid && val.uid.length > 0) {
-        setTimeout(() => {
-          this.$router.push('/')
-        }, 500)
+    name : 'login',
+    data() {
+      return {
+        form : {},
+        processing : false
       }
     },
-    loginError (val) {
-      if (val != null) {
-        this.$notify('error', 'Login Error', val, { duration: 3000, permanent: false })
+    computed : mapGetters({
+        response : 'getResponse'
+    }),
+    watch: {
+        response (set) {
+            if(set.success)
+            {
+                this.$notify('success', 'Success', set.message, { duration: 3000, permanent: false })
+                setTimeout(() => {
+                  this.$router.push('/')
+                }, 100)
+            } else {
+                this.$notify('error', 'Error', set.message, { duration: 3000, permanent: false })
+            }
+        }
+    },
+    methods: {
+      ...mapActions(['POST_LOGIN']),
+      login(e) {
+        this.processing = true
+        e.preventDefault();
+        this.POST_LOGIN({
+          email : this.form.email,
+          password : this.form.password
+        })
+        .then(() => {
+          this.processing = false
+        })
       }
-    }
-  }
+    },
 }
 </script>

@@ -60,9 +60,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "user" */ './views/user'),
     redirect: '/user/login',
     children: [
-      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/user/Login') },
-      { path: 'register', component: () => import(/* webpackChunkName: "user" */ './views/user/Register') },
-      { path: 'forgot-password', component: () => import(/* webpackChunkName: "user" */ './views/user/ForgotPassword') }
+      { path: 'login', component: () => import(/* webpackChunkName: "user" */ './views/user/Login') }
     ]
   },
   { path: '*', component: () => import(/* webpackChunkName: "error" */ './views/Error') }
