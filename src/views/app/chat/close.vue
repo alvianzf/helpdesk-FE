@@ -11,7 +11,21 @@
             </b-row>
             <template v-if="isLoad">
                 <b-row>
-                    
+                    <b-colxx sm="12" md="12" class="mb-4">
+                        <b-card class="d-flex flex-row" no-body>
+                            <div class="pl-2 d-flex flex-grow-1 min-width-zero">
+                                <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                                    <router-link :to="{ name : 'chat.detail', params : { id : '123'}}" class="w-40 w-sm-100">
+                                        <p class="list-item-heading mb-1 truncate">Title</p>
+                                    </router-link>
+                                    <p class="mb-1 text-muted text-small w-15 w-sm-100">1/11/2019</p>
+                                    <div class="w-15 w-sm-100">
+                                        <b-badge pill :variant="'success'">64</b-badge>
+                                    </div>
+                                </div>
+                            </div>
+                        </b-card>
+                    </b-colxx>
                 </b-row>
             </template>
             <template v-else>
@@ -23,6 +37,11 @@
 <script>
 
 export default {
-    name : 'close'
+    name : 'active',
+    data() {
+        return {
+            isLoad : true
+        }
+    }
 }
 </script>

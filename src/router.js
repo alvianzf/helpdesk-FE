@@ -33,6 +33,7 @@ const routes = [
       { path: 'open', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/open') },
       { path: 'active', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/active') },
       { path: 'close', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/close') },
+      { path: 'detail/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/detail'), props : true, name : 'chat.detail' },
     ]
   },
   {
