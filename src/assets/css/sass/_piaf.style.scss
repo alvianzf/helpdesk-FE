@@ -8056,3 +8056,22 @@ input:-webkit-autofill {
     }
   }
 }
+
+.VueTables__table {
+  thead {
+    background: #fff;
+    tr {
+      th {
+        border : 1px solid #d7d7d7;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        border : 1px solid #d7d7d7;
+      }
+    }
+  }
+}

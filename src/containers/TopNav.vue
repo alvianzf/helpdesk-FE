@@ -31,9 +31,9 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">{{currentUser.title}}</span>
+            <span class="name mr-1">Ari Putra</span>
             <span>
-              <img :alt="currentUser.title" :src="currentUser.img" />
+              
             </span>
           </template>
           <b-dropdown-item>Account</b-dropdown-item>
@@ -164,7 +164,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentUser: 'currentUser',
       menuType: 'getMenuType',
       menuClickCount: 'getMenuClickCount'
     })

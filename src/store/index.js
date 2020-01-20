@@ -12,10 +12,13 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
+    response : {}
   },
   getters: {
+    getResponse : (state) => state.response
   },
   mutations: {
+    SET_RESPONSE : (state,payload) => state.response = payload,
     changeLang (state, payload) {
       app.$i18n.locale = payload
       localStorage.setItem('currentLanguage', payload)

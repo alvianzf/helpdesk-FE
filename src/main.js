@@ -28,9 +28,21 @@ import 'v-calendar/lib/v-calendar.min.css'
 import VueScrollTo from 'vue-scrollto'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import VueTables from 'vue-tables-2'
+import VeeValidate from 'vee-validate'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+const options = {
+  confirmButtonColor: '#41b882',
+  cancelButtonColor: '#ff7674'
+}
 
 Vue.use(BootstrapVue)
 Vue.use(VueI18n)
+Vue.use(VueTables.ClientTable);
+Vue.use(VeeValidate)
+Vue.use(VueSweetalert2, options)
 
 const messages = { en: en, es: es }
 const locale = (localStorage.getItem('currentLanguage') && localeOptions.filter(x => x.id === localStorage.getItem('currentLanguage')).length > 0) ? localStorage.getItem('currentLanguage') : defaultLocale
