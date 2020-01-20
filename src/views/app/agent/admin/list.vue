@@ -111,11 +111,11 @@
                         <v-client-table :columns="columns" :data="rows" :options="options" ref="table">
                             <div slot="action" slot-scope="props">
                                 <button type="button" class="btn btn-warning btn-icon edit" @click="edit(props.row.id)">
-                                    <i class="fas fa-pencil-alt mg-r-0"></i>
+                                    <i class="simple-icon-pencil mg-r-0"></i>
                                 </button>
 
                                 <button type="button" class="btn btn-danger btn-icon delete" @click="destroy(props.row.id)">
-                                    <i class="fas fa-trash mg-r-0" style="color : #fff !important"></i>
+                                    <i class="simple-icon-trash mg-r-0" style="color : #fff !important"></i>
                                 </button>
                             </div>
                         </v-client-table>
