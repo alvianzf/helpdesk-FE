@@ -100,7 +100,7 @@
                                     >Submit</b-button>
                                 </template>
                             </b-modal>
-                        </div>
+                    </div>
                     <piaf-breadcrumb/>
                     <div class="separator mb-5"/>
                 </b-colxx>
