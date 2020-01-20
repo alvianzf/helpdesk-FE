@@ -11,6 +11,11 @@
                           <i class="iconsminds-support"></i>Ticket
                         </a>
                     </li>
+                    <li :class="{ active : selectedParentMenu==='agent'}">
+                        <a @click.prevent="openSubMenu($event,'agent')" href="#agent">
+                          <i class="iconsminds-conference"></i>Agent
+                        </a>
+                    </li>
 
                    <!-- Single Menu
                     <router-link :class="{ active : selectedParentMenu==='dashboards' }" @click.native="changeSelectedParentHasNoSubmenu('dashboards')" to="/app/dashboards/default" tag="li">
@@ -40,6 +45,11 @@
                     <router-link tag="li" to="/app/chat/open" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Open</span></a></router-link>
                     <router-link tag="li" to="/app/chat/active" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Active</span></a></router-link>
                     <router-link tag="li" to="/app/chat/close" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Close</span></a></router-link>
+                </ul>
+
+                <ul class="list-unstyled" data-link="agent" :class="{'d-block':selectedParentMenu==='agent' }">
+                    <router-link tag="li" to="/app/agent/admin" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Admin</span></a></router-link>
+                    <router-link tag="li" to="/app/agent/operator" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Operator</span></a></router-link>
                 </ul>
             </vue-perfect-scrollbar>
 

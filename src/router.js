@@ -34,6 +34,15 @@ const routes = [
       { path: 'close', component: () => import(/* webpackChunkName: "applications" */ './views/app/chat/close') },
     ]
   },
+  {
+    path: '/app/agent',
+    component: () => import(/* webpackChunkName: "applications" */ './views/app'),
+    redirect: '/app/agent/admin',
+    children: [
+      { path: 'admin', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/admin') },
+      { path: 'operator', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/operator') },
+    ]
+  },
   { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },
   {
     path: '/user',
