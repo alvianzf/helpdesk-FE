@@ -31,7 +31,7 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">Ari Putra</span>
+            <span class="name mr-1">{{ current_name }}</span>
             <span>
               
             </span>
@@ -76,7 +76,8 @@ export default {
       localeOptions,
       buyUrl,
       notifications,
-      isDarkActive: false
+      isDarkActive: false,
+      current_name : localStorage.getItem('user_name')
     }
   },
   methods: {
