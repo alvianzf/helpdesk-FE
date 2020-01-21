@@ -10,15 +10,15 @@ import { store } from './store'
 import en from './locales/en.json'
 import es from './locales/es.json'
 import VueI18n from 'vue-i18n'
-import { defaultLocale, localeOptions, firebaseConfig } from '@/constants/config'
+import { defaultLocale, localeOptions, firebaseConfig } from './constants/config'
 // Notification Component Add
-import Notifications from '@/components/Common/Notification'
+import Notifications from './components/Common/Notification'
 // Breadcrumb Component Add
-import Breadcrumb from '@/components/Common/Breadcrumb'
+import Breadcrumb from './components/Common/Breadcrumb'
 // RefreshButton Component Add
-import RefreshButton from '@/components/Common/RefreshButton'
+import RefreshButton from './components/Common/RefreshButton'
 // Colxx Component Add
-import Colxx from '@/components/Common/Colxx'
+import Colxx from './components/Common/Colxx'
 // Perfect Scrollbar Add
 import vuePerfectScrollbar from 'vue-perfect-scrollbar'
 import contentmenu from 'v-contextmenu'
