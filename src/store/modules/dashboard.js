@@ -3,13 +3,15 @@ import { get, post } from '@/api'
 const state = {
     total_count : 0,
     total_open : 0,
-    total_active : 0
+    total_active : 0,
+    total_close : 0
 }
 
 const getters = {
     getTotalCount : (state) => state.total_count,
     getTotalOpen : (state) => state.total_open,
-    getTotalActive : (state) => state.total_active
+    getTotalActive : (state) => state.total_active,
+    getTotalClose : (state) => state.total_close
 }
 
 const actions = {
@@ -79,6 +81,28 @@ const actions = {
             })
         })
     },
+    COUNT_CLOSE_CHAT_OPERATOR : ({ commit}, payload) => {
+        post('api/chat/count/chatcloseoperator', payload)
+        .then(res => {
+            commit('setTotalClose', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    COUNT_CHAT_CLOSE: ({commit}) => {
+        get('api/chat/count/chatclose')
+        .then(res => {
+            commit('setTotalClose', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
 }
 
 const mutations = {
@@ -90,6 +114,9 @@ const mutations = {
     },
     setTotalActive (state, payload) {
         state.total_active = payload
+    },
+    setTotalClose (state, payload) {
+        state.total_close = payload
     }
 }
 

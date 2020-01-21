@@ -19,7 +19,7 @@
         </b-colxx>
         <b-colxx xxs="3">
             <b-card :title="'Total Close Chat'">
-                23
+                {{ total_close }}
             </b-card> 
         </b-colxx>
     </b-row>
@@ -34,11 +34,13 @@ export default {
     computed : mapGetters({
         total_chat : 'getTotalCount',
         total_open : 'getTotalOpen',
-        total_active : 'getTotalActive'
+        total_active : 'getTotalActive',
+        total_close : 'getTotalClose'
     }),
     methods: {
         ...mapActions(['COUNT_ALL_CHAT_OPERATOR','COUNT_CHAT','COUNT_OPEN_CHAT_OPERATOR',
-            'COUNT_CHAT_OPEN','COUNT_ACTIVE_CHAT_OPERATOR','COUNT_CHAT_ACTIVE'])
+            'COUNT_CHAT_OPEN','COUNT_ACTIVE_CHAT_OPERATOR','COUNT_CHAT_ACTIVE',
+            'COUNT_CLOSE_CHAT_OPERATOR'])
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
@@ -51,10 +53,14 @@ export default {
             this.COUNT_ACTIVE_CHAT_OPERATOR({
                 operator : localStorage.getItem('user_id')
             })
+            this.COUNT_CLOSE_CHAT_OPERATOR({
+                operator : localStorage.getItem('user_id')
+            })
         } else {
             this.COUNT_CHAT()
             this.COUNT_CHAT_OPEN()
             this.COUNT_CHAT_ACTIVE()
+            this.COUNT_CHAT_CLOSE()
         }
     },
 }
