@@ -40,7 +40,7 @@ export default {
     methods: {
         ...mapActions(['COUNT_ALL_CHAT_OPERATOR','COUNT_CHAT','COUNT_OPEN_CHAT_OPERATOR',
             'COUNT_CHAT_OPEN','COUNT_ACTIVE_CHAT_OPERATOR','COUNT_CHAT_ACTIVE',
-            'COUNT_CLOSE_CHAT_OPERATOR'])
+            'COUNT_CLOSE_CHAT_OPERATOR','COUNT_CHAT_CLOSE'])
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
