@@ -54,22 +54,7 @@ Vue.component('b-colxx', Colxx)
 Vue.component('vue-perfect-scrollbar', vuePerfectScrollbar)
 Vue.use(require('vue-shortkey'))
 Vue.use(contentmenu)
-Vue.use(lineClamp, { /* plugin options */})
-Vue.use(VCalendar, {
-  firstDayOfWeek: 2, // ...other defaults,
-  formats: {
-    title: 'MMM YY',
-    weekdays: 'WW',
-    navMonths: 'MMMM',
-    input: ['L', 'YYYY-MM-DD', 'YYYY/MM/DD'],
-    dayPopover: 'L'
-  },
-  datePickerShowDayPopover: false,
-  popoverExpanded: true,
-  popoverDirection: 'bottom'
-})
 Vue.use(VueScrollTo)
-firebase.initializeApp(firebaseConfig)
 
 export default new Vue({
   el: '#app',
