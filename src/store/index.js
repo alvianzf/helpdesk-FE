@@ -9,6 +9,7 @@ import todo from './modules/todo'
 import survey from './modules/survey'
 import website from './modules/website'
 import auth from './modules/auth'
+import dashboard from './modules/dashboard'
 
 Vue.use(Vuex)
 
@@ -38,6 +39,7 @@ export const store = new Vuex.Store({
     todo,
     survey,
     website,
-    auth
+    auth,
+    dashboard
   }
 })

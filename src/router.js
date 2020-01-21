@@ -8,18 +8,15 @@ const routes = [
   {
     path: '/',
     component: () => import(/* webpackChunkName: "app" */ './views/app'),
-    redirect: '/app/dashboards',
+    redirect: '/app/dashboard',
     beforeEnter: AuthRequired,
     children: [
       {
-        path: 'app/dashboards',
+        path: 'app/dashboard',
         component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboards'),
         redirect: '/app/dashboards/default',
         children: [
-          { path: 'default', component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboards/Default') },
-          { path: 'analytics', component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboards/Analytics') },
-          { path: 'ecommerce', component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboards/Ecommerce') },
-          { path: 'content', component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboards/Content') }
+          { path: 'default', component: () => import(/* webpackChunkName: "dashboards" */ './views/app/dashboard/default') },
         ]
       }
     ]

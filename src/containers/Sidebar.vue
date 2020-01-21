@@ -5,7 +5,9 @@
             <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
                 <ul class="list-unstyled">
 
-                    <li :class="{ active : selectedParentMenu==='dashboards' }"><a @click.prevent="openSubMenu($event,'dashboards')" href="#dashboards"><i class="iconsminds-shop-4"></i>{{ $t("menu.dashboards") }}</a></li>
+                    <router-link :class="{ active : selectedParentMenu==='dashboard' }" @click.native="changeSelectedParentHasNoSubmenu('dashboard')" to="/app/dashboard/default" tag="li">
+                      <a><i class="iconsminds-shop"></i>  Dashboard</a>
+                    </router-link>
                     <li :class="{ active : selectedParentMenu==='chat'}">
                         <a @click.prevent="openSubMenu($event,'chat')" href="#chat">
                           <i class="iconsminds-support"></i>Ticket
