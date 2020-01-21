@@ -8,7 +8,7 @@
                             <div class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                                 <div class="min-width-zero">
                                     <div>
-                                        <p class="list-item-heading mb-1 truncate">User A</p>
+                                        <p class="list-item-heading mb-1 truncate"> {{ chat.ticket_id }} ( {{ chat.is_open ? chat.active_operator.name : 'ticket closed'}} )</p>
                                     </div>
                                 </div>
                             </div>
@@ -16,10 +16,27 @@
                     </div>
                     <div class="separator mb-5"/>
                     <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" ref="chatArea">
-                        <div>
-                            <b-card no-body
-                                :class="'d-inline-block mb-3 float-right'"
-                            >
+                        <div v-for="message in chat.message">
+                            <b-card no-body class="d-inline-block mb-3 float-left" v-if="message.is_guest">
+                                <div class="position-absolute pt-1 pr-2 r-0">
+                                    <span class="text-extra-small text-muted">11/11/2020</span>
+                                </div>
+                                <b-card-body>
+                                    <div class="d-flex flex-row pb-1">
+                                        <div class="d-flex flex-grow-1 min-width-zero">
+                                            <div class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                                                <div class="min-width-zero">
+                                                    <p class="mb-0 truncate list-item-heading">Guest</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-text-left">
+                                        <p class="mb-0 text-semi-muted">{{ message.message }}</p>
+                                    </div>
+                                </b-card-body>
+                            </b-card>
+                            <b-card no-body class="d-inline-block mb-3 float-right" v-else>
                                 <div class="position-absolute pt-1 pr-2 r-0">
                                     <span class="text-extra-small text-muted">11/11/2020</span>
                                 </div>
@@ -34,7 +51,7 @@
                                         </div>
                                     </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted">Lorem Ipsum Dolor Sit Amet</p>
+                                        <p class="mb-0 text-semi-muted">{{ message.message }}</p>
                                     </div>
                                 </b-card-body>
                             </b-card>
@@ -44,8 +61,8 @@
                 </div>
             </b-colxx>
         </b-row>
-        <div class="chat-input-container d-flex justify-content-between align-items-center">
-            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'"/>
+        <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open">
+            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage"/>
             <div>
                 <b-button variant="outline-primary" class="icon-button large ml-1">
                     <i class="simple-icon-paper-clip" />
@@ -63,7 +80,7 @@
                 </select>
             </div>
             <b-button variant="primary" class="mt-15 btn-block btn-square">Transfer Ticker</b-button>
-            <b-button variant="danger" class="mt-15 btn-block btn-square">Close Ticker</b-button>
+            <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticker</b-button>
         </application-menu>
     </div>
 </template>
@@ -71,9 +88,90 @@
 import { mapGetters, mapActions } from 'vuex'
 import ApplicationMenu from '@/components/Common/ApplicationMenu'
 export default {
-  name : 'detail',
-  components: {
-    ApplicationMenu
-  },
+    name : 'detail',
+    components: {
+        ApplicationMenu
+    },
+    computed : mapGetters({
+        chat : 'getChat',
+        response : 'getResponse',
+        users : 'getUsers'
+    }),
+    watch: {
+        response (set) {
+            if(set.success)
+            {
+                this.$notify('success', 'Success', set.message, { duration: 3000, permanent: false })
+            } else {
+                this.$notify('error', 'Error', set.message, { duration: 3000, permanent: false })
+            }
+        }
+    },
+    data() {
+        return {
+            form : {},
+            url : process.env.VUE_APP_API,
+            transfer : {
+                operator : ""
+            },
+            active_user : localStorage.getItem('user_id')
+        }
+    },
+    methods: {
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','USERS_BY_WEBSITE','TRANSFER_CHAT']),
+        sendMessage(e) {
+            e.preventDefault();
+            this.SEND_MESSAGE({
+                message : this.form.message,
+                id : this.$route.params.id
+            })
+            this.form.message = null
+        },
+        sendImage(e) {
+            e.preventDefault();
+            var form = {
+                attach : e.target.files[0],
+                id : this.$route.params.id
+            }
+            this.SEND_MESSAGE_IMAGE(form)
+        },
+        endChat(e) {
+            this.$swal({
+            title : 'Are You Sure To Close This Chat?',
+            text : "You won't able to revert this!",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, close it!'
+            }).then((result) => {
+                if (result.value) {
+                    this.CLOSE_CHAT({
+                        id : this.$route.params.id
+                    })
+                }
+            })
+            
+        },
+        transferChat(e) {
+            e.preventDefault()
+            this.TRANSFER_CHAT({
+                id : this.$route.params.id,
+                operator : this.transfer.operator
+            })
+        }
+    },
+    mounted() {
+        this.FIND_CHAT_BY_ID({
+            id : this.$route.params.id
+        })
+        this.ASSIGN_OPERATOR({
+            id : this.$route.params.id,
+            operator : localStorage.getItem('user_id')
+        })
+        this.USERS_BY_WEBSITE({
+            website : localStorage.getItem('user_website')
+        })
+    },
 }
 </script>
