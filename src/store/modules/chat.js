@@ -131,10 +131,10 @@ const actions = {
             })
         })
     },
-    TRANSFER_CHAT : ({ commit, dispatch}, payload) => {
+    TRANSFER_CHAT : ({ commit}, payload) => {
         post('api/chat/transfer', payload)
         .then(res => {
-            router.push({ name : "chat.active.list"})
+            router.push('/app/chat/open')
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message

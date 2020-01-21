@@ -75,11 +75,13 @@
         <application-menu>
             <div class="form-group">
                 <label>Transfer Chat To</label>
-                <select class="form-control">
-                    <option val="">Choose Operator </option>
+                <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
+                    <option selected="selected" value="">Choose CSO</option>
+                    <option v-for="user in users.filter( (v) => v._id != active_user )" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
                 </select>
+                <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
             </div>
-            <b-button variant="primary" class="mt-15 btn-block btn-square">Transfer Ticker</b-button>
+            <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticker</b-button>
             <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticker</b-button>
         </application-menu>
     </div>
@@ -155,9 +157,13 @@ export default {
         },
         transferChat(e) {
             e.preventDefault()
-            this.TRANSFER_CHAT({
-                id : this.$route.params.id,
-                operator : this.transfer.operator
+            this.$validator.validate().then(valid => {
+                if(valid) {
+                    this.TRANSFER_CHAT({
+                        id : this.$route.params.id,
+                        operator : this.transfer.operator
+                    })
+                }
             })
         }
     },
