@@ -7,6 +7,7 @@
 import { getDirection } from '@/utils'
 
 export default {
+  name : 'App',
   beforeMount () {
     const direction = getDirection()
     if (direction.isRtl) {
