@@ -8,7 +8,7 @@
                             <div class="card-body pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                                 <div class="min-width-zero">
                                     <div>
-                                        <p class="list-item-heading mb-1 truncate"> {{ chat.ticket_id }} ( {{ chat.is_open ? chat.active_operator.name : 'ticket closed'}} )</p>
+                                        <p class="list-item-heading mb-1 truncate"> {{ chat.ticket_id }} ( {{ chat.is_open ? null : 'ticket closed'}} )</p>
                                     </div>
                                 </div>
                             </div>
