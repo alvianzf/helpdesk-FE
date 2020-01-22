@@ -1,16 +1,21 @@
 import { get, post, postImg } from '@/api'
 import router from '@/router'
+import io from 'socket.io-client';
+
+const socket = io(`${process.env.VUE_APP_SOCKET_URL}`)
 
 const state = {
     chat : {},
     chats : [],
-    count : null
+    count : null,
+    new_chat : 0,
 }
 
 const getters = {
     getChat : (state) => state.chat,
     getChats : (state) => state.chats,
-    getCount : (state) => state.count
+    getCount : (state) => state.count,
+    getNewChat : (state) => state.new_chat
 }
 
 const actions = {
@@ -91,10 +96,11 @@ const actions = {
             })
         })
     },
-    ASSIGN_OPERATOR : ({commit}, payload) => {
+    ASSIGN_OPERATOR : ({commit, dispatch}, payload) => {
         post('api/chat/assign/operator', payload)
         .then(res => {
-            
+            dispatch('GET_NEW_CHAT_ON_OPERATOR', payload)
+            dispatch('GET_NEW_CHAT_ON_ADMIN')
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -145,6 +151,23 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    GET_NEW_CHAT_ON_OPERATOR : ({commit}, payload) => {
+        // console.log('new_chat_operator')
+        socket.emit('new_chat_for_operator', payload)
+        socket.on('list_new_chat_for_operator', res => {
+            console.log(res)
+
+            commit('setNewChat', res.data.length)
+        })
+    },
+    GET_NEW_CHAT_ON_ADMIN : ({commit}) => {
+        // console.log('new_chat_admin')
+        socket.emit('new_chat_for_admin')
+        socket.on('list_new_chat_for_admin', res => {
+            console.log(res)
+            commit('setNewChat', res.data.length)
+        })
     }
 }
 
@@ -157,6 +180,9 @@ const mutations = {
     },
     setCount (state, payload) {
         state.count = payload
+    },
+    setNewChat (state, payload) {
+        state.new_chat = payload
     }
 }
 

@@ -173,7 +173,8 @@ export default {
         })
         this.ASSIGN_OPERATOR({
             id : this.$route.params.id,
-            operator : localStorage.getItem('user_id')
+            operator : localStorage.getItem('user_id'),
+            website : localStorage.getItem('user_website')
         })
         this.USERS_BY_WEBSITE({
             website : localStorage.getItem('user_website')

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <router-view/>
       </div>
-      <div class="notification-box">
+      <div class="notification-box" v-if="getNewChat > 0">
         <router-link to="/app/chat/open">
             <span> You have new ticket open </span>
         </router-link>
@@ -17,7 +17,7 @@
 <script>
 import Sidebar from '@/containers/Sidebar'
 import TopNav from '@/containers/TopNav'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -28,7 +28,16 @@ export default {
     Sidebar
   },
   computed: {
-    ...mapGetters(['getMenuType'])
-  }
+    ...mapGetters(['getMenuType','getNewChat'])
+  },
+  methods: {
+    ...mapActions(['GET_NEW_CHAT_ON_OPERATOR','GET_NEW_CHAT_ON_ADMIN'])
+  },
+  mounted() {
+    this.GET_NEW_CHAT_ON_OPERATOR( {
+      website : localStorage.getItem('user_website')
+    })
+    this.GET_NEW_CHAT_ON_ADMIN()
+  },
 }
 </script>
