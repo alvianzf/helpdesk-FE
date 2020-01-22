@@ -75,15 +75,20 @@ const actions = {
       })
     },
     FIND_CHAT_BY_ID : ({commit}, payload) => {
-        post('api/chat/findbyid', payload)
-        .then(res => {
-            commit('setChat', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+        socket.emit('retrive_new_message', payload)
+        socket.on('list_new_message', res => {
+            console.log(res.data)
+            commit('setChat', res.data)
         })
+        // post('api/chat/findbyid', payload)
+        // .then(res => {
+        //     commit('setChat', res.data.data)
+        // }).catch(error => {
+        //     commit('SET_RESPONSE', {
+        //         success : false,
+        //         message : error.response.data.message
+        //     })
+        // })
     },
     SEND_MESSAGE : ({commit, dispatch}, payload) => {
         post('api/chat/new/message/operator', payload)
@@ -156,8 +161,6 @@ const actions = {
         // console.log('new_chat_operator')
         socket.emit('new_chat_for_operator', payload)
         socket.on('list_new_chat_for_operator', res => {
-            console.log(res)
-
             commit('setNewChat', res.data.length)
         })
     },
@@ -165,7 +168,6 @@ const actions = {
         // console.log('new_chat_admin')
         socket.emit('new_chat_for_admin')
         socket.on('list_new_chat_for_admin', res => {
-            console.log(res)
             commit('setNewChat', res.data.length)
         })
     }

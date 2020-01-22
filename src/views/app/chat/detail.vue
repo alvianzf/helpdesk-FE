@@ -32,7 +32,8 @@
                                         </div>
                                     </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted" v-if="!message.media">{{ message.message }}</p>
+                                        <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
                             </b-card>
@@ -51,7 +52,8 @@
                                         </div>
                                     </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted" v-if="!message.media">{{ message.message }}</p>
+                                        <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
                             </b-card>
