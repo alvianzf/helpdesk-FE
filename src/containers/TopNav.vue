@@ -31,7 +31,7 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">{{ current_name }}</span>
+            <span class="name mr-1">{{ user.name }}</span>
             <span>
               
             </span>
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     ...mapMutations(['changeSideMenuStatus', 'changeSideMenuForMobile']),
-    ...mapActions(['setLang', 'signOut']),
+    ...mapActions(['setLang', 'signOut','CURRENT_USER']),
     search () {
       this.$router.push(`${this.searchPath}?search=${this.searchKeyword}`)
       this.searchKeyword = ''
@@ -168,7 +168,13 @@ export default {
   computed: {
     ...mapGetters({
       menuType: 'getMenuType',
-      menuClickCount: 'getMenuClickCount'
+      menuClickCount: 'getMenuClickCount',
+      user : 'getUser'
+    })
+  },
+  mounted() {
+    this.CURRENT_USER({
+        id : localStorage.getItem('user_id')
     })
   },
   beforeDestroy () {
