@@ -48,6 +48,7 @@ export default {
       website : localStorage.getItem('user_website')
     })
     this.GET_NEW_CHAT_ON_ADMIN()
+    this.$notification.requestPermission()
   },
 }
 </script>
