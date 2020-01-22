@@ -66,7 +66,8 @@
         <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open">
             <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage"/>
             <div>
-                <b-button variant="outline-primary" class="icon-button large ml-1">
+                <b-button variant="outline-primary" class="icon-button large ml-1 pos-relative">
+                    <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
                     <i class="simple-icon-paper-clip" />
                 </b-button>
                 <b-button variant="primary" class="icon-button large ml-1" @click="sendMessage">
@@ -128,11 +129,13 @@ export default {
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','USERS_BY_WEBSITE','TRANSFER_CHAT']),
         sendMessage(e) {
             e.preventDefault();
-            this.SEND_MESSAGE({
-                message : this.form.message,
-                id : this.$route.params.id
-            })
-            this.form.message = null
+            if(this.form.message) {
+                this.SEND_MESSAGE({
+                    message : this.form.message,
+                    id : this.$route.params.id
+                })
+                this.form.message = null
+            }
         },
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');

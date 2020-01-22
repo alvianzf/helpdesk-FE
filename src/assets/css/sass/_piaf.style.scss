@@ -8103,3 +8103,17 @@ input:-webkit-autofill {
 .f-12 {
   font-size : 12px;
 }
+
+.file-pick{
+  opacity: 0;
+  position: absolute;
+  left: 0px;
+  top: 0;
+  height: 60px;
+  width: 40px !important;
+  cursor: pointer;
+}
+
+.pos-relative {
+  position: relative;
+}
