@@ -18,7 +18,7 @@
                                     <router-link :to="{ name : 'chat.detail', params : { id : chat._id}}" class="w-40 w-sm-100">
                                         <p class="list-item-heading mb-1 truncate">{{ chat.ticket_id}}</p>
                                     </router-link>
-                                    <p class="mb-1 text-muted text-small w-15 w-sm-100">1/11/2019</p>
+                                    <p class="mb-1 text-muted text-small w-15 w-sm-100">{{ date(chat.createdAt )}}</p>
                                     <div class="w-15 w-sm-100">
                                         <b-badge pill :variant="'success'">Open</b-badge>
                                     </div>
@@ -36,6 +36,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import moment from 'moment'
+
 export default {
     name : 'active',
     data() {
@@ -47,7 +49,10 @@ export default {
         chats : 'getChats'
     }),
     methods: {
-        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE','GET_ACTIVE_LIST'])
+        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE','GET_ACTIVE_LIST']),
+        date: function (date) {
+            return moment(date).format('MMM D YYYY, h:mm:ss a');
+        },
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
