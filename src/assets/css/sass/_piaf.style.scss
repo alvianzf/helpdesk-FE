@@ -8083,3 +8083,15 @@ input:-webkit-autofill {
 .btn-square {
   border-radius: 5px;
 }
+
+.notification-box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 15px;
+  background: #f18025;
+  border-radius: 5px;
+  a span {
+    color : #fff;
+  }
+}

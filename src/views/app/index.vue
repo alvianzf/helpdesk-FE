@@ -6,6 +6,11 @@
       <div class="container-fluid">
         <router-view/>
       </div>
+      <div class="notification-box">
+        <router-link to="/app/chat/open">
+            <span> You have new ticket open </span>
+        </router-link>
+      </div>
     </main>
   </div>
 </template>

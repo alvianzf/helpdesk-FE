@@ -22,30 +22,12 @@
                       <a><i class="iconsminds-big-data"></i>  Website List</a>
                     </router-link>
 
-                   <!-- Single Menu
-                    <router-link :class="{ active : selectedParentMenu==='dashboards' }" @click.native="changeSelectedParentHasNoSubmenu('dashboards')" to="/app/dashboards/default" tag="li">
-                      <a><i class="iconsminds-digital-drawing"></i>  {{ $t("menu.dashboards") }}</a>
-                    </router-link>
-                    <router-link :class="{ active : selectedParentMenu==='pages' }" @click.native="changeSelectedParentHasNoSubmenu('pages')" to="/app/pages/data-list" tag="li">
-                      <a><i class="iconsminds-digital-drawing"></i>  {{ $t("menu.pages") }}</a>
-                    </router-link>
-                    <router-link :class="{ active : selectedParentMenu==='applications' }" @click.native="changeSelectedParentHasNoSubmenu('applications')" to="/app/applications/todo" tag="li">
-                      <a><i class="iconsminds-digital-drawing"></i>  {{ $t("menu.applications") }}</a>
-                    </router-link>
-                     -->
                 </ul>
             </vue-perfect-scrollbar>
         </div>
 
         <div class="sub-menu">
              <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
-                <ul class="list-unstyled" data-link="dashboards" :class="{'d-block':selectedParentMenu==='dashboards' }">
-                    <router-link tag="li" to="/app/dashboards/default"><a><i class="simple-icon-briefcase"></i> <span>{{ $t("menu.default") }}</span></a></router-link>
-                    <router-link tag="li" to="/app/dashboards/analytics"><a><i class="simple-icon-pie-chart"></i> <span>{{ $t("menu.analytics") }}</span></a></router-link>
-                    <router-link tag="li" to="/app/dashboards/ecommerce"><a><i class="simple-icon-basket-loaded"></i> <span>{{ $t("menu.ecommerce") }}</span></a></router-link>
-                    <router-link tag="li" to="/app/dashboards/content"><a><i class="simple-icon-doc"></i> <span>{{ $t("menu.content") }}</span></a></router-link>
-                </ul>
-
                 <ul class="list-unstyled" data-link="chat" :class="{'d-block':selectedParentMenu==='chat' }">
                     <router-link tag="li" to="/app/chat/open" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Open</span></a></router-link>
                     <router-link tag="li" to="/app/chat/active" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Active</span></a></router-link>
