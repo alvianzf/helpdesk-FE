@@ -69,7 +69,7 @@
                 <b-button variant="outline-primary" class="icon-button large ml-1">
                     <i class="simple-icon-paper-clip" />
                 </b-button>
-                <b-button variant="primary" class="icon-button large ml-1">
+                <b-button variant="primary" class="icon-button large ml-1" @click="sendMessage">
                     <i class="simple-icon-arrow-right" />
                 </b-button>
             </div>
