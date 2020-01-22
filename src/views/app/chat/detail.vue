@@ -19,7 +19,7 @@
                         <div v-for="message in chat.message">
                             <b-card no-body class="d-inline-block mb-3 float-left" v-if="message.is_guest">
                                 <div class="position-absolute pt-1 pr-2 r-0">
-                                    <span class="text-extra-small text-muted">11/11/2020</span>
+                                    <span class="text-extra-small text-muted">{{ date(message.createdAt) }}</span>
                                 </div>
                                 <b-card-body>
                                     <div class="d-flex flex-row pb-1">
@@ -39,7 +39,7 @@
                             </b-card>
                             <b-card no-body class="d-inline-block mb-3 float-right" v-else>
                                 <div class="position-absolute pt-1 pr-2 r-0">
-                                    <span class="text-extra-small text-muted">11/11/2020</span>
+                                    <span class="text-extra-small text-muted">{{ date(message.createdAt) }}</span>
                                 </div>
                                 <b-card-body>
                                     <div class="d-flex flex-row pb-1">
@@ -91,6 +91,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import ApplicationMenu from '@/components/Common/ApplicationMenu'
+import moment from 'moment'
+
 export default {
     name : 'detail',
     components: {
@@ -131,6 +133,9 @@ export default {
                 id : this.$route.params.id
             })
             this.form.message = null
+        },
+        date: function (date) {
+            return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
         sendImage(e) {
             e.preventDefault();
