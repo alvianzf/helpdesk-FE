@@ -36,7 +36,7 @@
               
             </span>
           </template>
-          <b-dropdown-item>Account</b-dropdown-item>
+          <b-dropdown-item @click="goToAccount">Account</b-dropdown-item>
           <b-dropdown-divider />
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>
@@ -98,6 +98,9 @@ export default {
       } else {
         this.search()
       }
+    },
+    goToAccount() {
+      this.$router.push('/app/account')
     },
     handleDocumentforMobileSearch () {
       if (!this.isSearchOver) {

@@ -52,6 +52,15 @@ const routes = [
       { path: 'operator', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/operator/list') },
     ]
   },
+  {
+    path: '/app/account',
+    component: () => import(/* webpackChunkName: "applications" */ './views/app'),
+    redirect: '/app/account/index',
+    beforeEnter: AuthRequired,
+    children: [
+      { path: 'index', component: () => import(/* webpackChunkName: "applications" */ './views/app/auth/account') },
+    ]
+  },
   { path: '/error', component: () => import(/* webpackChunkName: "error" */ './views/Error') },
   {
     path: '/user',

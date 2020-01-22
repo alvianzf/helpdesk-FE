@@ -152,7 +152,35 @@ const actions = {
                 message : error.response.data.message
             })
         })
-    }
+    },
+    CURRENT_USER : ({commit}, payload) => {
+        post('api/auth/find', payload)
+        .then((res) => {
+            commit('setUser', res.data.data)
+        })
+        .catch((error) => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    CHANGE_ACCOUNT : ({ commit, dispatch }, payload) => {
+        put('api/auth/update/edit', payload)
+        .then((res) => {
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+            dispatch('GET_USERS')
+        })
+        .catch((error) => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
 }
 
 const mutations = {
