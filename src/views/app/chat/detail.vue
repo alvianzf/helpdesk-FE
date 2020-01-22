@@ -26,13 +26,13 @@
                                         <div class="d-flex flex-grow-1 min-width-zero">
                                             <div class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                                                 <div class="min-width-zero">
-                                                    <p class="mb-0 truncate list-item-heading">Guest</p>
+                                                    <p class="mb-0 truncate list-item-heading f-12">Guest</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted" v-if="!message.media">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted f-15" v-if="!message.media">{{ message.message }}</p>
                                         <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
@@ -46,13 +46,13 @@
                                         <div class="d-flex flex-grow-1 min-width-zero">
                                             <div class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                                                 <div class="min-width-zero">
-                                                    <p class="mb-0 truncate list-item-heading">You</p>
+                                                    <p class="mb-0 truncate list-item-heading f-12">You</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted" v-if="!message.media">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted f-15" v-if="!message.media">{{ message.message }}</p>
                                         <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
@@ -83,8 +83,8 @@
                 </select>
                 <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
             </div>
-            <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticker</b-button>
-            <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticker</b-button>
+            <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
+            <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
         </application-menu>
     </div>
 </template>
