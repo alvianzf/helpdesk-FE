@@ -112,6 +112,13 @@ export default {
             } else {
                 this.$notify('error', 'Error', set.message, { duration: 3000, permanent: false })
             }
+        },
+        chat(set) {
+            if(set) {
+                this.$notification.show(set.ticket_id, {
+                    body: 'Have new reply'
+                }, {})
+            }
         }
     },
     data() {

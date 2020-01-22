@@ -27,6 +27,16 @@ export default {
     TopNav,
     Sidebar
   },
+  watch: {
+    getNewChat(set)
+    {
+      if(set > 0) {
+        this.$notification.show('New Ticket Open', {
+          body: 'You have new ticket open'
+        }, {})
+      }
+    }
+  },
   computed: {
     ...mapGetters(['getMenuType','getNewChat'])
   },
