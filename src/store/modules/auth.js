@@ -43,6 +43,20 @@ const actions = {
             localStorage.clear()
             router.push('/user/login')
         })
+    },
+    CHANGE_PASSWORD : ({commit}, payload) => {
+        post('api/auth/change/password', payload)
+        .then(res => {
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

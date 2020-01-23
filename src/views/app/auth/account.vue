@@ -14,7 +14,7 @@
                     <p>{{ user ? user.phone : null}}  </p>
 
                     <b-button v-b-modal.modaleditaccount variant="primary" size="lg" style="margin-right : 15px;">Edit Account</b-button>
-                    <b-button variant="secondary" size="lg">Change Password</b-button>
+                    <b-button v-b-modal.modalchangepassword variant="secondary" size="lg">Change Password</b-button>
                 </b-card> 
             </b-colxx>
         </b-row>
@@ -52,6 +52,40 @@
                 >Submit</b-button>
             </template>
         </b-modal>
+
+        <b-modal
+            id="modalchangepassword"
+            ref="modalchangepassword"
+            :title="'Change Password'"
+            class="modal-right"
+        >
+            <b-form>
+                <div class="form-group">
+                    <label>Old Password <span class="tx-danger">*</span></label>
+                    <input type="password" name="old_password" class="form-control" placeholder="Enter Old Password" 
+                        v-bind:class="errors.has('old_password') ? 'form-control is-invalid' : 'form-control'" 
+                        v-model="form.old_password" v-validate="'required'"/>
+                    <span v-show="errors.has('old_password')" class="help is-danger text-red">{{ errors.first('old_password') }}</span>
+                </div>
+                <div class="form-group">
+                    <label>New Password </label>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="Enter New Password"
+                        v-bind:class="errors.has('confirm_password') ? 'form-control is-invalid' : 'form-control'" 
+                        v-model="form.confirm_password" v-validate="'required'" />
+                    <span v-show="errors.has('confirm_password')" class="help is-danger text-red">{{ errors.first('confirm_password') }}</span>
+                </div>
+            </b-form>
+            <template slot="modal-footer">
+                <b-button
+                    variant="outline-secondary"
+                >Cencel</b-button>
+                <b-button
+                    variant="primary"
+                    class="mr-1"
+                    @click="changePassword"
+                >Submit</b-button>
+            </template>
+        </b-modal>
     </div>
 </template>
 <script>
@@ -83,7 +117,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['CURRENT_USER','CHANGE_ACCOUNT']),
+        ...mapActions(['CURRENT_USER','CHANGE_ACCOUNT','CHANGE_PASSWORD']),
         update(e) {
             e.preventDefault()
             this.$validator.validate().then(valid => {
@@ -97,6 +131,21 @@ export default {
                 }
             });
         },
+        changePassword(e) {
+            e.preventDefault()
+            this.$validator.validate().then(valid => {
+                if (valid) {
+                    this.CHANGE_PASSWORD({
+                        email : localStorage.getItem('user_email'),
+                        old_password : this.form.old_password,
+                        confirm_password : this.form.confirm_password
+                    })
+                    this.$bvModal.hide('modalchangepassword')
+                    this.form.old_password = null
+                    this.form.confirm_password = null
+                }
+            });
+        }
     },
     mounted() {
         this.CURRENT_USER({
