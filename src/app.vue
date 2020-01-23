@@ -5,9 +5,21 @@
 </template>
 <script>
 import { getDirection } from '@/utils'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name : 'app',
+  computed: mapGetters({
+    token : 'getCheckToken'
+  }),
+  methods: {
+    ...mapActions(['CHECK_TOKEN'])
+  },
+  mounted() {
+    this.CHECK_TOKEN({
+      token : localStorage.getItem('token')
+    })
+  },
   beforeMount () {
     const direction = getDirection()
     if (direction.isRtl) {

@@ -2,11 +2,13 @@ import { post } from '@/api'
 import router from '@/router'
 
 const state = {
-    logined : {}
+    logined : {},
+    checkToken : true
 }
 
 const getters = {
-    getLoginend : (state) => state.logined
+    getLoginend : (state) => state.logined,
+    getCheckToken : (state) => state.checkToken
 }
 
 const actions = {
@@ -31,12 +33,25 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    CHECK_TOKEN : ({commit}, payload) => {
+        post('api/auth/check/token', payload)
+        .then(res => {
+            commit('setCheckToken', true)
+        }).catch(error => {
+            commit('setCheckToken', false)
+            localStorage.clear()
+            router.push('/user/login')
+        })
     }
 }
 
 const mutations = {
     setLogined (state, payload) {
         state.logined = payload
+    },
+    setCheckToken (state, payload) {
+        state.checkToken = payload
     }
 }
 
