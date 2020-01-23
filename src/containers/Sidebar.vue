@@ -13,12 +13,12 @@
                           <i class="iconsminds-support"></i>Ticket
                         </a>
                     </li>
-                    <li :class="{ active : selectedParentMenu==='agent'}">
+                    <li :class="{ active : selectedParentMenu==='agent'}" v-if="role == 'administrator'">
                         <a @click.prevent="openSubMenu($event,'agent')" href="#agent">
                           <i class="iconsminds-conference"></i>Agent
                         </a>
                     </li>
-                    <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li">
+                    <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li" v-if="role == 'administrator'">
                       <a><i class="iconsminds-big-data"></i>  Website List</a>
                     </router-link>
 
@@ -51,7 +51,8 @@ export default {
   data () {
     return {
       selectedParentMenu: '',
-      isMenuOver: false
+      isMenuOver: false,
+      role : localStorage.getItem('user_role')
     }
   },
   mounted () {
