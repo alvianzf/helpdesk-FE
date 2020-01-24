@@ -29,9 +29,9 @@
         <div class="sub-menu">
              <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" >
                 <ul class="list-unstyled" data-link="chat" :class="{'d-block':selectedParentMenu==='chat' }">
-                    <router-link tag="li" to="/app/chat/open" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Open</span></a></router-link>
-                    <router-link tag="li" to="/app/chat/active" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Active</span></a></router-link>
-                    <router-link tag="li" to="/app/chat/close" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Close</span></a></router-link>
+                    <router-link tag="li" to="/app/chat/open" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>New</span></a></router-link>
+                    <router-link tag="li" to="/app/chat/active" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Current</span></a></router-link>
+                    <router-link tag="li" to="/app/chat/close" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>History</span></a></router-link>
                 </ul>
 
                 <ul class="list-unstyled" data-link="agent" :class="{'d-block':selectedParentMenu==='agent' }">
