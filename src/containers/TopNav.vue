@@ -33,7 +33,7 @@
           <template slot="button-content">
             <span class="name mr-1">{{ user.name }}</span>
             <span>
-              
+              {{ user.name }}
             </span>
           </template>
           <b-dropdown-item @click="goToAccount">Account</b-dropdown-item>
