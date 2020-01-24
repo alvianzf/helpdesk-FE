@@ -16,7 +16,7 @@
         <mobile-menu-icon />
       </a>
     </div>
-    <router-link class="navbar-logo" tag="a" to="/app">
+    <router-link class="navbar-logo" tag="a" to="/app/dashboard/default">
       Chat Helpdesk
     </router-link>
 
