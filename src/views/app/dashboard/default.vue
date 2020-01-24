@@ -2,22 +2,22 @@
 <template>
   <div>
     <b-row>
-        <b-colxx xxs="3">
+        <b-colxx md="3" xxs="12">
             <b-card :title="'Total Chat'">
                 {{ total_chat }}
             </b-card> 
         </b-colxx>
-        <b-colxx xxs="3">
+        <b-colxx md="3" xxs="12">
             <b-card :title="'Total Open Chat'">
                 {{ total_open }}
             </b-card> 
         </b-colxx>
-        <b-colxx xxs="3">
+        <b-colxx md="3" xxs="12">
             <b-card :title="'Total Active Chat'">
                 {{ total_active }}
             </b-card> 
         </b-colxx>
-        <b-colxx xxs="3">
+        <b-colxx md="3" xxs="12">
             <b-card :title="'Total Close Chat'">
                 {{ total_close }}
             </b-card> 
