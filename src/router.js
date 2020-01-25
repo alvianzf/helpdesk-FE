@@ -53,6 +53,15 @@ const routes = [
     ]
   },
   {
+    path: '/app/setting',
+    component: () => import(/* webpackChunkName: "applications" */ './views/app'),
+    redirect: '/app/setting/widget',
+    beforeEnter: AuthRequired,
+    children: [
+      { path: 'widget', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/list') }
+    ]
+  },
+  {
     path: '/app/account',
     component: () => import(/* webpackChunkName: "applications" */ './views/app'),
     redirect: '/app/account/index',

@@ -10,6 +10,7 @@ import survey from './modules/survey'
 import website from './modules/website'
 import auth from './modules/auth'
 import dashboard from './modules/dashboard'
+import widget from './modules/widget'
 
 Vue.use(Vuex)
 
@@ -40,6 +41,7 @@ export const store = new Vuex.Store({
     survey,
     website,
     auth,
-    dashboard
+    dashboard,
+    widget
   }
 })

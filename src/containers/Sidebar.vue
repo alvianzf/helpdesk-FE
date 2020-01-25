@@ -21,6 +21,11 @@
                     <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li" v-if="role == 'administrator'">
                       <a><i class="iconsminds-big-data"></i>  Website List</a>
                     </router-link>
+                    <li :class="{ active : selectedParentMenu==='setting'}" v-if="role == 'administrator'">
+                        <a @click.prevent="openSubMenu($event,'setting')" href="#setting">
+                          <i class="simple-icon-settings"></i>Setting
+                        </a>
+                    </li>
 
                 </ul>
             </vue-perfect-scrollbar>
@@ -37,6 +42,10 @@
                 <ul class="list-unstyled" data-link="agent" :class="{'d-block':selectedParentMenu==='agent' }">
                     <router-link tag="li" to="/app/agent/admin" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Admin</span></a></router-link>
                     <router-link tag="li" to="/app/agent/operator" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Operator</span></a></router-link>
+                </ul>
+
+                <ul class="list-unstyled" data-link="setting" :class="{'d-block':selectedParentMenu==='setting' }">
+                    <router-link tag="li" to="/app/setting/widget" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Widget</span></a></router-link>
                 </ul>
             </vue-perfect-scrollbar>
 
