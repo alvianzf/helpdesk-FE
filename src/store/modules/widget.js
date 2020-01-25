@@ -49,6 +49,38 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    CREATE_WELCOME_TEXT : ({commit,dispatch}, payload) => {
+        post('api/widget/store/welcome-message', payload)
+        .then(res => {
+            dispatch('GET_WIDGET', payload)
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            console.log(error)
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    REMOVE_WELCOME_TEXT : ({commit, dispatch}, payload) => {
+        destroy('api/widget/delete/welcome-message', payload)
+        .then(res => {
+            dispatch('GET_WIDGET', payload)
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            console.log(error)
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 

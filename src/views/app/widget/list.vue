@@ -18,6 +18,11 @@
                                     <i class="simple-icon-pencil mg-r-0"></i>
                                 </button>
                             </div>
+                            <div slot="manage" slot-scope="props">
+                                <button type="button" class="btn btn-primary btn-icon edit" @click="manageWelcome(props.row.id)">
+                                    Manage Welcome Status
+                                </button>
+                            </div>
                         </v-client-table>
                     </b-colxx>
                 </b-row>
@@ -70,13 +75,16 @@ export default {
         edit(id) {
             this.$router.push({ name : 'edit_widget', params : { id : id}})
         },
+        manageWelcome(id) {
+            this.$router.push({ name : 'manage_welcome', params : { id : id}})
+        }
     },
     mounted() {
         this.GET_WIDGETS().then(() => this.isLoad = true)
     },
     data() {
         return {
-            columns: ['name', 'title', 'subtitle','background_color','text_color','website','action'],
+            columns: ['name', 'title', 'subtitle','background_color','text_color','website','action','manage'],
             rows: [],
             options: {
                 headings: {
