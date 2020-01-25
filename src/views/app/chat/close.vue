@@ -19,6 +19,7 @@
                                         <p class="list-item-heading mb-1 truncate">{{ chat.ticket_id}}</p>
                                     </router-link>
                                     <p class="mb-1 text-muted text-small w-15 w-sm-100">{{ date(chat.createdAt ) }}</p>
+                                    <p class="mb-1 text-muted text-small w-15 w-sm-100">{{ chat.active_operator ? chat.active_operator.name : 'Not Served' }}</p>
                                     <div class="w-15 w-sm-100">
                                         <b-badge pill :variant="'danger'">Close</b-badge>
                                     </div>
