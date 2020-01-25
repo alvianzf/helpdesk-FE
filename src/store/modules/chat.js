@@ -20,47 +20,27 @@ const getters = {
 
 const actions = {
     GET_ACTIVE_LIST_BY_WESBITE : ({commit}, payload) => {
-        post('api/chat/list/active/bywebsite', payload)
-        .then(res => {
-            commit('setChats', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+        socket.emit('get_list_chat_current', payload)
+        socket.on('list_chat_with_operator', res => {
+            commit('setChats', res.data)
         })
     },
     GET_ACTIVE_LIST : ({commit}) => {
-        get('api/chat/list/active')
-        .then(res => {
-            commit('setChats', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+        socket.emit('new_chat_for_admin')
+        socket.on('list_new_chat_for_admin', res => {
+            commit('setChats', res.data)
         })
     },
     GET_RECENT_LIST : ({commit}) => {
-        get('api/chat/list/recent')
-        .then(res => {
-            commit('setChats', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+        socket.emit('get_list_close_chat')
+        socket.on('list_close_chat', res => {
+            commit('setChats', res.data)
         })
     },
     GET_RECENT_LIST_BY_WESBITE : ({commit}, payload) => {
-        post('api/chat/list/recent/bywebsite', payload)
-        .then(res => {
-            commit('setChats', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+        socket.emit('get_list_close_chat_with_operator', payload)
+        socket.on('list_close_chat_with_operator', res => {
+            commit('setChats', res.data)
         })
     },
     LIST_UNOPERATOR_BY_WEBSITE : ({ commit }, payload) => {
@@ -80,15 +60,6 @@ const actions = {
             console.log(res.data)
             commit('setChat', res.data)
         })
-        // post('api/chat/findbyid', payload)
-        // .then(res => {
-        //     commit('setChat', res.data.data)
-        // }).catch(error => {
-        //     commit('SET_RESPONSE', {
-        //         success : false,
-        //         message : error.response.data.message
-        //     })
-        // })
     },
     SEND_MESSAGE : ({commit, dispatch}, payload) => {
         post('api/chat/new/message/operator', payload)

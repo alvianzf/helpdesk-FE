@@ -55,14 +55,10 @@ export default {
         },
     },
     mounted() {
-        if(localStorage.getItem('user_role') == "customer service") {
-            this.GET_ACTIVE_LIST_BY_WESBITE({
-                website : localStorage.getItem('user_website'),
-                operator : localStorage.getItem('user_id')
-            })
-        } else {
-            this.GET_ACTIVE_LIST()
-        }
+        this.GET_ACTIVE_LIST_BY_WESBITE({
+            website : localStorage.getItem('user_website'),
+            operator : localStorage.getItem('user_id')
+        })
     },
 }
 </script>
