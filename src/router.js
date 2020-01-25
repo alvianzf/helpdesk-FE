@@ -60,7 +60,8 @@ const routes = [
     children: [
       { path: 'widget', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/list') },
       { name : 'edit_widget', path: 'widget/edit/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/edit') },
-      { name : 'manage_welcome', path: 'widget/welcome-text/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/welcometext') }
+      { name : 'manage_welcome', path: 'widget/welcome-text/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/welcometext') },
+      { name : 'splash_screen', path: 'widget/splash-screen/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/splash') }
     ]
   },
   {

@@ -22,6 +22,10 @@
                                 <button type="button" class="btn btn-primary btn-icon edit" @click="manageWelcome(props.row.id)">
                                     Manage Welcome Status
                                 </button>
+
+                                <button type="button" class="btn btn-primary btn-icon edit" @click="manageSplash(props.row.id)">
+                                    Manage Splash Screen
+                                </button>
                             </div>
                         </v-client-table>
                     </b-colxx>
@@ -77,6 +81,9 @@ export default {
         },
         manageWelcome(id) {
             this.$router.push({ name : 'manage_welcome', params : { id : id}})
+        },
+        manageSplash(id) {
+            this.$router.push({ name : 'splash_screen', params : { id : id}})
         }
     },
     mounted() {

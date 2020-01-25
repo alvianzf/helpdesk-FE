@@ -1,4 +1,4 @@
-import { get, post, put, destroy } from '@/api'
+import { get, post, postImg, destroy } from '@/api'
 import router from '@/router'
 
 const state = {
@@ -74,6 +74,23 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
+        }).catch(error => {
+            console.log(error)
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    UPLOAD_SPLASH : ({commit}, payload) => {
+        postImg('api/widget/manage-splash-screen', payload)
+        .then(res => {
+            router.push('/app/setting/widget')
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+            
         }).catch(error => {
             console.log(error)
             commit('SET_RESPONSE', {

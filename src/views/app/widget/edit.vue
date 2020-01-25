@@ -2,7 +2,7 @@
     <div>
         <b-row>
             <b-colxx md="6">
-                <b-card :title="'My Account'">
+                <b-card :title="'Edit Widget'">
                     <b-form>
                         <div class="form-group">
                             <label>Name <span class="tx-danger">*</span></label>
