@@ -3,7 +3,7 @@
         <b-colxx class="disable-text-selection">
             <b-row>
                 <b-colxx xxs="12">
-                    <h1>Active Ticket List</h1>
+                    <h1>Current Ticket List</h1>
 
                     <piaf-breadcrumb/>
                     <div class="separator mb-5"/>
@@ -49,16 +49,20 @@ export default {
         chats : 'getChats'
     }),
     methods: {
-        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE','GET_ACTIVE_LIST']),
+        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN','GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
     },
     mounted() {
-        this.GET_ACTIVE_LIST_BY_WESBITE({
-            website : localStorage.getItem('user_website'),
-            operator : localStorage.getItem('user_id')
-        })
+        if(localStorage.getItem('user_role') == "customer service") {
+            this.GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR({
+                website : localStorage.getItem('user_website'),
+                operator : localStorage.getItem('user_id') 
+            })
+        } else {
+            this.GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN()
+        }
     },
 }
 </script>

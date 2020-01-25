@@ -19,7 +19,13 @@ const getters = {
 }
 
 const actions = {
-    GET_ACTIVE_LIST_BY_WESBITE : ({commit}, payload) => {
+    GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN : ({commit}, payload) => {
+        socket.emit('get_list_chat_current_for_admin', payload)
+        socket.on('list_chat_with_operator_for_admin', res => {
+            commit('setChats', res.data)
+        })
+    },
+    GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR : ({commit}, payload) => {
         socket.emit('get_list_chat_current', payload)
         socket.on('list_chat_with_operator', res => {
             commit('setChats', res.data)

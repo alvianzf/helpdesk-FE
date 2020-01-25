@@ -3,7 +3,7 @@
         <b-colxx class="disable-text-selection">
             <b-row>
                 <b-colxx xxs="12">
-                    <h1>Open Ticket List</h1>
+                    <h1>New Ticket List</h1>
 
                     <piaf-breadcrumb/>
                     <div class="separator mb-5"/>
