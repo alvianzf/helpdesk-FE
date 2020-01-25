@@ -58,7 +58,8 @@ const routes = [
     redirect: '/app/setting/widget',
     beforeEnter: AuthRequired,
     children: [
-      { path: 'widget', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/list') }
+      { path: 'widget', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/list') },
+      { name : 'edit_widget', path: 'widget/edit/:id', component: () => import(/* webpackChunkName: "applications" */ './views/app/widget/edit') }
     ]
   },
   {

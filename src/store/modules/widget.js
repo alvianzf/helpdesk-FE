@@ -1,4 +1,5 @@
 import { get, post, put, destroy } from '@/api'
+import router from '@/router'
 
 const state = {
     widget : {},
@@ -16,6 +17,33 @@ const actions = {
         .then(res => {
             commit('setWidgets', res.data.data)
         }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    GET_WIDGET : ({commit}, payload) => {
+        post('api/widget/find', payload)
+        .then(res => {
+            commit('setWidget', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    UPDATE_WIDGET : ({commit}, payload) => {
+        post('api/widget/update', payload)
+        .then(res => {
+            router.push('/app/setting/widget')
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            console.log(error)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message

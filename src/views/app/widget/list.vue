@@ -67,6 +67,9 @@ export default {
     },
     methods: {
         ...mapActions(['GET_WIDGETS']),
+        edit(id) {
+            this.$router.push({ name : 'edit_widget', params : { id : id}})
+        },
     },
     mounted() {
         this.GET_WIDGETS().then(() => this.isLoad = true)
