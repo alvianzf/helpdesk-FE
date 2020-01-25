@@ -10,7 +10,7 @@
                     </router-link>
                     <li :class="{ active : selectedParentMenu==='chat'}">
                         <a @click.prevent="openSubMenu($event,'chat')" href="#chat">
-                          <i class="iconsminds-support"></i>Ticket
+                          <i class="iconsminds-support"></i>Live Chat
                         </a>
                     </li>
                     <li :class="{ active : selectedParentMenu==='agent'}" v-if="role == 'administrator'">
