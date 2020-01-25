@@ -20,6 +20,9 @@
                                     </router-link>
                                     <p class="mb-1 text-muted text-small w-15 w-sm-100">{{ date(chat.createdAt )}}</p>
                                     <div class="w-15 w-sm-100">
+                                        <b-badge pill :variant="'success'">{{ chat.unreadtotal }}</b-badge>
+                                    </div>
+                                    <div class="w-15 w-sm-100">
                                         <b-badge pill :variant="'success'">Open</b-badge>
                                     </div>
                                 </div>
