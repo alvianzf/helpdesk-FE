@@ -65,8 +65,15 @@ const actions = {
     FIND_CHAT_BY_ID : ({commit}, payload) => {
         socket.emit('retrive_new_message', payload)
         socket.on('list_new_message', res => {
-            console.log(res.data)
             commit('setChat', res.data)
+        })
+        socket.emit('waiting_new_chat_on_admin')
+        socket.on('list_chat_on_admin', res => {
+            commit('setNotifList', res.data)
+        })
+        socket.emit('waiting_new_chat_on_operator', payload)
+        socket.on('list_chat_on_operator', res => {
+            commit('setNotifList', res.data)
         })
     },
     SEND_MESSAGE : ({commit, dispatch}, payload) => {
@@ -83,10 +90,16 @@ const actions = {
     ASSIGN_OPERATOR : ({commit, dispatch}, payload) => {
         post('api/chat/assign/operator', payload)
         .then(res => {
-            dispatch('GET_NEW_CHAT_ON_OPERATOR', payload)
-            dispatch('GET_NEW_CHAT_ON_ADMIN')
-            dispatch('WAITING_NEW_CHAT_ON_ADMIN')
-            dispatch('WAITING_NEW_CHAT_ON_OPERATOR', payload)
+            // dispatch('GET_NEW_CHAT_ON_OPERATOR', payload)
+            // dispatch('GET_NEW_CHAT_ON_ADMIN')
+            socket.emit('waiting_new_chat_on_admin')
+            socket.on('list_chat_on_admin', res => {
+                commit('setNotifList', res.data)
+            })
+            socket.emit('waiting_new_chat_on_operator', payload)
+            socket.on('list_chat_on_operator', res => {
+                commit('setNotifList', res.data)
+            })
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -162,6 +175,17 @@ const actions = {
         socket.emit('waiting_new_chat_on_operator', payload)
         socket.on('list_chat_on_operator', res => {
             commit('setNotifList', res.data)
+        })
+    },
+    SET_READ : ({commit}, payload) => {
+        post('api/chat/setread', payload)
+        .then(res => {
+            console.log('readed!!')
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
         })
     }
 }

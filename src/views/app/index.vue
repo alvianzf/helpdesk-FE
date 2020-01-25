@@ -20,6 +20,11 @@
                 <span> {{ message.ticket_id }} </span>
             </router-link>
           </div>
+          <div class="notification-child success" v-if="message.active_operator && message.unreadtotal == 0">
+            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
+                <span> {{ message.ticket_id }} </span>
+            </router-link>
+          </div>
         </div>
         
       </div>
