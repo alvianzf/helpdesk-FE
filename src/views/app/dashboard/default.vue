@@ -22,12 +22,22 @@
                 {{ total_close }}
             </b-card> 
         </b-colxx>
+        <b-colxx md="6" xxs="12" style="margin-top: 15px;">
+            <b-card :title="'Chat Handling Chart'">
+                <GChart
+                    type="PieChart"
+                    :data="chartData"
+                    :options="chartOptions"
+                />
+            </b-card> 
+        </b-colxx>
     </b-row>
   </div>
 </template>
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
+import { GChart } from 'vue-google-charts'
 
 export default {
     name : 'default',
@@ -37,6 +47,26 @@ export default {
         total_active : 'getTotalActive',
         total_close : 'getTotalClose'
     }),
+    data() {
+        return {
+            chartData: [
+                ['Year', 'Sales'],
+                ['2014', 1000],
+                ['2015', 1170],
+                ['2016', 660],
+                ['2017', 1030]
+            ],
+            chartOptions: {
+                chart: {
+                title: 'Company Performance',
+                subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                }
+            }
+        }
+    },
+    components: {
+        GChart
+    },
     methods: {
         ...mapActions(['COUNT_ALL_CHAT_OPERATOR','COUNT_CHAT','COUNT_OPEN_CHAT_OPERATOR',
             'COUNT_CHAT_OPEN','COUNT_ACTIVE_CHAT_OPERATOR','COUNT_CHAT_ACTIVE',
