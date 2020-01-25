@@ -8088,13 +8088,47 @@ input:-webkit-autofill {
   position: fixed;
   bottom: 0;
   right: 0;
-  padding: 10px 15px;
-  background: #f18025;
-  border-radius: 5px;
+  width: 40%;
+  max-height: 150px;
+  overflow-y: scroll;
   a span {
     color : #fff;
   }
 }
+
+.notification-child {
+  padding: 10px 15px;
+  border-radius: 5px;
+  float:left;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  position : relative;
+  font-size : 11px;
+
+  span.badge {
+    border-radius: 100%;
+    background: #fff;
+    top: -7px;
+    right: 0;
+    font-size: 9px;
+  }
+}
+
+.chat-input-container {
+  z-index: 2;
+}
+.warning {
+  background: #f0ad4e;
+}
+
+.info {
+  background: #5bc0de;
+}
+
+.success {
+  background: #5cb85c;
+}
+
 
 .f-15 {
   font-size: 15px;

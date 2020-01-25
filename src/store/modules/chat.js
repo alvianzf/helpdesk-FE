@@ -9,13 +9,15 @@ const state = {
     chats : [],
     count : null,
     new_chat : 0,
+    notifList : []
 }
 
 const getters = {
     getChat : (state) => state.chat,
     getChats : (state) => state.chats,
     getCount : (state) => state.count,
-    getNewChat : (state) => state.new_chat
+    getNewChat : (state) => state.new_chat,
+    getNotifList : (state) => state.notifList
 }
 
 const actions = {
@@ -83,6 +85,8 @@ const actions = {
         .then(res => {
             dispatch('GET_NEW_CHAT_ON_OPERATOR', payload)
             dispatch('GET_NEW_CHAT_ON_ADMIN')
+            dispatch('WAITING_NEW_CHAT_ON_ADMIN')
+            dispatch('WAITING_NEW_CHAT_ON_OPERATOR', payload)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -138,14 +142,26 @@ const actions = {
         // console.log('new_chat_operator')
         socket.emit('new_chat_for_operator', payload)
         socket.on('list_new_chat_for_operator', res => {
-            commit('setNewChat', res.data.length)
+            commit('setChats', res.data)
         })
     },
     GET_NEW_CHAT_ON_ADMIN : ({commit}) => {
         // console.log('new_chat_admin')
         socket.emit('new_chat_for_admin')
         socket.on('list_new_chat_for_admin', res => {
-            commit('setNewChat', res.data.length)
+            commit('setChats', res.data)
+        })
+    },
+    WAITING_NEW_CHAT_ON_ADMIN : ({commit}) => {
+        socket.emit('waiting_new_chat_on_admin')
+        socket.on('list_chat_on_admin', res => {
+            commit('setNotifList', res.data)
+        })
+    },
+    WAITING_NEW_CHAT_ON_OPERATOR : ({commit}, payload) => {
+        socket.emit('waiting_new_chat_on_operator', payload)
+        socket.on('list_chat_on_operator', res => {
+            commit('setNotifList', res.data)
         })
     }
 }
@@ -162,6 +178,9 @@ const mutations = {
     },
     setNewChat (state, payload) {
         state.new_chat = payload
+    },
+    setNotifList (state, payload) {
+        state.notifList = payload
     }
 }
 

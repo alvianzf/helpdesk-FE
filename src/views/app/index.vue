@@ -6,10 +6,22 @@
       <div class="container-fluid">
         <router-view/>
       </div>
-      <div class="notification-box" v-if="getNewChat > 0">
-        <router-link to="/app/chat/open">
-            <span> You have new ticket open </span>
-        </router-link>
+      <div class="notification-box" v-if="getNotifList.length > 0">
+        <div v-for="message in getNotifList" :key="message._id">
+          <div class="notification-child warning" v-if="message.active_operator == null">
+            <span class="badge">{{message.unreadtotal}}</span>
+            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
+                <span> {{ message.ticket_id }} </span>
+            </router-link>
+          </div>
+          <div class="notification-child info" v-if="message.active_operator && message.unreadtotal > 0">
+            <span class="badge">{{message.unreadtotal}}</span>
+            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
+                <span> {{ message.ticket_id }} </span>
+            </router-link>
+          </div>
+        </div>
+        
       </div>
     </main>
   </div>
@@ -28,9 +40,9 @@ export default {
     Sidebar
   },
   watch: {
-    getNewChat(set)
+    getNotifList(set)
     {
-      if(set > 0) {
+      if(set.length > 0) {
         this.$notification.show('New Ticket Open', {
           body: 'You have new ticket open'
         }, {})
@@ -38,16 +50,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMenuType','getNewChat'])
+    ...mapGetters(['getMenuType','getNotifList'])
   },
   methods: {
-    ...mapActions(['GET_NEW_CHAT_ON_OPERATOR','GET_NEW_CHAT_ON_ADMIN'])
+    ...mapActions(['WAITING_NEW_CHAT_ON_ADMIN','WAITING_NEW_CHAT_ON_OPERATOR'])
   },
   mounted() {
-    this.GET_NEW_CHAT_ON_OPERATOR( {
+    this.WAITING_NEW_CHAT_ON_OPERATOR( {
       website : localStorage.getItem('user_website')
     })
-    this.GET_NEW_CHAT_ON_ADMIN()
+    this.WAITING_NEW_CHAT_ON_ADMIN()
     this.$notification.requestPermission()
   },
 }
