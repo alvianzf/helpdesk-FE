@@ -11,23 +11,20 @@
             </b-row>
             <template v-if="isLoad">
                 <b-row>
-                    <b-colxx sm="12" md="12" class="mb-4" v-for="(chat,index) in chats" :key="index">
-                        <b-card class="d-flex flex-row" no-body>
-                            <div class="pl-2 d-flex flex-grow-1 min-width-zero">
-                                <div class="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                                    <router-link :to="{ name : 'chat.detail', params : { id : chat._id}}" class="w-40 w-sm-100">
-                                        <p class="list-item-heading mb-1 truncate">{{ chat.ticket_id}}</p>
-                                    </router-link>
-                                    <p class="mb-1 text-muted text-small w-15 w-sm-100">{{ date(chat.createdAt )}}</p>
-                                    <div class="w-15 w-sm-100">
-                                        <b-badge pill :variant="'success'">{{ chat.unreadtotal }}</b-badge>
-                                    </div>
-                                    <div class="w-15 w-sm-100">
-                                        <b-badge pill :variant="'success'">Open</b-badge>
-                                    </div>
-                                </div>
+                    <b-colxx sm="12" md="12" class="mb-4">
+                        <v-client-table :columns="columns" :data="rows" :options="options" ref="table">
+                            <div slot="time" slot-scope="props">
+                                {{ date(props.row.createdAt) }}
                             </div>
-                        </b-card>
+                            <div slot="action" slot-scope="props">
+                                <router-link :to="{ name : 'chat.detail', params : { id : props.row.id}}" class="btn btn-info btn-icon">
+                                    <i class="simple-icon-share-alt mg-r-0"></i>
+                                </router-link>
+                                <button v-if="role == 'administrator' || role == 'super admin'" type="button" class="btn btn-danger btn-icon delete" @click="destroy(props.row.id)">
+                                    <i class="simple-icon-trash mg-r-0"></i>
+                                </button>
+                            </div>
+                        </v-client-table>
                     </b-colxx>
                 </b-row>
             </template>
@@ -45,12 +42,43 @@ export default {
     name : 'active',
     data() {
         return {
-            isLoad : true
+            isLoad : true,
+            columns: ['ticket_id', 'time','action'],
+            rows: [],
+            options: {
+                headings: {
+                    ticket_id: 'Number'
+                },
+                sortable: ['ticket_id'],
+                filterable: ['ticket_id']
+            },
+            method : 'post',
+            role : localStorage.getItem('user_role')
         }
     },
     computed : mapGetters({
         chats : 'getChats'
     }),
+    watch: {
+        chats(set) {
+            this.rows = []
+            set.forEach(v => {
+                this.rows.push({
+                    id : v._id,
+                    ticket_id : v.ticket_id,
+                    createdAt : v.createdAt
+                })
+            })
+        },
+        response (set) {
+            if(set.success)
+            {
+                this.$notify('success', 'Success', set.message, { duration: 3000, permanent: false })
+            } else {
+                this.$notify('error', 'Error', set.message, { duration: 3000, permanent: false })
+            }
+        }
+    },
     methods: {
         ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN','GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR']),
         date: function (date) {

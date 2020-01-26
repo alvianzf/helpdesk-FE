@@ -87,7 +87,7 @@ $theme-color-red: #880a1f;
 
 $info-color: #3195a5;
 $success-color: #3e884f;
-$warning-color: #b69329;
+$warning-color: #f18025;
 $error-color: #c43d4b;
 
 /* 01.Base */
@@ -8169,4 +8169,36 @@ input:-webkit-autofill {
 .custom-text {
   color : #000 !important;
   font-weight: 200;
+}
+
+.btn-icon {
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #fff;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.VueTables__search_AYGhJ {
+  justify-content: left !important;
+}
+
+.pagination {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.VuePagination {
+  .text-center {
+    width: 100%;
+  }
 }
