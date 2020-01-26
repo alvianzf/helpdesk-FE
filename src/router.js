@@ -48,6 +48,7 @@ const routes = [
     redirect: '/app/agent/admin',
     beforeEnter: AuthRequired,
     children: [
+      { path: 'super', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/super/list') },
       { path: 'admin', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/admin/list') },
       { path: 'operator', component: () => import(/* webpackChunkName: "applications" */ './views/app/agent/operator/list') },
     ]

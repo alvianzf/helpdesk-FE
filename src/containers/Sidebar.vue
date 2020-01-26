@@ -40,6 +40,7 @@
                 </ul>
 
                 <ul class="list-unstyled" data-link="agent" :class="{'d-block':selectedParentMenu==='agent' }">
+                    <router-link tag="li" v-if="role == 'superadmin'" to="/app/agent/super" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Super Admin</span></a></router-link>
                     <router-link tag="li" to="/app/agent/admin" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Admin</span></a></router-link>
                     <router-link tag="li" to="/app/agent/operator" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Operator</span></a></router-link>
                 </ul>
