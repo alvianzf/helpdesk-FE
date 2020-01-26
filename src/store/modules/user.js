@@ -33,17 +33,6 @@ const actions = {
             })
         }) 
     },
-    GET_USERS : ({commit}) => {
-        get('api/auth/list/cso')
-        .then(res => {
-            commit('setUsers', res.data.data)
-        }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
     GET_USER : ({commit}, payload) => {
         post('api/auth/find', payload)
         .then((res) => {
@@ -63,7 +52,15 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
-            dispatch('GET_ADMINS')
+            dispatch('GET_USER_AS_ROLE', {
+                role : payload.call_role
+            })
+            if(payload.call_website) {
+                dispatch('GET_USER_AS_ROLE_AS_WEB', {
+                    role : payload.call_role,
+                    website : payload.call_website
+                })
+            }
         })
         .catch((error) => {
             commit('SET_RESPONSE', {
@@ -79,7 +76,15 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
-            dispatch('GET_ADMINS')
+            dispatch('GET_USER_AS_ROLE', {
+                role : payload.call_role
+            })
+            if(payload.call_website) {
+                dispatch('GET_USER_AS_ROLE_AS_WEB', {
+                    role : payload.call_role,
+                    website : payload.call_website
+                })
+            }
         })
         .catch((error) => {
             commit('SET_RESPONSE', {
@@ -95,55 +100,15 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
-            dispatch('GET_ADMINS')
-        })
-        .catch((error) => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
+            dispatch('GET_USER_AS_ROLE', {
+                role : payload.call_role
             })
-        })
-    },
-    POST_CSO : ({ commit, dispatch }, payload) => {
-        post('api/auth/register', payload)
-        .then((res) => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
-            dispatch('GET_USERS')
-        })
-        .catch((error) => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
-    PUT_CSO : ({ commit, dispatch }, payload) => {
-        put('api/auth/update', payload)
-        .then((res) => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
-            dispatch('GET_USERS')
-        })
-        .catch((error) => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
-        })
-    },
-    DELETE_CSO : ({ commit, dispatch}, payload) => {
-        destroy('api/auth/delete', payload)
-        .then((res) => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
-            dispatch('GET_USERS')
+            if(payload.call_website) {
+                dispatch('GET_USER_AS_ROLE_AS_WEB', {
+                    role : payload.call_role,
+                    website : payload.call_website
+                })
+            }
         })
         .catch((error) => {
             commit('SET_RESPONSE', {

@@ -111,6 +111,9 @@
                 <b-row>
                     <b-colxx sm="12" md="12" class="mb-4">
                         <v-client-table :columns="columns" :data="rows" :options="options" ref="table">
+                            <div slot="website" slot-scope="props">
+                                {{ props.row.website.name }}
+                            </div>
                             <div slot="action" slot-scope="props">
                                 <button type="button" class="btn btn-warning btn-icon edit" @click="edit(props.row.id)" v-if="current_id != props.row.id">
                                     <i class="simple-icon-pencil mg-r-0"></i>
@@ -190,7 +193,9 @@ export default {
                         username : this.form.username,
                         password : this.form.password,
                         role : "administrator",
-                        website : this.form.website
+                        website : this.form.website,
+                        call_role : "administrator",
+                        call_website : localStorage.getItem('user_website') ? localStorage.getItem('user_website') : null
                     })
                     this.$bvModal.hide('modaladd')
                     this.form = {}
@@ -208,7 +213,9 @@ export default {
                         name : this.form_edit.name,
                         username : this.form_edit.username,
                         phone : this.form_edit.phone,
-                        website : this.form_edit.website
+                        website : this.form_edit.website,
+                        call_role : "administrator",
+                        call_website : localStorage.getItem('user_website') ? localStorage.getItem('user_website') : null
                     })
                     this.$bvModal.hide('modaledit')
                     this.form_edit = {}
@@ -227,7 +234,11 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value) {
-                        this.DELETE_USER({ id : id})
+                        this.DELETE_USER({ 
+                            id : id,
+                            call_role : "administrator",
+                            call_website : localStorage.getItem('user_website') ? localStorage.getItem('user_website') : null
+                        })
                         this.isLoad = true
                     }
                 })
@@ -249,7 +260,7 @@ export default {
     data() {
         return {
             isLoad : false,
-            columns: ['name', 'username','action'],
+            columns: ['name', 'username','website','action'],
             rows: [],
             options: {
                 headings: {
