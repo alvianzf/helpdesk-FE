@@ -26,12 +26,12 @@
                                             v-model="form.name" v-validate="'required'"/>
                                         <span v-show="errors.has('name')" class="help is-danger text-red">{{ errors.first('name') }}</span>
                                     </div>
-                                   <div class="form-group">
-                                        <label>Email <span class="tx-danger">*</span></label>
-                                        <input type="email" name="email" class="form-control" placeholder="Enter email" 
-                                            v-bind:class="errors.has('email') ? 'form-control is-invalid' : 'form-control'" 
-                                            v-model="form.email" v-validate="'required'" />
-                                        <span v-show="errors.has('email')" class="help is-danger text-red">{{ errors.first('email') }}</span>
+                                    <div class="form-group">
+                                        <label>Username <span class="tx-danger">*</span></label>
+                                        <input type="username" name="username" class="form-control" placeholder="Enter username" 
+                                            v-bind:class="errors.has('username') ? 'form-control is-invalid' : 'form-control'" 
+                                            v-model="form.username" v-validate="'required'" />
+                                        <span v-show="errors.has('username')" class="help is-danger text-red">{{ errors.first('username') }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label>Password <span class="tx-danger">*</span></label>
@@ -41,11 +41,12 @@
                                         <span v-show="errors.has('password')" class="help is-danger text-red">{{ errors.first('password') }}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label>Phone </label>
-                                        <input type="text" name="phone" class="form-control" placeholder="Enter phone"
-                                            v-bind:class="errors.has('phone') ? 'form-control is-invalid' : 'form-control'" 
-                                            v-model="form.phone" v-validate="'required'" />
-                                        <span v-show="errors.has('phone')" class="help is-danger text-red">{{ errors.first('phone') }}</span>
+                                        <label>Website </label>
+                                        <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form.website" name="manufacturing" v-validate="'required'">
+                                            <option selected="selected" value="">Choose Website</option>
+                                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                                        </select>
+                                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
                                     </div>
                                 </b-form>
                                 <template slot="modal-footer">
@@ -75,18 +76,19 @@
                                         <span v-show="errors.has('name')" class="help is-danger text-red">{{ errors.first('name') }}</span>
                                     </div>
                                    <div class="form-group">
-                                        <label>Email <span class="tx-danger">*</span></label>
-                                        <input type="email" name="email" class="form-control" placeholder="Enter email" 
-                                            v-bind:class="errors.has('email') ? 'form-control is-invalid' : 'form-control'" 
-                                            v-model="form_edit.email" v-validate="'required'" />
-                                        <span v-show="errors.has('email')" class="help is-danger text-red">{{ errors.first('email') }}</span>
+                                        <label>Username <span class="tx-danger">*</span></label>
+                                        <input type="username" name="username" class="form-control" placeholder="Enter username" 
+                                            v-bind:class="errors.has('username') ? 'form-control is-invalid' : 'form-control'" 
+                                            v-model="form_edit.username" v-validate="'required'" />
+                                        <span v-show="errors.has('username')" class="help is-danger text-red">{{ errors.first('username') }}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label>Phone </label>
-                                        <input type="text" name="phone" class="form-control" placeholder="Enter phone"
-                                            v-bind:class="errors.has('phone') ? 'form-control is-invalid' : 'form-control'" 
-                                            v-model="form_edit.phone" v-validate="'required'" />
-                                        <span v-show="errors.has('phone')" class="help is-danger text-red">{{ errors.first('phone') }}</span>
+                                        <label>Website </label>
+                                        <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form_edit.website" name="manufacturing" v-validate="'required'">
+                                            <option selected="selected" value="">Choose Website</option>
+                                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                                        </select>
+                                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
                                     </div>
                                 </b-form>
                                 <template slot="modal-footer">
@@ -110,11 +112,11 @@
                     <b-colxx sm="12" md="12" class="mb-4">
                         <v-client-table :columns="columns" :data="rows" :options="options" ref="table">
                             <div slot="action" slot-scope="props">
-                                <button type="button" class="btn btn-warning btn-icon edit" @click="edit(props.row.id)">
+                                <button type="button" class="btn btn-warning btn-icon edit" @click="edit(props.row.id)" v-if="current_id != props.row.id">
                                     <i class="simple-icon-pencil mg-r-0"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-danger btn-icon delete" @click="destroy(props.row.id)">
+                                <button type="button" class="btn btn-danger btn-icon delete" @click="destroy(props.row.id)" v-if="current_id != props.row.id">
                                     <i class="simple-icon-trash mg-r-0" style="color : #fff !important"></i>
                                 </button>
                             </div>
@@ -136,7 +138,8 @@ export default {
     computed : mapGetters({
         users : 'getUsers',
         user : 'getUser',
-        response : 'getResponse'
+        response : 'getResponse',
+        websites : 'getWebsites'
     }),
     watch: {
         users(set) {
@@ -145,8 +148,9 @@ export default {
                 this.rows.push({
                     id : v._id,
                     name : v.name,
-                    email : v.email,
-                    phone : v.phone
+                    username : v.username,
+                    phone : v.phone,
+                    website : v.website
                 })
             })
         },
@@ -159,11 +163,18 @@ export default {
             }
         },
         user(set) {
-            this.form_edit = set
+            if(set) {
+                this.form_edit = {
+                    _id : set._id,
+                    name : set.name,
+                    username : set.username,
+                    website : set.website ? set.website._id : null
+                }
+            }
         }
     },
     methods: {
-        ...mapActions(['GET_ADMINS','GET_USER','DELETE_USER','POST_USER','PUT_USER']),
+        ...mapActions(['GET_USER_AS_ROLE','GET_USER','DELETE_USER','POST_USER','PUT_USER','GET_WEBSITES','GET_USER_AS_ROLE_AS_WEB']),
         edit(id) {
             this.GET_USER({id : id})
             this.$bvModal.show('modaledit')
@@ -176,11 +187,10 @@ export default {
                 if (valid) {
                     this.POST_USER({
                         name : this.form.name,
-                        email : this.form.email,
+                        username : this.form.username,
                         password : this.form.password,
                         role : "administrator",
-                        phone : this.form.phone,
-                        website : null
+                        website : this.form.website
                     })
                     this.$bvModal.hide('modaladd')
                     this.form = {}
@@ -196,8 +206,9 @@ export default {
                     this.PUT_USER({
                         id : this.form_edit._id,
                         name : this.form_edit.name,
-                        email : this.form_edit.email,
-                        phone : this.form_edit.phone
+                        username : this.form_edit.username,
+                        phone : this.form_edit.phone,
+                        website : this.form_edit.website
                     })
                     this.$bvModal.hide('modaledit')
                     this.form_edit = {}
@@ -223,25 +234,39 @@ export default {
         }
     },
     mounted() {
-        this.GET_ADMINS().then(() => this.isLoad = true)
+        if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+            this.GET_USER_AS_ROLE_AS_WEB({
+                role : "administrator",
+                website : localStorage.getItem('user_website')
+            }).then(() => this.isLoad = true)
+        }else {
+            this.GET_USER_AS_ROLE({
+                role : "administrator"
+            }).then(() => this.isLoad = true)
+        }
+        this.GET_WEBSITES()
     },
     data() {
         return {
             isLoad : false,
-            columns: ['name', 'email', 'phone','action'],
+            columns: ['name', 'username','action'],
             rows: [],
             options: {
                 headings: {
                     name: 'Name',
-                    email: 'Email',
-                    phone: 'Phone'
+                    username: 'Username',
                 },
-                sortable: ['name', 'email','phone'],
-                filterable: ['name', 'email','phone']
+                sortable: ['name', 'username'],
+                filterable: ['name', 'username']
             },
             method : 'post',
-            form : {},
-            form_edit : {}
+            form : {
+                website : ""
+            },
+            form_edit : {
+                website : ""
+            },
+            current_id : localStorage.getItem('user_id')
         }
     }
 }

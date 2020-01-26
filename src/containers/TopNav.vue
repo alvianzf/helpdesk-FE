@@ -169,7 +169,7 @@ export default {
     ...mapGetters({
       menuType: 'getMenuType',
       menuClickCount: 'getMenuClickCount',
-      user : 'getUser'
+      user : 'getLoginend'
     })
   },
   mounted() {

@@ -11,8 +11,8 @@ const getters = {
 }
 
 const actions = {
-    GET_ADMINS : ({commit}) => {
-        get('api/auth/list/admin')
+    GET_USER_AS_ROLE : ({commit}, payload) => {
+        post('api/auth/list/asrole', payload)
         .then(res => {
             commit('setUsers', res.data.data)
         }).catch(error => {
@@ -21,6 +21,17 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    GET_USER_AS_ROLE_AS_WEB : ({commit}, payload) => {
+        post('api/auth/list/asroleasweb', payload)
+        .then(res => {
+            commit('setUsers', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        }) 
     },
     GET_USERS : ({commit}) => {
         get('api/auth/list/cso')

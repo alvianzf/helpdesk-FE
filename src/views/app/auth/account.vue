@@ -90,7 +90,7 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
     name : 'account',
     computed : mapGetters({
-        user : 'getUser',
+        user : 'getLoginend',
         response : 'getResponse'
     }),
     data() {
