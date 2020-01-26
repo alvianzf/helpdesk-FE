@@ -20,7 +20,7 @@
                             </div>
                             <div slot="manage" slot-scope="props">
                                 <button type="button" class="btn btn-primary btn-icon edit" @click="manageWelcome(props.row.id)">
-                                    Manage Welcome Status
+                                    Manage Trigger
                                 </button>
 
                                 <button type="button" class="btn btn-primary btn-icon edit" @click="manageSplash(props.row.id)">
@@ -61,7 +61,7 @@ export default {
                     welcome_text : v.welcome_text,
                     splashscreen : v.splashscreen,
                     splashscreenduration : v.splashscreenduration,
-                    website : v.website.name
+                    website : v.website ? v.website.name : null
                 })
             })
         },
