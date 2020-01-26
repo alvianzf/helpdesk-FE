@@ -13,7 +13,7 @@
                           <i class="iconsminds-support"></i>Live Chat
                         </a>
                     </li>
-                    <li :class="{ active : selectedParentMenu==='agent'}" v-if="role == 'administrator'">
+                    <li :class="{ active : selectedParentMenu==='agent'}">
                         <a @click.prevent="openSubMenu($event,'agent')" href="#agent">
                           <i class="iconsminds-conference"></i>Agent
                         </a>
@@ -21,7 +21,7 @@
                     <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li" v-if="role == 'administrator'">
                       <a><i class="iconsminds-big-data"></i>  Website List</a>
                     </router-link>
-                    <li :class="{ active : selectedParentMenu==='setting'}" v-if="role == 'administrator'">
+                    <li :class="{ active : selectedParentMenu==='setting'}" v-if="role == 'superadmin'">
                         <a @click.prevent="openSubMenu($event,'setting')" href="#setting">
                           <i class="simple-icon-settings"></i>Setting
                         </a>

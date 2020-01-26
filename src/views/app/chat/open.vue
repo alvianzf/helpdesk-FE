@@ -86,7 +86,7 @@ export default {
         }
     },
     mounted() {
-        if(localStorage.getItem('user_role') == "customer service") {
+        if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
             this.LIST_UNOPERATOR_BY_WEBSITE({
                 website : localStorage.getItem('user_website')
             })

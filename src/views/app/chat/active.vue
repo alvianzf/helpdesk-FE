@@ -86,7 +86,7 @@ export default {
         },
     },
     mounted() {
-        if(localStorage.getItem('user_role') == "customer service") {
+        if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
             this.GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR({
                 website : localStorage.getItem('user_website'),
                 operator : localStorage.getItem('user_id') 

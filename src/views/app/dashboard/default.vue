@@ -66,7 +66,7 @@ export default {
             'COUNT_CLOSE_CHAT_OPERATOR','COUNT_CHAT_CLOSE','ADMIN_CHART'])
     },
     mounted() {
-        if(localStorage.getItem('user_role') == "customer service") {
+        if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
             this.COUNT_ALL_CHAT_OPERATOR({
                 operator : localStorage.getItem('user_id')
             })

@@ -17,10 +17,9 @@ const actions = {
         .then(res => {
             commit('setLogined', res.data.data)
             localStorage.setItem('token', res.data.data.token)
-            localStorage.setItem('user_email', res.data.data.email)
+            localStorage.setItem('username', res.data.data.username)
             localStorage.setItem('user_role', res.data.data.role)
             localStorage.setItem('user_name', res.data.data.name)
-            localStorage.setItem('user_phone', res.data.data.phone)
             localStorage.setItem('user_id', res.data.data.id)
             localStorage.setItem('user_website', res.data.data.website)
             commit('SET_RESPONSE', {

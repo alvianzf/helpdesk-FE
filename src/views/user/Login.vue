@@ -12,8 +12,8 @@
             <p class="white mb-0">Please use your credentials to login.</p>
             <b-form @submit.prevent="login">
               <label class="form-group has-float-label mb-4">
-                <input type="email" class="form-control" v-model="form.email">
-                <span>Email</span>
+                <input type="text" class="form-control" v-model="form.username">
+                <span>Username</span>
               </label>
               <label class="form-group has-float-label mb-4">
                 <input type="password" class="form-control" v-model="form.password">
@@ -62,7 +62,7 @@ export default {
         this.processing = true
         e.preventDefault();
         this.POST_LOGIN({
-          email : this.form.email,
+          username : this.form.username,
           password : this.form.password
         })
         .then(() => {

@@ -32,7 +32,7 @@
         >
           <template slot="button-content">
             <span class="name mr-1">{{ user.name }}</span>
-            <span>
+            <span class="name-web">
               {{ user.name }}
             </span>
           </template>

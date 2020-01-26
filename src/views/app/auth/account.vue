@@ -7,11 +7,11 @@
                     <strong> Name </strong>
                     <p>{{ user ? user.name : null}} </p>
 
-                    <strong> Email </strong>
-                    <p>{{ user ? user.email : null}} </p>
+                    <strong> Username </strong>
+                    <p>{{ user ? user.username : null}} </p>
 
-                    <strong> Phone </strong>
-                    <p>{{ user ? user.phone : null}}  </p>
+                    <strong> Role </strong>
+                    <p>{{ user ? user.role : null}}  </p>
 
                     <b-button v-b-modal.modaleditaccount variant="primary" size="lg" style="margin-right : 15px;">Edit Account</b-button>
                     <b-button v-b-modal.modalchangepassword variant="secondary" size="lg">Change Password</b-button>
@@ -25,7 +25,7 @@
             :title="'Edit Account'"
             class="modal-right"
         >
-            <b-form>
+            <b-form @submit="update">
                 <div class="form-group">
                     <label>Name <span class="tx-danger">*</span></label>
                     <input type="text" name="name" class="form-control" placeholder="Enter name" 
@@ -33,17 +33,11 @@
                         v-model="form.name" v-validate="'required'"/>
                     <span v-show="errors.has('name')" class="help is-danger text-red">{{ errors.first('name') }}</span>
                 </div>
-                <div class="form-group">
-                    <label>Phone </label>
-                    <input type="text" name="phone" class="form-control" placeholder="Enter phone"
-                        v-bind:class="errors.has('phone') ? 'form-control is-invalid' : 'form-control'" 
-                        v-model="form.phone" v-validate="'required'" />
-                    <span v-show="errors.has('phone')" class="help is-danger text-red">{{ errors.first('phone') }}</span>
-                </div>
             </b-form>
             <template slot="modal-footer">
                 <b-button
                     variant="outline-secondary"
+                    @click="cancelEdit"
                 >Cencel</b-button>
                 <b-button
                     variant="primary"
@@ -78,6 +72,7 @@
             <template slot="modal-footer">
                 <b-button
                     variant="outline-secondary"
+                    @click="cancelPassword"
                 >Cencel</b-button>
                 <b-button
                     variant="primary"
@@ -145,6 +140,12 @@ export default {
                     this.form.confirm_password = null
                 }
             });
+        },
+        cancelEdit(e) {
+            this.$bvModal.hide('modaleditaccount')
+        },
+        cancelPassword(e) {
+            this.$bvModal.hide('modalchangepassword')
         }
     },
     mounted() {

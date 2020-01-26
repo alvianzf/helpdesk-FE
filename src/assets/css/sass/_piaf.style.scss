@@ -8202,3 +8202,21 @@ input:-webkit-autofill {
     width: 100%;
   }
 }
+
+@media (min-width: 992px) {
+  .navbar .user .name-web {
+      display: block;
+  }
+  .navbar .user .name {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar .user .name {
+    display: block;
+  }
+  .navbar .user .name-web {
+    display: none;
+  }
+}
