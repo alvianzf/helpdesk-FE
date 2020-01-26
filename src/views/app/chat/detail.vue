@@ -17,42 +17,30 @@
                     <div class="separator mb-5"/>
                     <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" ref="chatArea">
                         <div v-for="message in chat.message">
-                            <b-card no-body class="d-inline-block mb-3 float-left" v-if="message.is_guest">
+                            <b-card no-body class="d-inline-block mb-3 float-left wd-100" v-if="message.is_guest">
                                 <div class="position-absolute pt-1 pr-2 r-0">
                                     <span class="text-extra-small text-muted">{{ date(message.createdAt) }}</span>
                                 </div>
+                                <div class="visitor-name">
+                                    <p class="mb-0 truncate list-item-heading f-12">Guest</p>
+                                </div>
                                 <b-card-body>
-                                    <div class="d-flex flex-row pb-1">
-                                        <div class="d-flex flex-grow-1 min-width-zero">
-                                            <div class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
-                                                <div class="min-width-zero">
-                                                    <p class="mb-0 truncate list-item-heading f-12">Guest</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted f-15" v-if="!message.media">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted f-15 custom-text" v-if="!message.media">{{ message.message }}</p>
                                         <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
                             </b-card>
-                            <b-card no-body class="d-inline-block mb-3 float-right" v-else>
+                            <b-card no-body class="d-inline-block mb-3 float-right wd-100" v-else>
                                 <div class="position-absolute pt-1 pr-2 r-0">
                                     <span class="text-extra-small text-muted">{{ date(message.createdAt) }}</span>
                                 </div>
+                                <div class="agent-name">
+                                    <p class="mb-0 truncate list-item-heading f-12">Operator</p>
+                                </div>
                                 <b-card-body>
-                                    <div class="d-flex flex-row pb-1">
-                                        <div class="d-flex flex-grow-1 min-width-zero">
-                                            <div class="m-2 pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
-                                                <div class="min-width-zero">
-                                                    <p class="mb-0 truncate list-item-heading f-12">You</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="chat-text-left">
-                                        <p class="mb-0 text-semi-muted f-15" v-if="!message.media">{{ message.message }}</p>
+                                        <p class="mb-0 text-semi-muted f-15 custom-text" v-if="!message.media">{{ message.message }}</p>
                                         <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
                                 </b-card-body>
