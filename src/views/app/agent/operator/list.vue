@@ -3,7 +3,7 @@
         <b-colxx class="disable-text-selection">
             <b-row>
                 <b-colxx xxs="12">
-                    <h1>Admin</h1>
+                    <h1>Operator</h1>
                     <div class="top-right-button-container">
                         <b-button
                             v-b-modal.modaladd
