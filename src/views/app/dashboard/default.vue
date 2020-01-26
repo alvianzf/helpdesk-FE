@@ -45,21 +45,14 @@ export default {
         total_chat : 'getTotalCount',
         total_open : 'getTotalOpen',
         total_active : 'getTotalActive',
-        total_close : 'getTotalClose'
+        total_close : 'getTotalClose',
+        chartData : 'getAdminChart'
     }),
     data() {
         return {
-            chartData: [
-                ['Year', 'Sales'],
-                ['2014', 1000],
-                ['2015', 1170],
-                ['2016', 660],
-                ['2017', 1030]
-            ],
             chartOptions: {
                 chart: {
-                title: 'Company Performance',
-                subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                    title: 'Total Chat'
                 }
             }
         }
@@ -70,7 +63,7 @@ export default {
     methods: {
         ...mapActions(['COUNT_ALL_CHAT_OPERATOR','COUNT_CHAT','COUNT_OPEN_CHAT_OPERATOR',
             'COUNT_CHAT_OPEN','COUNT_ACTIVE_CHAT_OPERATOR','COUNT_CHAT_ACTIVE',
-            'COUNT_CLOSE_CHAT_OPERATOR','COUNT_CHAT_CLOSE'])
+            'COUNT_CLOSE_CHAT_OPERATOR','COUNT_CHAT_CLOSE','ADMIN_CHART'])
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service") {
@@ -87,6 +80,7 @@ export default {
                 operator : localStorage.getItem('user_id')
             })
         } else {
+            this.ADMIN_CHART()
             this.COUNT_CHAT()
             this.COUNT_CHAT_OPEN()
             this.COUNT_CHAT_ACTIVE()

@@ -4,14 +4,16 @@ const state = {
     total_count : 0,
     total_open : 0,
     total_active : 0,
-    total_close : 0
+    total_close : 0,
+    adminChart : []
 }
 
 const getters = {
     getTotalCount : (state) => state.total_count,
     getTotalOpen : (state) => state.total_open,
     getTotalActive : (state) => state.total_active,
-    getTotalClose : (state) => state.total_close
+    getTotalClose : (state) => state.total_close,
+    getAdminChart : (state) => state.adminChart
 }
 
 const actions = {
@@ -103,6 +105,17 @@ const actions = {
             })
         })
     },
+    ADMIN_CHART : ({commit}) => {
+        get('api/chat/totalchatperagent')
+        .then(res => {
+            commit('setAdminChart', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    }
 }
 
 const mutations = {
@@ -117,6 +130,9 @@ const mutations = {
     },
     setTotalClose (state, payload) {
         state.total_close = payload
+    },
+    setAdminChart (state,payload) {
+        state.adminChart = payload
     }
 }
 
