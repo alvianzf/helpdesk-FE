@@ -77,18 +77,18 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['LIST_UNOPERATOR_BY_WEBSITE','GET_ACTIVE_LIST']),
+        ...mapActions(['GET_NEW_LIST_GLOBAL','GET_NEW_LIST_GROUP']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         }
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-            this.LIST_UNOPERATOR_BY_WEBSITE({
+            this.GET_NEW_LIST_GROUP({
                 website : localStorage.getItem('user_website')
             })
         } else {
-            this.GET_ACTIVE_LIST()
+            this.GET_NEW_LIST_GLOBAL()
         }
     },
 }

@@ -77,20 +77,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN','GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR']),
+        ...mapActions(['GET_CURRENT_LIST']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
     },
     mounted() {
-        if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-            this.GET_ACTIVE_LIST_BY_WESBITE_FOR_OPERATOR({
-                website : localStorage.getItem('user_website'),
-                operator : localStorage.getItem('user_id') 
-            })
-        } else {
-            this.GET_ACTIVE_LIST_BY_WESBITE_FOR_ADMIN()
-        }
+        this.GET_CURRENT_LIST({
+            website : localStorage.getItem('user_website'),
+            active_operator : localStorage.getItem('user_id') 
+        })
     },
 }
 </script>

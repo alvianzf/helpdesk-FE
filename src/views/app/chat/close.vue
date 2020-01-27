@@ -86,7 +86,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_RECENT_LIST_BY_WESBITE','GET_RECENT_LIST','DELETE_CHAT']),
+        ...mapActions(['GET_CLOSE_LIST_GLOBAL','GET_CLOSE_LIST_GROUP','DELETE_CHAT']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
@@ -103,8 +103,7 @@ export default {
                     if (result.value) {
                         this.DELETE_CHAT({ 
                             id : id,
-                            website : localStorage.getItem('user_website'),
-                            operator : localStorage.getItem('user_id')
+                            website : localStorage.getItem('user_website')
                         })
                         this.isLoad = true
                     }
@@ -113,12 +112,11 @@ export default {
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-            this.GET_RECENT_LIST_BY_WESBITE({
-                website : localStorage.getItem('user_website'),
-                operator : localStorage.getItem('user_id') 
+            this.GET_CLOSE_LIST_GROUP({
+                website : localStorage.getItem('user_website')
             })
         } else {
-            this.GET_RECENT_LIST()
+            this.GET_CLOSE_LIST_GLOBAL()
         }
     },
 }

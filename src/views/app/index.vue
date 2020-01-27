@@ -6,28 +6,6 @@
       <div class="container-fluid">
         <router-view/>
       </div>
-      <div class="notification-box" v-if="getNotifList.length > 0">
-        <div v-for="message in getNotifList" :key="message._id">
-          <div class="notification-child warning" v-if="message.active_operator == null">
-            <span class="badge">{{message.unreadtotal}}</span>
-            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
-                <span> {{ message.ticket_id }} </span>
-            </router-link>
-          </div>
-          <div class="notification-child info" v-if="message.active_operator && message.unreadtotal > 0">
-            <span class="badge">{{message.unreadtotal}}</span>
-            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
-                <span> {{ message.ticket_id }} </span>
-            </router-link>
-          </div>
-          <div class="notification-child success" v-if="message.active_operator && message.unreadtotal == 0">
-            <router-link :to="{ name : 'chat.detail', params : { id : message._id}}">
-                <span> {{ message.ticket_id }} </span>
-            </router-link>
-          </div>
-        </div>
-        
-      </div>
     </main>
   </div>
 </template>
@@ -55,16 +33,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMenuType','getNotifList'])
+    ...mapGetters(['getMenuType'])
   },
   methods: {
-    ...mapActions(['WAITING_NEW_CHAT_ON_ADMIN','WAITING_NEW_CHAT_ON_OPERATOR'])
+    
   },
   mounted() {
-    this.WAITING_NEW_CHAT_ON_OPERATOR( {
-      website : localStorage.getItem('user_website')
-    })
-    this.WAITING_NEW_CHAT_ON_ADMIN()
     this.$notification.requestPermission()
   },
 }
