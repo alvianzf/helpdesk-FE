@@ -16,6 +16,14 @@
                     </div>
                     <div class="separator mb-5"/>
                     <vue-perfect-scrollbar class="scroll" :settings="{ suppressScrollX: true, wheelPropagation: false }" ref="chatArea">
+                        <b-card no-body class="d-inline-block mb-3 float-left wd-100">
+                            <div class="position-absolute pt-1 pr-2 r-0">
+                                <span class="text-extra-small text-muted">{{ date(chat.createdAt) }}</span>
+                            </div>
+                            <b-card-body>
+                                <p class="text-center"> Guest Created Chat </p>
+                            </b-card-body>
+                        </b-card>
                         <div v-for="message in chat.message">
                             <b-card no-body class="d-inline-block mb-3 float-left wd-100" v-if="message.is_guest">
                                 <div class="position-absolute pt-1 pr-2 r-0">
@@ -29,6 +37,14 @@
                                         <p class="mb-0 text-semi-muted f-15 custom-text" v-if="!message.media">{{ message.message }}</p>
                                         <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                     </div>
+                                </b-card-body>
+                            </b-card>
+                            <b-card no-body class="d-inline-block mb-3 float-left wd-100" v-else-if="message.is_system">
+                                <div class="position-absolute pt-1 pr-2 r-0">
+                                    <span class="text-extra-small text-muted">{{ date(chat.createdAt) }}</span>
+                                </div>
+                                <b-card-body>
+                                    <p class="text-center"> {{ message.message }} </p>
                                 </b-card-body>
                             </b-card>
                             <b-card no-body class="d-inline-block mb-3 float-right wd-100" v-else>
@@ -90,7 +106,8 @@ export default {
     computed : mapGetters({
         chat : 'getChat',
         response : 'getResponse',
-        users : 'getUsers'
+        users : 'getUsers',
+        currentOperator : 'getCurrentOperator'
     }),
     watch: {
         response (set) {
@@ -121,7 +138,7 @@ export default {
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
-            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','USERS_BY_WEBSITE','TRANSFER_CHAT','SET_READ']),
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ']),
         sendMessage(e) {
             e.preventDefault();
             if(this.form.message) {
@@ -177,17 +194,23 @@ export default {
         this.FIND_CHAT_BY_ID({
             id : this.$route.params.id
         })
-        this.ASSIGN_OPERATOR({
-            id : this.$route.params.id,
-            operator : localStorage.getItem('user_id'),
-            website : localStorage.getItem('user_website')
-        })
-        this.USERS_BY_WEBSITE({
-            website : localStorage.getItem('user_website')
-        })
-        this.SET_READ({
-            id : this.$route.params.id
-        })
+        let that = this
+        setTimeout(async function(){ 
+            await localStorage.setItem('current_chat_web', that.chat.website)
+            await that.ASSIGN_OPERATOR({
+                id : that.$route.params.id,
+                operator : localStorage.getItem('user_id'),
+                website : localStorage.getItem('current_chat_web')
+            })
+            await that.GET_USER_AS_ROLE_AS_WEB({
+                role : "customer service",
+                website : localStorage.getItem('current_chat_web')
+            })
+            await that.SET_READ({
+                id : that.$route.params.id
+            })
+        }, 2000);
+        
     },
 }
 </script>
