@@ -20,9 +20,6 @@
                                 <router-link :to="{ name : 'chat.detail', params : { id : props.row.id}}" class="btn btn-info btn-icon">
                                     <i class="simple-icon-share-alt mg-r-0"></i>
                                 </router-link>
-                                <button v-if="role == 'administrator' || role == 'super admin'" type="button" class="btn btn-danger btn-icon delete" @click="destroy(props.row.id)">
-                                    <i class="simple-icon-trash mg-r-0"></i>
-                                </button>
                             </div>
                         </v-client-table>
                     </b-colxx>

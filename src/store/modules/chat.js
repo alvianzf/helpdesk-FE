@@ -1,4 +1,4 @@
-import { get, post, postImg } from '@/api'
+import { get, post, postImg, destroy } from '@/api'
 import router from '@/router'
 import io from 'socket.io-client';
 
@@ -181,6 +181,22 @@ const actions = {
         post('api/chat/setread', payload)
         .then(res => {
             console.log('readed!!')
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    DELETE_CHAT : ({commit}, payload) => {
+        destroy('api/chat/destroy', payload)
+        .then(res => {
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+            dispatch('GET_RECENT_LIST_BY_WESBITE', payload)
+            dispatch('GET_RECENT_LIST')
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,

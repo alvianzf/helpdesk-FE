@@ -86,9 +86,29 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_RECENT_LIST_BY_WESBITE','GET_RECENT_LIST']),
+        ...mapActions(['GET_RECENT_LIST_BY_WESBITE','GET_RECENT_LIST','DELETE_CHAT']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
+        },
+        destroy(id) {
+            this.$swal({
+                title : 'Are You Sure?',
+                text : "You won't able to revert this!",
+                type : "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.DELETE_CHAT({ 
+                            id : id,
+                            website : localStorage.getItem('user_website'),
+                            operator : localStorage.getItem('user_id')
+                        })
+                        this.isLoad = true
+                    }
+                })
         }
     },
     mounted() {
