@@ -13,7 +13,7 @@
                           <i class="iconsminds-support"></i>Live Chat
                         </a>
                     </li>
-                    <li :class="{ active : selectedParentMenu==='agent'}">
+                    <li :class="{ active : selectedParentMenu==='agent'}" v-if="role == 'super admin'|| role == 'administrator'">
                         <a @click.prevent="openSubMenu($event,'agent')" href="#agent">
                           <i class="iconsminds-conference"></i>Agent
                         </a>

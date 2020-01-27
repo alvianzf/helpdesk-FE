@@ -115,6 +115,11 @@
                                 {{ props.row.website.name }}
                             </div>
                             <div slot="action" slot-scope="props">
+
+                                <button type="button" class="btn btn-success btn-icon edit" @click="reset(props.row.id)" v-if="current_id != props.row.id">
+                                    <i class="simple-icon-refresh mg-r-0"></i>
+                                </button>
+
                                 <button type="button" class="btn btn-warning btn-icon edit" @click="edit(props.row.id)" v-if="current_id != props.row.id">
                                     <i class="simple-icon-pencil mg-r-0"></i>
                                 </button>
@@ -177,11 +182,31 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_USER_AS_ROLE','GET_USER','DELETE_USER','POST_USER','PUT_USER','GET_WEBSITES','GET_USER_AS_ROLE_AS_WEB']),
+        ...mapActions(['GET_USER_AS_ROLE','GET_USER','DELETE_USER','POST_USER','PUT_USER','GET_WEBSITES','GET_USER_AS_ROLE_AS_WEB','RESET_PASSWORD']),
         edit(id) {
             this.GET_USER({id : id})
             this.$bvModal.show('modaledit')
             this.method = 'update'
+        },
+        reset(id){
+            this.$swal({
+                title : 'Are You Sure To Reset This User Password?',
+                text : "You won't able to revert this!",
+                type : "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        this.RESET_PASSWORD({ 
+                            id : id,
+                            call_role : "administrator",
+                            call_website : localStorage.getItem('user_website') ? localStorage.getItem('user_website') : null
+                        })
+                        this.isLoad = true
+                    }
+                })
         },
         save(e) {
             this.isLoad = false
