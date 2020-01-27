@@ -18,10 +18,10 @@
                           <i class="iconsminds-conference"></i>Agent
                         </a>
                     </li>
-                    <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li" v-if="role == 'administrator'">
+                    <router-link :class="{ active : selectedParentMenu==='website' }" @click.native="changeSelectedParentHasNoSubmenu('website')" to="/app/website/list" tag="li" v-if="role == 'super admin'">
                       <a><i class="iconsminds-big-data"></i>  Website List</a>
                     </router-link>
-                    <li :class="{ active : selectedParentMenu==='setting'}" v-if="role == 'superadmin'">
+                    <li :class="{ active : selectedParentMenu==='setting'}" v-if="role == 'super admin'">
                         <a @click.prevent="openSubMenu($event,'setting')" href="#setting">
                           <i class="simple-icon-settings"></i>Setting
                         </a>
@@ -40,7 +40,7 @@
                 </ul>
 
                 <ul class="list-unstyled" data-link="agent" :class="{'d-block':selectedParentMenu==='agent' }">
-                    <router-link tag="li" v-if="role == 'superadmin'" to="/app/agent/super" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Super Admin</span></a></router-link>
+                    <router-link tag="li" v-if="role == 'super admin'" to="/app/agent/super" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Super Admin</span></a></router-link>
                     <router-link tag="li" to="/app/agent/admin" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Admin</span></a></router-link>
                     <router-link tag="li" to="/app/agent/operator" @click.native.prevent="changeDefaultMenuType('menu-sub-hidden')"><a><span>Operator</span></a></router-link>
                 </ul>
