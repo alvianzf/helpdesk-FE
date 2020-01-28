@@ -7,13 +7,17 @@ const socket = io(`${process.env.VUE_APP_SOCKET_URL}`)
 const state = {
     chat : {},
     chats : [],
-    current_operator : null
+    current_operator : null,
+    visitor_typing : false,
+    operator_typing : null
 }
 
 const getters = {
     getChat : (state) => state.chat,
     getChats : (state) => state.chats,
-    getCurrentOperator : (state) => state.current_operator
+    getCurrentOperator : (state) => state.current_operator,
+    getVisitorTyping : (state) => state.visitor_typing,
+    getOperatorTyping : (state) => state.operator_typing,
 }
 
 const mutations = {
@@ -25,6 +29,12 @@ const mutations = {
     },
     setCurrentOperator (state, payload) {
         state.current_operator = payload
+    },
+    setVisitorTyping (state, payload) {
+        state.visitor_typing = payload
+    },
+    setOperatorTyping (state, payload) {
+        state.operator_typing = payload
     }
 }
 
@@ -156,6 +166,18 @@ const actions = {
                 success : false,
                 message : error.response.data.message
             })
+        })
+    },
+    GET_VISITOR_TYPING : ({commit}) => {
+        socket.emit('visitor_typing')
+        socket.on('set_visitor_typing', res => {
+            commit('setVisitorTyping', res.data)
+        })
+    },
+    FETCH_OPERATOR_TYPING : ({commit}, payload) => {
+        socket.emit('operator_typing', payload)
+        socket.on('set_operator_typing', res => {
+            commit('setOperatorTyping', res.data)
         })
     },
     // GET_NEW_CHAT_ON_OPERATOR : ({commit}, payload) => {

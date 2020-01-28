@@ -63,12 +63,13 @@
                             </b-card>
                             <div class="clearfix"/>
                         </div>
+                        <p class="text-center" v-if="visitor_typing"> Visitor is typing.... </p>
                     </vue-perfect-scrollbar>
                 </div>
             </b-colxx>
         </b-row>
         <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open">
-            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage" />
+            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping"/>
             <div>
                 <b-button variant="outline-primary" class="icon-button large ml-1 pos-relative">
                     <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
@@ -107,7 +108,8 @@ export default {
         chat : 'getChat',
         response : 'getResponse',
         users : 'getUsers',
-        currentOperator : 'getCurrentOperator'
+        currentOperator : 'getCurrentOperator',
+        visitor_typing : 'getVisitorTyping'
     }),
     watch: {
         response (set) {
@@ -138,15 +140,26 @@ export default {
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
-            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ']),
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
+            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING']),
+        sendTyping(e) {
+            console.log(this.form.message)
+            if(this.form.message != "") {
+                this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
+            } else {
+                this.FETCH_OPERATOR_TYPING(null)
+            }
+        },
         sendMessage(e) {
             e.preventDefault();
+            
             if(this.form.message) {
                 this.SEND_MESSAGE({
                     message : this.form.message,
                     id : this.$route.params.id,
                     website : localStorage.getItem('website_id')
                 })
+                this.FETCH_OPERATOR_TYPING(null)
                 this.form.message = null
             }
         },
@@ -194,6 +207,7 @@ export default {
         this.FIND_CHAT_BY_ID({
             id : this.$route.params.id
         })
+        this.GET_VISITOR_TYPING()
         let that = this
         setTimeout(async function(){ 
             await localStorage.setItem('current_chat_web', that.chat.website)
