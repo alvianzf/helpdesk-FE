@@ -5,7 +5,24 @@
     <main>
       <div class="container-fluid">
         <router-view/>
+        
       </div>
+      <div class="notification-list">
+          <div class="new-list" v-for="notif in getNewNotif" :key="notif._id">
+            <router-link :to="{ name : 'chat.detail', params : { id : notif._id }}">
+              <span class="badge-number">{{ notif.unreadtotal }}</span>
+              <p>{{ notif.ticket_id }}</p>
+            </router-link>
+          </div>
+          <div v-for="notif in getCurrentNofif" :key="notif._id">
+            <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'" >
+              <div v-if="current_user == notif.active_operator">
+                <span class="badge-number" v-if="notif.unreadtotal > 0">{{ notif.unreadtotal }}</span>
+                <p>{{ notif.ticket_id }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
   </div>
 </template>
@@ -16,7 +33,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
-    return { show: false }
+    return { show: false, current_user : localStorage.getItem('user_id') }
   },
   components: {
     TopNav,
@@ -33,12 +50,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMenuType'])
+    ...mapGetters(['getMenuType','getNewNotif','getCurrentNofif'])
   },
   methods: {
-    
+    ...mapActions(['FETCH_NEW_NOTIF_GLOBAL','FETCH_NEW_NOTIF_GROUP','FETCH_CURRENT_NOTIF_GLOBAL'])
   },
   mounted() {
+    if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+      this.FETCH_NEW_NOTIF_GROUP({
+          website : localStorage.getItem('user_website')
+      })
+      this.FETCH_CURRENT_NOTIF_GROUP({
+        website : localStorage.getItem('user_website')
+      })
+    } else {
+      this.FETCH_NEW_NOTIF_GLOBAL()
+      this.FETCH_CURRENT_NOTIF_GLOBAL()
+    }
     this.$notification.requestPermission()
   },
 }

@@ -68,7 +68,7 @@
                 </div>
             </b-colxx>
         </b-row>
-        <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open">
+        <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open" style="{ margin-bottom: 35px; }">
             <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping"/>
             <div>
                 <b-button variant="outline-primary" class="icon-button large ml-1 pos-relative">

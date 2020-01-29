@@ -9,7 +9,9 @@ const state = {
     chats : [],
     current_operator : null,
     visitor_typing : false,
-    operator_typing : null
+    operator_typing : null,
+    newNotif : [],
+    currentNofif : []
 }
 
 const getters = {
@@ -18,6 +20,8 @@ const getters = {
     getCurrentOperator : (state) => state.current_operator,
     getVisitorTyping : (state) => state.visitor_typing,
     getOperatorTyping : (state) => state.operator_typing,
+    getNewNotif : (state) => state.newNotif,
+    getCurrentNofif : (state) => state.currentNofif,
 }
 
 const mutations = {
@@ -35,6 +39,12 @@ const mutations = {
     },
     setOperatorTyping (state, payload) {
         state.operator_typing = payload
+    },
+    setNewNotif (state, payload) {
+        state.newNotif = payload
+    },
+    setCurrentNotif (state, payload) {
+        state.currentNofif = payload
     }
 }
 
@@ -86,6 +96,10 @@ const actions = {
                         id : payload.id
                     })
                 }
+                socket.emit('new_notification_list_global')
+                socket.emit('new_notification_list_group')
+                socket.emit('current_notification_list_global')
+                socket.emit('current_notification_list_group', payload)
                 // console.log(res)
                 commit('setCurrentOperator', res.data)
             })
@@ -136,6 +150,10 @@ const actions = {
                 message : `chat ended by ${res.data.data.active_operator.name}`,
                 id : payload.id
             })
+            socket.emit('new_notification_list_global')
+            socket.emit('new_notification_list_group', payload)
+            socket.emit('current_notification_list_global')
+            socket.emit('current_notification_list_group', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
             commit('SET_RESPONSE', {
                 success : true,
@@ -180,32 +198,6 @@ const actions = {
             commit('setOperatorTyping', res.data)
         })
     },
-    // GET_NEW_CHAT_ON_OPERATOR : ({commit}, payload) => {
-    //     // console.log('new_chat_operator')
-    //     socket.emit('new_chat_for_operator', payload)
-    //     socket.on('list_new_chat_for_operator', res => {
-    //         commit('setChats', res.data)
-    //     })
-    // },
-    // GET_NEW_CHAT_ON_ADMIN : ({commit}) => {
-    //     // console.log('new_chat_admin')
-    //     socket.emit('new_chat_for_admin')
-    //     socket.on('list_new_chat_for_admin', res => {
-    //         commit('setChats', res.data)
-    //     })
-    // },
-    // WAITING_NEW_CHAT_ON_ADMIN : ({commit}) => {
-    //     socket.emit('waiting_new_chat_on_admin')
-    //     socket.on('list_chat_on_admin', res => {
-    //         commit('setNotifList', res.data)
-    //     })
-    // },
-    // WAITING_NEW_CHAT_ON_OPERATOR : ({commit}, payload) => {
-    //     socket.emit('waiting_new_chat_on_operator', payload)
-    //     socket.on('list_chat_on_operator', res => {
-    //         commit('setNotifList', res.data)
-    //     })
-    // },
     SET_READ : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
@@ -235,24 +227,30 @@ const actions = {
             })
         })
     },
-    // GET_NEW_LIST_GLOBAL : ({commit}, payload) => {
-    //     socket.emit('new_channel_created', {
-    //         website : null
-    //     })
-    //     socket.on('list_new_chat_global', res => {
-    //         commit('setNotifList', res.data)
-    //         commit('setChats', res.data)
-    //     })
-    // },
-    // GET_NEW_LIST_GROUP : ({commit}, payload) => {
-    //     socket.emit('new_channel_created', {
-    //         website : payload.website
-    //     })
-    //     socket.on('list_new_chat_group', res => {
-    //         commit('setNotifList', res.data)
-    //         commit('setChats', res.data)
-    //     })
-    // }
+    FETCH_NEW_NOTIF_GLOBAL : ({commit}) => {
+        socket.emit('new_notification_list_global')
+        socket.on('get_new_notification_list_global', res => {
+            commit('setNewNotif', res.data)
+        })
+    },
+    FETCH_NEW_NOTIF_GROUP : ({commit}, payload) => {
+        socket.emit('new_notification_list_group', payload)
+        socket.on('get_new_notification_list_group', res => {
+            commit('setNewNotif', res.data)
+        })
+    },
+    FETCH_CURRENT_NOTIF_GLOBAL : ({commit}) => {
+        socket.emit('current_notification_list_global')
+        socket.on('get_current_notification_list_global', res => {
+            commit('setCurrentNotif', res.data)
+        })
+    },
+    FETCH_CURRENT_NOTIF_GROUP : ({commit}, payload) => {
+        socket.emit('current_notification_list_group', payload)
+        socket.on('get_current_notification_list_group', res => {
+            commit('setCurrentNotif', res.data)
+        })
+    }
 }
 
 export default {
