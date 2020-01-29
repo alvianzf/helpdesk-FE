@@ -47,11 +47,13 @@ export default {
     data() {
         return {
             isLoad : true,
-            columns: ['ticket_id', 'time', 'taken_by','action'],
+            columns: ['ticket_id', 'taken_by', 'time','action'],
             rows: [],
             options: {
                 headings: {
-                    ticket_id: 'Number'
+                    ticket_id: 'Name',
+                    taken_by : 'Agent',
+                    time : 'Time'
                 },
                 sortable: ['ticket_id'],
                 filterable: ['ticket_id']
