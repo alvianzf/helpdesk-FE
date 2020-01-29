@@ -177,6 +177,10 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
+            socket.emit('new_notification_list_global')
+            socket.emit('new_notification_list_group', { website : res.data.data.website})
+            socket.emit('current_notification_list_global')
+            socket.emit('current_notification_list_group', { website : res.data.data.website})
             router.push('/app/chat/open')
         }).catch(error => {
             console.log(error)
@@ -202,6 +206,8 @@ const actions = {
         post('api/chat/setread', payload)
         .then(res => {
             console.log('readed!!')
+            socket.emit('current_notification_list_group', payload)
+            socket.emit('new_notification_list_global')
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,

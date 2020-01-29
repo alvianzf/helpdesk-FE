@@ -221,7 +221,8 @@ export default {
                 website : localStorage.getItem('current_chat_web')
             })
             await that.SET_READ({
-                id : that.$route.params.id
+                id : that.$route.params.id,
+                website : localStorage.getItem('current_chat_web')
             })
         }, 2000);
         

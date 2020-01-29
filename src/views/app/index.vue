@@ -14,12 +14,12 @@
               <p>{{ notif.ticket_id }}</p>
             </router-link>
           </div>
-          <div v-for="notif in getCurrentNofif" :key="notif._id">
-            <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'" >
-              <div v-if="current_user == notif.active_operator">
+          <div v-for="notif in getCurrentNofif" :key="notif._id" :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'" >
+            <div v-if="current_user == notif.active_operator">
+              <router-link :to="{ name : 'chat.detail', params : { id : notif._id }}">
                 <span class="badge-number" v-if="notif.unreadtotal > 0">{{ notif.unreadtotal }}</span>
                 <p>{{ notif.ticket_id }}</p>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>
