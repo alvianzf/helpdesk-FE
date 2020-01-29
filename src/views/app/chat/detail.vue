@@ -69,7 +69,7 @@
             </b-colxx>
         </b-row>
         <div class="chat-input-container d-flex justify-content-between align-items-center" v-if="chat.is_open" style="{ margin-bottom: 35px; }">
-            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping"/>
+            <b-input class="flex-grow-1" type="text" :placeholder="'Say Something...'" v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping" @click="setRead"/>
             <div>
                 <b-button variant="outline-primary" class="icon-button large ml-1 pos-relative">
                     <input type="file" class="file-pick" accept="image/jpeg,image/png" @change="sendImage"/>
@@ -191,6 +191,12 @@ export default {
             })
             
         },
+        setRead(e) {
+            this.SET_READ({
+                id : this.$route.params.id,
+                website : localStorage.getItem('current_chat_web')
+            })
+        },
         transferChat(e) {
             e.preventDefault()
             this.$validator.validate().then(valid => {
@@ -218,10 +224,6 @@ export default {
             })
             await that.GET_USER_AS_ROLE_AS_WEB({
                 role : "customer service",
-                website : localStorage.getItem('current_chat_web')
-            })
-            await that.SET_READ({
-                id : that.$route.params.id,
                 website : localStorage.getItem('current_chat_web')
             })
         }, 2000);
