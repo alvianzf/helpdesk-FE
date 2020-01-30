@@ -158,7 +158,7 @@ export default {
         scrollToEnd(e) {
             const container = this.$el.querySelector('.ps-container');
             console.log(container)
-            container.scrollTop = 999999999999;
+            // container.scrollTop = 999999999999;
         },
         sendMessage(e) {
             e.preventDefault();
