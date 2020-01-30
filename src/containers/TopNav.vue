@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     ...mapMutations(['changeSideMenuStatus', 'changeSideMenuForMobile']),
-    ...mapActions(['setLang', 'signOut','CURRENT_USER']),
+    ...mapActions(['setLang', 'signOut','CURRENT_USER','LOGOUT']),
     search () {
       this.$router.push(`${this.searchPath}?search=${this.searchKeyword}`)
       this.searchKeyword = ''
@@ -118,8 +118,12 @@ export default {
       this.setLang(locale)
     },
     logout () {
-      localStorage.clear()
-      this.$router.push('/user/login')
+      this.LOGOUT({
+        token : localStorage.getItem('token')
+      }).then(() => {
+        localStorage.clear()
+        this.$router.push('/user/login')
+      })
     },
 
     toggleFullScreen () {
@@ -169,7 +173,7 @@ export default {
     ...mapGetters({
       menuType: 'getMenuType',
       menuClickCount: 'getMenuClickCount',
-      user : 'getLoginend'
+      user : 'getUser'
     })
   },
   mounted() {

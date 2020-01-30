@@ -86,7 +86,14 @@
                     <label>Transfer Chat To</label>
                     <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
                         <option selected="selected" value="">Choose CSO</option>
-                        <option v-for="user in users.filter( (v) => v._id != active_user )" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
+                        <option v-for="user in users.filter( (v) =>{
+                            if( v._id != active_user) {
+                                return false
+                            }
+                            if( v.is_online != true){
+                                return false
+                            }
+                        })" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
                     </select>
                     <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
                 </div>
