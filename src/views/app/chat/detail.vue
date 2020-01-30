@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-row class="app-row">
+        <b-row class="app-row" v-if="isLoad"> 
             <b-colxx xxs="12" class="chat-app">
                 <div>
                     <div class="d-flex flex-row chat-heading">
@@ -81,16 +81,18 @@
             </div>
         </div>
         <application-menu>
-            <div class="form-group">
-                <label>Transfer Chat To</label>
-                <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
-                    <option selected="selected" value="">Choose CSO</option>
-                    <option v-for="user in users.filter( (v) => v._id != active_user )" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
-                </select>
-                <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
+            <div v-if="chat.is_open">
+                <div class="form-group">
+                    <label>Transfer Chat To</label>
+                    <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
+                        <option selected="selected" value="">Choose CSO</option>
+                        <option v-for="user in users.filter( (v) => v._id != active_user )" v-bind:key="user.index" v-bind:value="user._id">{{ user.name }}</option>
+                    </select>
+                    <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
+                </div>
+                <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
+                <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
             </div>
-            <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
-            <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
         </application-menu>
     </div>
 </template>
@@ -98,6 +100,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import ApplicationMenu from '@/components/Common/ApplicationMenu'
 import moment from 'moment'
+import $ from 'jquery'
 
 export default {
     name : 'detail',
@@ -125,6 +128,7 @@ export default {
                 this.$notification.show(set.ticket_id, {
                     body: 'Have new reply'
                 }, {})
+                this.isLoad = true
             }
         }
     },
@@ -135,7 +139,8 @@ export default {
             transfer : {
                 operator : ""
             },
-            active_user : localStorage.getItem('user_id')
+            active_user : localStorage.getItem('user_id'),
+            isLoad : false,
         }
     },
     methods: {
@@ -150,6 +155,11 @@ export default {
                 this.FETCH_OPERATOR_TYPING(null)
             }
         },
+        scrollToEnd(e) {
+            const container = this.$el.querySelector('.ps-container');
+            console.log(container)
+            container.scrollTop = 999999999999;
+        },
         sendMessage(e) {
             e.preventDefault();
             
@@ -161,6 +171,11 @@ export default {
                 })
                 this.FETCH_OPERATOR_TYPING(null)
                 this.form.message = null
+                this.SET_READ({
+                    id : this.$route.params.id,
+                    website : localStorage.getItem('current_chat_web')
+                })
+                this.scrollToEnd()
             }
         },
         date: function (date) {
@@ -173,6 +188,11 @@ export default {
                 id : this.$route.params.id
             }
             this.SEND_MESSAGE_IMAGE(form)
+            this.SET_READ({
+                id : this.$route.params.id,
+                website : localStorage.getItem('current_chat_web')
+            })
+            this.scrollToEnd()
         },
         endChat(e) {
             this.$swal({
@@ -187,6 +207,7 @@ export default {
                     this.CLOSE_CHAT({
                         id : this.$route.params.id
                     })
+                    this.scrollToEnd()
                 }
             })
             
@@ -212,21 +233,28 @@ export default {
     mounted() {
         this.FIND_CHAT_BY_ID({
             id : this.$route.params.id
-        })
+        }).then(() => this.isLoad = true)
         this.GET_VISITOR_TYPING()
+        this.scrollToEnd()
         let that = this
         setTimeout(async function(){ 
             await localStorage.setItem('current_chat_web', that.chat.website)
-            await that.ASSIGN_OPERATOR({
-                id : that.$route.params.id,
-                operator : localStorage.getItem('user_id'),
-                website : localStorage.getItem('current_chat_web')
-            })
+            if(!that.chat.active_operator) {
+                await that.ASSIGN_OPERATOR({
+                    id : that.$route.params.id,
+                    operator : localStorage.getItem('user_id'),
+                    website : localStorage.getItem('current_chat_web')
+                })
+            }
             await that.GET_USER_AS_ROLE_AS_WEB({
                 role : "customer service",
                 website : localStorage.getItem('current_chat_web')
             })
-        }, 2000);
+            await that.SET_READ({
+                id : that.$route.params.id,
+                website : localStorage.getItem('current_chat_web')
+            })
+        }, 1000);
         
     },
 }
