@@ -132,9 +132,11 @@ export default {
         },
         chat(set) {
             if(set) {
-                this.$notification.show(set.ticket_id, {
-                    body: 'Have new reply'
-                }, {})
+                if(set.message.filter(v => v._is_read == false).length > 0) {
+                    this.$notification.show(set.ticket_id, {
+                        body: 'Have new reply'
+                    }, {})
+                }
                 this.isLoad = true
             }
         }
