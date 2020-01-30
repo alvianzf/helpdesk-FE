@@ -255,11 +255,14 @@ export default {
                     website : localStorage.getItem('current_chat_web')
                 })
             }
-            await that.GET_USER_AS_ROLE_AS_WEB({
+        }, 500);
+
+        setTimeout(function(){ 
+            that.GET_USER_AS_ROLE_AS_WEB({
                 role : "customer service",
                 website : localStorage.getItem('current_chat_web')
             })
-            await that.SET_READ({
+            that.SET_READ({
                 id : that.$route.params.id,
                 website : localStorage.getItem('current_chat_web')
             })
