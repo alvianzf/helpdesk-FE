@@ -165,9 +165,9 @@ export default {
             }
         },
         scrollToEnd(e) {
-            const container = this.$el.querySelector('.ps-container');
-            console.log(container)
-            // container.scrollTop = 999999999999;
+            $('.ps-container').animate({
+				scrollTop: 999999999999999999
+			}, 'slow');
         },
         sendMessage(e) {
             e.preventDefault();
@@ -244,8 +244,10 @@ export default {
             id : this.$route.params.id
         }).then(() => this.isLoad = true)
         this.GET_VISITOR_TYPING()
-        this.scrollToEnd()
         let that = this
+        setTimeout(async function(){ 
+            that.scrollToEnd()
+        }, 1500);
         setTimeout(async function(){ 
             await localStorage.setItem('current_chat_web', that.chat.website)
             if(!that.chat.active_operator) {
