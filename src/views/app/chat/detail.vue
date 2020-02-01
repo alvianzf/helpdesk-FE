@@ -157,7 +157,6 @@ export default {
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
             'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING']),
         sendTyping(e) {
-            console.log(this.form.message)
             if(this.form.message != "") {
                 this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
             } else {
@@ -226,6 +225,7 @@ export default {
                 id : this.$route.params.id,
                 website : localStorage.getItem('current_chat_web')
             })
+            this.scrollToEnd()
         },
         transferChat(e) {
             e.preventDefault()
@@ -237,6 +237,7 @@ export default {
                     })
                 }
             })
+            this.scrollToEnd()
         }
     },
     mounted() {
