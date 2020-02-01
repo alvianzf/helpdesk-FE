@@ -164,6 +164,7 @@ export default {
             }
         },
         scrollToEnd(e) {
+            console.log('scrolled')
             $('.ps-container').animate({
 				scrollTop: 999999999999999999
 			}, 'slow');
