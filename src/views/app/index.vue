@@ -53,7 +53,7 @@ export default {
     ...mapGetters(['getMenuType','getNewNotif','getCurrentNofif'])
   },
   methods: {
-    ...mapActions(['FETCH_NEW_NOTIF_GLOBAL','FETCH_NEW_NOTIF_GROUP','FETCH_CURRENT_NOTIF_GLOBAL'])
+    ...mapActions(['FETCH_NEW_NOTIF_GLOBAL','FETCH_NEW_NOTIF_GROUP','FETCH_CURRENT_NOTIF_GLOBAL','FETCH_CURRENT_NOTIF_GROUP'])
   },
   mounted() {
     if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
