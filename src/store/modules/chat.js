@@ -11,7 +11,8 @@ const state = {
     visitor_typing : false,
     operator_typing : null,
     newNotif : [],
-    currentNofif : []
+    currentNofif : [],
+    notif : []
 }
 
 const getters = {
@@ -22,6 +23,7 @@ const getters = {
     getOperatorTyping : (state) => state.operator_typing,
     getNewNotif : (state) => state.newNotif,
     getCurrentNofif : (state) => state.currentNofif,
+    getNotif : (state) => state.notif
 }
 
 const mutations = {
@@ -45,10 +47,25 @@ const mutations = {
     },
     setCurrentNotif (state, payload) {
         state.currentNofif = payload
+    },
+    setNotif (state, payload) {
+        state.notif = payload
     }
 }
 
 const actions = {
+    GET_NOTIFICATION : ({commit}) => {
+        socket.emit('notification_list_global')
+        socket.on('get_notification_list_global', res => {
+            commit('setNotif', res.data)
+        })
+    },
+    GET_NOTIFICATION_GROUP : ({commit}, payload) => {
+        socket.emit('notification_list_group', payload)
+        socket.on('get_notification_list_group', res => {
+            commit('setNotif', res.data)
+        })
+    },
     GET_NEW_LIST_GLOBAL : ({commit}) => {
         socket.emit('new_list_global')
         socket.on('get_new_list_global', res => {
@@ -96,10 +113,8 @@ const actions = {
                         id : payload.id
                     })
                 }
-                socket.emit('new_notification_list_global')
-                socket.emit('new_notification_list_group')
-                socket.emit('current_notification_list_global')
-                socket.emit('current_notification_list_group', payload)
+                socket.emit('notification_list_global')
+                socket.emit('notification_list_group', payload)
                 // console.log(res)
                 commit('setCurrentOperator', res.data)
             })
@@ -150,10 +165,8 @@ const actions = {
                 message : `chat ended by ${res.data.data.active_operator.name}`,
                 id : payload.id
             })
-            socket.emit('new_notification_list_global')
-            socket.emit('new_notification_list_group', payload)
-            socket.emit('current_notification_list_global')
-            socket.emit('current_notification_list_group', payload)
+            socket.emit('notification_list_global')
+            socket.emit('notification_list_group', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
             commit('SET_RESPONSE', {
                 success : true,
@@ -177,10 +190,9 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
-            socket.emit('new_notification_list_global')
-            socket.emit('new_notification_list_group', { website : res.data.data.website})
-            socket.emit('current_notification_list_global')
-            socket.emit('current_notification_list_group', { website : res.data.data.website})
+            socket.emit('notification_list_global')
+            socket.emit('notification_list_group', { website : res.data.data.website})
+
             router.push('/app/chat/open')
         }).catch(error => {
             console.log(error)
@@ -205,11 +217,8 @@ const actions = {
     SET_READ : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
-            console.log('readed!!')
-            socket.emit('new_notification_list_group', payload)
-            socket.emit('current_notification_list_group', payload)
-            socket.emit('new_notification_list_global')
-            socket.emit('current_notification_list_global')
+            socket.emit('notification_list_global')
+            socket.emit('notification_list_group', { website : res.data.data.website})
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,

@@ -8223,7 +8223,7 @@ input:-webkit-autofill {
 
 .notification-list {
   position: fixed;
-  left: 0;
+  left: 112px;
   bottom: 0;
   z-index: 9;
   width: 100%;
@@ -8241,6 +8241,7 @@ input:-webkit-autofill {
   font-size: 10px;
   position: relative;
   margin-right:5px;
+  cursor: pointer;
   p {
     font-size: 10px;
     margin-bottom: 0;
@@ -8262,6 +8263,7 @@ input:-webkit-autofill {
   position: relative;
   display: inline-block;
   margin-right:5px;
+  cursor: pointer;
   p {
     font-size: 10px;
     margin-bottom: 0;
@@ -8278,6 +8280,7 @@ input:-webkit-autofill {
 
 .no-unread {
   background-color: #5cb85c;
+  cursor: pointer;
 }
 
 .badge-number {
@@ -8291,4 +8294,20 @@ input:-webkit-autofill {
 .VueTables__table tbody tr td {
   border: 1px solid #d7d7d7;
   padding: 3px 5px;
+}
+
+.notification-button {
+  background: #f18025;
+  position: fixed;
+  bottom: 5px;
+  left: 0;
+  z-index: 99;
+  padding: 6px 20px;
+  border-radius: 10px;
+  color: #fff;
+
+  cursor: pointer;
+  a {
+    color: #fff;
+  }
 }

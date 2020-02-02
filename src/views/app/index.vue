@@ -5,24 +5,22 @@
     <main>
       <div class="container-fluid">
         <router-view :key="$route.fullPath"/>
-        
       </div>
-      <div class="notification-list">
-          <div class="new-list" v-for="notif in getNewNotif" :key="notif._id">
-            <router-link :to="{ name : 'chat.detail', params : { id : notif._id }}">
-              <span class="badge-number">{{ notif.unreadtotal }}</span>
-              <p>{{ notif.ticket_id }}</p>
-            </router-link>
+      <div class="notification-button" @click="setClicked">
+        <span> {{ getNotif.length }} Requests </span>
+      </div>
+      <div class="notification-list" v-if="clicked">
+        <span v-for="notif in getNotif" :key="notif._id">
+          <div class="new-list" v-if="notif.active_operator == null" @click="goToChat(notif._id)">
+            <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <p>{{ notif.ticket_id }}</p>
           </div>
-          <div v-for="notif in getCurrentNofif" :key="notif._id" :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'" >
-            <div v-if="current_user == notif.active_operator">
-              <router-link :to="{ name : 'chat.detail', params : { id : notif._id }}">
-                <span class="badge-number" v-if="notif.unreadtotal > 0">{{ notif.unreadtotal }}</span>
-                <p>{{ notif.ticket_id }}</p>
-              </router-link>
-            </div>
+          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else @click="goToChat(notif._id)">
+            <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <p>{{ notif.ticket_id }}</p>
           </div>
-        </div>
+        </span>
+      </div>
     </main>
   </div>
 </template>
@@ -33,7 +31,11 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
-    return { show: false, current_user : localStorage.getItem('user_id') }
+    return { 
+      show: false, 
+      current_user : localStorage.getItem('user_id'),
+      clicked : false
+    }
   },
   components: {
     TopNav,
@@ -50,22 +52,25 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMenuType','getNewNotif','getCurrentNofif'])
+    ...mapGetters(['getMenuType','getNotif'])
   },
   methods: {
-    ...mapActions(['FETCH_NEW_NOTIF_GLOBAL','FETCH_NEW_NOTIF_GROUP','FETCH_CURRENT_NOTIF_GLOBAL','FETCH_CURRENT_NOTIF_GROUP'])
+    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP']),
+    setClicked(e) {
+      this.clicked = !this.clicked
+    },
+    goToChat(id) {
+      this.clicked = !this.clicked
+      this.$router.push({ name : 'chat.detail', params : { id : id }})
+    }
   },
   mounted() {
     if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-      this.FETCH_NEW_NOTIF_GROUP({
+      this.GET_NOTIFICATION_GROUP({
           website : localStorage.getItem('user_website')
       })
-      this.FETCH_CURRENT_NOTIF_GROUP({
-        website : localStorage.getItem('user_website')
-      })
     } else {
-      this.FETCH_NEW_NOTIF_GLOBAL()
-      this.FETCH_CURRENT_NOTIF_GLOBAL()
+      this.GET_NOTIFICATION()
     }
     this.$notification.requestPermission()
   },
