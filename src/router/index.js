@@ -16,6 +16,9 @@ const Super = () => import('@/views/agent/Super')
 const Admin = () => import('@/views/agent/Admin')
 const Operator = () => import('@/views/agent/Operator')
 
+// Views - Website
+const Website = () => import('@/views/Website')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -53,6 +56,19 @@ function configRoutes() {
           path : '/agent/operator',
           name : 'Operator',
           component: Operator
+        }
+      ]
+    },
+    {
+      path : '/website',
+      redirect : '/website',
+      name : 'Website',
+      component: DefaultContainer,
+      children: [
+        {
+          path : '/website',
+          name : 'Website List',
+          component: Website
         }
       ]
     },

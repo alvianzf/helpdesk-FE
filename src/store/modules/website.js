@@ -12,10 +12,13 @@ const getters = {
 
 const actions = {
     GET_WEBSITES : ({commit}) => {
+        commit('SET_LOADING', true)
         get('api/website/list')
         .then(res => {
+            commit('SET_LOADING', false)
             commit('setWebsites', res.data.data)
         }).catch(error => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message

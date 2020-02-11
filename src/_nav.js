@@ -39,5 +39,13 @@ export default {
         }
       ]
     },
+    {
+      name: 'Website',
+      url: '/website',
+      icon: 'fa fa-globe',
+      badge: {
+        variant: 'primary'
+      }
+    },
   ]
 }
