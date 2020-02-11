@@ -1,5 +1,6 @@
 <template>
   <div class="app flex-row align-items-center">
+    <Loading :loading="loading" />
     <div class="container">
       <b-row class="justify-content-center">
         <b-col md="5">
@@ -34,6 +35,7 @@
 
 <script>
 import { mapActions,mapGetters } from 'vuex'
+import Loading from '../misc/Loading'
 
 export default {
   name: 'Login',
@@ -43,8 +45,12 @@ export default {
       processing : false
     }
   },
+  components : {
+    Loading
+  },
   computed : mapGetters({
-    response : 'getResponse'
+    response : 'getResponse',
+    loading : 'getLoading'
   }),
   watch: {
     response (set) {

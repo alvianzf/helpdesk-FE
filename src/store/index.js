@@ -12,13 +12,16 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    response : {}
+    response : {},
+    loading : false
   },
   getters: {
-    getResponse : (state) => state.response
+    getResponse : (state) => state.response,
+    getLoading : (state) => state.loading
   },
   mutations: {
     SET_RESPONSE : (state,payload) => state.response = payload,
+    SET_LOADING : (state, payload) => state.loading = payload
   },
   modules: {
     user,

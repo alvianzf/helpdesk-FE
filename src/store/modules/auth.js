@@ -13,6 +13,7 @@ const getters = {
 
 const actions = {
     POST_LOGIN : ({commit}, payload) => {
+        commit('SET_LOADING', true)
         post('api/auth/login', payload)
         .then(res => {
             commit('setLogined', res.data.data)
@@ -26,11 +27,13 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
+            commit('SET_LOADING', false)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         })
     },
     CHECK_TOKEN : ({commit}, payload) => {

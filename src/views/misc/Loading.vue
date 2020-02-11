@@ -9,6 +9,7 @@
 import loading from 'vue-full-loading'
 
 export default {
+    name : 'Loading',
     components: {
         loading
     },
