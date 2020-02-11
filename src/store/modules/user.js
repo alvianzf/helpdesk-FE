@@ -12,33 +12,42 @@ const getters = {
 
 const actions = {
     GET_USER_AS_ROLE : ({commit}, payload) => {
+        commit('SET_LOADING', true)
         post('api/auth/list/asrole', payload)
         .then(res => {
             commit('setUsers', res.data.data)
+            commit('SET_LOADING', false)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         })
     },
     GET_USER_AS_ROLE_AS_WEB : ({commit}, payload) => {
+        commit('SET_LOADING', true)
         post('api/auth/list/asroleasweb', payload)
         .then(res => {
             commit('setUsers', res.data.data)
+            commit('SET_LOADING', false)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         }) 
     },
     GET_USER : ({commit}, payload) => {
+        commit('SET_LOADING', true)
         post('api/auth/find', payload)
         .then((res) => {
             commit('setUser', res.data.data)
+            commit('SET_LOADING', false)
         })
         .catch((error) => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
@@ -46,12 +55,14 @@ const actions = {
         })
     },
     POST_USER : ({ commit, dispatch }, payload) => {
+        commit('SET_LOADING', true)
         post('api/auth/register', payload)
         .then((res) => {
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
             })
+            commit('SET_LOADING', false)
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
@@ -63,6 +74,7 @@ const actions = {
             }
         })
         .catch((error) => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
@@ -70,12 +82,14 @@ const actions = {
         })
     },
     PUT_USER : ({ commit, dispatch }, payload) => {
+        commit('SET_LOADING', true)
         put('api/auth/update', payload)
         .then((res) => {
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
             })
+            commit('SET_LOADING', false)
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
@@ -91,15 +105,18 @@ const actions = {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         })
     },
     DELETE_USER : ({ commit, dispatch}, payload) => {
+        commit('SET_LOADING', true)
         destroy('api/auth/delete', payload)
         .then((res) => {
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
             })
+            commit('SET_LOADING', false)
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
@@ -111,6 +128,7 @@ const actions = {
             }
         })
         .catch((error) => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
@@ -142,8 +160,10 @@ const actions = {
         })
     },
     CHANGE_ACCOUNT : ({ commit, dispatch }, payload) => {
+        commit('SET_LOADING', true)
         put('api/auth/update/edit', payload)
         .then((res) => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
@@ -151,6 +171,7 @@ const actions = {
             dispatch('GET_USERS')
         })
         .catch((error) => {
+            commit('SET_LOADING', false)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message

@@ -1,6 +1,6 @@
 <template>
-  <div class="animated fadeIn">
-
+  <div>
+    asdas
   </div>
 </template>
 

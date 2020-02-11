@@ -11,6 +11,9 @@ const Dashboard = () => import('@/views/Dashboard')
 const Page404 = () => import('@/views/misc/Page404')
 const Login = () => import('@/views/auth/Login')
 
+// Views - Agent
+const Super = () => import('@/views/agent/Super')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -18,13 +21,26 @@ function configRoutes() {
     {
       path: '/',
       redirect: '/dashboard',
-      name: 'Home',
+      name: 'Dashboard',
       component: DefaultContainer,
       children: [
         {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+      ]
+    },
+    {
+      path : '/agent',
+      redirect : '/agent/super-admin',
+      name : 'Agent',
+      component: DefaultContainer,
+      children: [
+        {
+          path : '/agent/super-admin',
+          name : 'Super Admin',
+          component: Super
         }
       ]
     },
