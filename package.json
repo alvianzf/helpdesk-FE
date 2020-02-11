@@ -21,15 +21,18 @@
     "@coreui/coreui": "^2.1.12",
     "@coreui/icons": "0.3.0",
     "@coreui/vue": "^2.1.2",
+    "axios": "^0.19.2",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.1.0",
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
     "perfect-scrollbar": "^1.4.0",
     "simple-line-icons": "^2.4.1",
+    "socket.io-client": "^2.3.0",
     "vue": "^2.6.10",
     "vue-perfect-scrollbar": "^0.1.0",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@vue/cli-service": "^4.1.0",
