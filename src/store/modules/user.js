@@ -66,7 +66,7 @@ const actions = {
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
-            if(payload.call_website) {
+            if(payload.call_website != null && payload.call_website != "null") {
                 dispatch('GET_USER_AS_ROLE_AS_WEB', {
                     role : payload.call_role,
                     website : payload.call_website
@@ -93,7 +93,7 @@ const actions = {
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
-            if(payload.call_website) {
+            if(payload.call_website != null && payload.call_website != "null") {
                 dispatch('GET_USER_AS_ROLE_AS_WEB', {
                     role : payload.call_role,
                     website : payload.call_website
@@ -120,7 +120,7 @@ const actions = {
             dispatch('GET_USER_AS_ROLE', {
                 role : payload.call_role
             })
-            if(payload.call_website) {
+            if(payload.call_website != null && payload.call_website != "null") {
                 dispatch('GET_USER_AS_ROLE_AS_WEB', {
                     role : payload.call_role,
                     website : payload.call_website
