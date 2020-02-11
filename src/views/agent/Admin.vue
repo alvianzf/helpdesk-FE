@@ -12,7 +12,7 @@
                     >Add New Admin</b-button>
                     <b-table responsive="sm" :items="users" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true">
                         <template v-slot:cell(website)="data">
-                            {{ data.item.website.name }}
+                            {{ data.item.website ? data.item.website.name : null }}
                         </template>
                         <template v-slot:cell(action)="data">
                             <b-button-group v-if="data.item._id != current_id">
