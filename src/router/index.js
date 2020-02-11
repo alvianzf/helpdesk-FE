@@ -14,6 +14,7 @@ const Login = () => import('@/views/auth/Login')
 // Views - Agent
 const Super = () => import('@/views/agent/Super')
 const Admin = () => import('@/views/agent/Admin')
+const Operator = () => import('@/views/agent/Operator')
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ function configRoutes() {
           path : '/agent/admin',
           name : 'Admin',
           component: Admin
+        },
+        {
+          path : '/agent/operator',
+          name : 'Operator',
+          component: Operator
         }
       ]
     },
