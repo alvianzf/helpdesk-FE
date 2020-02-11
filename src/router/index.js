@@ -23,6 +23,7 @@ const Website = () => import('@/views/Website')
 const List = () => import('@/views/widget/List')
 const Edit = () => import('@/views/widget/Edit')
 const Splash = () => import('@/views/widget/Splash')
+const Trigger = () => import('@/views/widget/Trigger')
 
 Vue.use(Router)
 
@@ -97,6 +98,11 @@ function configRoutes() {
           path : '/widget/splash/:id',
           name : 'Widget Splash',
           component: Splash
+        },
+        {
+          path : '/widget/trigger/:id',
+          name : 'Widget Trigger',
+          component : Trigger
         }
       ]
     },

@@ -85,7 +85,7 @@ export default {
             this.$router.push({ name : 'Widget Edit', params : { id : id}})
         },
         manageWelcome(id) {
-            this.$router.push({ name : 'Widget Splash', params : { id : id}})
+            this.$router.push({ name : 'Widget Trigger', params : { id : id}})
         },
         manageSplash(id) {
             this.$router.push({ name : 'Widget Splash', params : { id : id}})
