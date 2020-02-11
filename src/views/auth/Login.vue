@@ -6,20 +6,20 @@
           <b-card-group>
             <b-card no-body class="p-4">
               <b-card-body>
-                <b-form>
+                <b-form @submit.prevent="login">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="text" class="form-control" placeholder="Username" autocomplete="username email" />
+                    <b-form-input type="text" class="form-control" placeholder="Username" autocomplete="username email" v-model="form.username"/>
                   </b-input-group>
                   <b-input-group class="mb-4">
                     <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                    <b-form-input type="password" class="form-control" placeholder="Password" autocomplete="current-password" />
+                    <b-form-input type="password" class="form-control" placeholder="Password" autocomplete="current-password" v-model="form.password"/>
                   </b-input-group>
                   <b-row>
                     <b-col cols="6">
-                      <b-button variant="primary" class="px-4">Login</b-button>
+                      <b-button type="submit" variant="primary" class="px-4">Login</b-button>
                     </b-col>
                   </b-row>
                 </b-form>
@@ -33,14 +33,53 @@
 </template>
 
 <script>
+import { mapActions,mapGetters } from 'vuex'
+
 export default {
   name: 'Login',
-  mounted() {
-    this.$toast.open({
-      message : 'testing',
-      type : 'success',
-      position : 'top-right'
-    })
+  data() {
+    return {
+      form : {},
+      processing : false
+    }
+  },
+  computed : mapGetters({
+    response : 'getResponse'
+  }),
+  watch: {
+    response (set) {
+      if(set.success)
+      {
+          this.$toast.open({
+            message : set.message,
+            type : 'success',
+            position : 'top-right'
+          })
+          setTimeout(() => {
+            this.$router.push('/')
+          }, 100)
+      } else {
+          this.$toast.open({
+            message : set.message,
+            type : 'error',
+            position : 'top-right'
+          })
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['POST_LOGIN']),
+    login(e) {
+      this.processing = true
+      e.preventDefault();
+      this.POST_LOGIN({
+        username : this.form.username,
+        password : this.form.password
+      })
+      .then(() => {
+        this.processing = false
+      })
+    }
   },
 }
 </script>
