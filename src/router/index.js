@@ -21,6 +21,7 @@ const Website = () => import('@/views/Website')
 
 // Views - Widget
 const List = () => import('@/views/widget/List')
+const Edit = () => import('@/views/widget/Edit')
 
 Vue.use(Router)
 
@@ -85,6 +86,11 @@ function configRoutes() {
           path : '/widget/list',
           name : 'Widget List',
           component: List
+        },
+        {
+          path : '/widget/edit/:id',
+          name : 'Widget Edit',
+          component: Edit
         }
       ]
     },

@@ -43,7 +43,7 @@ const actions = {
     UPDATE_WIDGET : ({commit}, payload) => {
         post('api/widget/update', payload)
         .then(res => {
-            router.push('/app/setting/widget')
+            router.push('/widget/list')
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
@@ -91,7 +91,7 @@ const actions = {
     UPLOAD_SPLASH : ({commit}, payload) => {
         postImg('api/widget/manage-splash-screen', payload)
         .then(res => {
-            router.push('/app/setting/widget')
+            router.push('/widget/list')
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
