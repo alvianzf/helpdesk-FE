@@ -22,6 +22,7 @@ const Website = () => import('@/views/Website')
 // Views - Widget
 const List = () => import('@/views/widget/List')
 const Edit = () => import('@/views/widget/Edit')
+const Splash = () => import('@/views/widget/Splash')
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ function configRoutes() {
           path : '/widget/edit/:id',
           name : 'Widget Edit',
           component: Edit
+        },
+        {
+          path : '/widget/splash/:id',
+          name : 'Widget Splash',
+          component: Splash
         }
       ]
     },

@@ -85,10 +85,10 @@ export default {
             this.$router.push({ name : 'Widget Edit', params : { id : id}})
         },
         manageWelcome(id) {
-            this.$router.push({ name : 'manage_welcome', params : { id : id}})
+            this.$router.push({ name : 'Widget Splash', params : { id : id}})
         },
         manageSplash(id) {
-            this.$router.push({ name : 'splash_screen', params : { id : id}})
+            this.$router.push({ name : 'Widget Splash', params : { id : id}})
         },
         getRowCount: function () {
             return this.widgets.length
