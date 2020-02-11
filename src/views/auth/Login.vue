@@ -34,6 +34,13 @@
 
 <script>
 export default {
-  name: 'Login'
+  name: 'Login',
+  mounted() {
+    this.$toast.open({
+      message : 'testing',
+      type : 'success',
+      position : 'top-right'
+    })
+  },
 }
 </script>

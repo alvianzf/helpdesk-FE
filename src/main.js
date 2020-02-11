@@ -6,10 +6,13 @@ import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
 import { store } from './store'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
 // todo
 // cssVars()
 
 Vue.use(BootstrapVue)
+Vue.use(VueToast);
 
 /* eslint-disable no-new */
 new Vue({

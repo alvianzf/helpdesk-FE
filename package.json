@@ -32,6 +32,7 @@
     "vue": "^2.6.10",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.6",
+    "vue-toast-notification": "0.0.3",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
