@@ -25,14 +25,17 @@ export default {
         {
           name: 'Super Admin',
           url: '/agent/super-admin',
+          icon : 'fa fa-circle'
         },
         {
           name: 'Admin',
-          url: '/agent/admin'
+          url: '/agent/admin',
+          icon : 'fa fa-circle'
         },
         {
           name: 'Operator',
-          url: '/agent/operator'
+          url: '/agent/operator',
+          icon : 'fa fa-circle'
         }
       ]
     },
