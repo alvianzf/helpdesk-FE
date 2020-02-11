@@ -47,5 +47,13 @@ export default {
         variant: 'primary'
       }
     },
+    {
+      name: 'Widget',
+      url: '/widget',
+      icon: 'fa fa-briefcase',
+      badge: {
+        variant: 'primary'
+      }
+    },
   ]
 }

@@ -13,25 +13,31 @@ const getters = {
 
 const actions = {
     GET_WIDGETS : ({commit}) => {
+        commit('SET_LOADING', true)
         get('api/widget/list')
         .then(res => {
             commit('setWidgets', res.data.data)
+            commit('SET_LOADING', false)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         })
     },
     GET_WIDGET : ({commit}, payload) => {
+        commit('SET_LOADING', true)
         post('api/widget/find', payload)
         .then(res => {
             commit('setWidget', res.data.data)
+            commit('SET_LOADING', false)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
             })
+            commit('SET_LOADING', false)
         })
     },
     UPDATE_WIDGET : ({commit}, payload) => {

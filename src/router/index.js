@@ -19,6 +19,9 @@ const Operator = () => import('@/views/agent/Operator')
 // Views - Website
 const Website = () => import('@/views/Website')
 
+// Views - Widget
+const List = () => import('@/views/widget/List')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -69,6 +72,19 @@ function configRoutes() {
           path : '/website',
           name : 'Website List',
           component: Website
+        }
+      ]
+    },
+    {
+      path : '/widget',
+      redirect : '/widget/list',
+      name : 'Widget',
+      component: DefaultContainer,
+      children: [
+        {
+          path : '/widget/list',
+          name : 'Widget List',
+          component: List
         }
       ]
     },
