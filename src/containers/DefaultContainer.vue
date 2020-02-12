@@ -36,6 +36,7 @@
           </div>
         </span>
       </div>
+      <Modal ref="notifChatDetail"/>
   </div>
 </template>
 
@@ -47,6 +48,7 @@ import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 import DefaultHeader from './DefaultHeader'
 import DefaultFooter from './DefaultFooter'
 import { mapGetters, mapActions } from 'vuex'
+import Modal from './Modal'
 
 export default {
   name: 'DefaultContainer',
@@ -62,7 +64,8 @@ export default {
     SidebarNav,
     SidebarMinimizer,
     DefaultFooter,
-    DefaultHeader
+    DefaultHeader,
+    Modal
   },
   data () {
     return {
@@ -88,6 +91,8 @@ export default {
     },
     goToChat(id) {
       this.clicked = !this.clicked
+      this.$refs.notifChatDetail.getChat(id)
+        this.$bvModal.show('notifchatdetail')
     }
   },
   mounted() {
