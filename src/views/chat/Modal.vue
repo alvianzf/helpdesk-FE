@@ -60,7 +60,7 @@
                             <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
                         </div>
                         <b-button variant="primary" class="mt-15 btn-block btn-square">Transfer Ticket</b-button>
-                        <b-button variant="danger" class="mt-15 btn-block btn-square"> Close Ticket</b-button>
+                        <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
                     </div>
                 </b-col>
             </b-row>
