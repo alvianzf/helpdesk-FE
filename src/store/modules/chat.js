@@ -115,6 +115,9 @@ const actions = {
                 }
                 socket.emit('notification_list_global')
                 socket.emit('notification_list_group', payload)
+                dispatch('GET_NEW_LIST_GLOBAL')
+                dispatch('GET_NEW_LIST_GROUP', payload)
+                dispatch('GET_CURRENT_LIST')
                 // console.log(res)
                 commit('setCurrentOperator', res.data)
             })
@@ -167,6 +170,9 @@ const actions = {
             })
             socket.emit('notification_list_global')
             socket.emit('notification_list_group', payload)
+            dispatch('GET_NEW_LIST_GLOBAL')
+            dispatch('GET_NEW_LIST_GROUP', payload)
+            dispatch('GET_CURRENT_LIST')
             dispatch('FIND_CHAT_BY_ID', payload)
             commit('SET_RESPONSE', {
                 success : true,
