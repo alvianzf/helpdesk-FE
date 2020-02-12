@@ -28,6 +28,11 @@ const Trigger = () => import('@/views/widget/Trigger')
 // Views - User
 const AccountPage = () => import('@/views/account/Index')
 
+// Views - Chat
+const NewChat = () => import('@/views/chat/New')
+const CurrentChat = () => import('@/views/chat/Current')
+const HistoryChat = () => import('@/views/chat/History')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -48,6 +53,29 @@ function configRoutes() {
           name: 'Account Page',
           component: AccountPage
         },
+      ]
+    },
+    {
+      path: '/live-chat',
+      redirect: '/live-chat/new',
+      name: 'Live Chat',
+      component: DefaultContainer,
+      children: [
+        {
+          path: '/live-chat/new',
+          name: 'New',
+          component: NewChat
+        },
+        {
+          path: '/live-chat/current',
+          name: 'Current',
+          component: CurrentChat
+        },
+        {
+          path: '/live-chat/history',
+          name: 'History',
+          component: HistoryChat
+        }
       ]
     },
     {

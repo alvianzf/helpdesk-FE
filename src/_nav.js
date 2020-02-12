@@ -18,6 +18,28 @@ export default {
       }
     },
     {
+      name: 'Live Chat',
+      url: '/live-chat',
+      icon: 'icon-people',
+      children: [
+        {
+          name: 'New',
+          url: '/live-chat/new',
+          icon : 'fa fa-info'
+        },
+        {
+          name: 'Current',
+          url: '/live-chat/current',
+          icon : 'fa fa-hourglass-end'
+        },
+        {
+          name: 'History',
+          url: '/live-chat/history',
+          icon : 'fa fa-history'
+        }
+      ]
+    },
+    {
       name: 'Agent',
       url: '/agent',
       icon: 'icon-people',
