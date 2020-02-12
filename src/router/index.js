@@ -40,7 +40,7 @@ function configRoutes() {
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: 'Default',
           component: Dashboard
         },
         {

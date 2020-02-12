@@ -8,7 +8,7 @@
       <b-dropdown-item><i class="fa fa-user" /> 
         <router-link to="/account">User</router-link>
       </b-dropdown-item>
-      <b-dropdown-item><i class="fa fa-lock" /> Logout</b-dropdown-item>
+      <b-dropdown-item @click="logout"><i class="fa fa-lock"/> Logout</b-dropdown-item>
 
     </template>
   </AppHeaderDropdown>
@@ -16,6 +16,8 @@
 
 <script>
 import { HeaderDropdown as AppHeaderDropdown } from '@coreui/vue'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'DefaultHeaderDropdownAccnt',
   components: {
@@ -23,6 +25,16 @@ export default {
   },
   data: () => {
     return { itemsCount: 42 }
-  }
+  },
+  methods: {
+    ...mapActions(['LOGOUT']),
+    logout () {
+      this.LOGOUT({
+        token : localStorage.getItem('token')
+      })
+      localStorage.clear()
+      this.$router.push('/auth/login')
+    }
+  },
 }
 </script>

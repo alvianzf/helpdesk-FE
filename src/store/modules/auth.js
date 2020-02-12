@@ -85,6 +85,21 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    LOGOUT : ({commit}, payload) => {
+        post('api/auth/logout', payload)
+        .then((res) => {
+            commit('SET_RESPONSE', {
+                success : true,
+                message : 'Logout successfully'
+            })
+        })
+        .catch((error) => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : 'Failed to logout'
+            })
+        })
     }
 }
 
