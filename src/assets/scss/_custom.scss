@@ -11,3 +11,116 @@ span.is-danger {
     background: #e4e5e6;
     font-weight: bold;
 }
+
+.notification-list {
+    position: fixed;
+    left: 11%;
+    bottom: 6%;
+    z-index: 9;
+    width: 100%;
+    height: 44px;
+    padding-top: 7px;
+    overflow: auto;
+    white-space: nowrap;
+}
+  
+  .new-list {
+    background: #f18025;
+    display: inline-block;
+    color: #fff;
+    padding: 5px;
+    font-size: 10px;
+    position: relative;
+    margin-right:5px;
+    cursor: pointer;
+    p {
+      font-size: 10px;
+      margin-bottom: 0;
+    }
+    a {
+      color: #fff;
+    }
+  
+    a:hover{
+      color: #fff;
+    }
+  }
+  
+  .current-list {
+    background: #18a2b8;
+    color: #fff;
+    padding: 5px;
+    font-size: 10px;
+    position: relative;
+    display: inline-block;
+    margin-right:5px;
+    cursor: pointer;
+    p {
+      font-size: 10px;
+      margin-bottom: 0;
+    }
+  
+    a {
+      color: #fff;
+    }
+  
+    a:hover{
+      color: #fff;
+    }
+  }
+  
+  .no-unread {
+    background-color: #5cb85c;
+    cursor: pointer;
+  }
+  
+  .badge-number {
+    position: absolute;
+    background: red;
+    border-radius: 100%;
+    padding: 1px 5px;
+    top: -6px;
+  }
+  
+  .VueTables__table tbody tr td {
+    border: 0 !important;
+    border-bottom: 1px solid #dcdcdc !important;
+    padding: 7px 10px;
+  }
+  
+  .VueTables__row.no-operator {
+    background: #dedede;
+    color: #000;
+    font-weight: bold;
+  }
+  
+  .VueTables__table thead tr th {
+    border: 0 !important;
+    border-bottom: 1px solid #eae5e5 !important;
+    padding: 7px 10px;
+  }
+  
+  .total-message {
+    background: #c3c3c3;
+    padding: 3px 5px;
+    border-radius: 6px;
+  }
+  
+  .notification-button {
+    background: #f18025;
+    position: fixed;
+    bottom: 55px;
+    left: 0;
+    z-index: 999999;
+    padding: 6px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+  
+    cursor: pointer;
+    a {
+      color: #fff;
+    }
+  }

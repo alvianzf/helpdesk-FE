@@ -21,6 +21,21 @@
       </AppAside>
     </div>
     <DefaultFooter/>
+    <div class="notification-button" @click="setClicked">
+        <span> {{ getNotif.length }} Requests </span>
+      </div>
+      <div class="notification-list" v-if="clicked">
+        <span v-for="notif in getNotif" :key="notif._id">
+          <div class="new-list" v-if="notif.active_operator == null" @click="goToChat(notif._id)">
+            <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <p>{{ notif.ticket_id }}</p>
+          </div>
+          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else @click="goToChat(notif._id)">
+            <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <p>{{ notif.ticket_id }}</p>
+          </div>
+        </span>
+      </div>
   </div>
 </template>
 
@@ -31,6 +46,7 @@ import DefaultAside from './DefaultAside'
 import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 import DefaultHeader from './DefaultHeader'
 import DefaultFooter from './DefaultFooter'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'DefaultContainer',
@@ -50,7 +66,10 @@ export default {
   },
   data () {
     return {
-      nav: nav.items
+      nav: nav.items,
+      show: false, 
+      current_user : localStorage.getItem('user_id'),
+      clicked : false
     }
   },
   computed: {
@@ -59,7 +78,26 @@ export default {
     },
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
+    },
+    ...mapGetters(['getMenuType','getNotif'])
+  },
+  methods: {
+    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP']),
+    setClicked(e) {
+      this.clicked = !this.clicked
+    },
+    goToChat(id) {
+      this.clicked = !this.clicked
     }
-  }
+  },
+  mounted() {
+    if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+      this.GET_NOTIFICATION_GROUP({
+          website : localStorage.getItem('user_website')
+      })
+    } else {
+      this.GET_NOTIFICATION()
+    }
+  },
 }
 </script>

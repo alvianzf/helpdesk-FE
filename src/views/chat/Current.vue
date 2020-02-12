@@ -9,7 +9,7 @@
                             {{ date(data.item.createdAt) }}
                         </template>
                         <template v-slot:cell(message)="data">
-                            {{ data.item.messages[0].message }}
+                            {{ data.item.message[0].message }}
                         </template>
                         <template v-slot:cell(agent)="data">
                             {{ data.item.active_operator ? data.item.active_operator.name : null }}

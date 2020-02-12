@@ -9,10 +9,7 @@
                             {{ date(data.item.createdAt) }}
                         </template>
                         <template v-slot:cell(message)="data">
-                            {{ data.item.messages[0].message }}
-                        </template>
-                        <template v-slot:cell(agent)="data">
-                            {{ data.item.active_operator ? data.item.active_operator.name : null }}
+                            {{ data.item.message[0].message }}
                         </template>
                     </b-table>
                     <nav>
@@ -66,7 +63,6 @@ export default {
             perPage : 10,
             fields: [
                 { key : 'ticket_id' , label : 'Name' },
-                'agent',
                 'time',
                 'message'
             ]
