@@ -141,6 +141,7 @@ span.is-danger {
     height: 250px;
     max-height: 250px;
     overflow-y: scroll;
+    position: relative;
   }
 
   .system-chat {
@@ -228,5 +229,12 @@ span.is-danger {
 .chat-action {
   background: #fff;
   padding: 15px;
+}
+
+.support-text {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0;
+  color: #c1c1c1;
 }
 

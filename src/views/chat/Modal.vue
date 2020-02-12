@@ -23,7 +23,7 @@
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
-                        
+                        <p class="text-center support-text" v-if="visitor_typing"> Visitor is typing.... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
                         <b-form-textarea
@@ -76,8 +76,11 @@ import $ from 'jquery'
 export default {
     name : 'Modal',
     computed : mapGetters({
+        chat : 'getChat',
+        response : 'getResponse',
         users : 'getUsers',
-        chat : 'getChat'
+        currentOperator : 'getCurrentOperator',
+        visitor_typing : 'getVisitorTyping'
     }),
     data() {
         return {
@@ -92,7 +95,6 @@ export default {
     },
     watch : {
         chat(set) {
-            console.log(set)
             this.singlechat = set
             localStorage.setItem('current_chat_web', set.website)
             this.SET_READ({

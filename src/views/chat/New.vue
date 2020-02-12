@@ -80,13 +80,15 @@ export default {
             return this.chats.length
         },
         onRowSelected(items) {
-            this.$refs.modalDetail.getChat(items[0]._id)
-            this.ASSIGN_OPERATOR({
-                id : items[0]._id,
-                operator : localStorage.getItem('user_id'),
-                website : localStorage.getItem('current_chat_web')
-            })
-            this.$bvModal.show('chatdetail')
+            if(items.length > 0) {
+                this.$refs.modalDetail.getChat(items[0]._id)
+                this.ASSIGN_OPERATOR({
+                    id : items[0]._id,
+                    operator : localStorage.getItem('user_id'),
+                    website : localStorage.getItem('current_chat_web')
+                })
+                this.$bvModal.show('chatdetail')
+            }
         },
     },
     mounted() {
