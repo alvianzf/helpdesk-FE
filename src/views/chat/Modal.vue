@@ -10,17 +10,17 @@
                         <div v-for="message in chat.message" :key="message._id">
                             <div class="system-chat" v-if="message.is_system">
                                 {{ message.message }}
-                                <span class="time"> 11:45 PM </span>
+                                <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                             <div class="visitor-chat" v-if="message.is_guest">
                                 <span class="visitor-title"> Visitor </span>
                                 {{ message.message }}
-                                <span class="time"> 11:45 PM </span>
+                                <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                             <div class="operator-chat" v-if="message.is_operator">
-                                <span class="operator-title"> Operator </span>
+                                <span class="operator-title"> {{ singlechat.active_operator ? singlechat.active_operator.name : null }} </span>
                                 {{ message.message }}
-                                <span class="time"> 11:45 PM </span>
+                                <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
                         
@@ -43,7 +43,7 @@
                     </div>
                 </b-col>
                 <b-col sm="3" md="3">
-                    <div class="chat-action">
+                    <div class="chat-action" v-if="chat.is_open">
                         <div class="form-group">
                             <label>Transfer Chat To</label>
                             <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
@@ -92,6 +92,7 @@ export default {
     },
     watch : {
         chat(set) {
+            console.log(set)
             this.singlechat = set
             localStorage.setItem('current_chat_web', set.website)
             this.SET_READ({
@@ -142,7 +143,7 @@ export default {
             }
         },
         date: function (date) {
-            return moment(date).format('MMM D YYYY, h:mm:ss a');
+            return moment(date).format('h:mm a');
         },
         sendImage(e) {
             e.preventDefault();

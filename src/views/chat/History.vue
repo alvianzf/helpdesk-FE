@@ -117,8 +117,10 @@ export default {
             return this.chats.length
         },
         onRowSelected(items) {
-            this.$refs.modalDetail.getChat(items[0].id)
-            this.$bvModal.show('chatdetail')
+            if(items.length > 0) {
+                this.$refs.modalDetail.getChat(items[0].id)
+                this.$bvModal.show('chatdetail')
+            }
         }
     },
     mounted() {
