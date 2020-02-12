@@ -72,7 +72,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['GET_NEW_LIST_GLOBAL','GET_NEW_LIST_GROUP']),
+        ...mapActions(['GET_NEW_LIST_GLOBAL','GET_NEW_LIST_GROUP','ASSIGN_OPERATOR']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
@@ -81,8 +81,12 @@ export default {
         },
         onRowSelected(items) {
             this.$refs.modalDetail.getChat(items[0]._id)
+            this.ASSIGN_OPERATOR({
+                id : items[0]._id,
+                operator : localStorage.getItem('user_id'),
+                website : localStorage.getItem('current_chat_web')
+            })
             this.$bvModal.show('chatdetail')
-            console.log(items)
         },
     },
     mounted() {
