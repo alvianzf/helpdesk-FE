@@ -14,12 +14,14 @@
                             </div>
                             <div class="visitor-chat" v-if="message.is_guest">
                                 <span class="visitor-title"> Visitor </span>
-                                {{ message.message }}
+                                <span v-if="!message.media"> {{ message.message }} </span>
+                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                             <div class="operator-chat" v-if="message.is_operator">
                                 <span class="operator-title"> {{ singlechat.active_operator ? singlechat.active_operator.name : null }} </span>
-                                {{ message.message }}
+                                <span v-if="!message.media"> {{ message.message }} </span>
+                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
@@ -34,7 +36,7 @@
                         ></b-form-textarea>
                         <div class="chat-attachment">
                             <div class="input-file-container">  
-                                <input class="input-file" id="my-file" type="file"/>
+                                <input class="input-file" id="my-file" type="file" @change="sendImage"/>
                                 <label tabindex="0" for="my-file" class="input-file-trigger">
                                     <i class="fa fa-paperclip"></i> Attach
                                 </label>
@@ -59,7 +61,7 @@
                             </select>
                             <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
                         </div>
-                        <b-button variant="primary" class="mt-15 btn-block btn-square">Transfer Ticket</b-button>
+                        <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
                         <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
                     </div>
                 </b-col>
