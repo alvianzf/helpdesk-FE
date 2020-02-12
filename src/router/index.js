@@ -25,6 +25,9 @@ const Edit = () => import('@/views/widget/Edit')
 const Splash = () => import('@/views/widget/Splash')
 const Trigger = () => import('@/views/widget/Trigger')
 
+// Views - User
+const AccountPage = () => import('@/views/account/Index')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -39,6 +42,11 @@ function configRoutes() {
           path: 'dashboard',
           name: 'Dashboard',
           component: Dashboard
+        },
+        {
+          path: 'account',
+          name: 'Account Page',
+          component: AccountPage
         },
       ]
     },

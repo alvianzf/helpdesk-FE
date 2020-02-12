@@ -168,7 +168,6 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
-            dispatch('GET_USERS')
         })
         .catch((error) => {
             commit('SET_LOADING', false)

@@ -5,7 +5,11 @@
     </template>\
     <template slot="dropdown">
       <b-dropdown-header tag="div" class="text-center"><strong>Account</strong></b-dropdown-header>
+      <b-dropdown-item><i class="fa fa-user" /> 
+        <router-link to="/account">User</router-link>
+      </b-dropdown-item>
       <b-dropdown-item><i class="fa fa-lock" /> Logout</b-dropdown-item>
+
     </template>
   </AppHeaderDropdown>
 </template>

@@ -7,7 +7,7 @@ const state = {
 }
 
 const getters = {
-    getLoginend : (state) => state.logined,
+    getLogined : (state) => state.logined,
     getCheckToken : (state) => state.checkToken
 }
 
@@ -68,6 +68,18 @@ const actions = {
                 message : res.data.message
             })
         }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
+    GET_LOGINED_USER : ({commit}, payload) => {
+        post('api/auth/find', payload)
+        .then((res) => {
+            commit('setLogined', res.data.data)
+        })
+        .catch((error) => {
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
