@@ -4,7 +4,7 @@
         <b-row>
             <b-col sm="12" md="12">
                 <b-card>
-                    <b-table responsive="sm" :items="chats" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true">
+                    <b-table responsive="sm" selectable :items="chats" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true" @row-selected="onRowSelected">
                         <template v-slot:cell(time)="data">
                             {{ date(data.item.createdAt) }}
                         </template>
@@ -18,6 +18,7 @@
                 </b-card>
             </b-col>
         </b-row>
+        <Modal ref="modalDetail"/>
     </div>
 </template>
 
@@ -25,11 +26,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../misc/Loading'
 import moment from 'moment'
+import Modal from './Modal'
 
 export default {
     name : 'New',
     components : {
-        Loading
+        Loading,
+        Modal
     },
     computed: {
         totalRows: function () { return this.getRowCount() },
@@ -75,7 +78,12 @@ export default {
         },
         getRowCount: function () {
             return this.chats.length
-        }
+        },
+        onRowSelected(items) {
+            this.$refs.modalDetail.getChat(items[0]._id)
+            this.$bvModal.show('chatdetail')
+            console.log(items)
+        },
     },
     mounted() {
         if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {

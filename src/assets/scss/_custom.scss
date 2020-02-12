@@ -14,8 +14,8 @@ span.is-danger {
 
 .notification-list {
     position: fixed;
-    left: 11%;
-    bottom: 6%;
+    left: 15%;
+    bottom: 9%;
     z-index: 9;
     width: 100%;
     height: 44px;
@@ -111,7 +111,7 @@ span.is-danger {
     position: fixed;
     bottom: 55px;
     left: 0;
-    z-index: 999999;
+    z-index: 1040;
     padding: 6px 20px;
     border-radius: 10px;
     color: #fff;
@@ -124,3 +124,109 @@ span.is-danger {
       color: #fff;
     }
   }
+
+@media (min-width: 992px) {
+  .modal-lg, .modal-xl {
+    max-width: 1400px;
+  }
+}
+
+#chatdetail {
+  .modal-body {
+    background: #f3f3f3;
+  }
+
+  .chat-box {
+    background: #fff;
+    height: 250px;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+
+  .system-chat {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px;
+    text-align: center;
+    color: #676767;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .visitor-chat {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px 10px;
+    color: #000;
+    position: relative;
+
+    .visitor-title {
+      display: block;
+      color: #cc0000;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+
+  .operator-chat {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px 10px;
+    color: #000;
+    position: relative;
+
+    .operator-title {
+      display: block;
+      color: #000;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  }
+
+  span.time {
+    position: absolute;
+    right: 10px;
+    font-weight: 200;
+  }
+
+  .chat-input {
+    margin-top: 10px;
+    background: #fff;
+  }
+}
+
+.input-file-container {
+  position: relative;
+  width: 120px;
+} 
+
+.input-file-trigger {
+  display: block;
+  padding: 5px 20px;
+  background: transparent;
+  color: #000;
+  font-size: 1em;
+  font-weight: 200;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+.input-file {
+  position: absolute;
+  top: 0; left: 0;
+  width: 120px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  background: transparent;
+  color: #000;
+}
+
+.chat-action {
+  background: #fff;
+  padding: 15px;
+}
+
