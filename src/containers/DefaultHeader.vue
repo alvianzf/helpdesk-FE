@@ -2,7 +2,7 @@
     <AppHeader fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile />
       <b-link class="navbar-brand" to="/dashboard">
-        Chat Helpdesk
+        Jose Chat
       </b-link>
       <SidebarToggler class="d-md-down-none" display="lg" :defaultOpen="true" />
       <b-navbar-nav class="ml-auto">

@@ -2,7 +2,7 @@
       <TheFooter>
         <div>
           <!--footer-->
-          <a href="https://coreui.io">Chat Helpdesk</a>
+          <a href="https://coreui.io">JoseChat</a>
           <span class="ml-1">&copy; 2020.</span>
         </div>
       </TheFooter>
