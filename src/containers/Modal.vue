@@ -25,7 +25,7 @@
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
-                        <p class="text-center support-text" v-if="visitor_typing"> Visitor is typing.... </p>
+                        <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
                         <b-form-textarea
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label>Transfer Chat To</label>
                             <select v-bind:class="errors.has('operator') ? 'form-control is-invalid' : 'form-control'"  v-model="transfer.operator" name="operator" v-validate="'required'">
-                                <option selected="selected" value="">Choose CSO</option>
+                                <option selected="selected" value="">Pilih CS</option>
                                 <option v-for="user in users.filter( (v) =>{
                                     if( v._id != active_user) {
                                         return false
@@ -61,8 +61,8 @@
                             </select>
                             <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
                         </div>
-                        <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
-                        <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
+                        <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Chat</b-button>
+                        <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Chat</b-button>
                     </div>
 
                     <div class="meta-data">

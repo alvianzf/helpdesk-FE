@@ -20,7 +20,7 @@ export default {
     {
       name: 'Live Chat',
       url: '/live-chat',
-      icon: 'icon-people',
+      icon: 'fa fa-comments',
       children: [
         {
           name: 'New',
