@@ -64,6 +64,76 @@
                         <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Ticket</b-button>
                         <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Ticket</b-button>
                     </div>
+
+                    <div class="meta-data">
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> Meta Agent </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta_agent }} </span>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> Country </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).country : null }} </span>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> City </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).city : null }} </span>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> Timezone </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).timezone : null}} </span>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> ISP </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).isp : null}} </span>
+                            </b-col>
+                        </b-row>
+                        <b-row>
+                            <b-col sm="4" md="4">
+                                <span class="bold"> Ip Address </span>
+                            </b-col>
+                            <b-col sm="2" md="2">
+                                <span> : </span>
+                            </b-col>
+                            <b-col sm="6" md="6">
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).query : null}} </span>
+                            </b-col>
+                        </b-row>
+                    </div>
+                    
                 </b-col>
             </b-row>
         </b-modal>

@@ -26,7 +26,7 @@
       </div>
       <div class="notification-list" v-if="clicked">
         <span v-for="notif in getNotif" :key="notif._id">
-          <div class="new-list" v-if="notif.active_operator == null" @click="goToChat(notif._id)">
+          <div class="new-list" v-if="notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
             <p>{{ notif.ticket_id }}</p>
           </div>
@@ -85,7 +85,7 @@ export default {
     ...mapGetters(['getMenuType','getNotif'])
   },
   methods: {
-    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP']),
+    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR']),
     setClicked(e) {
       this.clicked = !this.clicked
     },
@@ -93,6 +93,16 @@ export default {
       this.clicked = !this.clicked
       this.$refs.notifChatDetail.getChat(id)
         this.$bvModal.show('notifchatdetail')
+    },
+    goToChatAndAssign(id) {
+      this.clicked = !this.clicked
+      this.ASSIGN_OPERATOR({
+          id : id,
+          operator : localStorage.getItem('user_id'),
+          website : localStorage.getItem('current_chat_web')
+      })
+      this.$refs.notifChatDetail.getChat(id)
+      this.$bvModal.show('notifchatdetail')
     }
   },
   mounted() {
