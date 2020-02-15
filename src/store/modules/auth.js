@@ -43,7 +43,7 @@ const actions = {
         }).catch(error => {
             commit('setCheckToken', false)
             localStorage.clear()
-            router.push('/user/login')
+            router.push('/auth/login')
         })
     },
     CHANGE_PASSWORD : ({commit}, payload) => {
