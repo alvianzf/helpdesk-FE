@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Auth from './auth'
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
 
@@ -42,6 +42,7 @@ function configRoutes() {
       redirect: '/dashboard',
       name: 'Dashboard',
       component: DefaultContainer,
+      beforeEnter: Auth,
       children: [
         {
           path: 'dashboard',
@@ -59,6 +60,7 @@ function configRoutes() {
       path: '/live-chat',
       redirect: '/live-chat/new',
       name: 'Live Chat',
+      beforeEnter: Auth,
       component: DefaultContainer,
       children: [
         {
@@ -82,6 +84,7 @@ function configRoutes() {
       path : '/agent',
       redirect : '/agent/super-admin',
       name : 'Agent',
+      beforeEnter: Auth,
       component: DefaultContainer,
       children: [
         {
@@ -105,6 +108,7 @@ function configRoutes() {
       path : '/website',
       redirect : '/website',
       name : 'Website',
+      beforeEnter: Auth,
       component: DefaultContainer,
       children: [
         {
@@ -118,6 +122,7 @@ function configRoutes() {
       path : '/widget',
       redirect : '/widget/list',
       name : 'Widget',
+      beforeEnter: Auth,
       component: DefaultContainer,
       children: [
         {
