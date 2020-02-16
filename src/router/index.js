@@ -33,6 +33,8 @@ const NewChat = () => import('@/views/chat/New')
 const CurrentChat = () => import('@/views/chat/Current')
 const HistoryChat = () => import('@/views/chat/History')
 
+const Help = () => import('@/views/guide/Index')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -144,6 +146,20 @@ function configRoutes() {
           path : '/widget/trigger/:id',
           name : 'Widget Trigger',
           component : Trigger
+        }
+      ]
+    },
+    {
+      path : '/help',
+      redirect : '/help',
+      name : 'Help',
+      beforeEnter: Auth,
+      component: DefaultContainer,
+      children: [
+        {
+          path : '/help',
+          name : 'Widget List',
+          component: Help
         }
       ]
     },
