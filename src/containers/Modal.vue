@@ -68,7 +68,7 @@
                     <div class="meta-data">
                         <b-row>
                             <b-col sm="4" md="4">
-                                <span class="bold"> Meta Agent </span>
+                                <span class="bold"> Browser </span>
                             </b-col>
                             <b-col sm="2" md="2">
                                 <span> : </span>
