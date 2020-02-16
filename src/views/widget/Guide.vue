@@ -9,7 +9,7 @@
                     <p> <strong> Step 2 </strong> </p>
                     <p> Copy this to above &lt;/body&gt; tag <code class="highlighter-rouge"> &lt;script src="https://res.cloudinary.com/dtjnr7mrl/raw/upload/widget/js/app.js"&gt;&lt;/script&gt;</code> </p>
                     <p> <strong> Step 3 </strong> </p>
-                    <p> Put this tag into body  <code class="highlighter-rouge">&lt;chat-widget website="{{ widget.website._id }}" widget="{{ widget._id }}"&gt;&lt;/chat-widget&gt;</code></p>
+                    <p> Put this tag into body  <code class="highlighter-rouge">&lt;chat-widget website_name="{{ widget.website.name }}" website_id="{{ widget.website._id }}" widget_id="{{ widget._id }}"&gt;&lt;/chat-widget&gt;</code></p>
                 </b-card>
             </b-col>
         </b-row>
