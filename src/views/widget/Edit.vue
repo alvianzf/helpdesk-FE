@@ -43,7 +43,7 @@
                             <label for="">Logo</label>
                             <picture-input @change="getLogo" ref="logo"
                                 :prefill="form.logo ? `${url}/${form.logo}` : null"
-                                name="logo" margin="16" accept="image/jpeg,image/png" size="4" 
+                                name="logo" margin="16" accept="image/*" size="10" 
                                 width="500" 
                                 height="500" buttonClass="btn"/>
                         </div>
