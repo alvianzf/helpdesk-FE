@@ -4,6 +4,12 @@
         <b-row>
             <b-col sm="12" md="12">
                 <b-card>
+                    <b-button
+                        variant="primary"
+                        size="md"
+                        class="mg-b-15"
+                        @click="add"
+                    >Add New Widget</b-button>
                     <b-table responsive="sm" :items="widgets" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true">
                         <template v-slot:cell(website)="data">
                             {{ data.item.website ? data.item.website.name : null }}
@@ -81,6 +87,9 @@ export default {
     },
     methods: {
         ...mapActions(['GET_WIDGETS']),
+        add() {
+            this.$router.push('/widget/add')
+        },
         edit(id) {
             this.$router.push({ name : 'Widget Edit', params : { id : id}})
         },

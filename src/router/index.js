@@ -21,6 +21,7 @@ const Website = () => import('@/views/Website')
 
 // Views - Widget
 const List = () => import('@/views/widget/List')
+const Add = () => import('@/views/widget/Add')
 const Edit = () => import('@/views/widget/Edit')
 const Splash = () => import('@/views/widget/Splash')
 const Trigger = () => import('@/views/widget/Trigger')
@@ -127,6 +128,11 @@ function configRoutes() {
       beforeEnter: Auth,
       component: DefaultContainer,
       children: [
+        {
+          path : '/widget/add',
+          name : 'Add Widget',
+          component: Add
+        },
         {
           path : '/widget/list',
           name : 'Widget List',

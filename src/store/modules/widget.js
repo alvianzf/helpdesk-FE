@@ -40,6 +40,22 @@ const actions = {
             commit('SET_LOADING', false)
         })
     },
+    STORE_WIDGET : ({commit}, payload) => {
+        post('api/widget/create', payload)
+        .then(res => {
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+            router.push('/widget/list')
+        }).catch(error => {
+            console.log(error)
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
     UPDATE_WIDGET : ({commit}, payload) => {
         post('api/widget/update', payload)
         .then(res => {
