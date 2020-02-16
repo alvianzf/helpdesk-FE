@@ -21,8 +21,11 @@
                             <b-button variant="success" @click="manageWelcome(data.item._id)" size="sm" class="mg-b-15">
                                 Manage Trigger
                             </b-button>
-                            <b-button variant="warning" @click="manageSplash(data.item._id)" size="sm" >
+                            <b-button variant="warning" @click="manageSplash(data.item._id)" size="sm" class="mg-b-15" >
                                 Manage Splash Screen
+                            </b-button>
+                            <b-button variant="primary" @click="guide(data.item._id)" size="sm" >
+                                Guide To Install
                             </b-button>
                         </template>
                     </b-table>
@@ -98,6 +101,9 @@ export default {
         },
         manageSplash(id) {
             this.$router.push({ name : 'Widget Splash', params : { id : id}})
+        },
+        guide(id) {
+            this.$router.push({ name : 'Guide Widget', params : { id : id}})
         },
         getRowCount: function () {
             return this.widgets.length

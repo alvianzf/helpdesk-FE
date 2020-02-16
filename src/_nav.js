@@ -76,14 +76,6 @@ export default {
       badge: {
         variant: 'primary'
       }
-    },
-    {
-      name: 'Help',
-      url: '/help',
-      icon: 'fa fa-question',
-      badge: {
-        variant: 'primary'
-      }
     }
   ]
 }
