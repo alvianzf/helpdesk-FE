@@ -25,7 +25,7 @@
         <b-col md="6" xxs="12" style="margin-top: 15px;">
             <b-card :title="'Chat Handling Chart'">
                 <GChart
-                    type="PieChart"
+                    type="LineChart"
                     :data="chartData"
                     :options="chartOptions"
                 />
