@@ -22,7 +22,7 @@
     </div>
     <DefaultFooter/>
     <div class="notification-button" @click="setClicked">
-        <span> {{ getNotif.length }} Requests </span>
+        <span> {{ getUnreadTotal(getNotif) }} Requests </span>
       </div>
       <div class="notification-list" v-if="clicked">
         <span v-for="notif in getNotif" :key="notif._id">
@@ -82,7 +82,7 @@ export default {
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     },
-    ...mapGetters(['getMenuType','getNotif'])
+    ...mapGetters(['getNotif'])
   },
   methods: {
     ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR']),
@@ -103,6 +103,15 @@ export default {
       })
       this.$refs.notifChatDetail.getChat(id)
       this.$bvModal.show('notifchatdetail')
+    },
+    getUnreadTotal(items) 
+    {
+      let total = 0;
+      items.map(v => {
+        total = total + v.unreadtotal
+      })
+
+      return total
     }
   },
   mounted() {
