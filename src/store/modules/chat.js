@@ -109,6 +109,15 @@ const actions = {
             })
         })
     },
+    CHAT_BY_ID : ({commit}, payload) => {
+        post('api/chat/findbyid', payload)
+        .then(res => {
+            commit('setChat', res.data.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    },
     ASSIGN_OPERATOR : ({commit, dispatch}, payload) => {
         post('api/chat/assign/operator', payload)
         .then(response => {

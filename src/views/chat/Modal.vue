@@ -179,9 +179,9 @@ export default {
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING']),
+            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING','CHAT_BY_ID']),
         getChat(id) {
-            this.FIND_CHAT_BY_ID({
+            this.CHAT_BY_ID({
                 id : id
             })
             this.scrollToEnd()
