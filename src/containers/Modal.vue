@@ -271,10 +271,10 @@ export default {
     },
     mounted() {
         this.GET_VISITOR_TYPING()
-        this.GET_USER_AS_ROLE_AS_WEB({
-            role : "customer service",
-            website : localStorage.getItem('current_chat_web')
-        })
+        // this.GET_USER_AS_ROLE_AS_WEB({
+        //     role : "customer service",
+        //     website : localStorage.getItem('current_chat_web')
+        // })
     },
 }
 </script>

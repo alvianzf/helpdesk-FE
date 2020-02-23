@@ -99,7 +99,14 @@ const actions = {
     FIND_CHAT_BY_ID : ({commit}, payload) => {
         socket.emit('send_message', payload)
         socket.on('get_message', res => {
-            commit('setChat', res.data)
+            // commit('setChat', res.data)
+            post('api/chat/findbyid', payload)
+            .then(res => {
+                commit('setChat', res.data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         })
     },
     ASSIGN_OPERATOR : ({commit, dispatch}, payload) => {
@@ -227,10 +234,11 @@ const actions = {
             socket.emit('notification_list_global')
             socket.emit('notification_list_group', { website : res.data.data.website})
         }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+            console.log(error)
+            // commit('SET_RESPONSE', {
+            //     success : false,
+            //     message : error.response.data.message
+            // })
         })
     },
     DELETE_CHAT : ({commit, dispatch}, payload) => {
