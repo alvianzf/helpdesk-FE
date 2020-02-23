@@ -7,6 +7,7 @@ import website from './modules/website'
 import auth from './modules/auth'
 import dashboard from './modules/dashboard'
 import widget from './modules/widget'
+import suggest from './modules/suggest'
 
 Vue.use(Vuex)
 
@@ -29,6 +30,7 @@ export const store = new Vuex.Store({
     website,
     auth,
     dashboard,
-    widget
+    widget,
+    suggest
   }
 })

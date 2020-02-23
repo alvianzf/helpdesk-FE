@@ -76,6 +76,14 @@ export default {
       badge: {
         variant: 'primary'
       }
+    },
+    {
+      name: 'Suggestion',
+      url: '/suggestion',
+      icon: 'fa fa-help',
+      badge: {
+        variant: 'primary'
+      }
     }
   ]
 }

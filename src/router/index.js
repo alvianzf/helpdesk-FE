@@ -36,6 +36,8 @@ const HistoryChat = () => import('@/views/chat/History')
 
 const Help = () => import('@/views/guide/Index')
 
+const Sugget = () => import('@/views/Suggest')
+
 Vue.use(Router)
 
 function configRoutes() {
@@ -118,6 +120,20 @@ function configRoutes() {
           path : '/website',
           name : 'Website List',
           component: Website
+        }
+      ]
+    },
+    {
+      path : '/suggestion',
+      redirect : '/suggestion',
+      name : 'Suggest',
+      beforeEnter: Auth,
+      component: DefaultContainer,
+      children: [
+        {
+          path : '/suggestion',
+          name : 'Suggest List',
+          component: Sugget
         }
       ]
     },
