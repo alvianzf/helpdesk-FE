@@ -85,7 +85,7 @@
                                 <span> : </span>
                             </b-col>
                             <b-col sm="6" md="6">
-                                <span> {{ chat.meta ? JSON.parse(chat.meta).country : null }} </span>
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).country_name : null }} </span>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -107,7 +107,7 @@
                                 <span> : </span>
                             </b-col>
                             <b-col sm="6" md="6">
-                                <span> {{ chat.meta ? JSON.parse(chat.meta).timezone : null}} </span>
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).timezone_name : null}} </span>
                             </b-col>
                         </b-row>
                         <b-row>
@@ -129,7 +129,7 @@
                                 <span> : </span>
                             </b-col>
                             <b-col sm="6" md="6">
-                                <span> {{ chat.meta ? JSON.parse(chat.meta).query : null}} </span>
+                                <span> {{ chat.meta ? JSON.parse(chat.meta).ip : null}} </span>
                             </b-col>
                         </b-row>
                     </div>
