@@ -80,7 +80,7 @@ export default {
     {
       name: 'Suggestion',
       url: '/suggestion',
-      icon: 'fa fa-help',
+      icon: 'fa fa-question',
       badge: {
         variant: 'primary'
       }
