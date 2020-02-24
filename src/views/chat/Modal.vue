@@ -179,7 +179,7 @@ export default {
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING','CHAT_BY_ID']),
+            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING','CHAT_BY_ID','SET_READ_OPERATOR']),
         getChat(id) {
             this.CHAT_BY_ID({
                 id : id
@@ -251,10 +251,17 @@ export default {
             
         },
         setRead(e) {
-            this.SET_READ({
-                id : this.singlechat._id,
-                website : localStorage.getItem('current_chat_web')
-            })
+            if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+                this.SET_READ_OPERATOR({
+                    id : this.singlechat._id,
+                    website : localStorage.getItem('current_chat_web')
+                })
+            } else {
+                this.SET_READ({
+                    id : this.singlechat._id
+                })
+            }
+            
             this.scrollToEnd()
         },
         transferChat(e) {
@@ -272,6 +279,8 @@ export default {
     },
     mounted() {
         this.GET_VISITOR_TYPING()
+
+
         // this.GET_USER_AS_ROLE_AS_WEB({
         //     role : "customer service",
         //     website : localStorage.getItem('current_chat_web')

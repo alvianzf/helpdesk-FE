@@ -241,6 +241,17 @@ const actions = {
         post('api/chat/setread', payload)
         .then(res => {
             socket.emit('notification_list_global')
+        }).catch(error => {
+            console.log(error)
+            // commit('SET_RESPONSE', {
+            //     success : false,
+            //     message : error.response.data.message
+            // })
+        })
+    },
+    SET_READ_OPERATOR : ({commit}, payload) => {
+        post('api/chat/setread', payload)
+        .then(res => {
             socket.emit('notification_list_group', { website : res.data.data.website})
         }).catch(error => {
             console.log(error)
