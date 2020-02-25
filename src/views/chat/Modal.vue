@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Loading :loading="loading" />
         <b-modal id="chatdetail" size="lg" :hide-footer="true">
             <template v-slot:modal-header="{ close }">
                 <h5>{{ chat.ticket_id }}</h5>
@@ -144,15 +145,20 @@
 import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment'
 import $ from 'jquery'
+import Loading from '../misc/Loading'
 
 export default {
     name : 'Modal',
+    components : {
+        Loading
+    },
     computed : mapGetters({
         chat : 'getChat',
         response : 'getResponse',
         users : 'getUsers',
         currentOperator : 'getCurrentOperator',
-        visitor_typing : 'getVisitorTyping'
+        visitor_typing : 'getVisitorTyping',
+        loading : 'getLoading'
     }),
     data() {
         return {
