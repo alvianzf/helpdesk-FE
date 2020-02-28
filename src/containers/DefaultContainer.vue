@@ -21,7 +21,7 @@
       </AppAside>
     </div>
     <DefaultFooter/>
-    <div class="notification-button" @click="setClicked">
+    <div :class="getUnreadTotal(getNotif) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked">
         <span> {{ getUnreadTotal(getNotif) }} Requests </span>
       </div>
       <div class="notification-list" v-if="clicked">
