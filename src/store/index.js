@@ -14,15 +14,18 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     response : {},
-    loading : false
+    loading : false,
+    isLoad : false
   },
   getters: {
     getResponse : (state) => state.response,
-    getLoading : (state) => state.loading
+    getLoading : (state) => state.loading,
+    getIsLoad : (state) => state.isLoad
   },
   mutations: {
     SET_RESPONSE : (state,payload) => state.response = payload,
-    SET_LOADING : (state, payload) => state.loading = payload
+    SET_LOADING : (state, payload) => state.loading = payload,
+    SET_IS_LOAD : (state, payload) => state.isLoad = payload
   },
   modules: {
     user,

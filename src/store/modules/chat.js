@@ -108,20 +108,19 @@ const actions = {
                 commit('SET_LOADING', false)
             })
             .catch(error => {
-                console.log(error)
                 commit('SET_LOADING', false)
             })
         })
     },
     CHAT_BY_ID : ({commit}, payload) => {
-        commit('SET_LOADING', true)
+        commit('SET_IS_LOAD', true)
         post('api/chat/findbyid', payload)
         .then(res => {
-            commit('SET_LOADING', false)
+            commit('SET_IS_LOAD', false)
             commit('setChat', res.data.data)
         })
         .catch(error => {
-            commit('SET_LOADING', false)
+            commit('SET_IS_LOAD', false)
             console.log(error)
         })
     },
