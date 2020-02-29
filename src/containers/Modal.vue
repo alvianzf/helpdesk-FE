@@ -1,8 +1,11 @@
 <template>
     <div>
-        <b-modal id="notifchatdetail" size="lg" :hide-footer="true">
+        <b-modal id="notifchatdetail" size="lg" :hide-footer="true" ref="chat-modal">
             <template v-slot:modal-header="{ close }">
                 <h5>{{ chat.ticket_id }}</h5>
+                <button class="btn btn-transparent btn-minimize" @click="closeModal"> 
+                    <i class="fa fa-window-minimize" />
+                </button>
             </template>
             <b-row>
                 <b-col sm="9" md="9">
@@ -267,6 +270,9 @@ export default {
                 }
             })
             this.scrollToEnd()
+        },
+        closeModal() {
+            this.$refs['chat-modal'].hide()
         }
     },
     mounted() {

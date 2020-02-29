@@ -134,9 +134,18 @@ span.is-danger {
     background: #f18025;
   }
 
+.modal.show .modal-dialog {
+  -webkit-transform: none;
+  transform: none;
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
 @media (min-width: 992px) {
   .modal-lg, .modal-xl {
-    max-width: 1400px;
+    max-width: 95%;
   }
 }
 
@@ -322,3 +331,13 @@ span.is-danger {
 .app-header .dropdown-item {
   min-width: 100%;
 }
+
+.btn-transparent {
+  color : #000;
+}
+
+.btn-minimize {
+  margin-top: -15px;
+  margin-right: -5px;
+}
+
