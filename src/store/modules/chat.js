@@ -97,30 +97,23 @@ const actions = {
         })
     },
     FIND_CHAT_BY_ID : ({commit}, payload) => {
-        
         socket.emit('send_message', payload)
         socket.on('get_message', res => {
-            // commit('setChat', res.data)
-            commit('SET_LOADING', true)
             post('api/chat/findbyid', payload)
             .then(res => {
                 commit('setChat', res.data.data)
-                commit('SET_LOADING', false)
             })
             .catch(error => {
-                commit('SET_LOADING', false)
+                console.log(error)
             })
         })
     },
     CHAT_BY_ID : ({commit}, payload) => {
-        commit('SET_IS_LOAD', true)
         post('api/chat/findbyid', payload)
         .then(res => {
-            commit('SET_IS_LOAD', false)
             commit('setChat', res.data.data)
         })
         .catch(error => {
-            commit('SET_IS_LOAD', false)
             console.log(error)
         })
     },
