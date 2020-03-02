@@ -19,13 +19,13 @@
                             <div class="visitor-chat" v-if="message.is_guest">
                                 <span class="visitor-title"> Visitor </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
-                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
+                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 250px;"/>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                             <div class="operator-chat" v-if="message.is_operator">
                                 <span class="operator-title"> {{ singlechat.active_operator ? singlechat.active_operator.name : null }} </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
-                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 400px;"/>
+                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 250px;"/>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                         ></b-form-textarea>
                         <div class="chat-attachment">
                             <div class="input-file-container">  
-                                <input class="input-file" id="my-file" type="file" @change="sendImage"/>
+                                <input class="input-file" id="my-file" type="file" @change="sendImage" accept="image/*"/>
                                 <label tabindex="0" for="my-file" class="input-file-trigger">
                                     <i class="fa fa-paperclip"></i> Attach
                                 </label>
@@ -229,16 +229,22 @@ export default {
         },
         sendImage(e) {
             e.preventDefault();
-            var form = {
-                attach : e.target.files[0],
-                id : this.singlechat._id
-            }
-            this.SEND_MESSAGE_IMAGE(form)
-            this.SET_READ({
-                id : this.singlechat._id,
-                website : localStorage.getItem('current_chat_web')
-            })
-            this.scrollToEnd()
+            const size =  (e.target.files[0].size / 1024 / 1024).toFixed(2); 
+
+            if (size > 4) { 
+                alert("Max size is 4mb"); 
+            } else { 
+                var form = {
+                    attach : e.target.files[0],
+                    id : this.singlechat._id
+                }
+                this.SEND_MESSAGE_IMAGE(form)
+                this.SET_READ({
+                    id : this.singlechat._id,
+                    website : localStorage.getItem('current_chat_web')
+                })
+                this.scrollToEnd()
+            } 
         },
         endChat(e) {
             this.$swal({
