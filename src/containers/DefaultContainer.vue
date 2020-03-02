@@ -24,16 +24,16 @@
     <div :class="getUnreadTotal(getNotif) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked">
         <span> {{ getUnreadTotal(getNotif) }} Requests </span>
       </div>
-      <div class="notification-list" v-if="clicked">
+      <div class="notification-list">
         <span v-for="notif in getNotif" :key="notif._id">
-          <div class="new-list" v-if="notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
+          <div class="new-list" v-if="notif.is_minimize == true && notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
             <button class="btn-close" @click="endChat(notif._id)"> 
               <i class="fa fa-close"></i>
             </button>
             <p>{{ notif.ticket_id }}</p>
           </div>
-          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else @click="goToChat(notif._id)">
+          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
             <button class="btn-close" @click="endChat(notif._id)"> 
               <i class="fa fa-close"></i>
@@ -113,10 +113,12 @@ export default {
     },
     getUnreadTotal(items) 
     {
+      console.log(items)
       let total = 0;
-      items.map(v => {
-        total = total + v.unreadtotal
-      })
+      for(var i = 0; i < items.length; ++i){
+          if(items[i].active_operator == null)
+              total++;
+      }
 
       return total
     },

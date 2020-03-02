@@ -109,7 +109,7 @@ const actions = {
         })
     },
     CHAT_BY_ID : ({commit}, payload) => {
-        post('api/chat/findbyid', payload)
+        post('api/chat/findbyidandsetminimize', payload)
         .then(res => {
             commit('setChat', res.data.data)
         })
