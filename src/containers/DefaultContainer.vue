@@ -113,14 +113,14 @@ export default {
     },
     getUnreadTotal(items) 
     {
-      console.log(items)
-      let total = 0;
-      for(var i = 0; i < items.length; ++i){
-          if(items[i].active_operator == null)
-              total++;
-      }
+      // console.log(items)
+      // let total = 0;
+      // for(var i = 0; i < items.length; ++i){
+      //     if(items[i].active_operator == null)
+      //         total++;
+      // }
 
-      return total
+      return items.length
     },
     endChat(id) {
         this.$swal({
