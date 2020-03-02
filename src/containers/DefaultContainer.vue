@@ -28,10 +28,16 @@
         <span v-for="notif in getNotif" :key="notif._id">
           <div class="new-list" v-if="notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <button class="btn-close" @click="endChat(notif._id)"> 
+              <i class="fa fa-close"></i>
+            </button>
             <p>{{ notif.ticket_id }}</p>
           </div>
           <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else @click="goToChat(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
+            <button class="btn-close" @click="endChat(notif._id)"> 
+              <i class="fa fa-close"></i>
+            </button>
             <p>{{ notif.ticket_id }}</p>
           </div>
         </span>
@@ -85,7 +91,8 @@ export default {
     ...mapGetters(['getNotif'])
   },
   methods: {
-    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR']),
+    ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
+      'CLOSE_CHAT']),
     setClicked(e) {
       this.clicked = !this.clicked
     },
@@ -112,7 +119,24 @@ export default {
       })
 
       return total
-    }
+    },
+    endChat(id) {
+        this.$swal({
+        title : 'Are You Sure To Close This Chat?',
+        text : "You won't able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, close it!'
+        }).then((result) => {
+            if (result.value) {
+                this.CLOSE_CHAT({
+                    id : id
+                })
+            }
+        })
+        
+    },
   },
   mounted() {
     if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {

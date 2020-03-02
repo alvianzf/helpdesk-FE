@@ -341,3 +341,12 @@ span.is-danger {
   margin-right: -5px;
 }
 
+.btn-close {
+  position: absolute;
+  right: 0;
+  top: -13px;
+  background: red;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+}
