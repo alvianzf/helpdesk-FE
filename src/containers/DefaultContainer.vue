@@ -21,7 +21,7 @@
       </AppAside>
     </div>
     <DefaultFooter/>
-    <div :class="getUnreadTotal(getNotif) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked">
+    <div :class="getUnreadTotal(getNotif) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked(getNotif)">
         <span> {{ getUnreadTotal(getNotif) }} Requests </span>
       </div>
       <div class="notification-list">
@@ -93,8 +93,20 @@ export default {
   methods: {
     ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
       'CLOSE_CHAT']),
-    setClicked(e) {
-      this.clicked = !this.clicked
+    setClicked(items) {
+      let total = 0;
+      for(var i = 0; i < items.length; ++i){
+          if(items[i].active_operator == null)
+              total++;
+      }
+      if(total > 0) {
+        let a = items.filter(async (v) => {
+          return v.active_operator == null
+          
+        })
+
+        this.goToChatAndAssign(a[0]._id)
+      }
     },
     goToChat(id) {
       this.clicked = !this.clicked
@@ -114,13 +126,13 @@ export default {
     getUnreadTotal(items) 
     {
       // console.log(items)
-      // let total = 0;
-      // for(var i = 0; i < items.length; ++i){
-      //     if(items[i].active_operator == null)
-      //         total++;
-      // }
-
-      return items.length
+      let total = 0;
+      for(var i = 0; i < items.length; ++i){
+          if(items[i].active_operator == null)
+              total++;
+      }
+      return total
+      // return items.length
     },
     endChat(id) {
         this.$swal({
