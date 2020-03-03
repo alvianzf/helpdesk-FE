@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  mounted() {
+    this.$notification.requestPermission()
+  },
 }
 </script>
 

@@ -55,6 +55,8 @@ import DefaultHeader from './DefaultHeader'
 import DefaultFooter from './DefaultFooter'
 import { mapGetters, mapActions } from 'vuex'
 import Modal from './Modal'
+import {Howl, Howler} from 'howler';
+import ding from '../assets/ding.mp3'
 
 export default {
   name: 'DefaultContainer',
@@ -89,6 +91,30 @@ export default {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
     },
     ...mapGetters(['getNotif'])
+  },
+  watch: {
+    getNotif(set) {
+      console.log(set)
+      if(set) {
+        set.map(v => {
+          if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
+            this.$notification.show(v.ticket_id, {
+              body: 'You got the ticket'
+            }, {})
+            var sound = new Howl({
+              src: [ding]
+            });
+            sound.play();
+          }
+          if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
+            this.$notification.show(v.ticket_id, {
+              body: 'You got the reply'
+            }, {})
+          }
+        })
+        
+      }
+    }
   },
   methods: {
     ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
@@ -151,6 +177,12 @@ export default {
         })
         
     },
+    playSound (sound) {
+      if(sound) {
+        var audio = new Audio(sound);
+        audio.play();
+      }
+    }
   },
   mounted() {
     if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
@@ -160,6 +192,7 @@ export default {
     } else {
       this.GET_NOTIFICATION()
     }
+    
   },
 }
 </script>

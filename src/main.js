@@ -11,6 +11,7 @@ import 'vue-toast-notification/dist/index.css';
 import VeeValidate from 'vee-validate'
 import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css';
+import VueNativeNotification from 'vue-native-notification'
 
 // todo
 // cssVars()
@@ -24,7 +25,9 @@ Vue.use(BootstrapVue)
 Vue.use(VueToast);
 Vue.use(VeeValidate, { fieldsBagName: 'veeFields' })
 Vue.use(VueSweetalert2, options)
-
+Vue.use(VueNativeNotification, {
+  requestOnNotify: true
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
