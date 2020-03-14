@@ -22,7 +22,7 @@
                 {{ total_close }}
             </b-card> 
         </b-col>
-        <b-col md="6" xxs="12" style="margin-top: 15px;">
+        <b-col md="12" xxs="12" style="margin-top: 15px;">
             <b-card :title="'Chat Handling Chart'">
                 <GChart
                     type="LineChart"
