@@ -42,7 +42,7 @@
           </div>
         </span>
       </div>
-      <Modal ref="notifChatDetail"/>
+      <Modal ref="notifChatDetail" :id="selected"/>
   </div>
 </template>
 
@@ -80,7 +80,8 @@ export default {
       nav: nav.items,
       show: false, 
       current_user : localStorage.getItem('user_id'),
-      clicked : false
+      clicked : false,
+      selected : null
     }
   },
   computed: {
@@ -94,52 +95,54 @@ export default {
   },
   watch: {
     getNotif(set) {
-      console.log(set)
-      if(set) {
-        set.map(v => {
-          if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
-            this.$notification.show(v.ticket_id, {
-              body: 'You got the ticket'
-            }, {})
-            var sound = new Howl({
-              src: [ding]
-            });
-            sound.play();
-          }
-          if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
-            this.$notification.show(v.ticket_id, {
-              body: 'You got the reply'
-            }, {})
-          }
-        })
+      // console.log(set)
+      // if(set) {
+      //   set.map(v => {
+      //     if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
+      //       this.$notification.show(v.ticket_id, {
+      //         body: 'You got the ticket'
+      //       }, {})
+      //       var sound = new Howl({
+      //         src: [ding]
+      //       });
+      //       sound.play();
+      //     }
+      //     if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
+      //       this.$notification.show(v.ticket_id, {
+      //         body: 'You got the reply'
+      //       }, {})
+      //     }
+      //   })
         
-      }
+      // }
     }
   },
   methods: {
     ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
       'CLOSE_CHAT']),
     setClicked(items) {
-      let total = 0;
-      for(var i = 0; i < items.length; ++i){
-          if(items[i].active_operator == null)
-              total++;
-      }
-      if(total > 0) {
-        let a = items.filter(async (v) => {
-          return v.active_operator == null
-          
+      // console.log(items)
+      // let total = 0;
+      // for(var i = 0; i < items.length; ++i){
+      //     if(items[i].active_operator == null)
+      //         total++;
+      // }
+      // if(total > 0) {
+        let a = items.filter((v) => {
+          return !v.active_operator
         })
 
         this.goToChatAndAssign(a[0]._id)
-      }
+      // }
     },
     goToChat(id) {
+      this.selected = id
       this.clicked = !this.clicked
       this.$refs.notifChatDetail.getChat(id)
         this.$bvModal.show('notifchatdetail')
     },
     goToChatAndAssign(id) {
+      this.selected = id
       this.clicked = !this.clicked
       this.ASSIGN_OPERATOR({
           id : id,

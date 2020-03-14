@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-modal id="notifchatdetail" size="lg" :hide-footer="true" ref="chat-modal">
+        <b-modal id="notifchatdetail" size="lg" :hide-footer="true" ref="chat-modal" >
             <template v-slot:modal-header="{ close }">
                 <h5>{{ chat.ticket_id }}</h5>
                 <button class="btn btn-transparent btn-minimize" @click="closeModal"> 
@@ -149,6 +149,7 @@ import $ from 'jquery'
 
 export default {
     name : 'Modal',
+    props : ['id'],
     computed : mapGetters({
         chat : 'getChat',
         response : 'getResponse',
@@ -284,6 +285,8 @@ export default {
         }
     },
     mounted() {
+        // $(this.$el).on('show.bs.modal', this.getChat(this.id));
+        console.log(this.id)
         this.GET_VISITOR_TYPING()
         // this.GET_USER_AS_ROLE_AS_WEB({
         //     role : "customer service",
