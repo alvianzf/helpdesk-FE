@@ -96,44 +96,36 @@ export default {
   watch: {
     getNotif(set) {
       // console.log(set)
-      // if(set) {
-      //   set.map(v => {
-      //     if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
-      //       this.$notification.show(v.ticket_id, {
-      //         body: 'You got the ticket'
-      //       }, {})
-      //       var sound = new Howl({
-      //         src: [ding]
-      //       });
-      //       sound.play();
-      //     }
-      //     if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
-      //       this.$notification.show(v.ticket_id, {
-      //         body: 'You got the reply'
-      //       }, {})
-      //     }
-      //   })
+      if(set) {
+        set.map(v => {
+          if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
+            this.$notification.show(v.ticket_id, {
+              body: 'You got the ticket'
+            }, {})
+            // var sound = new Howl({
+            //   src: [ding]
+            // });
+            // sound.play();
+          }
+          if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
+            this.$notification.show(v.ticket_id, {
+              body: 'You got the reply'
+            }, {})
+          }
+        })
         
-      // }
+      }
     }
   },
   methods: {
     ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
       'CLOSE_CHAT']),
     setClicked(items) {
-      // console.log(items)
-      // let total = 0;
-      // for(var i = 0; i < items.length; ++i){
-      //     if(items[i].active_operator == null)
-      //         total++;
-      // }
-      // if(total > 0) {
         let a = items.filter((v) => {
           return !v.active_operator
         })
 
         this.goToChatAndAssign(a[0]._id)
-      // }
     },
     goToChat(id) {
       this.selected = id
