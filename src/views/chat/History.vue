@@ -4,7 +4,7 @@
         <b-row>
             <b-col sm="12" md="12">
                 <b-card>
-                    <b-table responsive="sm" selectable :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true" @row-selected="onRowSelected">
+                    <b-table responsive="sm" selectable :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true" @row-clicked="onRowSelected">
                         <template v-slot:cell(time)="data">
                             {{ date(data.item.createdAt) }}
                         </template>
@@ -116,11 +116,9 @@ export default {
         getRowCount: function () {
             return this.chats.length
         },
-        onRowSelected(items) {
-            if(items.length > 0) {
-                this.$refs.modalDetail.getChat(items[0].id)
-                this.$bvModal.show('chatdetail')
-            }
+        async onRowSelected(record, index) {
+            await this.$refs.modalDetail.getChat(record.id)
+            this.$bvModal.show('chatdetail')
         }
     },
     mounted() {
