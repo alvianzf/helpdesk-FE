@@ -86,10 +86,6 @@ export default {
         async onRowSelected(record, index) {
             await this.$refs.modalDetail.getChat(record._id)
             this.$bvModal.show('chatdetail')
-            // if(items.length > 0) {
-            //     await this.$refs.modalDetail.getChat(items.slice(-1)[0]._id)
-            //     await this.$bvModal.show('chatdetail')
-            // }
         }
     },
     mounted() {

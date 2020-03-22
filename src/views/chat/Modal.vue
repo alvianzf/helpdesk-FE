@@ -29,7 +29,7 @@
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
-                        <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
+                        <!-- <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p> -->
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
                         <b-form-textarea
@@ -156,7 +156,7 @@ export default {
         response : 'getResponse',
         users : 'getUsers',
         currentOperator : 'getCurrentOperator',
-        visitor_typing : 'getVisitorTyping',
+        // visitor_typing : 'getVisitorTyping',
         isLoad : 'getIsLoad'
     }),
     data() {
@@ -186,8 +186,7 @@ export default {
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
-            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING','CHAT_BY_ID','SET_READ_OPERATOR']),
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR']),
         async getChat(id) {
             await this.CHAT_BY_ID({
                 id : id
@@ -195,11 +194,11 @@ export default {
             await this.scrollToEnd()
         },
         sendTyping(e) {
-            if(this.form.message != "") {
-                this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
-            } else {
-                this.FETCH_OPERATOR_TYPING(null)
-            }
+            // if(this.form.message != "") {
+            //     this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
+            // } else {
+            //     this.FETCH_OPERATOR_TYPING(null)
+            // }
         },
         scrollToEnd(e) {
             $('.chat-box').animate({
@@ -295,7 +294,7 @@ export default {
         }
     },
     mounted() {
-        this.GET_VISITOR_TYPING()
+        // this.GET_VISITOR_TYPING()
 
 
         // this.GET_USER_AS_ROLE_AS_WEB({
