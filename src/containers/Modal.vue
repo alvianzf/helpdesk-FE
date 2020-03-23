@@ -192,7 +192,7 @@ export default {
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'FETCH_OPERATOR_TYPING']),
+            'OPERATOR_TYPING']),
         getChat(id) {
             this.FIND_CHAT_BY_ID({
                 id : id
@@ -200,11 +200,11 @@ export default {
             this.scrollToEnd()
         },
         sendTyping(e) {
-            // if(this.form.message != "") {
-            //     this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
-            // } else {
-            //     this.FETCH_OPERATOR_TYPING(null)
-            // }
+            if(this.form.message != "") {
+                this.OPERATOR_TYPING(true)
+            } else {
+                this.OPERATOR_TYPING(false)
+            }
         },
         scrollToEnd(e) {
             $('.chat-box').animate({

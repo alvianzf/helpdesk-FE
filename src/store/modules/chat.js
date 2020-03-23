@@ -291,6 +291,9 @@ const actions = {
         socket.on('get_notif_event', res => {
             dispatch('GET_NOTIF', payload)
         })
+    },
+    OPERATOR_TYPING : ({dispatch}, payload) => {
+        socket.emit('operator_typing', payload)
     }
 }
 
