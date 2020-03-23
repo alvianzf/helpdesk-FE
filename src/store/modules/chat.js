@@ -218,6 +218,8 @@ const actions = {
             dispatch('GET_NEW_LIST_GROUP', payload)
             dispatch('GET_CURRENT_LIST')
             dispatch('FIND_CHAT_BY_ID', payload)
+            socket.emit('notif_event', "new operator")
+            socket.emit('send_message', payload)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -228,7 +230,7 @@ const actions = {
     SET_READ : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
-            
+            socket.emit('notif_event', "new operator")
         }).catch(error => {
             console.log(error)
         })
@@ -236,6 +238,7 @@ const actions = {
     SET_READ_OPERATOR : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
+            socket.emit('notif_event', "new operator")
         }).catch(error => {
             console.log(error)
         })
@@ -285,7 +288,6 @@ const actions = {
     },
     GET_NOTIF_EVENT : ({dispatch}, payload) => {
         socket.on('get_notif_event', res => {
-            console.log(res)
             dispatch('GET_NOTIF', payload)
         })
     }

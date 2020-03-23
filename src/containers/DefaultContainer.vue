@@ -99,15 +99,23 @@ export default {
     
   },
   watch: {
-    replyEvent(set) {
-        this.$notification.show(set.ticket_id, {
+    async replyEvent(set) {
+        await this.$notification.show(set.ticket_id, {
             body: 'You got the reply'
         }, {})
+        await this.GET_NOTIF({
+          role : localStorage.getItem('user_role'),
+          website : localStorage.getItem('user_website')
+        }) 
     },
-    newTicketEvent(set) {
-      this.$notification.show(set.ticket_id, {
+    async newTicketEvent(set) {
+      await this.$notification.show(set.ticket_id, {
         body: 'You got the ticket'
       }, {})
+      await this.GET_NOTIF({
+        role : localStorage.getItem('user_role'),
+        website : localStorage.getItem('user_website')
+      })
     }
   },
   methods: {

@@ -175,7 +175,8 @@ export default {
             localStorage.setItem('current_chat_web', set.website)
             this.SET_READ({
                 id : set._id,
-                website : localStorage.getItem('current_chat_web')
+                website : localStorage.getItem('current_chat_web'),
+                role : localStorage.getItem('user_role')
             })
             this.scrollToEnd()
         },
@@ -223,7 +224,8 @@ export default {
                 this.form.message = null
                 await this.SET_READ({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
                 await this.scrollToEnd()
             }
@@ -246,7 +248,8 @@ export default {
                 this.SEND_MESSAGE_IMAGE(form)
                 this.SET_READ({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
                 this.scrollToEnd()
             } 
@@ -274,11 +277,14 @@ export default {
             if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
                 this.SET_READ_OPERATOR({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
             } else {
                 this.SET_READ({
-                    id : this.singlechat._id
+                    id : this.singlechat._id,
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
             }
             

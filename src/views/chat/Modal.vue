@@ -226,7 +226,8 @@ export default {
                 // this.FETCH_OPERATOR_TYPING(null)
                 await this.SET_READ({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
                 this.form.message = null
                 this.scrollToEnd()
@@ -249,7 +250,8 @@ export default {
                 this.SEND_MESSAGE_IMAGE(form)
                 this.SET_READ({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
                 this.scrollToEnd()
             } 
@@ -276,11 +278,14 @@ export default {
             if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
                 this.SET_READ_OPERATOR({
                     id : this.singlechat._id,
-                    website : localStorage.getItem('current_chat_web')
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
             } else {
                 this.SET_READ({
-                    id : this.singlechat._id
+                    id : this.singlechat._id,
+                    website : localStorage.getItem('current_chat_web'),
+                    role : localStorage.getItem('user_role')
                 })
             }
             
