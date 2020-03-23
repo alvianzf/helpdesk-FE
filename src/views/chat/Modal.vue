@@ -194,7 +194,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','OPERATOR_TYPING',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR']),
         async getChat(id) {
             await this.CHAT_BY_ID({
@@ -203,11 +203,11 @@ export default {
             await this.scrollToEnd()
         },
         sendTyping(e) {
-            // if(this.form.message != "") {
-            //     this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
-            // } else {
-            //     this.FETCH_OPERATOR_TYPING(null)
-            // }
+            if(this.form.message != "") {
+                this.OPERATOR_TYPING(true)
+            } else {
+                this.OPERATOR_TYPING(false)
+            }
         },
         scrollToEnd(e) {
             $('.chat-box').animate({
