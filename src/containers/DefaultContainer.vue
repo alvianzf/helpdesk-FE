@@ -21,11 +21,11 @@
       </AppAside>
     </div>
     <DefaultFooter/>
-    <!-- <div :class="getUnreadTotal(getNotif) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked(getNotif)">
-        <span> {{ getUnreadTotal(getNotif) }} Requests </span>
+    <div :class="getUnreadTotal(notifs) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked(notifs)">
+        <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-        <span v-for="notif in getNotif" :key="notif._id">
+        <span v-for="notif in notifs" :key="notif._id">
           <div class="new-list" v-if="notif.is_minimize == true && notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
             <button class="btn-close" @click="endChat(notif._id)"> 
@@ -42,7 +42,7 @@
           </div>
         </span>
       </div>
-      <Modal ref="notifChatDetail" :id="selected"/> -->
+      <Modal ref="notifChatDetail" :id="selected"/>
   </div>
 </template>
 
@@ -87,7 +87,8 @@ export default {
   computed: {
     ...mapGetters({
       replyEvent : 'getReplyEvent',
-      newTicketEvent : 'getNewTicketEvent'
+      newTicketEvent : 'getNewTicketEvent',
+      notifs : 'getNotifs'
     }),
     name () {
       return this.$route.name
@@ -104,109 +105,71 @@ export default {
         }, {})
     },
     newTicketEvent(set) {
-      console.log(set)
       this.$notification.show(set.ticket_id, {
         body: 'You got the ticket'
       }, {})
     }
-    // getNotif(set) {
-    //   // console.log(set)
-    //   if(set) {
-    //     set.map(v => {
-    //       if(v.active_operator == null && v.unreadtotal == 1 || v.unreadtotal == 0) {
-    //         this.$notification.show(v.ticket_id, {
-    //           body: 'You got the ticket'
-    //         }, {})
-    //         // var sound = new Howl({
-    //         //   src: [ding]
-    //         // });
-    //         // sound.play();
-    //       }
-    //       if(v.unreadtotal > 0 && v.active_operator == this.current_user) {
-    //         this.$notification.show(v.ticket_id, {
-    //           body: 'You got the reply'
-    //         }, {})
-    //       }
-    //     })
-        
-    //   }
-    // }
   },
   methods: {
-    ...mapActions(['GET_REPLY_EVENT','GET_NEW_TICKET_EVENT']),
-    // setClicked(items) {
-    //     let a = items.filter((v) => {
-    //       return !v.active_operator
-    //     })
+    ...mapActions(['GET_REPLY_EVENT','GET_NEW_TICKET_EVENT','GET_NOTIF','ASSIGN_OPERATOR']),
+    setClicked(items) {
+        let a = items.filter((v) => {
+          return !v.active_operator
+        })
 
-    //     this.goToChatAndAssign(a[0]._id)
-    // },
-    // goToChat(id) {
-    //   this.selected = id
-    //   this.clicked = !this.clicked
-    //   this.$refs.notifChatDetail.getChat(id)
-    //     this.$bvModal.show('notifchatdetail')
-    // },
-    // goToChatAndAssign(id) {
-    //   this.selected = id
-    //   this.clicked = !this.clicked
-    //   this.ASSIGN_OPERATOR({
-    //       id : id,
-    //       operator : localStorage.getItem('user_id'),
-    //       website : localStorage.getItem('current_chat_web')
-    //   })
-    //   this.$refs.notifChatDetail.getChat(id)
-    //   this.$bvModal.show('notifchatdetail')
-    // },
-    // getUnreadTotal(items) 
-    // {
-    //   // console.log(items)
-    //   let total = 0;
-    //   for(var i = 0; i < items.length; ++i){
-    //       if(items[i].active_operator == null)
-    //           total++;
-    //   }
-    //   return total
-    //   // return items.length
-    // },
-    // endChat(id) {
-    //     this.$swal({
-    //     title : 'Are You Sure To Close This Chat?',
-    //     text : "You won't able to revert this!",
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     confirmButtonText: 'Yes, close it!'
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             this.CLOSE_CHAT({
-    //                 id : id
-    //             })
-    //         }
-    //     })
+        this.goToChatAndAssign(a[0]._id)
+    },
+    goToChat(id) {
+      this.selected = id
+      this.clicked = !this.clicked
+      this.$refs.notifChatDetail.getChat(id)
+        this.$bvModal.show('notifchatdetail')
+    },
+    goToChatAndAssign(id) {
+      this.selected = id
+      this.clicked = !this.clicked
+      this.ASSIGN_OPERATOR({
+          id : id,
+          operator : localStorage.getItem('user_id'),
+          website : localStorage.getItem('current_chat_web')
+      })
+      this.$refs.notifChatDetail.getChat(id)
+      this.$bvModal.show('notifchatdetail')
+    },
+    getUnreadTotal(items) 
+    {
+      let total = 0;
+      for(var i = 0; i < items.length; ++i){
+          if(items[i].active_operator == null)
+              total++;
+      }
+      return total
+    },
+    endChat(id) {
+        this.$swal({
+        title : 'Are You Sure To Close This Chat?',
+        text : "You won't able to revert this!",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, close it!'
+        }).then((result) => {
+            if (result.value) {
+                this.CLOSE_CHAT({
+                    id : id
+                })
+            }
+        })
         
-    // },
-    // playSound (sound) {
-    //   if(sound) {
-    //     var audio = new Audio(sound);
-    //     audio.play();
-    //   }
-    // }
+    }
   },
   mounted() {
     this.GET_REPLY_EVENT()
     this.GET_NEW_TICKET_EVENT()
-    // this.socket.on('get_message', function(data) {
-    //   alert(data)
-    // })
-    // if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-    //   this.GET_NOTIFICATION_GROUP({
-    //       website : localStorage.getItem('user_website')
-    //   })
-    // } else {
-    //   this.GET_NOTIFICATION()
-    // }
-    
+    this.GET_NOTIF({
+      role : localStorage.getItem('user_role'),
+      website : localStorage.getItem('user_website')
+    })
   }
 }
 </script>

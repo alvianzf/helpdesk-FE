@@ -9,7 +9,8 @@ const state = {
     current_operator : null,
     message_event : {},
     reply_event : {},
-    new_ticket_event : {}
+    new_ticket_event : {},
+    notifs : []
 }
 
 const getters = {
@@ -18,7 +19,8 @@ const getters = {
     getCurrentOperator : (state) => state.current_operator,
     getMessageEvent : (state) => state.message_event,
     getReplyEvent : (state) => state.reply_event,
-    getNewTicketEvent : (state) => state.new_ticket_event
+    getNewTicketEvent : (state) => state.new_ticket_event,
+    getNotifs : (state) => state.notifs
 }
 
 const mutations = {
@@ -39,6 +41,9 @@ const mutations = {
     },
     setNewTicketEvent (state, payload) {
         state.new_ticket_event = payload
+    },
+    setNotifs (state, payload) {
+        state.notifs = payload
     }
 }
 
@@ -263,6 +268,17 @@ const actions = {
     GET_NEW_TICKET_EVENT : ({commit}) => {
         socket.on('get_new_ticket', res => {
             commit('setNewTicketEvent',res.data)
+        })
+    },
+    GET_NOTIF : ({commit}, payload) => {
+        post('api/chat/notif/list', payload)
+        .then(res => {
+            commit('setNotifs', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
         })
     }
 }
