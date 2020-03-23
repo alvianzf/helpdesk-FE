@@ -179,6 +179,9 @@ export default {
     // }
   },
   mounted() {
+    // this.socket.on('get_message', function(data) {
+    //   alert(data)
+    // })
     // if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
     //   this.GET_NOTIFICATION_GROUP({
     //       website : localStorage.getItem('user_website')
@@ -187,6 +190,6 @@ export default {
     //   this.GET_NOTIFICATION()
     // }
     
-  },
+  }
 }
 </script>

@@ -157,7 +157,9 @@ export default {
         users : 'getUsers',
         currentOperator : 'getCurrentOperator',
         // visitor_typing : 'getVisitorTyping',
-        isLoad : 'getIsLoad'
+        isLoad : 'getIsLoad',
+        messageEvent : 'getMessageEvent',
+        replyEvent : 'getReplyEvent'
     }),
     data() {
         return {
@@ -173,7 +175,7 @@ export default {
     watch : {
         chat(set) {
             this.singlechat = set
-            localStorage.setItem('current_chat_web', set.website)
+            localStorage.setItem('current_chat_web', set.website._id)
             this.SET_READ({
                 id : set._id,
                 website : localStorage.getItem('current_chat_web')
@@ -181,11 +183,25 @@ export default {
             this.scrollToEnd()
         },
         isLoad(set) {
+        
+        },
+        messageEvent(set) {            
+            if(set.id == this.chat._id) {
+                this.FIND_CHAT_BY_ID({
+                    id : this.chat._id
+                })
+                
+            }
+        },
+        replyEvent(set) {
             console.log(set)
+            this.$notification.show(set.ticket_id, {
+                body: 'You got the reply'
+            }, {})
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','GET_REPLY_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR']),
         async getChat(id) {
             await this.CHAT_BY_ID({
@@ -205,21 +221,21 @@ export default {
 				scrollTop: 999999999999999999
 			}, 'slow');
         },
-        sendMessage(e) {
+        async sendMessage(e) {
             e.preventDefault();
             
             if(this.form.message) {
-                this.SEND_MESSAGE({
+                await this.SEND_MESSAGE({
                     message : this.form.message,
                     id : this.singlechat._id,
                     website : localStorage.getItem('website_id')
                 })
-                this.FETCH_OPERATOR_TYPING(null)
-                this.form.message = null
-                this.SET_READ({
+                // this.FETCH_OPERATOR_TYPING(null)
+                await this.SET_READ({
                     id : this.singlechat._id,
                     website : localStorage.getItem('current_chat_web')
                 })
+                this.form.message = null
                 this.scrollToEnd()
             }
         },
@@ -295,12 +311,12 @@ export default {
     },
     mounted() {
         // this.GET_VISITOR_TYPING()
-
-
-        // this.GET_USER_AS_ROLE_AS_WEB({
-        //     role : "customer service",
-        //     website : localStorage.getItem('current_chat_web')
-        // })
-    },
+        this.GET_MESSAGE_EVENT()
+        this.GET_REPLY_EVENT()
+        this.GET_USER_AS_ROLE_AS_WEB({
+            role : "customer service",
+            website : localStorage.getItem('current_chat_web')
+        })
+    }
 }
 </script>

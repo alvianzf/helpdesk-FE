@@ -1,16 +1,22 @@
 import { get, post, postImg, destroy } from '@/api'
+import io from 'socket.io-client';
+
+const socket = io(`${process.env.VUE_APP_SOCKET_URL}`)
 
 const state = {
     chat : {},
     chats : [],
-    current_operator : null
+    current_operator : null,
+    message_event : {},
+    reply_event : {}
 }
 
 const getters = {
     getChat : (state) => state.chat,
     getChats : (state) => state.chats,
-    getCurrentOperator : (state) => state.current_operator
-
+    getCurrentOperator : (state) => state.current_operator,
+    getMessageEvent : (state) => state.message_event,
+    getReplyEvent : (state) => state.reply_event
 }
 
 const mutations = {
@@ -22,6 +28,12 @@ const mutations = {
     },
     setCurrentOperator (state, payload) {
         state.current_operator = payload
+    },
+    setMessageEvent (state, payload) {
+        state.message_event = payload
+    },
+    setReplyEvent (state, payload) {
+        state.reply_event = payload
     }
 }
 
@@ -122,8 +134,10 @@ const actions = {
     SEND_MESSAGE : ({commit, dispatch}, payload) => {
         post('api/chat/new/message/operator', payload)
         .then(res => {
+            socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
         }).catch(error => {
+            console.log(error)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
@@ -199,32 +213,16 @@ const actions = {
     SET_READ : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
             
         }).catch(error => {
             console.log(error)
-            // commit('SET_RESPONSE', {
-            //     success : false,
-            //     message : error.response.data.message
-            // })
         })
     },
     SET_READ_OPERATOR : ({commit}, payload) => {
         post('api/chat/setread', payload)
         .then(res => {
-            commit('SET_RESPONSE', {
-                success : true,
-                message : res.data.message
-            })
         }).catch(error => {
             console.log(error)
-            // commit('SET_RESPONSE', {
-            //     success : false,
-            //     message : error.response.data.message
-            // })
         })
     },
     DELETE_CHAT : ({commit, dispatch}, payload) => {
@@ -242,6 +240,16 @@ const actions = {
                 success : false,
                 message : error.response.data.message
             })
+        })
+    },
+    GET_MESSAGE_EVENT : ({commit, dispatch}) => {
+        socket.on('get_message', res => {
+            commit('setMessageEvent',res.data)
+        })
+    },
+    GET_REPLY_EVENT : ({commit}) => {
+        socket.on('get_reply_client', res => {
+            commit('setReplyEvent',res.data)
         })
     }
 }
