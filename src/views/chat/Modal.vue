@@ -158,8 +158,7 @@ export default {
         currentOperator : 'getCurrentOperator',
         // visitor_typing : 'getVisitorTyping',
         isLoad : 'getIsLoad',
-        messageEvent : 'getMessageEvent',
-        replyEvent : 'getReplyEvent'
+        messageEvent : 'getMessageEvent'
     }),
     data() {
         return {
@@ -192,15 +191,10 @@ export default {
                 })
                 
             }
-        },
-        replyEvent(set) {
-            this.$notification.show(set.ticket_id, {
-                body: 'You got the reply'
-            }, {})
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','GET_REPLY_EVENT',
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR']),
         async getChat(id) {
             await this.CHAT_BY_ID({
@@ -311,7 +305,6 @@ export default {
     mounted() {
         // this.GET_VISITOR_TYPING()
         this.GET_MESSAGE_EVENT()
-        this.GET_REPLY_EVENT()
         this.GET_USER_AS_ROLE_AS_WEB({
             role : "customer service",
             website : localStorage.getItem('current_chat_web')

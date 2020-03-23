@@ -85,14 +85,23 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      replyEvent : 'getReplyEvent'
+    }),
     name () {
       return this.$route.name
     },
     list () {
       return this.$route.matched.filter((route) => route.name || route.meta.label )
-    }
+    },
+    
   },
   watch: {
+    replyEvent(set) {
+        this.$notification.show(set.ticket_id, {
+            body: 'You got the reply'
+        }, {})
+    }
     // getNotif(set) {
     //   // console.log(set)
     //   if(set) {
@@ -117,8 +126,7 @@ export default {
     // }
   },
   methods: {
-    // ...mapActions(['GET_NOTIFICATION','GET_NOTIFICATION_GROUP','ASSIGN_OPERATOR',
-    //   'CLOSE_CHAT']),
+    ...mapActions(['GET_REPLY_EVENT']),
     // setClicked(items) {
     //     let a = items.filter((v) => {
     //       return !v.active_operator
@@ -179,6 +187,7 @@ export default {
     // }
   },
   mounted() {
+    this.GET_REPLY_EVENT()
     // this.socket.on('get_message', function(data) {
     //   alert(data)
     // })
