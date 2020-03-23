@@ -28,7 +28,7 @@
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
-                        <!-- <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p> -->
+                        <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
                         <b-form-textarea
@@ -156,7 +156,8 @@ export default {
         users : 'getUsers',
         currentOperator : 'getCurrentOperator',
         isLoad : 'getIsLoad',
-        messageEvent : 'getMessageEvent'
+        messageEvent : 'getMessageEvent',
+        visitor_typing : 'getVisitorTyping'
     }),
     data() {
         return {
@@ -192,7 +193,7 @@ export default {
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'OPERATOR_TYPING']),
+            'OPERATOR_TYPING','VISITOR_TYPING']),
         getChat(id) {
             this.FIND_CHAT_BY_ID({
                 id : id
@@ -313,6 +314,7 @@ export default {
             role : "customer service",
             website : localStorage.getItem('current_chat_web')
         })
+        this.VISITOR_TYPING()
     },
 }
 </script>

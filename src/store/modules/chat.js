@@ -10,7 +10,8 @@ const state = {
     message_event : {},
     reply_event : {},
     new_ticket_event : {},
-    notifs : []
+    notifs : [],
+    visitor_typing : false
 }
 
 const getters = {
@@ -20,7 +21,8 @@ const getters = {
     getMessageEvent : (state) => state.message_event,
     getReplyEvent : (state) => state.reply_event,
     getNewTicketEvent : (state) => state.new_ticket_event,
-    getNotifs : (state) => state.notifs
+    getNotifs : (state) => state.notifs,
+    getVisitorTyping : (state) => state.visitor_typing
 }
 
 const mutations = {
@@ -44,6 +46,9 @@ const mutations = {
     },
     setNotifs (state, payload) {
         state.notifs = payload
+    },
+    setVisitorTyping (state, payload) {
+        state.visitor_typing = payload
     }
 }
 
@@ -294,6 +299,12 @@ const actions = {
     },
     OPERATOR_TYPING : ({dispatch}, payload) => {
         socket.emit('operator_typing', payload)
+    },
+    VISITOR_TYPING : ({commit}) => {
+        socket.on('get_visitor_typing', res => {
+            console.log(res)
+            commit('setVisitorTyping', res)
+        })
     }
 }
 
