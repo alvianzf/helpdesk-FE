@@ -172,6 +172,7 @@ const actions = {
         form.set('id', payload.id)
         postImg('api/chat/attach/operator', form)
         .then(res => {
+            socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
         }).catch(error => {
             commit('SET_RESPONSE', {
