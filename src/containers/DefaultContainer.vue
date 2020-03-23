@@ -111,7 +111,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['GET_REPLY_EVENT','GET_NEW_TICKET_EVENT','GET_NOTIF','ASSIGN_OPERATOR']),
+    ...mapActions(['GET_REPLY_EVENT','GET_NEW_TICKET_EVENT','GET_NOTIF',
+      'ASSIGN_OPERATOR','GET_NOTIF_EVENT','CLOSE_CHAT']),
     setClicked(items) {
         let a = items.filter((v) => {
           return !v.active_operator
@@ -163,13 +164,17 @@ export default {
         
     }
   },
-  mounted() {
-    this.GET_REPLY_EVENT()
-    this.GET_NEW_TICKET_EVENT()
-    this.GET_NOTIF({
+  async mounted() {
+    await this.GET_NOTIF({
       role : localStorage.getItem('user_role'),
       website : localStorage.getItem('user_website')
     })
+    await this.GET_NOTIF_EVENT({
+      role : localStorage.getItem('user_role'),
+      website : localStorage.getItem('user_website')
+    })
+    await this.GET_REPLY_EVENT()
+    await this.GET_NEW_TICKET_EVENT()
   }
 }
 </script>

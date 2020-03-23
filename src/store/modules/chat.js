@@ -134,6 +134,7 @@ const actions = {
             dispatch('GET_NEW_LIST_GLOBAL')
             dispatch('GET_NEW_LIST_GROUP', payload)
             dispatch('GET_CURRENT_LIST')
+            socket.emit('notif_event', "new operator")
             commit('setCurrentOperator', response.data)
         }).catch(error => {
             console.log(error)
@@ -194,6 +195,7 @@ const actions = {
                 success : true,
                 message : res.data.message
             })
+            socket.emit('notif_event', "new operator")
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -279,6 +281,12 @@ const actions = {
                 success : false,
                 message : error.response.data.message
             })
+        })
+    },
+    GET_NOTIF_EVENT : ({dispatch}, payload) => {
+        socket.on('get_notif_event', res => {
+            console.log(res)
+            dispatch('GET_NOTIF', payload)
         })
     }
 }
