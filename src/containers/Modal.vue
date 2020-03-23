@@ -28,7 +28,7 @@
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
-                        <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
+                        <!-- <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p> -->
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
                         <b-form-textarea
@@ -155,7 +155,8 @@ export default {
         response : 'getResponse',
         users : 'getUsers',
         currentOperator : 'getCurrentOperator',
-        visitor_typing : 'getVisitorTyping'
+        isLoad : 'getIsLoad',
+        messageEvent : 'getMessageEvent'
     }),
     data() {
         return {
@@ -177,12 +178,20 @@ export default {
                 website : localStorage.getItem('current_chat_web')
             })
             this.scrollToEnd()
+        },
+        messageEvent(set) {            
+            if(set.id == this.chat._id) {
+                this.FIND_CHAT_BY_ID({
+                    id : this.chat._id
+                })
+                
+            }
         }
     },
     methods: {
-        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR',
+        ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
-            'FETCH_OPERATOR_TYPING','GET_VISITOR_TYPING']),
+            'FETCH_OPERATOR_TYPING']),
         getChat(id) {
             this.FIND_CHAT_BY_ID({
                 id : id
@@ -190,33 +199,33 @@ export default {
             this.scrollToEnd()
         },
         sendTyping(e) {
-            if(this.form.message != "") {
-                this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
-            } else {
-                this.FETCH_OPERATOR_TYPING(null)
-            }
+            // if(this.form.message != "") {
+            //     this.FETCH_OPERATOR_TYPING(localStorage.getItem('user_name'))
+            // } else {
+            //     this.FETCH_OPERATOR_TYPING(null)
+            // }
         },
         scrollToEnd(e) {
             $('.chat-box').animate({
 				scrollTop: 999999999999999999
 			}, 'slow');
         },
-        sendMessage(e) {
+        async sendMessage(e) {
             e.preventDefault();
             
             if(this.form.message) {
-                this.SEND_MESSAGE({
+                await this.SEND_MESSAGE({
                     message : this.form.message,
                     id : this.singlechat._id,
                     website : localStorage.getItem('website_id')
                 })
-                this.FETCH_OPERATOR_TYPING(null)
+                // this.FETCH_OPERATOR_TYPING(null)
                 this.form.message = null
-                this.SET_READ({
+                await this.SET_READ({
                     id : this.singlechat._id,
                     website : localStorage.getItem('current_chat_web')
                 })
-                this.scrollToEnd()
+                await this.scrollToEnd()
             }
         },
         date: function (date) {
@@ -262,10 +271,17 @@ export default {
             
         },
         setRead(e) {
-            this.SET_READ({
-                id : this.singlechat._id,
-                website : localStorage.getItem('current_chat_web')
-            })
+            if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+                this.SET_READ_OPERATOR({
+                    id : this.singlechat._id,
+                    website : localStorage.getItem('current_chat_web')
+                })
+            } else {
+                this.SET_READ({
+                    id : this.singlechat._id
+                })
+            }
+            
             this.scrollToEnd()
         },
         transferChat(e) {
@@ -286,12 +302,11 @@ export default {
     },
     mounted() {
         // $(this.$el).on('show.bs.modal', this.getChat(this.id));
-        console.log(this.id)
-        this.GET_VISITOR_TYPING()
-        // this.GET_USER_AS_ROLE_AS_WEB({
-        //     role : "customer service",
-        //     website : localStorage.getItem('current_chat_web')
-        // })
+        this.GET_MESSAGE_EVENT()
+        this.GET_USER_AS_ROLE_AS_WEB({
+            role : "customer service",
+            website : localStorage.getItem('current_chat_web')
+        })
     },
 }
 </script>
