@@ -116,15 +116,17 @@ const actions = {
         .then(response => {
             if(response.data.code != 443) {
                 dispatch('SEND_MESSAGE_SYSTEM', {
-                    message : `${res.data} joined this chat`,
+                    message : `${response.data.data.active_operator.name} joined this chat`,
                     id : payload.id
                 })
+                
             }
             dispatch('GET_NEW_LIST_GLOBAL')
             dispatch('GET_NEW_LIST_GROUP', payload)
             dispatch('GET_CURRENT_LIST')
-            commit('setCurrentOperator', res.data)
+            commit('setCurrentOperator', response.data)
         }).catch(error => {
+            console.log(error)
             commit('SET_RESPONSE', {
                 success : false,
                 message : error.response.data.message
@@ -147,6 +149,7 @@ const actions = {
     SEND_MESSAGE_SYSTEM : ({commit, dispatch}, payload) => {
         post('api/chat/new/message/system', payload)
         .then(res => {
+            socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
         }).catch(error => {
             
