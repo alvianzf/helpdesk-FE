@@ -86,7 +86,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      replyEvent : 'getReplyEvent'
+      replyEvent : 'getReplyEvent',
+      newTicketEvent : 'getNewTicketEvent'
     }),
     name () {
       return this.$route.name
@@ -101,6 +102,12 @@ export default {
         this.$notification.show(set.ticket_id, {
             body: 'You got the reply'
         }, {})
+    },
+    newTicketEvent(set) {
+      console.log(set)
+      this.$notification.show(set.ticket_id, {
+        body: 'You got the ticket'
+      }, {})
     }
     // getNotif(set) {
     //   // console.log(set)
@@ -126,7 +133,7 @@ export default {
     // }
   },
   methods: {
-    ...mapActions(['GET_REPLY_EVENT']),
+    ...mapActions(['GET_REPLY_EVENT','GET_NEW_TICKET_EVENT']),
     // setClicked(items) {
     //     let a = items.filter((v) => {
     //       return !v.active_operator
@@ -188,6 +195,7 @@ export default {
   },
   mounted() {
     this.GET_REPLY_EVENT()
+    this.GET_NEW_TICKET_EVENT()
     // this.socket.on('get_message', function(data) {
     //   alert(data)
     // })

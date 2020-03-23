@@ -8,7 +8,8 @@ const state = {
     chats : [],
     current_operator : null,
     message_event : {},
-    reply_event : {}
+    reply_event : {},
+    new_ticket_event : {}
 }
 
 const getters = {
@@ -16,7 +17,8 @@ const getters = {
     getChats : (state) => state.chats,
     getCurrentOperator : (state) => state.current_operator,
     getMessageEvent : (state) => state.message_event,
-    getReplyEvent : (state) => state.reply_event
+    getReplyEvent : (state) => state.reply_event,
+    getNewTicketEvent : (state) => state.new_ticket_event
 }
 
 const mutations = {
@@ -34,6 +36,9 @@ const mutations = {
     },
     setReplyEvent (state, payload) {
         state.reply_event = payload
+    },
+    setNewTicketEvent (state, payload) {
+        state.new_ticket_event = payload
     }
 }
 
@@ -253,6 +258,11 @@ const actions = {
     GET_REPLY_EVENT : ({commit}) => {
         socket.on('get_reply_client', res => {
             commit('setReplyEvent',res.data)
+        })
+    },
+    GET_NEW_TICKET_EVENT : ({commit}) => {
+        socket.on('get_new_ticket', res => {
+            commit('setNewTicketEvent',res.data)
         })
     }
 }
