@@ -194,7 +194,6 @@ export default {
             }
         },
         replyEvent(set) {
-            console.log(set)
             this.$notification.show(set.ticket_id, {
                 body: 'You got the reply'
             }, {})
