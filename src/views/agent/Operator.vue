@@ -194,10 +194,10 @@ export default {
     data() {
         return {
             form : {
-                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : null
+                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : ""
             },
             form_edit : {
-                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : null
+                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : ""
             },
             current_id : localStorage.getItem('user_id'),
             user_role : localStorage.getItem('user_role'),
