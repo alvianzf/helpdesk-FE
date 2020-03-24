@@ -103,6 +103,10 @@ export default {
         await this.$notification.show(set.ticket_id, {
             body: 'You got the reply'
         }, {})
+        var sound = new Howl({
+          src: [ding]
+        });
+        sound.play();
         await this.GET_NOTIF({
           role : localStorage.getItem('user_role'),
           website : localStorage.getItem('user_website')
@@ -112,6 +116,10 @@ export default {
       await this.$notification.show(set.ticket_id, {
         body: 'You got the ticket'
       }, {})
+      var sound = new Howl({
+        src: [ding]
+      });
+      sound.play();
       await this.GET_NOTIF({
         role : localStorage.getItem('user_role'),
         website : localStorage.getItem('user_website')
