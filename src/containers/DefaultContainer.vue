@@ -33,7 +33,7 @@
             </button>
             <p>{{ notif.ticket_id }}</p>
           </div>
-          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id)">
+          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)">
             <span class="badge-number">{{ notif.unreadtotal }}</span>
             <button class="btn-close" @click="endChat(notif._id)"> 
               <i class="fa fa-close"></i>
@@ -134,15 +134,15 @@ export default {
           return !v.active_operator
         })
 
-        this.goToChatAndAssign(a[0]._id)
+        this.goToChatAndAssign(a[0]._id, a[0].website)
     },
-    goToChat(id) {
+    goToChat(id, website) {
       this.selected = id
       this.clicked = !this.clicked
-      this.$refs.notifChatDetail.getChat(id)
+      this.$refs.notifChatDetail.getChat(id, website)
         this.$bvModal.show('notifchatdetail')
     },
-    goToChatAndAssign(id) {
+    goToChatAndAssign(id, website) {
       this.selected = id
       this.clicked = !this.clicked
       this.ASSIGN_OPERATOR({
@@ -150,7 +150,7 @@ export default {
           operator : localStorage.getItem('user_id'),
           website : localStorage.getItem('current_chat_web')
       })
-      this.$refs.notifChatDetail.getChat(id)
+      this.$refs.notifChatDetail.getChat(id, website)
       this.$bvModal.show('notifchatdetail')
     },
     getUnreadTotal(items) 

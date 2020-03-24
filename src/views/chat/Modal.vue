@@ -179,7 +179,6 @@ export default {
     watch : {
         chat(set) {
             this.singlechat = set
-            localStorage.setItem('current_chat_web', set.website._id)
             this.SET_READ({
                 id : set._id,
                 website : localStorage.getItem('current_chat_web')
@@ -207,6 +206,7 @@ export default {
                 id : id
             })
             await this.scrollToEnd()
+            localStorage.setItem('current_chat_web', this.singlechat.website._id)
         },
         sendTyping(e) {
             if(this.form.message != "") {
