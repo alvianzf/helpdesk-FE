@@ -18,13 +18,18 @@
                             <div class="visitor-chat" v-if="message.is_guest">
                                 <span class="visitor-title"> Visitor </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
-                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 250px;"/>
+                                <a :href="`${url}/${message.media}`" target="__blank" v-else>
+                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 250px;"/>
+                                </a>
+                                
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                             <div class="operator-chat" v-if="message.is_operator">
                                 <span class="operator-title"> {{ singlechat.active_operator ? singlechat.active_operator.name : null }} </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
-                                <img v-bind:src="`${url}/${message.media}`" v-else class="img-responsive" style="width: 250px;"/>
+                                <a :href="`${url}/${message.media}`" target="__blank" v-else>
+                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 250px;"/>
+                                </a>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
                         </div>
