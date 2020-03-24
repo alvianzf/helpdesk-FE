@@ -117,7 +117,7 @@ export default {
             return this.chats.length
         },
         async onRowSelected(record, index) {
-            await this.$refs.modalDetail.getChat(record.id)
+            await this.$refs.modalDetail.getChat(record.id, record.website)
             this.$bvModal.show('chatdetail')
         }
     },

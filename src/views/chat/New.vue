@@ -80,7 +80,7 @@ export default {
             return this.chats.length
         },
         onRowSelected(record, index) {
-            this.$refs.modalDetail.getChat(record._id)
+            this.$refs.modalDetail.getChat(record._id, record.website)
             this.ASSIGN_OPERATOR({
                 id : record._id,
                 operator : localStorage.getItem('user_id'),

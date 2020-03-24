@@ -177,13 +177,9 @@ export default {
         }
     },
     watch : {
-        chat(set) {
+        async chat(set) {
             this.singlechat = set
-            this.SET_READ({
-                id : set._id,
-                website : localStorage.getItem('current_chat_web')
-            })
-            this.scrollToEnd()
+            await this.scrollToEnd()
         },
         isLoad(set) {
         
@@ -201,12 +197,17 @@ export default {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','OPERATOR_TYPING',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_ONLINE_AGENT','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR',
             'VISITOR_TYPING']),
-        async getChat(id) {
-            await this.CHAT_BY_ID({
+        async getChat(id, website) {
+            await this.FIND_CHAT_BY_ID({
                 id : id
             })
+            await this.SET_READ({
+                id : id,
+                website : website,
+                role : localStorage.getItem('user_role')
+            })
             await this.scrollToEnd()
-            localStorage.setItem('current_chat_web', this.singlechat.website._id)
+            localStorage.setItem('current_chat_web', website)
         },
         sendTyping(e) {
             if(this.form.message != "") {
