@@ -144,6 +144,10 @@ span.is-danger {
   padding: 0;
 }
 
+.modal.show .modal-content {
+  height: 97%;
+}
+
 @media (min-width: 992px) {
   .modal-lg, .modal-xl {
     max-width: 95%;
