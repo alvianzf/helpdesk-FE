@@ -62,7 +62,8 @@ export default {
             position : 'top-right'
           })
           setTimeout(() => {
-            this.$router.push('/')
+            window.location.href='/'
+
           }, 100)
       } else {
           this.$toast.open({
