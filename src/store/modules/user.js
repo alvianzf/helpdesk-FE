@@ -32,10 +32,11 @@ const actions = {
             commit('setUsers', res.data.data)
             commit('SET_LOADING', false)
         }).catch(error => {
-            commit('SET_RESPONSE', {
-                success : false,
-                message : error.response.data.message
-            })
+            console.log(error)
+            // commit('SET_RESPONSE', {
+            //     success : false,
+            //     message : error.response.data.message
+            // })
             commit('SET_LOADING', false)
         }) 
     },
