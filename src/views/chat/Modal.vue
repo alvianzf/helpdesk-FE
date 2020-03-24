@@ -159,7 +159,7 @@ export default {
     computed : mapGetters({
         chat : 'getChat',
         response : 'getResponse',
-        users : 'getUsers',
+        users : 'getOnlineAgents',
         currentOperator : 'getCurrentOperator',
         visitor_typing : 'getVisitorTyping',
         isLoad : 'getIsLoad',
@@ -200,7 +200,7 @@ export default {
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','OPERATOR_TYPING',
-            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR',
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_ONLINE_AGENT','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR',
             'VISITOR_TYPING']),
         async getChat(id) {
             await this.CHAT_BY_ID({
@@ -316,7 +316,7 @@ export default {
     mounted() {
         // this.GET_VISITOR_TYPING()
         this.GET_MESSAGE_EVENT()
-        this.GET_USER_AS_ROLE_AS_WEB({
+        this.GET_ONLINE_AGENT({
             role : "customer service",
             website : localStorage.getItem('current_chat_web')
         })

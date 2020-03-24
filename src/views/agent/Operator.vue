@@ -9,7 +9,7 @@
                         variant="primary"
                         size="md"
                         class="mg-b-15"
-                    >Add New Admin</b-button>
+                    >Add New Operator</b-button>
                     <b-table responsive="sm" :items="users" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true">
                         <template v-slot:cell(website)="data">
                             {{ data.item.website ? data.item.website.name : null }}
@@ -62,9 +62,17 @@
                             v-model="form.password" v-validate="'required'" />
                         <span v-show="errors.has('password')" class="help is-danger text-red">{{ errors.first('password') }}</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" v-if="user_role == 'super admin'">
                         <label>Website </label>
                         <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form.website" name="manufacturing" v-validate="'required'">
+                            <option selected="selected" value="">Choose Website</option>
+                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                        </select>
+                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
+                    </div>
+                    <div class="form-group" v-else>
+                        <label>Website </label>
+                        <select disabled v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form.website" name="manufacturing" v-validate="'required'">
                             <option selected="selected" value="">Choose Website</option>
                             <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
                         </select>
@@ -104,9 +112,17 @@
                             v-model="form_edit.username" v-validate="'required'" />
                         <span v-show="errors.has('username')" class="help is-danger text-red">{{ errors.first('username') }}</span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" v-if="user_role == 'super admin'">
                         <label>Website </label>
                         <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form_edit.website" name="manufacturing" v-validate="'required'">
+                            <option selected="selected" value="">Choose Website</option>
+                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                        </select>
+                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
+                    </div>
+                    <div class="form-group" v-else>
+                        <label>Website </label>
+                        <select disabled v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form_edit.website" name="manufacturing" v-validate="'required'">
                             <option selected="selected" value="">Choose Website</option>
                             <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
                         </select>
@@ -178,12 +194,13 @@ export default {
     data() {
         return {
             form : {
-                website : ""
+                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : null
             },
             form_edit : {
-                website : ""
+                website : localStorage.getItem('user_role') == "administrator" ? localStorage.getItem('user_website') : null
             },
             current_id : localStorage.getItem('user_id'),
+            user_role : localStorage.getItem('user_role'),
             currentPage: 1,
             perPage : 10,
             fields: [
@@ -281,14 +298,14 @@ export default {
             return this.users.length
         }
     },
-    mounted() {
+    async mounted() {
         if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
-            this.GET_USER_AS_ROLE_AS_WEB({
+            await this.GET_USER_AS_ROLE_AS_WEB({
                 role : "customer service",
                 website : localStorage.getItem('user_website')
             }).then(() => this.isLoad = true)
-        }else {
-            this.GET_USER_AS_ROLE({
+        } else {
+            await this.GET_USER_AS_ROLE({
                 role : "customer service"
             }).then(() => this.isLoad = true)
         }

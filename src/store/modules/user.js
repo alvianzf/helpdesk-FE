@@ -2,12 +2,14 @@ import { get, post, put, destroy } from '@/api'
 
 const state = {
     user : {},
-    users : []
+    users : [],
+    online_agents : []
 }
 
 const getters = {
     getUser : (state) => state.user,
-    getUsers : (state) => state.users
+    getUsers : (state) => state.users,
+    getOnlineAgents : (state) => state.online_agents
 }
 
 const actions = {
@@ -30,6 +32,21 @@ const actions = {
         post('api/auth/list/asroleasweb', payload)
         .then(res => {
             commit('setUsers', res.data.data)
+            commit('SET_LOADING', false)
+        }).catch(error => {
+            console.log(error)
+            // commit('SET_RESPONSE', {
+            //     success : false,
+            //     message : error.response.data.message
+            // })
+            commit('SET_LOADING', false)
+        }) 
+    },
+    GET_ONLINE_AGENT : ({commit}, payload) => {
+        commit('SET_LOADING', true)
+        post('api/auth/list/asroleasweb', payload)
+        .then(res => {
+            commit('setOnlineAgents', res.data.data)
             commit('SET_LOADING', false)
         }).catch(error => {
             console.log(error)
@@ -187,6 +204,9 @@ const mutations = {
     setUser (state, payload) {
         state.user = payload
     },
+    setOnlineAgents (state, payload) {
+        state.online_agents = payload
+    }
 }
 
 export default {

@@ -158,7 +158,7 @@ export default {
     computed : mapGetters({
         chat : 'getChat',
         response : 'getResponse',
-        users : 'getUsers',
+        users : 'getOnlineAgents',
         currentOperator : 'getCurrentOperator',
         isLoad : 'getIsLoad',
         messageEvent : 'getMessageEvent',
@@ -197,7 +197,7 @@ export default {
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
-            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_USER_AS_ROLE_AS_WEB','TRANSFER_CHAT','SET_READ',
+            'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_ONLINE_AGENT','TRANSFER_CHAT','SET_READ',
             'OPERATOR_TYPING','VISITOR_TYPING']),
         getChat(id) {
             this.FIND_CHAT_BY_ID({
@@ -315,7 +315,7 @@ export default {
     mounted() {
         // $(this.$el).on('show.bs.modal', this.getChat(this.id));
         this.GET_MESSAGE_EVENT()
-        this.GET_USER_AS_ROLE_AS_WEB({
+        this.GET_ONLINE_AGENT({
             role : "customer service",
             website : localStorage.getItem('current_chat_web')
         })

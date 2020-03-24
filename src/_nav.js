@@ -87,7 +87,7 @@ if(role == "super admin") {
       }
     }
   ]
-} else if( role == "admin") {
+} else if( role == "administrator") {
   var items = [
     {
       title: true,
@@ -134,40 +134,11 @@ if(role == "super admin") {
       icon: 'icon-people',
       children: [
         {
-          name: 'Admin',
-          url: '/agent/admin',
-          icon : 'fa fa-circle'
-        },
-        {
           name: 'Operator',
           url: '/agent/operator',
           icon : 'fa fa-circle'
         }
       ]
-    },
-    {
-      name: 'Website',
-      url: '/website',
-      icon: 'fa fa-globe',
-      badge: {
-        variant: 'primary'
-      }
-    },
-    {
-      name: 'Widget',
-      url: '/widget',
-      icon: 'fa fa-briefcase',
-      badge: {
-        variant: 'primary'
-      }
-    },
-    {
-      name: 'Suggestion',
-      url: '/suggestion',
-      icon: 'fa fa-question',
-      badge: {
-        variant: 'primary'
-      }
     }
   ]
 } else {
