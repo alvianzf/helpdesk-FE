@@ -117,7 +117,8 @@ export default {
         body: 'You got the ticket'
       }, {})
       var sound = new Howl({
-        src: [ding]
+        src: [ding],
+        preload : false
       });
       sound.play();
       await this.GET_NOTIF({
