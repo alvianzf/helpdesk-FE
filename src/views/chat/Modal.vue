@@ -20,7 +20,7 @@
                                 <span class="visitor-title"> Visitor </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
                                 <a :href="`${url}/${message.media}`" target="__blank" v-else>
-                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 250px;"/>
+                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 150px; height: 150px;"/>
                                 </a>
                                 
                                 <span class="time"> {{ date(message.createdAt) }} </span>
@@ -29,7 +29,7 @@
                                 <span class="operator-title"> {{ singlechat.active_operator ? singlechat.active_operator.name : null }} </span>
                                 <span v-if="!message.media"> {{ message.message }} </span>
                                 <a :href="`${url}/${message.media}`" target="__blank" v-else>
-                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 250px;"/>
+                                    <img v-bind:src="`${url}/${message.media}`"  class="img-responsive" style="width: 150px; height: 150px;"/>
                                 </a>
                                 <span class="time"> {{ date(message.createdAt) }} </span>
                             </div>
