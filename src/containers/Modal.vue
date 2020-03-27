@@ -314,6 +314,7 @@ export default {
             website : localStorage.getItem('current_chat_web')
         })
         this.VISITOR_TYPING()
+        this.scrollToEnd()
     },
 }
 </script>
