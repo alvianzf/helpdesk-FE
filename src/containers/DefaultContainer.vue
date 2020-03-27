@@ -25,7 +25,7 @@
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" :class="notifs.length >= 1 && notifs.length <= 4 ? 'float-left normal-width' : notifs.length >= 5 && notifs.length <= 7 ? 'float-left rem10' : notifs.length >= 8 && notifs.length <= 11 ? 'float-left rem7' : notifs.length >= 12 ? 'float-left rem5' :'float-left rem3'">
+          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" :class="notifs.length >= 1 && notifs.length <= 4 ? 'float-left normal-width' : notifs.length >= 5 && notifs.length <= 7 ? 'float-left rem10' : notifs.length >= 8 && notifs.length <= 11 ? 'float-left rem7' : notifs.length >= 12 && notifs.length <= 15 ? 'float-left rem5' :'float-left rem3'">
             <div v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
