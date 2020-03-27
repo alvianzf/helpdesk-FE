@@ -25,22 +25,22 @@
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-        <span v-for="notif in notifs" :key="notif._id">
-          <div class="new-list" v-if="notif.is_minimize == true && notif.active_operator == null" @click="goToChatAndAssign(notif._id)">
-            <span class="badge-number">{{ notif.unreadtotal }}</span>
-            <button class="btn-close" @click="endChat(notif._id)"> 
-              <i class="fa fa-close"></i>
-            </button>
-            <p>{{ notif.ticket_id }}</p>
+          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" :class="notifs.length <= 4 ? 'float-left normal-width' : notifs.length >= 5 ? 'float-left rem10' : notifs.length >= 8 ? 'float-left rem7' : notifs.length >= 12 ? 'float-left rem5' :'float-left rem3'">
+            <div v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list">
+              <span class="badge-number">{{ notif.unreadtotal }}</span>
+              <button class="btn-close" @click="endChat(notif._id)"> 
+                <i class="fa fa-close"></i>
+              </button>
+              <p>{{ notif.ticket_id }}</p>
+            </div>
+            <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)">
+              <span class="badge-number">{{ notif.unreadtotal }}</span>
+              <button class="btn-close" @click="endChat(notif._id)"> 
+                <i class="fa fa-close"></i>
+              </button>
+              <p>{{ notif.ticket_id }}</p>
+            </div>
           </div>
-          <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)">
-            <span class="badge-number">{{ notif.unreadtotal }}</span>
-            <button class="btn-close" @click="endChat(notif._id)"> 
-              <i class="fa fa-close"></i>
-            </button>
-            <p>{{ notif.ticket_id }}</p>
-          </div>
-        </span>
       </div>
       <Modal ref="notifChatDetail" :id="selected"/>
   </div>

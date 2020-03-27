@@ -22,6 +22,62 @@ span.is-danger {
     overflow: auto;
     white-space: nowrap;
 }
+
+.float-left {
+  float : left;
+}
+
+.rem10 .current-list{
+  width: 10rem;
+}
+
+.rem7 .current-list{
+  float : left;
+  width: 7rem;
+}
+
+.rem5 .current-list{
+  float : left;
+  width: 5rem;
+}
+
+.rem3 .current-list{
+  float : left;
+  width: 3rem;
+}
+
+@media(min-width : 767px)and (max-width : 1200px) {
+  .rem10 .current-list{
+    width: 8rem;
+  }
+  
+  .rem7 .current-list{
+    float : left;
+    width: 5rem;
+  }
+  
+  .rem5 .current-list{
+    float : left;
+    width: 3rem;
+  }
+  
+  .rem3 .current-list{
+    float : left;
+    width: 2rem;
+  }
+}
+
+// .notification-list div.float-left:first-child:nth-last-child(n + 5) ~ div.float-left > .current-list {
+//   width: 10rem;
+// }
+
+// .notification-list div.float-left:first-child:nth-last-child(n + 8) ~ div.float-left > .current-list {
+//   width: 7rem;
+// }
+
+// .notification-list div.float-left:first-child:nth-last-child(n + 12) ~ div.float-left > .current-list {
+//   width: 5rem;
+// }
   
   .new-list {
     background: #f18025;
@@ -35,6 +91,7 @@ span.is-danger {
     p {
       font-size: 12px;
       margin-bottom: 0;
+      overflow : auto;
     }
     a {
       color: #fff;
@@ -54,12 +111,12 @@ span.is-danger {
     display: inline-block;
     margin-right:5px;
     margin-bottom: 5px;
-    float: left;
-    width: 16%;
+    width: auto;
     cursor: pointer;
     p {
       font-size: 12px;
       margin-bottom: 0;
+      overflow: auto;
     }
   
     a {
