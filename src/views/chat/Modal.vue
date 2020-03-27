@@ -210,7 +210,7 @@ export default {
             localStorage.setItem('current_chat_web', website)
         },
         sendTyping(e) {
-            if(this.form.message != "") {
+            if(this.form.message != "" || this.form.message == null || this.form.message == undefined) {
                 this.OPERATOR_TYPING(true)
             } else {
                 this.OPERATOR_TYPING(false)
@@ -236,14 +236,15 @@ export default {
                     website : localStorage.getItem('current_chat_web'),
                     role : localStorage.getItem('user_role')
                 })
+                await this.OPERATOR_TYPING(false)
+                await this.scrollToEnd()
                 this.form.message = null
-                this.scrollToEnd()
             }
         },
         date: function (date) {
             return moment(date).format('h:mm a');
         },
-        sendImage(e) {
+        async sendImage(e) {
             e.preventDefault();
             const size =  (e.target.files[0].size / 1024 / 1024).toFixed(2); 
 
@@ -254,13 +255,14 @@ export default {
                     attach : e.target.files[0],
                     id : this.singlechat._id
                 }
-                this.SEND_MESSAGE_IMAGE(form)
-                this.SET_READ({
+                await this.SEND_MESSAGE_IMAGE(form)
+                await this.SET_READ({
                     id : this.singlechat._id,
                     website : localStorage.getItem('current_chat_web'),
                     role : localStorage.getItem('user_role')
                 })
-                this.scrollToEnd()
+                await this.scrollToEnd()
+                await this.OPERATOR_TYPING(false)
             } 
         },
         endChat(e) {

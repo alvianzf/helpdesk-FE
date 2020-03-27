@@ -206,7 +206,7 @@ export default {
             localStorage.setItem('current_chat_web', website)
         },
         sendTyping(e) {
-            if(this.form.message != "") {
+            if(this.form.message != "" || this.form.message == null || this.form.message == undefined) {
                 this.OPERATOR_TYPING(true)
             } else {
                 this.OPERATOR_TYPING(false)
@@ -234,6 +234,7 @@ export default {
                     role : localStorage.getItem('user_role')
                 })
                 await this.scrollToEnd()
+                await this.OPERATOR_TYPING(false)
             }
         },
         date: function (date) {
@@ -258,6 +259,7 @@ export default {
                     role : localStorage.getItem('user_role')
                 })
                 this.scrollToEnd()
+                this.OPERATOR_TYPING(false)
             } 
             
         },
