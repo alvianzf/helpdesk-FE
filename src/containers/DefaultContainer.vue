@@ -25,7 +25,7 @@
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" :class="notifs.length >= 1 && notifs.length <= 4 ? 'float-left normal-width' : notifs.length >= 5 && notifs.length <= 7 ? 'float-left rem10' : notifs.length >= 8 && notifs.length <= 11 ? 'float-left rem7' : notifs.length >= 12 && notifs.length <= 15 ? 'float-left rem5' :'float-left rem3'">
+          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" class="float-left mw-10" :style="{width : `${child_width}%` }" >
             <div v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
@@ -81,7 +81,8 @@ export default {
       show: false, 
       current_user : localStorage.getItem('user_id'),
       clicked : false,
-      selected : null
+      selected : null,
+      child_width : null
     }
   },
   computed: {
@@ -163,6 +164,12 @@ export default {
       }
       return total
     },
+    getChildWidth() {
+      let width = 100 / this.notifs.length
+      
+      this.child_width = width.toFixed(2)
+      console.log(this.child_width)
+    },
     endChat(id) {
         this.$swal({
         title : 'Are You Sure To Close This Chat?',
@@ -192,6 +199,7 @@ export default {
     })
     await this.GET_REPLY_EVENT()
     await this.GET_NEW_TICKET_EVENT()
+    this.getChildWidth()
   }
 }
 </script>
