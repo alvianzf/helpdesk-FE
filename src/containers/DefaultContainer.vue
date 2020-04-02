@@ -126,6 +126,9 @@ export default {
         role : localStorage.getItem('user_role'),
         website : localStorage.getItem('user_website')
       })
+    },
+    notifs(set) {
+      this.getChildWidth()
     }
   },
   methods: {
@@ -201,7 +204,6 @@ export default {
     })
     await this.GET_REPLY_EVENT()
     await this.GET_NEW_TICKET_EVENT()
-    this.getChildWidth()
   }
 }
 </script>
