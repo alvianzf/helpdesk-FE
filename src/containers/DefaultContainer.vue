@@ -165,10 +165,12 @@ export default {
       return total
     },
     getChildWidth() {
-      let width = 100 / this.notifs.length
+      let width = 75 / this.notifs.length
       
       this.child_width = width.toFixed(2)
       console.log(this.child_width)
+      console.log(width)
+      console.log(this.notifs.length)
     },
     endChat(id) {
         this.$swal({
