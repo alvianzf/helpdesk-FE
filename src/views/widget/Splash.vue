@@ -15,7 +15,7 @@
                             <label for="">Image</label>
                             <picture-input @change="getImage" ref="splashscreen"
                                 :prefill="form.splashscreen ? `${url}/${form.splashscreen}` : null"
-                                name="splashscreen" margin="16" accept="image/jpeg,image/png" size="4" 
+                                name="splashscreen" margin="16" accept="image/*" size="4" 
                                 width="500" 
                                 height="500" buttonClass="btn"/>
                         </div>
