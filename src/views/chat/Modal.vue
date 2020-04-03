@@ -265,12 +265,11 @@ export default {
                 await this.OPERATOR_TYPING(false)
             } 
         },
-        endChat(e) {
-            this.CLOSE_CHAT({
+        async endChat(e) {
+            await this.CLOSE_CHAT({
                 id : this.singlechat._id
             })
-            this.scrollToEnd()
-            
+            await this.closeModal()
         },
         setRead(e) {
             this.SET_READ({

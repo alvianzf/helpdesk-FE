@@ -263,11 +263,11 @@ export default {
             } 
             
         },
-        endChat(e) {
-            this.CLOSE_CHAT({
+        async endChat(e) {
+            await this.CLOSE_CHAT({
                 id : this.singlechat._id
             })
-            
+            await this.closeModal()
         },
         setRead(e) {
             this.SET_READ({
