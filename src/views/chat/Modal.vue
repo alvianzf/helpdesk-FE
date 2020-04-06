@@ -37,12 +37,22 @@
                         <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
-                        <b-form-textarea
-                            id="textarea"
-                            rows="6"
-                            max-rows="6"
-                            v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping" @click="setRead"
-                        ></b-form-textarea>
+                        <textarea ref="textSuggestionRef" 
+                            v-model="form.message" 
+                            @blur="textSuggestionControl" 
+                            v-on:keyup="getReferralSuggestion(form.message)" 
+                            name="message" 
+                            class="form-control"
+                            rows="6"></textarea>
+                        <div v-show="textSuggestionState" id="content" ref="content">
+                            <div>
+                                <div :style="{'width' : textSuggestionWidth +'px'}" class="textArea-suggestion" id="scrollContent1">
+                                    <ul style="list-style:none;margin : 0;padding: 0;" class="scrollContent" id="ulScrollContent"  v-for="(refSearch, index) in referralSearch" v-bind:key="index">
+                                        <li @click.self="setReferralTest(refSearch)" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" :style="{'width' : textSuggestionWidth -40 +'px'}"  :class="inputValIdTemp == refSearch.id ? 'selectedWithArrow' : ''" >{{refSearch.text}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <div class="chat-attachment">
                             <div class="input-file-container">  
                                 <input class="input-file" id="my-file" type="file" @change="sendImage" accept="image/*"/>
@@ -163,7 +173,8 @@ export default {
         currentOperator : 'getCurrentOperator',
         visitor_typing : 'getVisitorTyping',
         isLoad : 'getIsLoad',
-        messageEvent : 'getMessageEvent'
+        messageEvent : 'getMessageEvent',
+        options : 'getSuggests'
     }),
     data() {
         return {
@@ -173,7 +184,15 @@ export default {
             transfer : {
                 operator : ""
             },
-            active_user : localStorage.getItem('user_id')
+            active_user : localStorage.getItem('user_id'),
+            textSuggestionState : false,
+            scrollVisible : false,
+            textSuggestionWidth : 0,
+            referralSearch : [],
+            selectedIndex : -1,
+            referralSearchSelectedId : 0,
+            inputValTemp : '',
+            inputValIdTemp : 0,
         }
     },
     watch : {
@@ -196,7 +215,7 @@ export default {
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT','OPERATOR_TYPING',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_ONLINE_AGENT','TRANSFER_CHAT','SET_READ','CHAT_BY_ID','SET_READ_OPERATOR',
-            'VISITOR_TYPING']),
+            'VISITOR_TYPING','GET_SUGGESTS']),
         async getChat(id, website) {
             await this.FIND_CHAT_BY_ID({
                 id : id
@@ -294,6 +313,66 @@ export default {
         },
         closeModal() {
             this.$refs['chat-modal'].hide()
+        },
+        getReferralSuggestion : function(query){
+            if(event.keyCode == 13) {
+                this.sendMessage(event)
+            } else {
+                $("#scrollContent1").scrollTop(0);
+                this.selectedIndex = -1;
+                this.textSuggestionWidth = this.$refs.textSuggestionRef.clientWidth;
+                var state = false;
+                if(query == ''){
+                    this.referralSearch = [];
+                    this.scrollVisible = false;
+                }
+                else{
+                    this.referralSearch = [];
+                    this.options.forEach(item => {
+                        if ((item.description.includes(query))) {
+                            state = true;
+                            if(state){
+                                var rTemp = {};
+                                rTemp.id = item.id;
+                                rTemp.text = item.description;
+                                this.referralSearch.push(rTemp);
+                                this.scrollVisible = true;
+                            }
+                            else this.selectedIndex = -1;
+                        }
+                        else{
+                            this.scrollVisible = false;
+                        }
+                    });
+                }
+                if(this.form.message == '' || this.form.message == null || this.referralSearch.length == 0)
+                {
+                    this.textSuggestionState = false;
+                }
+                else {
+                    this.textSuggestionState = true;
+                }
+            }
+            
+        },
+        setScroll: function(){
+            var selected = this.selectedIndex;
+            var elHeight = $("#ulScrollContent").height();
+            var scrollTop = $("#scrollContent1").scrollTop();
+            var viewport = scrollTop + $("#scrollContent1").height();
+            var elOffset = elHeight * selected;
+            if (elOffset < scrollTop || (elOffset + elHeight) > viewport)
+                $("#scrollContent1").scrollTop(elOffset);
+        },
+        setReferralTest : function(input){
+            this.form.message = input.text;
+            this.textSuggestionState = false;
+        },
+        textSuggestionControl : function () {
+            var _this = this;
+            setTimeout(function () {
+                _this.textSuggestionState = false;
+            },300)
         }
     },
     mounted() {
@@ -304,7 +383,94 @@ export default {
             website : localStorage.getItem('current_chat_web')
         })
         this.VISITOR_TYPING()
-        this.scrollToEnd()
+        this.scrollToEnd(),
+        this.GET_SUGGESTS()
     }
 }
 </script>
+<style scoped>
+    .form-element-margin-btm {
+        margin-bottom: 0px;
+    }
+    .margin-top-grid{
+        margin-top: 8px;
+    }
+    .textArea-suggestion{
+        position: absolute;
+        z-index: 9999;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 5px #1E90FF;
+        transition: all .15s ease;
+        -webkit-transform: translateY(-2px);
+        max-height: 150px;
+        min-height: 38px;
+        overflow-y: auto;
+    }
+    .textArea-suggestion ul li{
+        padding: 8px;
+        font-weight: normal;
+        border-bottom: 1px solid #FAFAFA;
+        color : #777777;
+    }
+    .textArea-suggestion ul li:hover{
+        background-color: #F5F5F5;
+        cursor: pointer;
+    }
+    .scrollContent{
+    }
+    .selectedWithArrow{
+        background-color: #F5F5F5;
+    }
+    textarea:focus {
+        background-color: #fefefe;
+        border: 1px solid #8a8a8a;
+        box-shadow: 0 0 5px #1E90FF;
+        outline: medium none;
+        transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
+    }
+    .form-element-margin-btm {
+        margin-bottom: 0px;
+    }
+    .margin-top-grid{
+        margin-top: 8px;
+    }
+    .textArea-suggestion{
+        position: absolute;
+        z-index: 9999;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 5px #1E90FF;
+        transition: all .15s ease;
+        -webkit-transform: translateY(-2px);
+        max-height: 150px;
+        min-height: 38px;
+        overflow-y: auto;
+    }
+
+    .textArea-suggestion ul li{
+        padding: 8px;
+        font-weight: normal;
+        border-bottom: 1px solid #FAFAFA;
+        color : #777777;
+    }
+
+    .textArea-suggestion ul li:hover{
+        background-color: #F5F5F5;
+        cursor: pointer;
+    }
+
+    .scrollContent{
+
+    }
+    .selectedWithArrow{
+        background-color: #F5F5F5;
+    }
+
+    textarea:focus {
+        background-color: #fefefe;
+        border: 1px solid #8a8a8a;
+        box-shadow: 0 0 5px #1E90FF;
+        outline: medium none;
+        transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
+
+    }
+</style>
