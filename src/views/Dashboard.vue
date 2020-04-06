@@ -38,6 +38,7 @@
 
 import { mapGetters, mapActions } from 'vuex'
 import { GChart } from 'vue-google-charts'
+import AutoComplete from '../components/AutoComplete'
 
 export default {
     name : 'default',
