@@ -81,7 +81,7 @@
                             <span v-show="errors.has('operator')" class="help is-danger text-red">{{ errors.first('operator') }}</span>
                         </div>
                         <b-button variant="primary" class="mt-15 btn-block btn-square" @click="transferChat">Transfer Chat</b-button>
-                        <b-button variant="danger" class="mt-15 btn-block btn-square" @click="endChat"> Close Chat</b-button>
+                        <b-button variant="danger" class="mt-15 btn-block btn-square" v-shortkey="['ctrl','.']" @shortkey="endChat" @click="endChat"> Close Chat</b-button>
                     </div>
 
                     <div class="meta-data">
