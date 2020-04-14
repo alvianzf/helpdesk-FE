@@ -25,21 +25,21 @@
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-          <div v-for="notif in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" class="float-left mw-10" :style="{width : `${child_width}%` }" >
-            <div v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list">
+          <div v-for="(notif, index) in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" class="float-left mw-10" :style="{width : `${child_width}%` }" >
+            <button v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list" v-shortkey="index <= 8 ? ['ctrl', (index + 1)] : null" @shortkey="goToChat(notif._id, notif.website)">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
                 <i class="fa fa-close"></i>
               </button>
               <p>{{ notif.ticket_id }}</p>
-            </div>
-            <div :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)">
+            </button>
+            <button :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)" v-shortkey="index <= 8 ? ['ctrl', (index + 1)] : null" @shortkey="goToChat(notif._id, notif.website)">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
                 <i class="fa fa-close"></i>
               </button>
               <p>{{ notif.ticket_id }}</p>
-            </div>
+            </button>
           </div>
       </div>
       <Modal ref="notifChatDetail" :id="selected"/>
@@ -180,6 +180,9 @@ export default {
             id : id
         })
         
+    },
+    theAction(id) {
+      console.log(`${id} pressed`)
     }
   },
   async mounted() {

@@ -41,6 +41,7 @@
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-picture-input": "^2.1.6",
     "vue-router": "^3.0.6",
+    "vue-shortkey": "^3.1.7",
     "vue-sweetalert2": "^3.0.1",
     "vue-toast-notification": "0.0.3",
     "vue2-editor": "^2.10.2",

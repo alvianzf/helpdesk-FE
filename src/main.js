@@ -28,6 +28,7 @@ Vue.use(VueSweetalert2, options)
 Vue.use(VueNativeNotification, {
   requestOnNotify: true
 })
+Vue.use(require('vue-shortkey'))
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
