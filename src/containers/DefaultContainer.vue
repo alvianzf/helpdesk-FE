@@ -21,7 +21,7 @@
       </AppAside>
     </div>
     <DefaultFooter/>
-    <div :class="getUnreadTotal(notifs) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" @click="setClicked(notifs)">
+    <div :class="getUnreadTotal(notifs) > 0 ? 'notification-button have-chat' : 'notification-button no-chat'" v-shortkey="['ctrl','`']" @shortkey="setClicked(notifs)" @click="setClicked(notifs)">
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
