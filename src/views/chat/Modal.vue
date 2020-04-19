@@ -37,22 +37,12 @@
                         <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
-                        <textarea ref="textSuggestionRef" 
-                            v-model="form.message" 
-                            @blur="textSuggestionControl" 
-                            v-on:keyup="getReferralSuggestion(form.message)" 
-                            name="message" 
-                            class="form-control"
-                            rows="6"></textarea>
-                        <div v-show="textSuggestionState" id="content" ref="content">
-                            <div>
-                                <div :style="{'width' : textSuggestionWidth +'px'}" class="textArea-suggestion" id="scrollContent1">
-                                    <ul style="list-style:none;margin : 0;padding: 0;" class="scrollContent" id="ulScrollContent"  v-for="(refSearch, index) in referralSearch" v-bind:key="index">
-                                        <li @click.self="setReferralTest(refSearch)" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" :style="{'width' : textSuggestionWidth -40 +'px'}"  :class="inputValIdTemp == refSearch.id ? 'selectedWithArrow' : ''" >{{refSearch.text}}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <b-form-textarea
+                            id="textarea"
+                            rows="6"
+                            max-rows="6"
+                            v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping" @click="setRead"
+                        ></b-form-textarea>
                         <div class="chat-attachment">
                             <div class="input-file-container">  
                                 <input class="input-file" id="my-file" type="file" @change="sendImage" accept="image/*"/>
