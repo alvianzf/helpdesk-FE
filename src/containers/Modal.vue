@@ -336,7 +336,6 @@ export default {
         this.scrollToEnd()
         this.GET_SUGGESTS()
         this.options.menuContainer = this.$refs.menuContainer;
-        console.log(this.form.message)
     },
 }
 </script>
