@@ -189,7 +189,7 @@ export default {
             },
             active_user : localStorage.getItem('user_id'),
             options : {
-                trigger: "@",
+                trigger: "/",
                 values: [
                     { key: "Collin Henderson", value: "syropian" },
                     { key: "Sarah Drasner", value: "sarah_edo" },
@@ -218,7 +218,14 @@ export default {
             }
         },
         suggests (set) {
-            this.options.values = set
+            let arr = []
+            set.forEach(v => {
+                arr.push({
+                    key : `${v.key} : ${v.description}`,
+                    description : v.description
+                })
+            })
+            this.options.values = arr
         }
     },
     methods: {
