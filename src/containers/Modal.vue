@@ -177,6 +177,7 @@ export default {
         isLoad : 'getIsLoad',
         messageEvent : 'getMessageEvent',
         visitor_typing : 'getVisitorTyping',
+        suggests : 'getSuggests'
     }),
     data() {
         return {
@@ -196,7 +197,7 @@ export default {
                     { key: "Adam Wathan", value: "adamwathan" }
                 ],
                 selectTemplate: function (item) {
-                    return item.original.value;
+                    return item.original.description;
                 },
                 positionMenu: true,
                 menuContainer: document.getElementsByClassName("menu-container")
@@ -215,23 +216,30 @@ export default {
                 })
                 
             }
+        },
+        suggests (set) {
+            this.options.values = set
         }
     },
     methods: {
         ...mapActions(['FIND_CHAT_BY_ID','SEND_MESSAGE','ASSIGN_OPERATOR','GET_MESSAGE_EVENT',
             'SEND_MESSAGE_IMAGE','CLOSE_CHAT','GET_ONLINE_AGENT','TRANSFER_CHAT','SET_READ',
-            'OPERATOR_TYPING','VISITOR_TYPING','GET_SUGGESTS']),
+            'OPERATOR_TYPING','VISITOR_TYPING','GET_SUGGESTS_BY_WEBSITE']),
         async getChat(id, website) {
-            await this.FIND_CHAT_BY_ID({
-                id : id
+            localStorage.setItem('current_chat_web', website)
+            await this.GET_SUGGESTS_BY_WEBSITE({
+                website : website
             })
             await this.SET_READ({
                 id : id,
                 website : website,
                 role : localStorage.getItem('user_role')
             })
+            await this.FIND_CHAT_BY_ID({
+                id : id
+            })
             await this.scrollToEnd()
-            localStorage.setItem('current_chat_web', website)
+            
         },
         sendTyping(e) {
             if(this.form.message != "" || this.form.message == null || this.form.message == undefined) {
@@ -325,16 +333,15 @@ export default {
             console.log('clicked')
         }
     },
-    mounted() {
+    async mounted() {
         // $(this.$el).on('show.bs.modal', this.getChat(this.id));
-        this.GET_MESSAGE_EVENT()
-        this.GET_ONLINE_AGENT({
+        await this.GET_MESSAGE_EVENT()
+        await this.GET_ONLINE_AGENT({
             role : "customer service",
             website : localStorage.getItem('current_chat_web')
         })
-        this.VISITOR_TYPING()
-        this.scrollToEnd()
-        this.GET_SUGGESTS()
+        await this.VISITOR_TYPING()
+        await this.scrollToEnd()
         this.options.menuContainer = this.$refs.menuContainer;
     },
 }

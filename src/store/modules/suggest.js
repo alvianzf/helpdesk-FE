@@ -26,6 +26,20 @@ const actions = {
             commit('SET_LOADING', false)
         })
     },
+    GET_SUGGESTS_BY_WEBSITE : ({commit}, payload) => {
+        commit('SET_LOADING', true)
+        post('api/suggest/list/bywebsite', payload)
+        .then(res => {
+            commit('setSuggests', res.data.data)
+            commit('SET_LOADING', false)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+            commit('SET_LOADING', false)
+        })
+    },
     GET_SUGGEST : ({commit}, payload) => {
         commit('SET_LOADING', true)
         post('api/suggest/find', payload)

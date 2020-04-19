@@ -11,6 +11,9 @@
                         class="mg-b-15"
                     >Add New Suggestion</b-button>
                     <b-table responsive="sm" :items="suggests" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true">
+                        <template v-slot:cell(website)="data">
+                            {{ data.item.website ? data.item.website.name : null }}
+                        </template>
                         <template v-slot:cell(action)="data">
                             <b-button-group>
                                 <b-button variant="info" @click="edit(data.item._id)">
@@ -36,11 +39,26 @@
             >
                 <b-form>
                     <div class="form-group">
+                        <label>Key <span class="tx-danger">*</span></label>
+                        <input type="text" name="key" class="form-control" placeholder="Enter key" 
+                            v-bind:class="errors.has('key') ? 'form-control is-invalid' : 'form-control'" 
+                            v-model="form.key" v-validate="'required'"/>
+                        <span v-show="errors.has('key')" class="help is-danger text-red">{{ errors.first('key') }}</span>
+                    </div>
+                    <div class="form-group">
                         <label>Description <span class="tx-danger">*</span></label>
                         <input type="text" name="description" class="form-control" placeholder="Enter description" 
                             v-bind:class="errors.has('description') ? 'form-control is-invalid' : 'form-control'" 
                             v-model="form.description" v-validate="'required'"/>
                         <span v-show="errors.has('description')" class="help is-danger text-red">{{ errors.first('description') }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Website </label>
+                        <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form.website" name="manufacturing" v-validate="'required'">
+                            <option selected="selected" value="">Choose Website</option>
+                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                        </select>
+                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
                     </div>
                 </b-form>
                 <template slot="modal-footer">
@@ -100,7 +118,8 @@ export default {
             suggests : 'getSuggests',
             suggest : 'getSuggest',
             response : 'getResponse',
-            loading : 'getLoading'
+            loading : 'getLoading',
+            websites : 'getWebsites'
         })
     },
     watch: {
@@ -131,18 +150,22 @@ export default {
     },
     data() {
         return {
-            form : {},
+            form : {
+                website : ""
+            },
             form_edit : {},
             currentPage: 1,
             perPage : 10,
             fields: [
+                {   key: 'key', label: 'Key', sortable: true },
                 {   key: 'description', label: 'Description', sortable: true },
+                'website',
                 'action'
             ],
         }
     },
     methods: {
-        ...mapActions(['GET_SUGGESTS','STORE_SUGGEST','UPDATE_SUGGEST','DELETE_SUGGEST','GET_SUGGEST']),
+        ...mapActions(['GET_SUGGESTS','STORE_SUGGEST','UPDATE_SUGGEST','DELETE_SUGGEST','GET_SUGGEST','GET_WEBSITES']),
         edit(id) {
             this.GET_SUGGEST({id : id})
             this.$bvModal.show('modaledit')
@@ -154,7 +177,9 @@ export default {
             this.$validator.validate().then(valid => {
                 if (valid) {
                     this.STORE_SUGGEST({
-                        description : this.form.description
+                        description : this.form.description,
+                        key : this.form.key,
+                        website : this.form.website,
                     })
                     this.$bvModal.hide('modaladd')
                     this.form = {}
@@ -198,6 +223,7 @@ export default {
     },
     mounted() {
         this.GET_SUGGESTS()
+        this.GET_WEBSITES()
     }
 }
 </script>

@@ -25,7 +25,7 @@
         <span> {{ getUnreadTotal(notifs) }} Requests </span>
       </div>
       <div class="notification-list">
-          <div v-for="(notif, index) in notifs" :key="notif._id" @click="goToChatAndAssign(notif._id)" class="float-left mw-10" :style="{width : `${child_width}%` }" >
+          <div v-for="(notif, index) in notifs" :key="notif._id" @click="goToChat(notif._id, notif.website)" class="float-left mw-10" :style="{width : `${child_width}%` }" >
             <button v-if="notif.is_minimize == true && notif.active_operator == null" class="new-list" v-shortkey="index <= 8 ? ['ctrl', (index + 1)] : null" @shortkey="goToChat(notif._id, notif.website)">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
@@ -145,7 +145,7 @@ export default {
       this.selected = id
       this.clicked = !this.clicked
       this.$refs.notifChatDetail.getChat(id, website)
-        this.$bvModal.show('notifchatdetail')
+      this.$bvModal.show('notifchatdetail')
     },
     goToChatAndAssign(id, website) {
       this.selected = id
