@@ -418,6 +418,25 @@ span.is-danger {
   margin-right: 5px;
 }
 
+.tribute-container {
+  background: #fff;
+  margin-top: 10px;
+  padding: 15px;
+  z-index:999999999999;
+  border: 1px solid #f5f5f5;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    li {
+      padding: 5px;
+    }
+    li.highlight {
+      background: #249fcc;
+      color: #fff;
+    }
+  }
+}
+
 @media(min-width: 1200px) and (max-width: 1599px) {
   .mw-10 {
     max-width: 13.5%;
