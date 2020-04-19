@@ -81,11 +81,26 @@
             >
                 <b-form>
                     <div class="form-group">
+                        <label>Key <span class="tx-danger">*</span></label>
+                        <input type="text" name="key" class="form-control" placeholder="Enter key" 
+                            v-bind:class="errors.has('key') ? 'form-control is-invalid' : 'form-control'" 
+                            v-model="form_edit.key" v-validate="'required'"/>
+                        <span v-show="errors.has('key')" class="help is-danger text-red">{{ errors.first('key') }}</span>
+                    </div>
+                    <div class="form-group">
                         <label>Description <span class="tx-danger">*</span></label>
                         <input type="text" name="description" class="form-control" placeholder="Enter description" 
                             v-bind:class="errors.has('description') ? 'form-control is-invalid' : 'form-control'" 
                             v-model="form_edit.description" v-validate="'required'"/>
                         <span v-show="errors.has('description')" class="help is-danger text-red">{{ errors.first('description') }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Website </label>
+                        <select v-bind:class="errors.has('website') ? 'form-control is-invalid' : 'form-control'"  v-model="form_edit.website" name="manufacturing" v-validate="'required'">
+                            <option selected="selected" value="">Choose Website</option>
+                            <option v-for="website in websites" v-bind:key="website.index" v-bind:value="website._id">{{ website.name }}</option>
+                        </select>
+                        <span v-show="errors.has('website')" class="help is-danger text-red">{{ errors.first('website') }}</span>
                     </div>
                 </b-form>
                 <template slot="modal-footer">
@@ -143,7 +158,9 @@ export default {
             if(set) {
                 this.form_edit = {
                     _id : set._id,
-                    description : set.description
+                    key : set.key,
+                    description : set.description,
+                    website : set.website
                 }
             }
         }
@@ -153,7 +170,9 @@ export default {
             form : {
                 website : ""
             },
-            form_edit : {},
+            form_edit : {
+                website : ""
+            },
             currentPage: 1,
             perPage : 10,
             fields: [
@@ -193,7 +212,9 @@ export default {
                 if (valid) {
                     this.UPDATE_SUGGEST({
                         id : this.form_edit._id,
-                        description : this.form_edit.description
+                        description : this.form_edit.description,
+                        key : this.form_edit.key,
+                        website : this.form_edit.website,
                     })
                     this.$bvModal.hide('modaledit')
                     this.form_edit = {}
