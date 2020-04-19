@@ -36,12 +36,21 @@
                         <p class="text-center support-text" v-if="visitor_typing"> Pengunjung sedang mengetik ... </p>
                     </div>
                     <div class="chat-input" v-if="chat.is_open">
-                        <b-form-textarea
-                            id="textarea"
-                            rows="6"
-                            max-rows="6"
-                            v-model="form.message" @keyup.native.enter="sendMessage" @input="sendTyping" @click="setRead"
-                        ></b-form-textarea>
+                        <div class="menu-container" style="position: relative" ref="menuContainer">
+
+                        </div>
+                        <vue-tribute :options="options">
+                            <textarea id="textarea" class="form-control" 
+                                placeholder="type your message here" 
+                                rows="6"
+                                max-rows="6"
+                                v-model="form.message" 
+                                v-on:keyup.enter="sendMessage" 
+                                v-on:input="sendTyping"
+                                v-on:click="setRead"
+                            />
+                        </vue-tribute>
+                        
                         
                         <div class="chat-attachment">
                             <div class="input-file-container">  
@@ -152,13 +161,13 @@
 import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment'
 import $ from 'jquery'
-import AutoComplete from '../components/AutoComplete'
+import VueTribute from 'vue-tribute'
 
 export default {
     name : 'Modal',
     props : ['id'],
     components : {
-        AutoComplete
+        VueTribute
     },
     computed : mapGetters({
         chat : 'getChat',
@@ -168,7 +177,6 @@ export default {
         isLoad : 'getIsLoad',
         messageEvent : 'getMessageEvent',
         visitor_typing : 'getVisitorTyping',
-        options : 'getSuggests'
     }),
     data() {
         return {
@@ -179,14 +187,20 @@ export default {
                 operator : ""
             },
             active_user : localStorage.getItem('user_id'),
-            textSuggestionState : false,
-            scrollVisible : false,
-            textSuggestionWidth : 0,
-            referralSearch : [],
-            selectedIndex : -1,
-            referralSearchSelectedId : 0,
-            inputValTemp : '',
-            inputValIdTemp : 0,
+            options : {
+                trigger: "@",
+                values: [
+                    { key: "Collin Henderson", value: "syropian" },
+                    { key: "Sarah Drasner", value: "sarah_edo" },
+                    { key: "Evan You", value: "youyuxi" },
+                    { key: "Adam Wathan", value: "adamwathan" }
+                ],
+                selectTemplate: function (item) {
+                    return item.original.value;
+                },
+                positionMenu: true,
+                menuContainer: document.getElementsByClassName("menu-container")
+            }
         }
     },
     watch : {
@@ -307,65 +321,8 @@ export default {
         closeModal() {
             this.$refs['chat-modal'].hide()
         },
-        getReferralSuggestion : function(query){
-            if(event.keyCode == 13) {
-                this.sendMessage(event)
-            } else {
-                $("#scrollContent1").scrollTop(0);
-                this.selectedIndex = -1;
-                this.textSuggestionWidth = this.$refs.textSuggestionRef.clientWidth;
-                var state = false;
-                if(query == ''){
-                    this.referralSearch = [];
-                    this.scrollVisible = false;
-                }
-                else{
-                    this.referralSearch = [];
-                    this.options.forEach(item => {
-                        if ((item.description.includes(query))) {
-                            state = true;
-                            if(state){
-                                var rTemp = {};
-                                rTemp.id = item.id;
-                                rTemp.text = item.description;
-                                this.referralSearch.push(rTemp);
-                                this.scrollVisible = true;
-                            }
-                            else this.selectedIndex = -1;
-                        }
-                        else{
-                            this.scrollVisible = false;
-                        }
-                    });
-                }
-                if(this.form.message == '' || this.form.message == null || this.referralSearch.length == 0)
-                {
-                    this.textSuggestionState = false;
-                }
-                else {
-                    this.textSuggestionState = true;
-                }
-            }
-            
-        },
-        setScroll: function(){
-            var selected = this.selectedIndex;
-            var elHeight = $("#ulScrollContent").height();
-            var scrollTop = $("#scrollContent1").scrollTop();
-            var viewport = scrollTop + $("#scrollContent1").height();
-            var elOffset = elHeight * selected;
-            if (elOffset < scrollTop || (elOffset + elHeight) > viewport)
-                $("#scrollContent1").scrollTop(elOffset);
-        },
-        setReferralTest : function(input){
-            this.form.message = input.text;
-            this.textSuggestionState = false;
-        },
-        textSuggestionControl : function () {
-            var _this = this;
-            setTimeout(function () {
-                _this.textSuggestionState = false;
-            },300)
+        testing() {
+            console.log('clicked')
         }
     },
     mounted() {
@@ -378,92 +335,8 @@ export default {
         this.VISITOR_TYPING()
         this.scrollToEnd()
         this.GET_SUGGESTS()
+        this.options.menuContainer = this.$refs.menuContainer;
+        console.log(this.form.message)
     },
 }
 </script>
-<style scoped>
-    .form-element-margin-btm {
-        margin-bottom: 0px;
-    }
-    .margin-top-grid{
-        margin-top: 8px;
-    }
-    .textArea-suggestion{
-        position: absolute;
-        z-index: 9999;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 5px #1E90FF;
-        transition: all .15s ease;
-        -webkit-transform: translateY(-2px);
-        max-height: 150px;
-        min-height: 38px;
-        overflow-y: auto;
-    }
-    .textArea-suggestion ul li{
-        padding: 8px;
-        font-weight: normal;
-        border-bottom: 1px solid #FAFAFA;
-        color : #777777;
-    }
-    .textArea-suggestion ul li:hover{
-        background-color: #F5F5F5;
-        cursor: pointer;
-    }
-    .scrollContent{
-    }
-    .selectedWithArrow{
-        background-color: #F5F5F5;
-    }
-    textarea:focus {
-        background-color: #fefefe;
-        border: 1px solid #8a8a8a;
-        box-shadow: 0 0 5px #1E90FF;
-        outline: medium none;
-        transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
-    }
-    .form-element-margin-btm {
-        margin-bottom: 0px;
-    }
-    .margin-top-grid{
-        margin-top: 8px;
-    }
-    .textArea-suggestion{
-        position: absolute;
-        z-index: 9999;
-        background-color: #ffffff;
-        box-shadow: 0px 0px 5px #1E90FF;
-        transition: all .15s ease;
-        -webkit-transform: translateY(-2px);
-        max-height: 150px;
-        min-height: 38px;
-        overflow-y: auto;
-    }
-
-    .textArea-suggestion ul li{
-        padding: 8px;
-        font-weight: normal;
-        border-bottom: 1px solid #FAFAFA;
-        color : #777777;
-    }
-
-    .textArea-suggestion ul li:hover{
-        background-color: #F5F5F5;
-        cursor: pointer;
-    }
-
-    .scrollContent{
-
-    }
-    .selectedWithArrow{
-        background-color: #F5F5F5;
-    }
-
-    textarea:focus {
-        background-color: #fefefe;
-        border: 1px solid #8a8a8a;
-        box-shadow: 0 0 5px #1E90FF;
-        outline: medium none;
-        transition: box-shadow 0.5s ease 0s, border-color 0.25s ease-in-out 0s;
-
-    }
-</style>
