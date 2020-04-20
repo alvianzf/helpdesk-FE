@@ -42,7 +42,7 @@
             </button>
           </div>
       </div>
-      <Modal ref="notifChatDetail" :id="selected" :key="selected"/>
+      <Modal ref="notifChatDetail" :id="selected"/>
   </div>
 </template>
 
