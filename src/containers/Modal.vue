@@ -7,7 +7,7 @@
                     <i class="fa fa-window-minimize" />
                 </button>
             </template>
-            <b-row>
+            <b-row :key="id">
                 <b-col sm="9" md="9">
                     <div class="chat-box">
                         <div v-for="message in chat.message" :key="message._id">
