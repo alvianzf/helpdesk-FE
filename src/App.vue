@@ -6,6 +6,7 @@
 export default {
   name: 'app',
   mounted() {
+    console.log(`${process.env.VUE_APP_API}`)
     this.$notification.requestPermission()
   },
 }
