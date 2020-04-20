@@ -274,11 +274,22 @@ export default {
                 await this.OPERATOR_TYPING(false)
             } 
         },
-        async endChat(e) {
-            await this.CLOSE_CHAT({
-                id : this.singlechat._id
+        endChat(e) {
+            this.$swal({
+            title : 'Are You Sure To Close This Chat?',
+            text : "You won't able to revert this!",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, close it!'
+            }).then((result) => {
+                if (result.value) {
+                    this.CLOSE_CHAT({
+                        id : this.singlechat._id
+                    })
+                    this.scrollToEnd()
+                }
             })
-            await this.closeModal()
         },
         setRead(e) {
             this.SET_READ({
