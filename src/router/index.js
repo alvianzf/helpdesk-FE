@@ -124,15 +124,15 @@ function configRoutes() {
       ]
     },
     {
-      path : '/suggestion',
-      redirect : '/suggestion',
-      name : 'Suggest',
+      path : '/shortcut',
+      redirect : '/shortcut',
+      name : 'Shorcut',
       beforeEnter: Auth,
       component: DefaultContainer,
       children: [
         {
-          path : '/suggestion',
-          name : 'Suggest List',
+          path : '/shortcut',
+          name : 'Shortcut List',
           component: Sugget
         }
       ]

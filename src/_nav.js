@@ -79,8 +79,8 @@ if(role == "super admin") {
       }
     },
     {
-      name: 'Suggestion',
-      url: '/suggestion',
+      name: 'Shortcut',
+      url: '/shortcut',
       icon: 'fa fa-question',
       badge: {
         variant: 'primary'
