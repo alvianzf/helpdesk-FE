@@ -437,6 +437,14 @@ span.is-danger {
   }
 }
 
+.picture-input {
+  .preview-container {
+    .picture-preview {
+      z-index: 4 !important;
+    }
+  }
+}
+
 @media(min-width: 1200px) and (max-width: 1599px) {
   .mw-10 {
     max-width: 13.5%;
