@@ -282,12 +282,13 @@ export default {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, close it!'
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.value) {
-                    this.CLOSE_CHAT({
+                    await this.CLOSE_CHAT({
                         id : this.singlechat._id
                     })
-                    this.scrollToEnd()
+                    await this.scrollToEnd()
+                    await this.closeModal()
                 }
             })
         },
