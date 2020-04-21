@@ -22,7 +22,7 @@
                                 Manage Trigger
                             </b-button>
                             <b-button variant="warning" @click="manageSplash(data.item._id)" size="sm" class="mg-b-15" >
-                                Manage Splash Screen
+                                Manage Banner
                             </b-button>
                             <b-button variant="primary" @click="guide(data.item._id)" size="sm" >
                                 Guide To Install
