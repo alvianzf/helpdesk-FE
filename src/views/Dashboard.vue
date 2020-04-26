@@ -31,7 +31,6 @@
                 />
             </b-card> 
         </b-col>
-        <button class="btn btn-primary" @click="testing">Check Sound</button>
     </b-row>
   </div>
 </template>
