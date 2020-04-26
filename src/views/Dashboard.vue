@@ -1,4 +1,4 @@
-/* eslint-disable vue/no-unused-components */
+
 <template>
   <div>
     <b-row>
@@ -31,6 +31,7 @@
                 />
             </b-card> 
         </b-col>
+        <button class="btn btn-primary" @click="testing">Check Sound</button>
     </b-row>
   </div>
 </template>
@@ -39,6 +40,8 @@
 import { mapGetters, mapActions } from 'vuex'
 import { GChart } from 'vue-google-charts'
 import AutoComplete from '../components/AutoComplete'
+import {Howl, Howler} from 'howler';
+import ding from '../assets/ding.mp3'
 
 export default {
     name : 'default',
@@ -67,6 +70,15 @@ export default {
             'COUNT_CLOSE_CHAT_OPERATOR','COUNT_CHAT_CLOSE','ADMIN_CHART']),
         theAction() {
             console.log('shortcut pressed')
+        },
+        testing() {
+            console.log('testing')
+            var sound = new Howl({
+                src: [ding],
+                html5: true, // A live stream can only be played through HTML5 Audio.
+                format: ['mp3', 'aac']
+            });
+            sound.play();
         }
     },
     mounted() {

@@ -105,7 +105,9 @@ export default {
             body: 'You got the reply'
         }, {})
         var sound = new Howl({
-          src: [ding]
+            src: [ding],
+            html5: true, // A live stream can only be played through HTML5 Audio.
+            format: ['mp3', 'aac']
         });
         sound.play();
         await this.GET_NOTIF({
@@ -118,8 +120,9 @@ export default {
         body: 'You got the ticket'
       }, {})
       var sound = new Howl({
-        src: [ding],
-        preload : false
+          src: [ding],
+          html5: true, // A live stream can only be played through HTML5 Audio.
+          format: ['mp3', 'aac']
       });
       sound.play();
       await this.GET_NOTIF({
