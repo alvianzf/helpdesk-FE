@@ -24,6 +24,9 @@
                             <b-button variant="warning" @click="manageSplash(data.item._id)" size="sm" class="mg-b-15" >
                                 Manage Banner
                             </b-button>
+                            <b-button variant="danger" @click="manageReminder(data.item._id)" size="sm" class="mg-b-15" >
+                                Manage Reminder
+                            </b-button>
                             <b-button variant="primary" @click="guide(data.item._id)" size="sm" >
                                 Guide To Install
                             </b-button>
@@ -101,6 +104,9 @@ export default {
         },
         manageSplash(id) {
             this.$router.push({ name : 'Widget Splash', params : { id : id}})
+        },
+        manageReminder(id) {
+            this.$router.push({ name : 'Widget Reminder', params : { id : id}})
         },
         guide(id) {
             this.$router.push({ name : 'Guide Widget', params : { id : id}})

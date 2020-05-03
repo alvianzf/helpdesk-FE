@@ -25,6 +25,7 @@ const Add = () => import('@/views/widget/Add')
 const Edit = () => import('@/views/widget/Edit')
 const Splash = () => import('@/views/widget/Splash')
 const Trigger = () => import('@/views/widget/Trigger')
+const Reminder = () => import('@/views/widget/Reminder')
 const GuideWidget = () => import('@/views/widget/Guide')
 // Views - User
 const AccountPage = () => import('@/views/account/Index')
@@ -168,6 +169,11 @@ function configRoutes() {
           path : '/widget/trigger/:id',
           name : 'Widget Trigger',
           component : Trigger
+        },
+        {
+          path : '/widget/reminder/:id',
+          name : 'Widget Reminder',
+          component : Reminder
         },
         {
           path : '/widget/guide/:id',

@@ -120,6 +120,22 @@ const actions = {
                 message : error.response.data.message
             })
         })
+    },
+    UPDATE_REMINDER : ({commit,dispatch}, payload) => {
+        post('api/widget/manage-reminder', payload)
+        .then(res => {
+            dispatch('GET_WIDGET', payload)
+            commit('SET_RESPONSE', {
+                success : true,
+                message : res.data.message
+            })
+        }).catch(error => {
+            console.log(error)
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
     }
 }
 
