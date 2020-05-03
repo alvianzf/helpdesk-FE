@@ -154,6 +154,7 @@ const actions = {
         .then(res => {
             socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
+            socket.emit('start_reminder', true)
         }).catch(error => {
             console.log(error)
             commit('SET_RESPONSE', {
@@ -179,6 +180,7 @@ const actions = {
         .then(res => {
             socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
+            socket.emit('start_reminder', true)
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
