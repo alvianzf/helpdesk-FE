@@ -5,9 +5,9 @@
                 <b-card>
                     <h3> How To install widget to website </h3>
                     <p> <strong> Step 1 </strong> </p>
-                    <p> Copy this link in header tag <code class="highlighter-rouge">&lt;link rel="stylesheet" href="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1585393505/widget-v2/css/app.css"&gt;</code> </p>
+                    <p> Copy this link in header tag <code class="highlighter-rouge">&lt;link rel="stylesheet" href="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1588857571/widget-v4/css/app.css"&gt;</code> </p>
                     <p> <strong> Step 2 </strong> </p>
-                    <p> Copy this to above &lt;/body&gt; tag <code class="highlighter-rouge"> &lt;script src="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1585396584/widget-v2/js/app.js"&gt;&lt;/script&gt;</code> </p>
+                    <p> Copy this to above &lt;/body&gt; tag <code class="highlighter-rouge"> &lt;script src="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1588857571/widget-v4/css/app.css"&gt;&lt;/script&gt;</code> </p>
                     <p> <strong> Step 3 </strong> </p>
                     <p> Put this tag into body  <code class="highlighter-rouge">&lt;chat-widget website_name="{{ widget.website.name }}" website_id="{{ widget.website._id }}" widget_id="{{ widget._id }}"&gt;&lt;/chat-widget&gt;</code></p>
                 </b-card>
