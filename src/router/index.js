@@ -45,13 +45,12 @@ function configRoutes() {
   return [
     {
       path: '/',
-      redirect: '/dashboard',
       name: 'Dashboard',
       component: DefaultContainer,
       beforeEnter: Auth,
       children: [
         {
-          path: 'dashboard',
+          path: '/',
           name: 'Default',
           component: Dashboard
         },
