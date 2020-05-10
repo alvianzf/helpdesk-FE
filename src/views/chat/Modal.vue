@@ -10,7 +10,7 @@
             </template>
             <b-row>
                 <b-col sm="9" md="9">
-                    <div class="chat-box">
+                    <div class="chat-box" id="chat-box">
                         <div v-for="message in chat.message" :key="message._id">
                             <div class="system-chat" v-if="message.is_system">
                                 {{ message.message }}
@@ -226,9 +226,8 @@ export default {
             }
         },
         scrollToEnd(e) {
-            $('.chat-box').animate({
-				scrollTop: 999999999999999999
-			}, 'slow');
+            var objDiv = document.getElementById("chat-box");
+        	objDiv.scrollTop = objDiv.scrollHeight;
         },
         async sendMessage(e) {
             e.preventDefault();
@@ -385,7 +384,10 @@ export default {
             website : localStorage.getItem('current_chat_web')
         })
         this.VISITOR_TYPING()
-        this.scrollToEnd(),
+        let that = this
+        setTimeout(function(){ 
+			that.scrollToEnd()
+		}, 2000);
         this.GET_SUGGESTS()
     }
 }

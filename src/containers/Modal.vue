@@ -9,7 +9,7 @@
             </template>
             <b-row :key="id">
                 <b-col sm="9" md="9">
-                    <div class="chat-box">
+                    <div class="chat-box" id="chat-box">
                         <div v-for="message in chat.message" :key="message._id">
                             <div class="system-chat" v-if="message.is_system">
                                 {{ message.message }}
@@ -44,6 +44,7 @@
                                 placeholder="type your message here" 
                                 rows="6"
                                 max-rows="6"
+                                ref="textchat"
                                 v-model="form.message" 
                                 v-on:keyup.enter="sendMessage" 
                                 v-on:input="sendTyping"
@@ -246,6 +247,8 @@ export default {
                 id : id
             })
             await this.scrollToEnd()
+            $("#textarea").trigger('click')
+            // console.log()
             
         },
         sendTyping(e) {
@@ -256,9 +259,8 @@ export default {
             }
         },
         scrollToEnd(e) {
-            $('.chat-box').animate({
-				scrollTop: 999999999999999999
-			}, 'slow');
+            var objDiv = document.getElementById("chat-box");
+        	objDiv.scrollTop = objDiv.scrollHeight;
         },
         async sendMessage(e) {
             e.preventDefault();
@@ -360,7 +362,10 @@ export default {
             website : localStorage.getItem('current_chat_web')
         })
         await this.VISITOR_TYPING()
-        await this.scrollToEnd()
+        let that = this
+        setTimeout(function(){ 
+			that.scrollToEnd()
+		}, 2000);
         this.options.menuContainer = this.$refs.menuContainer;
     },
 }
