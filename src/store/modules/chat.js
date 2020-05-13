@@ -140,6 +140,10 @@ const actions = {
             dispatch('GET_NEW_LIST_GROUP', payload)
             dispatch('GET_CURRENT_LIST')
             socket.emit('notif_event', "new operator")
+            socket.emit('start_closing', {
+                code : 2,
+                id : payload.id
+            })
             commit('setCurrentOperator', response.data)
         }).catch(error => {
             console.log(error)
@@ -155,6 +159,10 @@ const actions = {
             socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
             socket.emit('start_reminder', true)
+            socket.emit('start_closing', {
+                code : 2,
+                id : payload.id
+            })
         }).catch(error => {
             console.log(error)
             commit('SET_RESPONSE', {
@@ -181,6 +189,10 @@ const actions = {
             socket.emit('send_message', payload)
             dispatch('FIND_CHAT_BY_ID', payload)
             socket.emit('start_reminder', true)
+            socket.emit('start_closing', {
+                code : 2,
+                id : payload.id
+            })
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -202,6 +214,10 @@ const actions = {
             commit('SET_RESPONSE', {
                 success : true,
                 message : res.data.message
+            })
+            socket.emit('start_closing', {
+                code : 0,
+                id : payload.id
             })
             socket.emit('notif_event', "new operator")
         }).catch(error => {
