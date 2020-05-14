@@ -302,6 +302,7 @@ const actions = {
     },
     GET_MESSAGE_EVENT : ({commit, dispatch}) => {
         socket.on('get_message', res => {
+            console.log(res)
             commit('setMessageEvent',res.data)
         })
     },
