@@ -144,6 +144,10 @@ const actions = {
                 code : 2,
                 id : payload.id
             })
+            socket.emit('start_red', {
+                code : 2,
+                id : payload.id
+            })
             commit('setCurrentOperator', response.data)
         }).catch(error => {
             console.log(error)
@@ -160,6 +164,10 @@ const actions = {
             dispatch('FIND_CHAT_BY_ID', payload)
             socket.emit('start_reminder', true)
             socket.emit('start_closing', {
+                code : 2,
+                id : payload.id
+            })
+            socket.emit('start_red', {
                 code : 2,
                 id : payload.id
             })
@@ -193,6 +201,10 @@ const actions = {
                 code : 2,
                 id : payload.id
             })
+            socket.emit('start_red', {
+                code : 2,
+                id : payload.id
+            })
         }).catch(error => {
             commit('SET_RESPONSE', {
                 success : false,
@@ -216,6 +228,10 @@ const actions = {
                 message : res.data.message
             })
             socket.emit('start_closing', {
+                code : 0,
+                id : payload.id
+            })
+            socket.emit('start_red', {
                 code : 0,
                 id : payload.id
             })
