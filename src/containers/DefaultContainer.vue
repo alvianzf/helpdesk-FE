@@ -33,7 +33,7 @@
               </button>
               <p>{{ notif.ticket_id }}</p>
             </button>
-            <button :class="notif.unreadtotal > 0 ? 'current-list' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)" v-shortkey="index <= 8 ? ['ctrl', (index + 1)] : null" @shortkey="goToChat(notif._id, notif.website)">
+            <button :class="notif.unreadtotal > 0 && notif.is_red == true  ? 'current-list red' : notif.unreadtotal > 0 && notif.is_red == false ? 'current-list' : notif.unreadtotal == 0 && notif.is_red == true ? 'current-list no-unread red' : 'current-list no-unread'"  v-else-if="notif.is_minimize == true && notif.active_operator == current_user" @click="goToChat(notif._id, notif.website)" v-shortkey="index <= 8 ? ['ctrl', (index + 1)] : null" @shortkey="goToChat(notif._id, notif.website)">
               <span class="badge-number">{{ notif.unreadtotal }}</span>
               <button class="btn-close" @click="endChat(notif._id)"> 
                 <i class="fa fa-close"></i>

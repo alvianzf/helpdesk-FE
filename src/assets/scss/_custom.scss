@@ -133,6 +133,16 @@ span.is-danger {
     background-color: #5cb85c;
     cursor: pointer;
   }
+
+  .current-list.red {
+    background-color: red;
+    cursor: pointer;
+  }
+
+  .no-unread.red {
+    background-color: red;
+    cursor: pointer;
+  }
   
   .badge-number {
     position: absolute;
