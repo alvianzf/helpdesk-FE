@@ -10,7 +10,7 @@
             </template>
             <b-row>
                 <b-col sm="9" md="9">
-                    <div class="chat-box" id="detail-chat-box">
+                    <div class="chat-box" id="chat-box">
                         <div v-for="message in chat.message" :key="message._id">
                             <div class="system-chat" v-if="message.is_system">
                                 {{ message.message }}
@@ -188,7 +188,7 @@ export default {
     watch : {
         async chat(set) {
             this.singlechat = set
-            // await this.scrollToEnd()
+            await this.scrollToEnd()
         },
         isLoad(set) {
         
@@ -215,7 +215,6 @@ export default {
                 website : website,
                 role : localStorage.getItem('user_role')
             })
-            // await this.scrollToEnd()
             localStorage.setItem('current_chat_web', website)
         },
         sendTyping(e) {
@@ -226,7 +225,7 @@ export default {
             }
         },
         scrollToEnd(e) {
-            var objDiv = document.getElementById("detail-chat-box");
+            var objDiv = document.getElementById("chat-box");
         	objDiv.scrollTop = objDiv.scrollHeight;
         },
         async sendMessage(e) {
