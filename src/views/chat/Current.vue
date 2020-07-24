@@ -21,7 +21,7 @@
                 </b-card>
             </b-col>
         </b-row>
-        <Modal ref="modalDetail"/>
+        <Modal ref="modalDetail" :id="selected"/>
     </div>
 </template>
 
@@ -72,7 +72,8 @@ export default {
                 'agent',
                 'time',
                 'message'
-            ]
+            ],
+            selected : null
         }
     },
     methods: {
@@ -84,6 +85,7 @@ export default {
             return this.chats.length
         },
         async onRowSelected(record, index) {
+            this.selected = record._id
             await this.$refs.modalDetail.getChat(record._id, record.website)
             this.$bvModal.show('chatdetail')
         }

@@ -245,7 +245,7 @@ export default {
                     role : localStorage.getItem('user_role')
                 })
                 await this.OPERATOR_TYPING(false)
-                // await this.scrollToEnd()
+                await this.scrollToEnd()
                 this.form.message = null
             }
         },
@@ -256,8 +256,8 @@ export default {
             e.preventDefault();
             const size =  (e.target.files[0].size / 1024 / 1024).toFixed(2); 
 
-            if (size > 4) { 
-                alert("Max size is 4mb"); 
+            if (size > 2) { 
+                alert("Max size is 2mb"); 
             } else { 
                 var form = {
                     attach : e.target.files[0],
@@ -269,7 +269,7 @@ export default {
                     website : localStorage.getItem('current_chat_web'),
                     role : localStorage.getItem('user_role')
                 })
-                // await this.scrollToEnd()
+                await this.scrollToEnd()
                 await this.OPERATOR_TYPING(false)
             } 
         },

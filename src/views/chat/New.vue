@@ -18,7 +18,7 @@
                 </b-card>
             </b-col>
         </b-row>
-        <Modal ref="modalDetail"/>
+        <Modal ref="modalDetail" :id="selected"/>
     </div>
 </template>
 
@@ -68,7 +68,8 @@ export default {
                 { key : 'ticket_id' , label : 'Name' },
                 'time',
                 'message'
-            ]
+            ],
+            selected : null
         }
     },
     methods: {
@@ -80,6 +81,7 @@ export default {
             return this.chats.length
         },
         onRowSelected(record, index) {
+            this.selected = record._id
             this.$refs.modalDetail.getChat(record._id, record.website)
             this.ASSIGN_OPERATOR({
                 id : record._id,
