@@ -290,8 +290,8 @@ export default {
             const size =  
                (e.target.files[0].size / 1024 / 1024).toFixed(2); 
   
-            if (size > 4) { 
-                alert("Max size is 4mb"); 
+            if (size > 2) { 
+                alert("Max size is 2mb"); 
             } else { 
                 var form = {
                     attach : e.target.files[0],
