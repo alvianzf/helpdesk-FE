@@ -10,7 +10,7 @@
             </template>
             <b-row>
                 <b-col sm="9" md="9">
-                    <div class="chat-box" id="chat-box">
+                    <div class="chat-box" id="detail-chat-box">
                         <div v-for="message in chat.message" :key="message._id">
                             <div class="system-chat" v-if="message.is_system">
                                 {{ message.message }}
@@ -188,7 +188,7 @@ export default {
     watch : {
         async chat(set) {
             this.singlechat = set
-            await this.scrollToEnd()
+            // await this.scrollToEnd()
         },
         isLoad(set) {
         
@@ -215,7 +215,7 @@ export default {
                 website : website,
                 role : localStorage.getItem('user_role')
             })
-            await this.scrollToEnd()
+            // await this.scrollToEnd()
             localStorage.setItem('current_chat_web', website)
         },
         sendTyping(e) {
@@ -226,7 +226,7 @@ export default {
             }
         },
         scrollToEnd(e) {
-            var objDiv = document.getElementById("chat-box");
+            var objDiv = document.getElementById("detail-chat-box");
         	objDiv.scrollTop = objDiv.scrollHeight;
         },
         async sendMessage(e) {
@@ -245,7 +245,7 @@ export default {
                     role : localStorage.getItem('user_role')
                 })
                 await this.OPERATOR_TYPING(false)
-                await this.scrollToEnd()
+                // await this.scrollToEnd()
                 this.form.message = null
             }
         },
@@ -269,7 +269,7 @@ export default {
                     website : localStorage.getItem('current_chat_web'),
                     role : localStorage.getItem('user_role')
                 })
-                await this.scrollToEnd()
+                // await this.scrollToEnd()
                 await this.OPERATOR_TYPING(false)
             } 
         },
@@ -298,7 +298,7 @@ export default {
                 role : localStorage.getItem('user_role')
             })
             
-            this.scrollToEnd()
+            // this.scrollToEnd()
         },
         transferChat(e) {
             e.preventDefault()
@@ -386,7 +386,7 @@ export default {
         this.VISITOR_TYPING()
         let that = this
         setTimeout(function(){ 
-			that.scrollToEnd()
+			// that.scrollToEnd()
 		}, 2000);
         this.GET_SUGGESTS()
     }
