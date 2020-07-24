@@ -2,6 +2,12 @@
     <div>
         <Loading :loading="loading" />
         <b-row>
+            <b-col sm="3" md="3">
+                <b-form-select v-model="selectedFilter" :options="filterOptions"></b-form-select>
+            </b-col>
+            <b-col sm="3" md="3">
+                <b-button variant="success" @click="filter">Filter</b-button>
+            </b-col>
             <b-col sm="12" md="12">
                 <b-card>
                     <b-table responsive="sm" selectable :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage" :fixed="true" @row-clicked="onRowSelected">
@@ -63,17 +69,22 @@ export default {
             }
         },
         chats(set) {
-            set.forEach(v => {
-                this.items.push({
-                    id : v._id,
-                    ticket_id : v.ticket_id,
-                    createdAt : v.createdAt,
-                    active_operator : v.active_operator,
-                    website : v.website,
-                    messages : v.message,
-                    _rowVariant : v.active_operator ? null : 'no-operator'
+            if(set.length > 0) {
+                set.forEach(v => {
+                    this.items.push({
+                        id : v._id,
+                        ticket_id : v.ticket_id,
+                        createdAt : v.createdAt,
+                        active_operator : v.active_operator,
+                        website : v.website,
+                        messages : v.message,
+                        _rowVariant : v.active_operator ? null : 'no-operator'
+                    })
                 })
-            })
+            } else {
+                this.items = []
+            }
+            
         }
     },
     data() {
@@ -87,10 +98,16 @@ export default {
                 'time',
                 'message'
             ],
+            selectedFilter: null,
+            filterOptions: [
+                { value: null, text: 'Please select an option' },
+                { value: 'unread', text: 'Unread Chat' },
+                { value: 'untaken', text: 'Untaken Chat' },
+            ]
         }
     },
     methods: {
-        ...mapActions(['GET_CLOSE_LIST_GLOBAL','GET_CLOSE_LIST_GROUP','DELETE_CHAT']),
+        ...mapActions(['GET_CLOSE_LIST_GLOBAL','GET_CLOSE_LIST_GROUP','DELETE_CHAT','GET_FILTER_GLOBAL']),
         date: function (date) {
             return moment(date).format('MMM D YYYY, h:mm:ss a');
         },
@@ -119,6 +136,15 @@ export default {
         async onRowSelected(record, index) {
             await this.$refs.modalDetail.getChat(record.id, record.website)
             this.$bvModal.show('chatdetail')
+        },
+        filter : function () {
+            if(localStorage.getItem('user_role') == "customer service" || localStorage.getItem('user_role') == "administrator") {
+
+            } else {
+                this.GET_FILTER_GLOBAL({
+                    filter_option : this.selectedFilter.value
+                })
+            }
         }
     },
     mounted() {

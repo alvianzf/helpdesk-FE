@@ -108,6 +108,17 @@ const actions = {
             })
         })
     },
+    GET_FILTER_GLOBAL : ({commit}, payload) => {
+        post('api/chat/list/close/global/filter', payload)
+        .then(res => {
+            commit('setChats', res.data.data)
+        }).catch(error => {
+            commit('SET_RESPONSE', {
+                success : false,
+                message : error.response.data.message
+            })
+        })
+    },
     FIND_CHAT_BY_ID : ({commit}, payload) => {
         post('api/chat/findbyid', payload)
         .then(res => {
