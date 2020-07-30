@@ -144,7 +144,7 @@ export default {
 
             } else {
                 this.GET_FILTER_GLOBAL({
-                    filter_option : this.selectedFilter.value
+                    filter_option : this.selectedFilter
                 })
             }
         }

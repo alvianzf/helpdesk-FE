@@ -111,6 +111,7 @@ const actions = {
     GET_FILTER_GLOBAL : ({commit}, payload) => {
         post('api/chat/list/close/global/filter', payload)
         .then(res => {
+            console.log(res.data)
             commit('setChats', res.data.data)
         }).catch(error => {
             commit('SET_RESPONSE', {
