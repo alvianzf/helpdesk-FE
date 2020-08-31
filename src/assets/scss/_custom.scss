@@ -449,6 +449,9 @@ span.is-danger {
 
 .picture-input {
   .preview-container {
+    .picture-inner {
+      z-index: 4 !important;
+    }
     .picture-preview {
       z-index: 4 !important;
     }
