@@ -4,12 +4,43 @@
             <b-col sm="12" md="12">
                 <b-card>
                     <h3> How To install widget to website </h3>
-                    <p> <strong> Step 1 </strong> </p>
-                    <p> Copy this link in header tag <code class="highlighter-rouge">&lt;link rel="stylesheet" href="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1596116297/widget-prod-v3/css/app.css"&gt;</code> </p>
-                    <p> <strong> Step 2 </strong> </p>
-                    <p> Copy this to above &lt;/body&gt; tag <code class="highlighter-rouge"> &lt;script src="https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1596116307/widget-prod-v3/js/app.js"&gt;&lt;/script&gt;</code> </p>
-                    <p> <strong> Step 3 </strong> </p>
-                    <p> Put this tag into body  <code class="highlighter-rouge">&lt;chat-widget website_name="{{ widget.website.name }}" website_id="{{ widget.website._id }}" widget_id="{{ widget._id }}"&gt;&lt;/chat-widget&gt;</code></p>
+                    <p> Copy this to above &lt;/body&gt; tag <code class="highlighter-rouge"> &lt;script&gt;
+                        function loadScript() {
+                            var script = document.createElement('script');
+                            script.type = 'text/javascript';
+                            script.src = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1598974695/widget-prod-new-way/js/app.js';
+                            document.body.appendChild(script);
+                            console.log('loadScript');
+
+                            var headID = document.getElementsByTagName('head')[0];
+                            var link = document.createElement('link');
+                            link.type = 'text/css';
+                            link.rel = 'stylesheet';
+
+                            link.href = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1598974683/widget-prod-new-way/css/app.css';
+                            headID.appendChild(link);
+                            console.log('loadCss');
+
+                            var widget = document.createElement('chat-widget');
+                            widget.website_id = "{{ widget.website._id }}";
+                            widget.widget_id = "{{ widget._id }}";
+                            widget.website_name = "{{ widget.website.name }}";
+
+                            document.body.appendChild(widget);
+                            console.log('loadWidget');
+
+                            let params = (new URL(document.location)).searchParams;
+                            let name = params.get("name");
+                            console.log(name)
+                        }
+
+
+                        function initialize() {
+                            console.log('initialize');
+                        }
+
+                        window.onload = loadScript; 
+                    &lt;/script&gt;</code> </p>
                 </b-card>
             </b-col>
         </b-row>
