@@ -111,7 +111,6 @@ const actions = {
     GET_FILTER_GLOBAL : ({commit}, payload) => {
         post('api/chat/list/close/global/filter', payload)
         .then(res => {
-            console.log(res.data)
             commit('setChats', res.data.data)
         }).catch(error => {
             commit('SET_RESPONSE', {
@@ -314,7 +313,6 @@ const actions = {
     },
     GET_MESSAGE_EVENT : ({commit, dispatch}) => {
         socket.on('get_message', res => {
-            console.log(res)
             commit('setMessageEvent',res.data)
         })
     },
@@ -349,7 +347,6 @@ const actions = {
     },
     VISITOR_TYPING : ({commit}) => {
         socket.on('get_visitor_typing', res => {
-            console.log(res)
             commit('setVisitorTyping', res)
         })
     }

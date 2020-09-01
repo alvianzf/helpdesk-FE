@@ -101,19 +101,22 @@ export default {
   },
   watch: {
     async replyEvent(set) {
-        await this.$notification.show(set.ticket_id, {
+        console.log(set)
+        if(set.is_open) {
+          await this.$notification.show(set.ticket_id, {
             body: 'You got the reply'
-        }, {})
-        var sound = new Howl({
-            src: [ding],
-            html5: true, // A live stream can only be played through HTML5 Audio.
-            format: ['mp3', 'aac']
-        });
-        sound.play();
-        await this.GET_NOTIF({
-          role : localStorage.getItem('user_role'),
-          website : localStorage.getItem('user_website')
-        }) 
+          }, {})
+          var sound = new Howl({
+              src: [ding],
+              html5: true, // A live stream can only be played through HTML5 Audio.
+              format: ['mp3', 'aac']
+          });
+          sound.play();
+          await this.GET_NOTIF({
+            role : localStorage.getItem('user_role'),
+            website : localStorage.getItem('user_website')
+          }) 
+        }
     },
     async newTicketEvent(set) {
       await this.$notification.show(set.ticket_id, {
