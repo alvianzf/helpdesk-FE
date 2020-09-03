@@ -8,7 +8,7 @@
                         function loadScript() {
                             var script = document.createElement('script');
                             script.type = 'text/javascript';
-                            script.src = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1598974695/widget-prod-new-way/js/app.js';
+                            script.src = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1599142008/widget-prod-new-way-2/js/app.js';
                             document.body.appendChild(script);
                             console.log('loadScript');
 
@@ -17,7 +17,7 @@
                             link.type = 'text/css';
                             link.rel = 'stylesheet';
 
-                            link.href = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1598974683/widget-prod-new-way/css/app.css';
+                            link.href = 'https://res.cloudinary.com/dtjnr7mrl/raw/upload/v1599142010/widget-prod-new-way-2/css/app.css';
                             headID.appendChild(link);
                             console.log('loadCss');
 
