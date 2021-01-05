@@ -21,7 +21,7 @@
     "@coreui/coreui": "^2.1.12",
     "@coreui/icons": "0.3.0",
     "@coreui/vue": "^2.1.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.1.0",
     "flag-icon-css": "^3.3.0",
